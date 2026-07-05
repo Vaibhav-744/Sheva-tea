@@ -379,6 +379,7 @@
 .sheva-shop-swiper .slick-slide {
   box-sizing: border-box !important;
   height: auto !important;
+  margin:0 8px;
 }
 
 .sheva-shop-swiper .slick-slide .sheva-shop-card {
