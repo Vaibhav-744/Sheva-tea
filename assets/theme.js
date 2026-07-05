@@ -3141,12 +3141,14 @@
                 const currentProductId = item?.product_id
                 const moreQuantity = parseInt(productForm.find('[data-inventory-quantity]').val()) 
                 const maxQuantity = parseInt(productForm.find('[data-inventory-quantity]').data('inventory-quantity'))
-                const saleOutStock = document.getElementById('product-add-to-cart').dataset.available === 'true' | false
+                const saleOutStockEl = document.getElementById('product-add-to-cart');
+                const saleOutStock = saleOutStockEl ? saleOutStockEl.dataset.available === 'true' : false;
 
                 if (!currentQuantity || !maxQuantity || saleOutStock) return addItemToCart(variantId)
                 var arrayInVarName = `selling_array_${currentProductId}`,
-                itemInArray = window[arrayInVarName],
-                itemStatus = itemInArray[variantId];
+                itemInArray = window[arrayInVarName];
+                if (!itemInArray) return addItemToCart(variantId);
+                var itemStatus = itemInArray[variantId];
                 if(itemStatus == 'deny') {
                     if (currentQuantity + moreQuantity > maxQuantity)  {
                         if(maxQuantity < 0){

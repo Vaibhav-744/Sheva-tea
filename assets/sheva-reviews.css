@@ -26,17 +26,15 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  line-height:1;
+  line-height: 1;
 }
 
-/* ── Slider ── */
+/* ── Marquee slider ── */
 .sheva-reviews-slider {
   position: relative;
   overflow: hidden;
   width: 100%;
   padding: 20px 0;
-  /* -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); */
 }
 
 .sheva-reviews-track {
@@ -45,18 +43,24 @@
   width: max-content;
   will-change: transform;
   padding: 0 24px;
-  /* LEFT → RIGHT: starts at -50%, goes to 0 */
   animation: shevaRevScroll var(--rev-speed, 45s) linear infinite;
 }
 
-/* Pause on hover */
 .sheva-reviews-slider:hover .sheva-reviews-track { animation-play-state: paused; }
 
-/* Left → Right direction */
+.sheva-reviews-track--ltr { animation-name: shevaRevScroll; }
 @keyframes shevaRevScroll {
   from { transform: translateX(-50%); }
   to   { transform: translateX(0); }
 }
+
+@keyframes shevaRevScrollRTL {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.sheva-reviews-track--rtl { animation-name: shevaRevScrollRTL; }
+
+.sheva-rev-pause-hover:hover .sheva-reviews-track { animation-play-state: paused; }
 
 /* ── Card ── */
 .sheva-review-card {
@@ -112,13 +116,108 @@
   margin: 0;
 }
 
-/* ── Responsive ── */
+/* ── Marquee responsive ── */
 @media (max-width: 768px) {
   .sheva-reviews { padding: 70px 0; }
   .sheva-reviews-track { gap: 16px; padding: 0 16px; animation-duration: 32s; }
   .sheva-review-card { flex: 0 0 270px !important; padding: 22px; min-height: 220px; }
 }
-
 @media (max-width: 420px) {
   .sheva-review-card { flex: 0 0 250px !important; padding: 20px; }
+}
+
+/* ============================================================
+   SLICK SLIDER MODE
+============================================================ */
+
+/* --slider modifier: open up overflow so Slick clones are never clipped,
+   and add horizontal padding so edge cards have breathing room */
+.sheva-reviews--slider {
+  overflow: visible !important;
+}
+
+/* Swiper wrapper: position context for arrows, no extra overflow */
+.sheva-rev-swiper {
+  position: relative;
+  width: 100%;
+  /* padding-bottom: 50px; */
+}
+  .sheva-rev-swiper .slick-list{
+      margin:0 -7px;
+  }
+/* Each slide: spacing between cards */
+.sheva-rev-swiper .slick-slide {
+  box-sizing: border-box !important;
+  height: auto !important;
+  margin:0 7px;
+}
+
+/* Compensate slide padding on the list */
+.sheva-rev-swiper .slick-list {
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 10px 0 !important;
+}
+
+/* Card fills its slide fully */
+.sheva-rev-swiper .slick-slide .sheva-review-card {
+  width: 100% !important;
+  flex: none !important;
+  box-sizing: border-box !important;
+  min-height: 240px;
+  margin: 0 12px;
+}
+
+/* Swiper wrapper: position context for arrows, no extra overflow */
+.sheva-rev-swiper {
+  position: relative;
+  width: 100%;
+}
+
+/* Dots — inherit theme variables, just fix position */
+.sheva-rev-swiper .slick-dots {
+  position: relative;
+  bottom: auto;
+  margin-top: 20px;
+}
+.sheva-rev-swiper .slick-dots li button {
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  border-radius: 50%;
+  transition: background 0.3s, transform 0.3s;
+}
+.sheva-rev-swiper .slick-dots li.slick-active button {
+  background: linear-gradient(90deg, #ff4db8, #ff7a3d, #22d3ee);
+  border: none;
+  transform: scale(1.3);
+}
+
+/* Slick arrows */
+.sheva-rev-swiper .slick-prev,
+.sheva-rev-swiper .slick-next {
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  transition: background .3s, border-color .3s;
+}
+.sheva-rev-swiper .slick-prev { left: -22px; }
+.sheva-rev-swiper .slick-next { right: -22px; }
+.sheva-rev-swiper .slick-prev:hover,
+.sheva-rev-swiper .slick-next:hover {
+  background: rgba(255,77,184,0.25);
+  border-color: #ff4db8;
+}
+.sheva-rev-swiper .slick-prev:before,
+.sheva-rev-swiper .slick-next:before {
+  font-size: 18px;
+  opacity: 1;
+}
+
+@media(max-width:600px){
+  .sheva-rev-swiper .slick-list{margin:0;}
+  .sheva-rev-swiper .slick-slide{margin:0 16px}
 }

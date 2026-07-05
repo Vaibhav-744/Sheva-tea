@@ -1,14 +1,18 @@
 {% comment %} ============================================================
-  SHEVA TEA — Reviews Slider Section
-  Auto-scrolling CSS carousel — LEFT → RIGHT direction.
-  Cards duplicated for seamless infinite loop.
+  SHEVA TEA — Reviews Section
+  Supports two layout modes (configurable in theme editor):
+    • marquee — auto-scrolling CSS carousel (pause/direction/speed)
+    • slider  — manual slider with dots and prev/next arrows
 ============================================================ {% endcomment %}
 
 {{ 'sheva-reviews.css' | asset_url | stylesheet_tag }}
 
+{%- assign layout = section.settings.layout_type | default: 'marquee' -%}
+{%- assign section_id = 'sheva-rev-' | append: section.id -%}
+
 <section
   id="sheva-reviews"
-  class="sheva-reviews"
+  class="sheva-reviews{% if layout == 'slider' %} sheva-reviews--slider{% endif %}"
   style="
     --rev-pad-top: {{ section.settings.padding_top }}px;
     --rev-pad-bottom: {{ section.settings.padding_bottom }}px;
@@ -44,39 +48,54 @@
     {%- endif -%}
   </div>
 
-  {%- comment %} ── Slider ── {% endcomment %}
-  <div class="sheva-reviews-slider js-sheva-auto-slider">
-    <div class="sheva-reviews-track">
+  {%- comment %} ── Collect review blocks ── {% endcomment %}
+  {%- assign rev_blocks = section.blocks | where: 'type', 'review' -%}
 
-      {%- comment -%} First pass — real cards {%- endcomment -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'review' -%}
-          <div class="sheva-review-card" {{ block.shopify_attributes }}>
-            <div class="sheva-rev__head">
-              <div
-                class="sheva-rev__avatar"
-                style="background: linear-gradient(135deg, {{ block.settings.avatar_from }}, {{ block.settings.avatar_to }}); font-size: {{ section.settings.avatar_fs }}px;"
-                aria-hidden="true"
-              >{{ block.settings.initials }}</div>
-              <div>
-                <strong style="font-size: {{ section.settings.name_fs }}px; color: #fff; font-family: 'Poppins', sans-serif; letter-spacing: 1px; display: block;">{{ block.settings.name }}</strong>
-                {%- if block.settings.verified -%}
-                  <span class="sheva-rev__verified" style="font-size: {{ section.settings.verified_fs }}px;">✓ Verified Buyer</span>
-                {%- endif -%}
-              </div>
-            </div>
-            <div class="sheva-stars-rating" style="font-size: 14px; letter-spacing: 2px; margin-bottom: 8px;">★★★★★</div>
-            <h5 class="sheva-rev__quote"
-              style="font-size: {{ section.settings.quote_fs }}px;">"{{ block.settings.quote }}"</h5>
-            <p class="sheva-rev__body"
-              style="font-size: {{ section.settings.body_fs }}px;">{{ block.settings.body }}</p>
+  {%- comment %} ── Shared card rendering snippet ── {% endcomment %}
+  {%- capture review_card_html -%}
+    {%- for block in rev_blocks -%}
+      <div class="sheva-review-card" {{ block.shopify_attributes }}>
+        <div class="sheva-rev__head">
+          <div
+            class="sheva-rev__avatar"
+            style="background: linear-gradient(135deg, {{ block.settings.avatar_from }}, {{ block.settings.avatar_to }}); font-size: {{ section.settings.avatar_fs }}px;"
+            aria-hidden="true"
+          >{{ block.settings.initials }}</div>
+          <div>
+            <strong style="font-size: {{ section.settings.name_fs }}px; color: #fff; font-family: 'Poppins', sans-serif; letter-spacing: 1px; display: block;">{{ block.settings.name }}</strong>
+            {%- if block.settings.verified -%}
+              <span class="sheva-rev__verified" style="font-size: {{ section.settings.verified_fs }}px;">✓ Verified Buyer</span>
+            {%- endif -%}
           </div>
-        {%- endif -%}
-      {%- endfor -%}
+        </div>
+        <div class="sheva-stars-rating" style="font-size: 14px; letter-spacing: 2px; margin-bottom: 8px;">★★★★★</div>
+        <h5 class="sheva-rev__quote"
+          style="font-size: {{ section.settings.quote_fs }}px;">"{{ block.settings.quote }}"</h5>
+        <p class="sheva-rev__body"
+          style="font-size: {{ section.settings.body_fs }}px;">{{ block.settings.body }}</p>
+      </div>
+    {%- endfor -%}
+  {%- endcapture -%}
 
-      {%- comment -%} Duplicate pass — seamless infinite loop {%- endcomment -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'review' -%}
+  {%- if layout == 'marquee' -%}
+    {%- comment %} ════════════════════════════════
+      MARQUEE LAYOUT
+    ════════════════════════════════ {% endcomment %}
+    {%- assign marquee_dir = section.settings.marquee_direction | default: 'ltr' -%}
+    {%- assign pause_class = '' -%}
+    {%- if section.settings.pause_on_hover -%}
+      {%- assign pause_class = ' sheva-rev-pause-hover' -%}
+    {%- endif -%}
+
+    <div class="sheva-reviews-slider js-sheva-auto-slider{{ pause_class }}"
+      data-direction="{{ marquee_dir }}">
+      <div class="sheva-reviews-track sheva-reviews-track--{{ marquee_dir }}">
+
+        {%- comment -%} First pass — real cards {%- endcomment -%}
+        {{ review_card_html }}
+
+        {%- comment -%} Duplicate pass — seamless infinite loop {%- endcomment -%}
+        {%- for block in rev_blocks -%}
           <div class="sheva-review-card" aria-hidden="true">
             <div class="sheva-rev__head">
               <div
@@ -97,12 +116,63 @@
             <p class="sheva-rev__body"
               style="font-size: {{ section.settings.body_fs }}px;">{{ block.settings.body }}</p>
           </div>
-        {%- endif -%}
-      {%- endfor -%}
+        {%- endfor -%}
 
+      </div>
     </div>
-  </div>
+
+  {%- else -%}
+    {%- comment %} ════════════════════════════════
+      SLIDER LAYOUT — powered by Slick Carousel
+    ════════════════════════════════ {% endcomment %}
+    <div class="sheva-rev-swiper" id="{{ section_id }}" data-section-id="{{ section.id }}">
+      <div class="sheva-rev-swiper__track"
+        data-dots="{{ section.settings.show_dots }}"
+        data-arrows="{{ section.settings.show_arrows }}"
+        data-slides-show="3"
+        data-slides-md="2">
+        {{ review_card_html }}
+      </div>
+      {%- if section.settings.show_dots -%}
+        <div class="sheva-swiper-dots" role="tablist"></div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
 </section>
+
+{%- if layout == 'slider' -%}
+<script>
+  $(document).ready(function () {
+    $('#sheva-rev-{{ section.id }} .sheva-rev-swiper__track').slick({
+      dots: {{ section.settings.show_dots }},
+      arrows: {{ section.settings.show_arrows }},
+      infinite: true,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      speed: 300,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    });
+  });
+</script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -111,6 +181,73 @@
   "class": "sheva-section sheva-reviews-section",
   "max_blocks": 20,
   "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout_type",
+      "label": "Layout Type",
+      "options": [
+        { "value": "marquee", "label": "Marquee (auto-scroll)" },
+        { "value": "slider",  "label": "Slider (manual)" }
+      ],
+      "default": "marquee"
+    },
+    {
+      "type": "header",
+      "content": "Marquee Settings"
+    },
+    {
+      "type": "paragraph",
+      "content": "These settings apply when Layout Type is set to Marquee."
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on Hover",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "marquee_direction",
+      "label": "Scroll Direction",
+      "options": [
+        { "value": "ltr", "label": "Left → Right" },
+        { "value": "rtl", "label": "Right → Left" }
+      ],
+      "default": "ltr"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Scroll Speed (seconds – lower = faster)",
+      "min": 15,
+      "max": 90,
+      "step": 5,
+      "default": 45
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "paragraph",
+      "content": "These settings apply when Layout Type is set to Slider."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "label": "Show Dot Navigation",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show Prev / Next Arrows",
+      "default": true
+    },
     {
       "type": "header",
       "content": "Section Header"
@@ -252,16 +389,7 @@
     },
     {
       "type": "header",
-      "content": "Slider"
-    },
-    {
-      "type": "range",
-      "id": "speed",
-      "label": "Scroll Speed (seconds – lower = faster)",
-      "min": 15,
-      "max": 90,
-      "step": 5,
-      "default": 45
+      "content": "Card Dimensions"
     },
     {
       "type": "range",

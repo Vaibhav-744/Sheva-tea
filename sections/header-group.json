@@ -13,6 +13,7 @@
   "sections": {
     "sheva-header": {
       "type": "sheva-header",
+      "disabled": true,
       "settings": {
         "logo_image_width": 140,
         "logo_text": "SHEVA TEA",
@@ -141,9 +142,10 @@
         "sections--14682829619277__9c03747e-b054-4db8-8194-5a35c71f82ca-1680876693acfad79f-0": {
           "type": "logo",
           "settings": {
-            "logo_position": "sticky_menu",
-            "logo_width": 90,
-            "logo_width_fixed": 55,
+            "logo_position": "always",
+            "logo": "shopify://shop_images/logo.png",
+            "logo_width": 210,
+            "logo_width_fixed": 100,
             "logo_text": "",
             "logo_font_size": 20,
             "logo_font_weight": "900",
@@ -155,12 +157,12 @@
           "type": "main_menu",
           "settings": {
             "menu": "main-menu",
-            "menu_top_spacing": 11,
-            "menu_bottom_spacing": 12,
-            "grid_gap_menu_item": 20,
-            "alignment": "left",
-            "bg_mega_menu": "#ffffff",
-            "bg_mega_menu_gradient": "",
+            "menu_top_spacing": 22,
+            "menu_bottom_spacing": 22,
+            "grid_gap_menu_item": 12,
+            "alignment": "center",
+            "bg_mega_menu": "rgba(0,0,0,0)",
+            "bg_mega_menu_gradient": "#050014a6",
             "lv_1_color": "#ffffff",
             "lv_1_color_hover": "#ffffff",
             "lv_2_color": "#232323",
@@ -197,150 +199,37 @@
           "type": "header_icons",
           "settings": {
             "show_language_currency": false,
-            "show_search": false,
-            "show_customer": false,
+            "show_search": true,
+            "show_customer": true,
             "show_wishlist": false,
-            "show_cart": false,
+            "show_cart": true,
             "text_font_size": 14,
             "show_language_currency_sticky": false,
             "show_search_sticky": true,
-            "show_customer_sticky": false,
+            "show_customer_sticky": true,
             "show_wishlist_sticky": false,
             "show_cart_sticky": true,
             "header_icons_color": "#ffffff",
             "header_icons_color_hover": "#ffffff",
             "header_icons_border_color": "rgba(0,0,0,0)",
-            "header_icons_border_sticky_color": "#232323",
-            "cart_count_bubble_color": "#323232",
-            "cart_count_bubble_bg": "#ffe5e8",
+            "header_icons_border_sticky_color": "rgba(0,0,0,0)",
+            "cart_count_bubble_color": "#ffffff",
+            "cart_count_bubble_bg": "#ff4db8",
             "cart_count_bubble_bg_gradient": ""
-          }
-        },
-        "d3131109-9329-42fa-bbb5-d25d01fd698b": {
-          "type": "megamenu_style_1",
-          "settings": {
-            "layout_block": "custom_width",
-            "header_custom_width_size": 1200,
-            "item": "new in",
-            "column": 3,
-            "show_banner_1": true,
-            "banner_url_1": "shopify://collections/blazero",
-            "show_product": true,
-            "product_title": "Featured Products",
-            "product_collection": "naminos-dementus-a-dincidunto-5"
-          }
-        },
-        "0e4cbbf3-fe5e-4e10-a837-c7651f114767": {
-          "type": "megamenu_style_2",
-          "settings": {
-            "layout_block": "custom_width",
-            "header_custom_width_size": 1200,
-            "item": "trend",
-            "column": 3,
-            "show_banner_1": true,
-            "banner_url_1": "shopify://collections/congue",
-            "show_banner_2": true,
-            "banner_url_2": "shopify://collections/cosmopolis",
-            "show_banner_3": true,
-            "banner_url_3": "shopify://collections/cosmopolitan"
-          }
-        },
-        "4d022900-5ec2-41b0-89c1-edea75a13c28": {
-          "type": "megamenu_style_3",
-          "settings": {
-            "layout_block": "custom_width",
-            "header_custom_width_size": 1200,
-            "mega_tyle": "style1",
-            "item": "collections",
-            "column": 5,
-            "show_banner_1": true,
-            "banner_url_1": "shopify://products/dempus-lortis-cosmo-sapiendo",
-            "show_banner_2": true,
-            "banner_url_2": "shopify://products/dempus-lortis-cosmo-sapiendo-1",
-            "show_banner_3": true,
-            "banner_url_3": "shopify://products/dempus-lortis-cosmo-sapiendo-2",
-            "show_banner_4": true,
-            "banner_url_4": "shopify://products/dempus-lortis-cosmo-sapiendo-3",
-            "show_banner_5": true,
-            "banner_url_5": "shopify://products/dempus-an-lortis-tempus-sapiendos"
-          }
-        },
-        "23b6fa6d-4f30-4a97-8dc1-2c516f8a7f0e": {
-          "type": "megamenu_style_1",
-          "settings": {
-            "layout_block": "custom_width",
-            "header_custom_width_size": 1200,
-            "item": "demo",
-            "column": 5,
-            "show_banner_1": false,
-            "banner_url_1": "shopify://products/dempus-lortis-cosmo-sapiendo-4",
-            "show_product": false,
-            "product_title": "On Sale Products",
-            "product_collection": "dempus-an-lortis-tempus-sapiendos"
-          }
-        },
-        "3d2520ed-30fc-4694-a7bd-8479ad2d6892": {
-          "type": "megamenu_style_1",
-          "settings": {
-            "layout_block": "custom_width",
-            "header_custom_width_size": 1200,
-            "item": "Theme Demo",
-            "column": 5,
-            "show_banner_1": false,
-            "banner_url_1": "",
-            "show_product": false,
-            "product_title": "Featured Products",
-            "product_collection": ""
-          }
-        },
-        "01014ccc-ffe5-4c78-b814-da3ff7d8b45c": {
-          "type": "megamenu_style_1",
-          "settings": {
-            "layout_block": "custom_width",
-            "header_custom_width_size": 1200,
-            "item": "Shop",
-            "column": 4,
-            "show_banner_1": false,
-            "banner_url_1": "",
-            "show_product": false,
-            "product_title": "Featured Products",
-            "product_collection": ""
-          }
-        },
-        "ec0f7e9f-1012-463e-a1fd-f9225f7f1cc3": {
-          "type": "megamenu_style_1",
-          "settings": {
-            "layout_block": "custom_width",
-            "header_custom_width_size": 1200,
-            "item": "Product",
-            "column": 5,
-            "show_banner_1": false,
-            "banner_url_1": "",
-            "show_product": false,
-            "product_title": "Featured Products",
-            "product_collection": ""
           }
         }
       },
       "block_order": [
         "sections--14682829619277__9c03747e-b054-4db8-8194-5a35c71f82ca-1680876693acfad79f-0",
         "54786c97-e881-45f5-a30a-6fdb552a963e",
-        "sections--14682829619277__9c03747e-b054-4db8-8194-5a35c71f82ca-1680876693acfad79f-2",
-        "d3131109-9329-42fa-bbb5-d25d01fd698b",
-        "0e4cbbf3-fe5e-4e10-a837-c7651f114767",
-        "4d022900-5ec2-41b0-89c1-edea75a13c28",
-        "23b6fa6d-4f30-4a97-8dc1-2c516f8a7f0e",
-        "3d2520ed-30fc-4694-a7bd-8479ad2d6892",
-        "01014ccc-ffe5-4c78-b814-da3ff7d8b45c",
-        "ec0f7e9f-1012-463e-a1fd-f9225f7f1cc3"
+        "sections--14682829619277__9c03747e-b054-4db8-8194-5a35c71f82ca-1680876693acfad79f-2"
       ],
-      "disabled": true,
       "settings": {
         "container": "1170",
         "padding_full_width": 0,
         "header_navigation_bg": "#000000",
         "header_navigation_bg_gradient": "",
-        "sticky_header_type": "on_scroll",
+        "sticky_header_type": "always",
         "sticky_header_width": "full",
         "enable_transparent": false,
         "transparent_color": "#ffffff",
@@ -353,20 +242,21 @@
         "7de2266e-0cd4-4fda-9f09-06f75a17f944": {
           "type": "menu",
           "settings": {
-            "color": "#232323",
+            "color": "#FFFFFF",
             "menu_tab_bg": "#000000"
           }
         },
         "163e2cb5-14f2-4af6-9ac3-77193c082f53": {
           "type": "search",
           "settings": {
-            "color": "#232323"
+            "color": "#ffffff"
           }
         },
         "550fbd21-75fb-4051-9dee-77d91b5239f0": {
           "type": "logo",
           "settings": {
-            "logo_width_mobile": 65,
+            "logo_mobile": "shopify://shop_images/logo.png",
+            "logo_width_mobile": 150,
             "logo_text": "",
             "logo_font_size": 20,
             "logo_font_weight": "900",
@@ -378,16 +268,16 @@
           "type": "customer",
           "settings": {
             "icon": "1",
-            "color": "#232323"
+            "color": "#ffffff"
           }
         },
         "633f9dae-3f65-4bda-9ca8-9d3e231aaf9d": {
           "type": "cart",
           "settings": {
             "icon": "2",
-            "color": "#232323",
+            "color": "#ffffff",
             "color_bubble": "#ffffff",
-            "bg_bubble": "#232323"
+            "bg_bubble": "#ff4db8"
           }
         }
       },
@@ -398,11 +288,10 @@
         "20dae707-64c0-4ea3-a05e-561cae9836d8",
         "633f9dae-3f65-4bda-9ca8-9d3e231aaf9d"
       ],
-      "disabled": true,
       "settings": {
         "background": "#ffffff",
         "gradient": "",
-        "sticky_header_type": "on_scroll",
+        "sticky_header_type": "always",
         "enable_transparent": false,
         "transparent_color": "#ffffff",
         "transparent_border_color": "",

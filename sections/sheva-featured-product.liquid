@@ -102,34 +102,55 @@
       </div>
     {%- endif -%}
 
-    {%- comment %} ── Add to Cart (theme default) ── {% endcomment %}
+    {%- comment %} ── Add to Cart — mirrors theme's product-button.liquid pattern ── {% endcomment %}
     {%- if fp != blank and fp != empty -%}
-      {%- form 'product', fp, class: 'sheva-fp__form' -%}
-        <input type="hidden" name="id" value="{{ fp.selected_or_first_available_variant.id }}">
+      {%- assign product_form_id = 'sheva-fp-form-' | append: section.id -%}
+      <product-form class="sheva-fp__form">
+        {%- form 'product', fp, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+          <input type="hidden" name="id" value="{{ fp.selected_or_first_available_variant.id }}">
 
-        <div class="sheva-fp__qty-row">
-          <div class="sheva-fp__qty">
-            <button type="button" class="sheva-fp__qty-btn sheva-fp__qty-minus" aria-label="Decrease quantity">−</button>
-            <span class="sheva-fp__qval" id="sheva-qval">1</span>
-            <button type="button" class="sheva-fp__qty-btn sheva-fp__qty-plus" aria-label="Increase quantity">+</button>
-            <input type="hidden" name="quantity" class="sheva-fp__qty-input" value="1">
+          <div class="sheva-fp__qty-row">
+            <div class="sheva-fp__qty">
+              <button type="button" class="sheva-fp__qty-btn sheva-fp__qty-minus" aria-label="Decrease quantity">−</button>
+              <span class="sheva-fp__qval">1</span>
+              <button type="button" class="sheva-fp__qty-btn sheva-fp__qty-plus" aria-label="Increase quantity">+</button>
+              <input type="hidden" name="quantity" class="sheva-fp__qty-input" value="1">
+            </div>
+
+            {%- if fp.selected_or_first_available_variant.available -%}
+              {%- assign allow_oversell = false -%}
+              {%- if fp.selected_or_first_available_variant.inventory_management == blank or fp.selected_or_first_available_variant.inventory_policy == 'continue' -%}
+                {%- assign allow_oversell = true -%}
+              {%- endif -%}
+              <button
+                type="submit"
+                name="add"
+                id="product-add-to-cart"
+                data-btn-addtocart
+                data-inventory-quantity="{{ fp.selected_or_first_available_variant.inventory_quantity }}"
+                data-available="{{ allow_oversell }}"
+                class="sheva-btn-primary sheva-fp__atc product-form__submit"
+              >
+                {{ section.settings.atc_label }} — {{ fp.selected_or_first_available_variant.price | money }}
+              </button>
+            {%- else -%}
+              <button
+                type="submit"
+                name="add"
+                id="product-add-to-cart"
+                data-btn-addtocart
+                data-inventory-quantity="0"
+                data-available="false"
+                class="sheva-btn-primary sheva-fp__atc product-form__submit"
+                disabled
+              >
+                {{ 'products.product.sold_out' | t }}
+              </button>
+            {%- endif -%}
           </div>
 
-          <button
-            type="submit"
-            name="add"
-            class="sheva-btn-primary sheva-fp__atc"
-            {%- if fp.selected_or_first_available_variant.available == false -%}disabled{%- endif -%}
-          >
-            {%- if fp.selected_or_first_available_variant.available -%}
-              {{ section.settings.atc_label }} — <span class="sheva-fp__price-display">{{ fp.selected_or_first_available_variant.price | money }}</span>
-            {%- else -%}
-              Sold Out
-            {%- endif -%}
-          </button>
-        </div>
-
-      {%- endform -%}
+        {%- endform -%}
+      </product-form>
     {%- endif -%}
 
     {%- if section.settings.shipping_note != blank -%}

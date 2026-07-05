@@ -1,14 +1,19 @@
 {% comment %} ============================================================
   SHEVA TEA — Shop / Collection Section
-  A. Bundle Hero card with floating emojis + orbit rings
-  B. Auto-scrolling product cards slider (Right → Left)
+  Supports two layout modes (configurable in theme editor):
+    • marquee — auto-scrolling CSS carousel (pause/direction/speed)
+    • slider  — manual slider with dots and prev/next arrows
+  Also includes the Bundle Hero card (independently toggled).
 ============================================================ {% endcomment %}
 
 {{ 'sheva-shop.css' | asset_url | stylesheet_tag }}
 
+{%- assign layout = section.settings.layout_type | default: 'marquee' -%}
+{%- assign section_id = 'sheva-shop-' | append: section.id -%}
+
 <section
   id="sheva-shop"
-  class="sheva-shop"
+  class="sheva-shop{% if layout == 'slider' %} sheva-shop--slider{% endif %}"
   style="
     --shop-pad-top: {{ section.settings.padding_top }}px;
     --shop-pad-bottom: {{ section.settings.padding_bottom }}px;
@@ -59,7 +64,6 @@
             style="font-size: {{ section.settings.bundle_desc_fs }}px;">{{ section.settings.bundle_desc }}</p>
         {%- endif -%}
 
-        {%- comment -%} Bundle items list (blocks) {%- endcomment -%}
         {%- assign bundle_items = section.blocks | where: 'type', 'bundle_item' -%}
         {%- if bundle_items.size > 0 -%}
           <ul class="sheva-bundle__list">
@@ -71,7 +75,6 @@
           </ul>
         {%- endif -%}
 
-        {%- comment -%} Pricing {%- endcomment -%}
         <div class="sheva-bundle__price">
           {%- if section.settings.bundle_was != blank -%}
             <span class="sheva-bundle__was"
@@ -115,76 +118,135 @@
   {%- endif -%}
 
   {%- comment %} ────────────────────────────────
-    B. SHOP PRODUCT SLIDER
+    B. SHOP CARD CAROUSEL (Marquee or Slider)
   ──────────────────────────────── {% endcomment %}
   {%- assign shop_cards = section.blocks | where: 'type', 'shop_card' -%}
-  {%- if shop_cards.size > 0 -%}
-    <div class="sheva-shop-slider js-sheva-auto-slider">
-      <div class="sheva-shop-track">
 
-        {%- comment -%} First pass — real cards {%- endcomment -%}
-        {%- for block in shop_cards -%}
-          <div class="sheva-shop-card" {{ block.shopify_attributes }}>
-            {%- if block.settings.badge != blank -%}
-              <div class="sheva-shop-badge{% if block.settings.badge_alt %} sheva-shop-badge--alt{% endif %}"
-                style="font-size: {{ section.settings.badge_fs }}px;">{{ block.settings.badge }}</div>
+  {%- comment %} ── Shared card snippet ── {% endcomment %}
+  {%- capture shop_card_html -%}
+    {%- for block in shop_cards -%}
+      <div class="sheva-shop-card" {{ block.shopify_attributes }}>
+        {%- if block.settings.badge != blank -%}
+          <div class="sheva-shop-badge{% if block.settings.badge_alt %} sheva-shop-badge--alt{% endif %}"
+            style="font-size: {{ section.settings.badge_fs }}px;">{{ block.settings.badge }}</div>
+        {%- endif -%}
+        <div class="sheva-shop-img {{ block.settings.gradient_class }}"
+          style="height: {{ section.settings.card_img_h }}px;">
+          <span class="sheva-shop-emoji" style="font-size: {{ section.settings.card_emoji_fs }}px;">{{ block.settings.emoji }}</span>
+        </div>
+        <div class="sheva-shop-info">
+          {%- if block.settings.category != blank -%}
+            <span class="sheva-shop-cat" style="font-size: {{ section.settings.cat_fs }}px;">{{ block.settings.category }}</span>
+          {%- endif -%}
+          <h4 class="sheva-shop-name" style="font-size: {{ section.settings.card_name_fs }}px;">{{ block.settings.name }}</h4>
+          <p class="sheva-shop-desc" style="font-size: {{ section.settings.card_desc_fs }}px;">{{ block.settings.description }}</p>
+          <div class="sheva-shop-foot">
+            <span class="sheva-shop-price" style="font-size: {{ section.settings.price_fs }}px;">{{ block.settings.price }}</span>
+            {%- if block.settings.product_link != blank -%}
+              <a href="{{ block.settings.product_link }}" class="sheva-btn-ghost sheva-btn-ghost--sm"
+                style="font-size: {{ section.settings.card_btn_fs }}px;">Add +</a>
             {%- endif -%}
-            <div class="sheva-shop-img {{ block.settings.gradient_class }}"
-              style="height: {{ section.settings.card_img_h }}px;">
-              <span class="sheva-shop-emoji" style="font-size: {{ section.settings.card_emoji_fs }}px;">{{ block.settings.emoji }}</span>
-            </div>
-            <div class="sheva-shop-info">
-              {%- if block.settings.category != blank -%}
-                <span class="sheva-shop-cat" style="font-size: {{ section.settings.cat_fs }}px;">{{ block.settings.category }}</span>
-              {%- endif -%}
-              <h4 class="sheva-shop-name" style="font-size: {{ section.settings.card_name_fs }}px;">{{ block.settings.name }}</h4>
-              <p class="sheva-shop-desc" style="font-size: {{ section.settings.card_desc_fs }}px;">{{ block.settings.description }}</p>
-              <div class="sheva-shop-foot">
-                <span class="sheva-shop-price"
-                  style="font-size: {{ section.settings.price_fs }}px;">{{ block.settings.price }}</span>
-                {%- if block.settings.product_link != blank -%}
-                  <a href="{{ block.settings.product_link }}" class="sheva-btn-ghost sheva-btn-ghost--sm"
-                    style="font-size: {{ section.settings.card_btn_fs }}px;">Add +</a>
-                {%- endif -%}
-              </div>
-            </div>
           </div>
-        {%- endfor -%}
-
-        {%- comment -%} Duplicate pass — seamless infinite loop {%- endcomment -%}
-        {%- for block in shop_cards -%}
-          <div class="sheva-shop-card" aria-hidden="true">
-            {%- if block.settings.badge != blank -%}
-              <div class="sheva-shop-badge{% if block.settings.badge_alt %} sheva-shop-badge--alt{% endif %}"
-                style="font-size: {{ section.settings.badge_fs }}px;">{{ block.settings.badge }}</div>
-            {%- endif -%}
-            <div class="sheva-shop-img {{ block.settings.gradient_class }}"
-              style="height: {{ section.settings.card_img_h }}px;">
-              <span class="sheva-shop-emoji" style="font-size: {{ section.settings.card_emoji_fs }}px;">{{ block.settings.emoji }}</span>
-            </div>
-            <div class="sheva-shop-info">
-              {%- if block.settings.category != blank -%}
-                <span class="sheva-shop-cat" style="font-size: {{ section.settings.cat_fs }}px;">{{ block.settings.category }}</span>
-              {%- endif -%}
-              <h4 class="sheva-shop-name" style="font-size: {{ section.settings.card_name_fs }}px;">{{ block.settings.name }}</h4>
-              <p class="sheva-shop-desc" style="font-size: {{ section.settings.card_desc_fs }}px;">{{ block.settings.description }}</p>
-              <div class="sheva-shop-foot">
-                <span class="sheva-shop-price"
-                  style="font-size: {{ section.settings.price_fs }}px;">{{ block.settings.price }}</span>
-                {%- if block.settings.product_link != blank -%}
-                  <a href="{{ block.settings.product_link }}" class="sheva-btn-ghost sheva-btn-ghost--sm"
-                    style="font-size: {{ section.settings.card_btn_fs }}px;">Add +</a>
-                {%- endif -%}
-              </div>
-            </div>
-          </div>
-        {%- endfor -%}
-
+        </div>
       </div>
-    </div>
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- if shop_cards.size > 0 -%}
+
+    {%- if layout == 'marquee' -%}
+      {%- comment %} ════════════ MARQUEE ════════════ {% endcomment %}
+      {%- assign marquee_dir = section.settings.marquee_direction | default: 'rtl' -%}
+      {%- assign pause_class = '' -%}
+      {%- if section.settings.pause_on_hover -%}
+        {%- assign pause_class = ' sheva-shop-pause-hover' -%}
+      {%- endif -%}
+      <div class="sheva-shop-slider js-sheva-auto-slider{{ pause_class }}"
+        data-direction="{{ marquee_dir }}">
+        <div class="sheva-shop-track sheva-shop-track--{{ marquee_dir }}">
+          {{ shop_card_html }}
+          {%- comment -%} Duplicate pass — seamless loop {%- endcomment -%}
+          {%- for block in shop_cards -%}
+            <div class="sheva-shop-card" aria-hidden="true">
+              {%- if block.settings.badge != blank -%}
+                <div class="sheva-shop-badge{% if block.settings.badge_alt %} sheva-shop-badge--alt{% endif %}"
+                  style="font-size: {{ section.settings.badge_fs }}px;">{{ block.settings.badge }}</div>
+              {%- endif -%}
+              <div class="sheva-shop-img {{ block.settings.gradient_class }}"
+                style="height: {{ section.settings.card_img_h }}px;">
+                <span class="sheva-shop-emoji" style="font-size: {{ section.settings.card_emoji_fs }}px;">{{ block.settings.emoji }}</span>
+              </div>
+              <div class="sheva-shop-info">
+                {%- if block.settings.category != blank -%}
+                  <span class="sheva-shop-cat" style="font-size: {{ section.settings.cat_fs }}px;">{{ block.settings.category }}</span>
+                {%- endif -%}
+                <h4 class="sheva-shop-name" style="font-size: {{ section.settings.card_name_fs }}px;">{{ block.settings.name }}</h4>
+                <p class="sheva-shop-desc" style="font-size: {{ section.settings.card_desc_fs }}px;">{{ block.settings.description }}</p>
+                <div class="sheva-shop-foot">
+                  <span class="sheva-shop-price" style="font-size: {{ section.settings.price_fs }}px;">{{ block.settings.price }}</span>
+                  {%- if block.settings.product_link != blank -%}
+                    <a href="{{ block.settings.product_link }}" class="sheva-btn-ghost sheva-btn-ghost--sm"
+                      style="font-size: {{ section.settings.card_btn_fs }}px;">Add +</a>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+    {%- else -%}
+      {%- comment %} ════════════ SLIDER — powered by Slick Carousel ════════════ {% endcomment %}
+      <div class="sheva-shop-swiper" id="{{ section_id }}" data-section-id="{{ section.id }}">
+        <div class="sheva-shop-swiper__track"
+          data-dots="{{ section.settings.show_dots }}"
+          data-arrows="{{ section.settings.show_arrows }}"
+          data-slides-show="3"
+          data-slides-md="2">
+          {{ shop_card_html }}
+        </div>
+        {%- if section.settings.show_dots -%}
+          <div class="sheva-swiper-dots" role="tablist"></div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
   {%- endif -%}
 
 </section>
+
+{%- if layout == 'slider' -%}
+<script>
+  $(document).ready(function () {
+    $('#sheva-shop-{{ section.id }} .sheva-shop-swiper__track').slick({
+      dots: {{ section.settings.show_dots }},
+      arrows: {{ section.settings.show_arrows }},
+      infinite: true,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      speed: 300,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    });
+  });
+</script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -253,6 +315,73 @@
       "max": 20,
       "step": 1,
       "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout_type",
+      "label": "Layout Type",
+      "options": [
+        { "value": "marquee", "label": "Marquee (auto-scroll)" },
+        { "value": "slider",  "label": "Slider (manual)" }
+      ],
+      "default": "marquee"
+    },
+    {
+      "type": "header",
+      "content": "Marquee Settings"
+    },
+    {
+      "type": "paragraph",
+      "content": "These settings apply when Layout Type is set to Marquee."
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on Hover",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "marquee_direction",
+      "label": "Scroll Direction",
+      "options": [
+        { "value": "rtl", "label": "Right → Left" },
+        { "value": "ltr", "label": "Left → Right" }
+      ],
+      "default": "rtl"
+    },
+    {
+      "type": "range",
+      "id": "slider_speed",
+      "label": "Scroll Speed (seconds – lower = faster)",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "default": 55
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "paragraph",
+      "content": "These settings apply when Layout Type is set to Slider."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "label": "Show Dot Navigation",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show Prev / Next Arrows",
+      "default": true
     },
     {
       "type": "header",
@@ -415,7 +544,7 @@
     },
     {
       "type": "header",
-      "content": "Shop Card Slider – Typography"
+      "content": "Shop Card – Typography"
     },
     {
       "type": "range",
@@ -491,16 +620,7 @@
     },
     {
       "type": "header",
-      "content": "Slider Settings"
-    },
-    {
-      "type": "range",
-      "id": "slider_speed",
-      "label": "Slider Speed (seconds)",
-      "min": 20,
-      "max": 100,
-      "step": 5,
-      "default": 55
+      "content": "Card Dimensions"
     },
     {
       "type": "range",
@@ -539,42 +659,17 @@
       "type": "bundle_item",
       "name": "Bundle Item",
       "settings": [
-        {
-          "type": "text",
-          "id": "emoji",
-          "label": "Emoji",
-          "default": "🍵"
-        },
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Item Name",
-          "default": "Supernova Herbal Tea"
-        }
+        { "type": "text", "id": "emoji", "label": "Emoji", "default": "🍵" },
+        { "type": "text", "id": "label", "label": "Item Name", "default": "Supernova Herbal Tea" }
       ]
     },
     {
       "type": "shop_card",
       "name": "Shop Card",
       "settings": [
-        {
-          "type": "text",
-          "id": "badge",
-          "label": "Badge Text",
-          "default": "MYSTIQUE"
-        },
-        {
-          "type": "checkbox",
-          "id": "badge_alt",
-          "label": "Use Alt Badge Style (cyan)",
-          "default": false
-        },
-        {
-          "type": "text",
-          "id": "emoji",
-          "label": "Product Emoji",
-          "default": "🫖"
-        },
+        { "type": "text",     "id": "badge",          "label": "Badge Text",                  "default": "MYSTIQUE" },
+        { "type": "checkbox", "id": "badge_alt",       "label": "Use Alt Badge Style (cyan)",  "default": false },
+        { "type": "text",     "id": "emoji",           "label": "Product Emoji",               "default": "🫖" },
         {
           "type": "select",
           "id": "gradient_class",
@@ -590,35 +685,11 @@
           ],
           "default": "sheva-tea-grad"
         },
-        {
-          "type": "text",
-          "id": "category",
-          "label": "Category Label",
-          "default": "Teapots"
-        },
-        {
-          "type": "text",
-          "id": "name",
-          "label": "Product Name",
-          "default": "Mystique Glass Teapot"
-        },
-        {
-          "type": "text",
-          "id": "description",
-          "label": "Short Description",
-          "default": "Thermal-shock resistant simax glass — showcase your Supernova."
-        },
-        {
-          "type": "text",
-          "id": "price",
-          "label": "Price Display",
-          "default": "from $24.95"
-        },
-        {
-          "type": "url",
-          "id": "product_link",
-          "label": "Product Link"
-        }
+        { "type": "text", "id": "category",     "label": "Category Label",     "default": "Teapots" },
+        { "type": "text", "id": "name",          "label": "Product Name",       "default": "Mystique Glass Teapot" },
+        { "type": "text", "id": "description",   "label": "Short Description",  "default": "Thermal-shock resistant simax glass — showcase your Supernova." },
+        { "type": "text", "id": "price",         "label": "Price Display",      "default": "from $24.95" },
+        { "type": "url",  "id": "product_link",  "label": "Product Link" }
       ]
     }
   ],
@@ -633,13 +704,13 @@
         { "type": "bundle_item", "settings": { "emoji": "📓", "label": "Vegan Leatherette Notebook" } },
         { "type": "bundle_item", "settings": { "emoji": "🖊️", "label": "Ergonomic Ballpoint Pen" } },
         { "type": "bundle_item", "settings": { "emoji": "🎴", "label": "Affirmation Card Deck" } },
-        { "type": "shop_card", "settings": { "badge": "MYSTIQUE", "badge_alt": false, "emoji": "🫖", "gradient_class": "sheva-tea-grad",      "category": "Teapots",    "name": "Mystique Glass Teapot",   "description": "Thermal-shock resistant simax glass — showcase your Supernova.", "price": "from $24.95" } },
-        { "type": "shop_card", "settings": { "badge": "TITAN AURA", "badge_alt": true, "emoji": "☕", "gradient_class": "sheva-mug-grad",      "category": "Drinkware",  "name": "Titan Aura Mug",          "description": "11oz stoneware — every sip, a reminder to rise.",               "price": "$15.95" } },
-        { "type": "shop_card", "settings": { "badge": "TITAN AURA", "badge_alt": true, "emoji": "📓", "gradient_class": "sheva-book-grad",     "category": "Books",      "name": "Titan Aura Notebook",     "description": "Vegan leatherette — made for cosmic downloads.",                 "price": "$18.50" } },
-        { "type": "shop_card", "settings": { "badge": "TITAN AURA", "badge_alt": true, "emoji": "🎴", "gradient_class": "sheva-card-grad",     "category": "Cards",      "name": "Affirmation Deck",        "description": "4×4\" deck — manifest one sip, one card at a time.",            "price": "$22.00" } },
-        { "type": "shop_card", "settings": { "badge": "TITAN AURA", "badge_alt": true, "emoji": "🔑", "gradient_class": "sheva-key-grad",      "category": "Keychains",  "name": "Holographic Keychain",    "description": "Epoxy resin with stars — carry the cosmos everywhere.",         "price": "$13.99" } },
-        { "type": "shop_card", "settings": { "badge": "TITAN AURA", "badge_alt": true, "emoji": "🖊️", "gradient_class": "sheva-pen-grad",      "category": "Pens",       "name": "Titan Aura Ballpoint",    "description": "Ergonomic 5.6\" pen — write your story into the stars.",        "price": "$6.50" } },
-        { "type": "shop_card", "settings": { "badge": "TITAN AURA", "badge_alt": true, "emoji": "📑", "gradient_class": "sheva-bookmark-grad", "category": "Bookmarks",  "name": "Silver-Foil Bookmark",    "description": "Seven Star Energy® engraved — a daily cosmic nudge.",           "price": "$6.50" } }
+        { "type": "shop_card", "settings": { "badge": "MYSTIQUE",    "badge_alt": false, "emoji": "🫖",  "gradient_class": "sheva-tea-grad",      "category": "Teapots",   "name": "Mystique Glass Teapot",  "description": "Thermal-shock resistant simax glass — showcase your Supernova.", "price": "from $24.95" } },
+        { "type": "shop_card", "settings": { "badge": "TITAN AURA",  "badge_alt": true,  "emoji": "☕",  "gradient_class": "sheva-mug-grad",      "category": "Drinkware", "name": "Titan Aura Mug",         "description": "11oz stoneware — every sip, a reminder to rise.",               "price": "$15.95" } },
+        { "type": "shop_card", "settings": { "badge": "TITAN AURA",  "badge_alt": true,  "emoji": "📓", "gradient_class": "sheva-book-grad",     "category": "Books",     "name": "Titan Aura Notebook",    "description": "Vegan leatherette — made for cosmic downloads.",                 "price": "$18.50" } },
+        { "type": "shop_card", "settings": { "badge": "TITAN AURA",  "badge_alt": true,  "emoji": "🎴", "gradient_class": "sheva-card-grad",     "category": "Cards",     "name": "Affirmation Deck",       "description": "4×4\" deck — manifest one sip, one card at a time.",            "price": "$22.00" } },
+        { "type": "shop_card", "settings": { "badge": "TITAN AURA",  "badge_alt": true,  "emoji": "🔑", "gradient_class": "sheva-key-grad",      "category": "Keychains", "name": "Holographic Keychain",   "description": "Epoxy resin with stars — carry the cosmos everywhere.",         "price": "$13.99" } },
+        { "type": "shop_card", "settings": { "badge": "TITAN AURA",  "badge_alt": true,  "emoji": "🖊️","gradient_class": "sheva-pen-grad",      "category": "Pens",      "name": "Titan Aura Ballpoint",   "description": "Ergonomic 5.6\" pen — write your story into the stars.",        "price": "$6.50" } },
+        { "type": "shop_card", "settings": { "badge": "TITAN AURA",  "badge_alt": true,  "emoji": "📑", "gradient_class": "sheva-bookmark-grad", "category": "Bookmarks", "name": "Silver-Foil Bookmark",   "description": "Seven Star Energy® engraved — a daily cosmic nudge.",           "price": "$6.50" } }
       ]
     }
   ]

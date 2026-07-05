@@ -1,7 +1,7 @@
 /* ============================================================
    SHEVA TEA — Featured Product JS
-   Handles quantity stepper only.
-   Add-to-cart is handled by the theme's native form submit.
+   Quantity stepper only.
+   Add-to-cart is handled by the theme's <product-form> element.
 ============================================================ */
 (function () {
   'use strict';
@@ -26,10 +26,16 @@
     });
 
     function update() {
-      qvalEl.textContent  = qty;
-      inputEl.value       = qty;
+      qvalEl.textContent = qty;
+      inputEl.value      = qty;
     }
   }
 
   document.querySelectorAll('.sheva-fp').forEach(initShevaQty);
+
+  document.addEventListener('shopify:section:load', function (e) {
+    var section = e.target.querySelector('.sheva-fp');
+    if (section) initShevaQty(section);
+  });
+
 })();

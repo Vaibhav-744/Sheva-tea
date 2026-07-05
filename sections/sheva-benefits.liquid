@@ -55,7 +55,7 @@
       {%- for block in section.blocks -%}
         {%- if block.type == 'benefit' -%}
           <div
-            class="sheva-b-card"
+            class="sheva-b-card{% if forloop.index > 4 %} sheva-b-card--hidden{% endif %}"
             style="border-radius: {{ section.settings.card_radius }}px;"
             {{ block.shopify_attributes }}
           >
@@ -75,9 +75,29 @@
         {%- endif -%}
       {%- endfor -%}
     </div>
+
+    {%- assign benefit_blocks = section.blocks | where: 'type', 'benefit' -%}
+    {%- if benefit_blocks.size > 4 -%}
+      <div class="sheva-benefits__read-more">
+        <button class="sheva-benefits__read-more-btn" aria-expanded="false">
+          View All Benefits
+        </button>
+      </div>
+    {%- endif -%}
   {%- endif -%}
 
 </section>
+
+<script>
+  (function () {
+    var btn = document.querySelector('#sheva-benefits .sheva-benefits__read-more-btn');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var grid = document.querySelector('#sheva-benefits .sheva-benefits__grid');
+      grid.classList.add('sheva-benefits__grid--expanded');
+    });
+  })();
+</script>
 
 {% schema %}
 {

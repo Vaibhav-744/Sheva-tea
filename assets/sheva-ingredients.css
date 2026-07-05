@@ -12,17 +12,15 @@
   background: transparent;
 }
 
-/* ── Slider wrapper ── */
+/* ── Marquee slider wrapper ── */
 .sheva-ing-slider {
   position: relative;
   overflow: hidden;
   width: 100%;
   padding: 20px 0;
-  /* -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); */
 }
 
-/* ── Track ── */
+/* ── Marquee track ── */
 .sheva-ing-track {
   display: flex;
   gap: var(--ing-gap, 24px);
@@ -32,14 +30,20 @@
   animation: shevaIngScroll var(--ing-speed, 35s) linear infinite;
 }
 
-/* Pause on hover (desktop) */
 .sheva-ing-slider:hover .sheva-ing-track { animation-play-state: paused; }
+.sheva-ing-pause-hover:hover .sheva-ing-track { animation-play-state: paused; }
 
-/* Right → Left */
+.sheva-ing-track--rtl { animation-name: shevaIngScroll; }
 @keyframes shevaIngScroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
+
+@keyframes shevaIngScrollLTR {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.sheva-ing-track--ltr { animation-name: shevaIngScrollLTR; }
 
 /* ── Card ── */
 .sheva-ing-card {
@@ -96,14 +100,92 @@
   margin: 0;
 }
 
-/* ── Responsive ── */
+/* ── Marquee responsive ── */
 @media (max-width: 768px) {
   .sheva-ingredients { padding: 70px 0; }
   .sheva-ing-track   { gap: 16px !important; padding: 0 16px; animation-duration: 28s; }
   .sheva-ing-card    { flex: 0 0 240px !important; padding: 26px 20px; }
   .sheva-full-ing    { padding: 22px; width: calc(100% - 32px); margin: 30px auto 0; }
 }
-
 @media (max-width: 420px) {
   .sheva-ing-card { flex: 0 0 220px !important; padding: 22px 18px; }
+}
+
+/* ============================================================
+   SLICK SLIDER MODE
+============================================================ */
+
+.sheva-ingredients--slider {
+  overflow: visible !important;
+}
+
+.sheva-ing-swiper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 60px;
+}
+
+.sheva-ing-swiper .slick-dots {
+  position: relative;
+  bottom: auto;
+  margin-top: 20px;
+}
+.sheva-ing-swiper .slick-dots li button {
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  border-radius: 50%;
+  transition: background 0.3s, transform 0.3s;
+}
+.sheva-ing-swiper .slick-dots li.slick-active button {
+  background: linear-gradient(90deg, #ff4db8, #ff7a3d, #22d3ee);
+  border: none;
+  transform: scale(1.3);
+}
+
+.sheva-ing-swiper .slick-list {
+  overflow: hidden !important;
+  padding: 10px !important;
+  margin:0 -7px
+}
+
+.sheva-ing-swiper .slick-slide {
+  box-sizing: border-box !important;
+  height: auto !important;
+  margin:0 8px;
+}
+
+.sheva-ing-swiper .slick-slide .sheva-ing-card {
+  width: 100% !important;
+  flex: none !important;
+  box-sizing: border-box !important;
+  margin: 0 12px;
+}
+
+.sheva-ing-swiper .slick-prev,
+.sheva-ing-swiper .slick-next {
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  transition: background .3s, border-color .3s;
+}
+.sheva-ing-swiper .slick-prev { left: -22px; }
+.sheva-ing-swiper .slick-next { right: -22px; }
+.sheva-ing-swiper .slick-prev:hover,
+.sheva-ing-swiper .slick-next:hover {
+  background: rgba(255,77,184,0.25);
+  border-color: #ff4db8;
+}
+.sheva-ing-swiper .slick-prev:before,
+.sheva-ing-swiper .slick-next:before {
+  font-size: 18px;
+  opacity: 1;
+}
+
+@media(max-width:600px){
+  .sheva-ing-swiper .slick-list {margin:0;}
+  .sheva-ing-swiper .slick-slide {margin:0 16px;}
 }

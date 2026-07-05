@@ -5,12 +5,15 @@
         body:not([allow-transparency]) .header-navigation {position: static !important;}
         .header-nav-plain:not(.header-plain--transparent),.scrolled-past-header .header-plain--transparent {
             {%- if section.settings.header_navigation_bg_gradient != 'rgba(0,0,0,0)' and section.settings.header_navigation_bg_gradient != blank -%}
-                 background: {{ section.settings.header_navigation_bg_gradient }}
+                 background: {{ section.settings.header_navigation_bg_gradient }};
             {%- else -%}
                 {%- if section.settings.header_navigation_bg != 'rgba(0,0,0,0)' and section.settings.header_navigation_bg != blank -%}
-                   background: {{ section.settings.header_navigation_bg }}
+                   background: {{ section.settings.header_navigation_bg }};
                 {%- endif -%}
             {%- endif -%}
+                background: rgba(5, 0, 20, 0.65);
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
         }
         {%- if section.settings.header_navigation_bg_gradient == 'rgba(0,0,0,0)' or section.settings.header_navigation_bg_gradient == blank -%}
             {%- if section.settings.header_navigation_bg == '#ffffff' -%}

@@ -51,6 +51,9 @@
     if (!els.length) return;
 
     els.forEach(function (el) {
+      /* Skip cards inside a Slick slider — inline styles would break the slider */
+      if (el.closest('.sheva-ing-swiper, .sheva-rev-swiper, .sheva-shop-swiper')) return;
+
       el.style.opacity   = '0';
       el.style.transform = 'translateY(30px)';
       el.style.transition = 'opacity .8s, transform .8s';
@@ -66,7 +69,10 @@
       });
     }, { threshold: 0.12 });
 
-    els.forEach(function (el) { io.observe(el); });
+    els.forEach(function (el) {
+      if (el.closest('.sheva-ing-swiper, .sheva-rev-swiper, .sheva-shop-swiper')) return;
+      io.observe(el);
+    });
   }
 
   /* ── 3. Navbar scroll effect ── */

@@ -100,7 +100,7 @@
         "icon-5"
       ],
       "settings": {
-        "product": "",
+        "product": "supernova-herbal-tea",
         "fallback_image": "shopify://shop_images/pack.png",
         "fallback_title": "SUPERNOVA Herbal Tea",
         "tag_label": "✦ SEVEN STAR ENERGY®",
@@ -360,6 +360,12 @@
         "i6"
       ],
       "settings": {
+        "layout_type": "slider",
+        "pause_on_hover": true,
+        "marquee_direction": "rtl",
+        "speed": 35,
+        "show_dots": true,
+        "show_arrows": false,
         "eyebrow": "✦ SACRED HERBS",
         "title_plain": "Key",
         "title": "Ingredients",
@@ -374,7 +380,6 @@
         "full_fs": 12,
         "eyebrow_color": "#22d3ee",
         "name_color": "#22d3ee",
-        "speed": 35,
         "card_width": 280,
         "card_gap": 24,
         "padding_top": 100,
@@ -557,6 +562,12 @@
         "title_fs_desktop": 52,
         "title_fs_mobile": 28,
         "sub_fs": 15,
+        "layout_type": "slider",
+        "pause_on_hover": true,
+        "marquee_direction": "rtl",
+        "slider_speed": 55,
+        "show_dots": true,
+        "show_arrows": false,
         "show_bundle": true,
         "bundle_tag": "✦ BEST VALUE · SAVE 28%",
         "bundle_tag_fs": 11,
@@ -586,7 +597,6 @@
         "card_btn_fs": 11,
         "card_img_h": 220,
         "card_emoji_fs": 88,
-        "slider_speed": 55,
         "card_width": 300,
         "padding_top": 100,
         "padding_bottom": 100
@@ -677,6 +687,12 @@
         "r6"
       ],
       "settings": {
+        "layout_type": "slider",
+        "pause_on_hover": true,
+        "marquee_direction": "ltr",
+        "speed": 45,
+        "show_dots": true,
+        "show_arrows": false,
         "eyebrow": "✦ COSMIC TESTIMONIALS",
         "title_plain": "Loved by",
         "title": "the Stars",
@@ -693,7 +709,6 @@
         "quote_fs": 14,
         "body_fs": 13,
         "eyebrow_color": "#22d3ee",
-        "speed": 45,
         "card_width": 320,
         "padding_top": 100,
         "padding_bottom": 100

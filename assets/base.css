@@ -106,7 +106,7 @@ option.soldout {
         width: 100%;
         position: relative;
         max-width: 100%;
-        padding: 0 15px;
+        padding: 0 16px;
         margin: 0 auto;
     }
 
@@ -3945,7 +3945,7 @@ summary::-webkit-details-marker {
     }
 
     .menu-lv-item{
-        display: inline-block;
+        display: inline-block !important;
         vertical-align: top;
         position: relative;
     }
@@ -4855,33 +4855,33 @@ summary::-webkit-details-marker {
             width: 100%;
             position: relative;
             max-width: 100%;
-            padding: 0 15px;
+            padding: 0 16px;
             margin: 0 auto;
         }
 
         .container-1570 {
-            padding-left: 15px;
-            padding-right: 15px;
+            padding-left: 16px;
+            padding-right: 16px;
         }
 
         .container-1470 {
-            padding-left: 15px;
-            padding-right: 15px;
+            padding-left: 16px;
+            padding-right: 16px;
         }
 
         .container-1370 {
-            padding-left: 15px;
-            padding-right: 15px;
+            padding-left: 16px;
+            padding-right: 16px;
         }
 
         .container-1320 {
-            padding-left: 15px;
-            padding-right: 15px;
+            padding-left: 16px;
+            padding-right: 16px;
         }
 
         .container-1170 {
-            padding-left: 15px;
-            padding-right: 15px;
+            padding-left: 16px;
+            padding-right: 16px;
         }
 
         .halo-row{
@@ -5543,38 +5543,38 @@ summary::-webkit-details-marker {
 @media (max-width: 551px){
     /* START: Container */
         .container{
-            padding-left: 10px;
-            padding-right: 10px;
+            padding-left: 16px;
+            padding-right: 16px;
         }
 
         .container-1770{
-            padding-left: 10px;
-            padding-right: 10px;
+            padding-left: 16px;
+            padding-right: 16px;
         }
 
         .container-1570{
-            padding-left: 10px;
-            padding-right: 10px;
+            padding-left: 16px;
+            padding-right: 16px;
         }
 
         .container-1470{
-            padding-left: 10px;
-            padding-right: 10px;
+            padding-left: 16px;
+            padding-right: 16px;
         }
 
         .container-1370{
-            padding-left: 10px;
-            padding-right: 10px;
+            padding-left: 16px;
+            padding-right: 16px;
         }
 
         .container-1320 {
-            padding-left: 10px;
-            padding-right: 10px;
+            padding-left: 16px;
+            padding-right: 16px;
         }
 
         .container-1170{
-            padding-left: 10px;
-            padding-right: 10px;
+            padding-left: 16px;
+            padding-right: 16px;
         }
 
         .halo-row{
@@ -7068,4 +7068,25 @@ summary::-webkit-details-marker {
     .motion-reduce {
         transition: none !important;
     }
+}
+.header-navigation .header__icon svg{
+    height:18px;
+    width:18px;
+}
+.scrolled-past-header .sticky-container-full{
+    padding:0 48px;
+}
+.header-mobile,
+.halo-sidebar.halo-sidebar_menu,
+.menu-heading-mobile{
+
+        background: rgba(5, 0, 20, 0.65);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+}
+.menu_open .halo-sidebar.halo-sidebar_menu *,
+.menu-heading-mobile *{color:#fff;}
+.halo-sidebar.halo-sidebar-left.halo-sidebar_menu .halo-sidebar-close svg{fill:#fff;}
+@media(max-width:1024px){
+    .header-mobile__item{min-width:36px !important;}
 }

@@ -144,3 +144,46 @@
     transition: none;
   }
 }
+
+/* ── Mobile: show only first 2 rows (4 cards), hide the rest ── */
+@media (max-width: 768px) {
+  .sheva-b-card--hidden {
+    display: none;
+  }
+  .sheva-benefits__grid.sheva-benefits__grid--expanded .sheva-b-card--hidden {
+    display: block;
+  }
+
+  .sheva-benefits__read-more {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .sheva-benefits__read-more-btn {
+    display: inline-block;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ff4db8, #8b5cf6);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .sheva-benefits__read-more-btn:hover {
+    opacity: 0.85;
+    transform: scale(1.04);
+  }
+  /* Hide button once expanded */
+  .sheva-benefits__grid--expanded ~ .sheva-benefits__read-more {
+    display: none;
+  }
+}
+
+/* On desktop the button and hidden class have no effect */
+@media (min-width: 769px) {
+  .sheva-b-card--hidden { display: block; }
+  .sheva-benefits__read-more { display: none; }
+}
