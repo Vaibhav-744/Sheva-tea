@@ -1,0 +1,307 @@
+{% comment %} ============================================================
+  SHEVA TEA — Custom Cosmic Navbar
+  - Fixed, blur-backdrop header
+  - Logo with animated gradient text
+  - Desktop nav links (from linklist)
+  - Cart icon with live item count
+  - Hamburger → full-screen mobile menu
+  - Scroll-darkening handled by sheva-sliders.js
+  - All colors, font sizes, spacing customisable in theme editor
+============================================================ {% endcomment %}
+
+{{ 'sheva-header.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign main_menu   = section.settings.main_menu
+  assign logo_text   = section.settings.logo_text | default: shop.name
+  assign show_cart   = section.settings.show_cart
+  assign show_search = section.settings.show_search
+-%}
+
+<nav
+  class="sheva-nav"
+  id="sheva-nav"
+  style="
+    --nav-pad-x: {{ section.settings.padding_x }}px;
+    --nav-pad-y: {{ section.settings.padding_y }}px;
+    --nav-logo-size: {{ section.settings.logo_fs }}px;
+    --nav-link-size: {{ section.settings.link_fs }}px;
+    --nav-link-color: {{ section.settings.link_color }};
+    --nav-link-hover: {{ section.settings.link_hover_color }};
+    --nav-logo-from: {{ section.settings.logo_grad_from }};
+    --nav-logo-mid:  {{ section.settings.logo_grad_mid }};
+    --nav-logo-to:   {{ section.settings.logo_grad_to }};
+    --nav-cart-badge-bg: {{ section.settings.cart_badge_bg }};
+  "
+  role="navigation"
+  aria-label="Main navigation"
+>
+
+  {%- comment %} ── Logo ── {% endcomment %}
+  <a href="{{ routes.root_url }}" class="sheva-nav__logo" aria-label="{{ shop.name }}">
+    {%- if section.settings.logo_image != blank -%}
+      <img
+        src="{{ section.settings.logo_image | img_url: '200x' }}"
+        alt="{{ shop.name }}"
+        width="{{ section.settings.logo_image_width }}"
+        loading="eager"
+      >
+    {%- else -%}
+      <span class="sheva-nav__logo-star" aria-hidden="true">✦</span>
+      {{ logo_text }}
+    {%- endif -%}
+  </a>
+
+  {%- comment %} ── Desktop Nav Links ── {% endcomment %}
+  {%- if main_menu != blank and linklists[main_menu].links.size > 0 -%}
+    <ul class="sheva-nav__links" id="sheva-nav-links" role="list">
+      {%- for link in linklists[main_menu].links -%}
+        <li>
+          <a
+            href="{{ link.url }}"
+            class="sheva-nav__link{% if link.active %} sheva-nav__link--active{% endif %}"
+          >{{ link.title }}</a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+
+  {%- comment %} ── Right: search / cart / hamburger ── {% endcomment %}
+  <div class="sheva-nav__right">
+
+    {%- if show_search -%}
+      <a href="{{ routes.search_url }}" class="sheva-nav__search-btn" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </a>
+    {%- endif -%}
+
+    {%- if show_cart -%}
+      <a
+        href="{{ routes.cart_url }}"
+        class="sheva-nav__cart"
+        aria-label="Cart ({{ cart.item_count }} items)"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        {%- if cart.item_count > 0 -%}
+          <span class="sheva-nav__cart-count" aria-label="{{ cart.item_count }} items in cart">
+            {{ cart.item_count }}
+          </span>
+        {%- endif -%}
+      </a>
+    {%- endif -%}
+
+    {%- comment -%} Hamburger — mobile only {%- endcomment -%}
+    <button
+      class="sheva-nav__hamburger"
+      id="sheva-hamburger"
+      aria-controls="sheva-mobile-menu"
+      aria-expanded="false"
+      aria-label="Toggle mobile menu"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+
+</nav>
+
+{%- comment %} ── Mobile Menu Overlay ── {% endcomment %}
+<div
+  class="sheva-mobile-menu"
+  id="sheva-mobile-menu"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Mobile navigation"
+  hidden
+>
+  <button
+    class="sheva-mobile-menu__close"
+    id="sheva-mobile-close"
+    aria-label="Close mobile menu"
+  >✕</button>
+
+  {%- if main_menu != blank and linklists[main_menu].links.size > 0 -%}
+    <ul class="sheva-mobile-menu__links" role="list">
+      {%- for link in linklists[main_menu].links -%}
+        <li>
+          <a
+            href="{{ link.url }}"
+            class="sheva-mobile-menu__link"
+            style="font-size: {{ section.settings.mobile_link_fs }}px;"
+          >{{ link.title }}</a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+
+  {%- if show_cart -%}
+    <a href="{{ routes.cart_url }}" class="sheva-mobile-menu__cart-link">
+      🛒 Cart
+      {%- if cart.item_count > 0 -%}
+        <span class="sheva-nav__cart-count">{{ cart.item_count }}</span>
+      {%- endif -%}
+    </a>
+  {%- endif -%}
+</div>
+
+<script src="{{ 'sheva-header.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Sheva – Header",
+  "tag": "section",
+  "class": "sheva-header-section",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo Image (leave blank for text logo)"
+    },
+    {
+      "type": "range",
+      "id": "logo_image_width",
+      "label": "Logo Image Width (px)",
+      "min": 60,
+      "max": 300,
+      "step": 5,
+      "default": 140
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo Text (if no image)",
+      "default": "SHEVA TEA"
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "link_list",
+      "id": "main_menu",
+      "label": "Main Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show Search Icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart",
+      "label": "Show Cart Icon",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "logo_fs",
+      "label": "Logo Font Size (px)",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "link_fs",
+      "label": "Nav Link Font Size (px)",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "mobile_link_fs",
+      "label": "Mobile Menu Link Font Size (px)",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "logo_grad_from",
+      "label": "Logo Gradient – From",
+      "default": "#ff4db8"
+    },
+    {
+      "type": "color",
+      "id": "logo_grad_mid",
+      "label": "Logo Gradient – Mid",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "color",
+      "id": "logo_grad_to",
+      "label": "Logo Gradient – To",
+      "default": "#ff7a3d"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Nav Link Color",
+      "default": "#f3f0ff"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Nav Link Hover Color",
+      "default": "#ff4db8"
+    },
+    {
+      "type": "color",
+      "id": "cart_badge_bg",
+      "label": "Cart Badge Background",
+      "default": "#ff4db8"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_x",
+      "label": "Horizontal Padding (px)",
+      "min": 12,
+      "max": 80,
+      "step": 2,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_y",
+      "label": "Vertical Padding (px)",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva – Header"
+    }
+  ]
+}
+{% endschema %}

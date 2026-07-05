@@ -1,0 +1,265 @@
+/* ============================================================
+   SHEVA TEA — Featured Product CSS
+============================================================ */
+
+.sheva-fp {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  padding: var(--fp-pad-top, 120px) 8% var(--fp-pad-bottom, 120px);
+  position: relative;
+  z-index: 5;
+  align-items: center;
+  width: 100%;
+  background: transparent;
+}
+
+/* ── Gallery ── */
+.sheva-fp__gallery {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 600px;
+}
+.sheva-fp__glow-orb {
+  display: block !important;
+  position: absolute;
+  width: 450px; height: 450px;
+  max-width: 90%; max-height: 90%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,77,184,.4), rgba(139,92,246,.2) 50%, transparent 70%);
+  filter: blur(50px);
+  animation: shevaFpPulse 4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes shevaFpPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+
+.sheva-fp__product-img {
+  width: 460px;
+  max-width: 80%;
+  animation: shevaFpFloat 6s ease-in-out infinite;
+  z-index: 3;
+  position: relative;
+}
+.sheva-fp__product-img--placeholder {
+  font-size: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+}
+@keyframes shevaFpFloat {
+  0%,100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-20px) rotate(2deg); }
+}
+
+/* Orbit rings */
+.sheva-fp__orbit-ring {
+  display: block !important;
+  position: absolute;
+  width: 480px; height: 480px;
+  max-width: 95%; max-height: 95%;
+  border-radius: 50%;
+  border: 2px dashed rgba(255,77,184,.3);
+  animation: shevaFpSpin 30s linear infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+.sheva-fp__orbit-ring--r2 {
+  width: 560px; height: 560px;
+  border-color: rgba(34,211,238,.2);
+  animation: shevaFpSpin 45s linear infinite reverse;
+}
+.sheva-fp__orbit-ring::before {
+  content: '';
+  position: absolute;
+  display: block !important;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: #22d3ee;
+  top: -8px; left: 50%;
+  box-shadow: 0 0 20px #22d3ee;
+}
+.sheva-fp__orbit-ring::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #ff4db8;
+  bottom: -6px; right: 20%;
+  box-shadow: 0 0 20px #ff4db8;
+}
+@keyframes shevaFpSpin { to { transform: rotate(360deg); } }
+
+/* ── Info ── */
+.sheva-fp__info { min-width: 0; }
+
+.sheva-fp__tag {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--fp-tag-color, #22d3ee);
+  letter-spacing: 3px;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.sheva-fp__title {
+  font-family: 'Orbitron', sans-serif;
+  line-height: 1;
+  margin-bottom: 14px;
+  background: linear-gradient(90deg, var(--fp-title-from, #ff7a3d), var(--fp-title-to, #ff4db8));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.sheva-fp__rating-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.sheva-stars-rating {
+  color: #ffd93d;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+.sheva-fp__rating-count {
+  font-size: 13px;
+  opacity: .7;
+  color: var(--sheva-text, #f3f0ff);
+  font-family: 'Poppins', sans-serif;
+}
+
+.sheva-fp__desc {
+  color: var(--sheva-text, #f3f0ff);
+  opacity: .8;
+  margin-bottom: 28px;
+  line-height: 1.7;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ── Benefit Icons ── */
+.sheva-fp__icons-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+.sheva-fp__icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+.sheva-fp__icon {
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(255,77,184,.25), rgba(34,211,238,.25));
+  border: 1px solid rgba(255,255,255,.2);
+  font-size: 22px;
+  transition: .3s;
+  backdrop-filter: blur(8px);
+}
+.sheva-fp__icon-item:hover .sheva-fp__icon {
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: 0 0 25px #ff4db8;
+}
+.sheva-fp__icon-item span {
+  letter-spacing: 1px;
+  opacity: .85;
+  color: var(--sheva-text, #f3f0ff);
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+/* ── Form / Qty ── */
+.sheva-fp__form { margin-bottom: 0; }
+
+.sheva-fp__qty-row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.sheva-fp__qty {
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.sheva-fp__qty-btn {
+  width: 38px; height: 48px;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background .2s;
+  font-family: 'Poppins', sans-serif;
+}
+.sheva-fp__qty-btn:hover { background: rgba(255,77,184,.3); }
+.sheva-fp__qval {
+  width: 40px;
+  text-align: center;
+  font-weight: 600;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  pointer-events: none;
+}
+.sheva-fp__atc {
+  flex: 1;
+  min-width: 180px;
+  white-space: nowrap;
+}
+.sheva-fp__atc:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+.sheva-fp__price-display {
+  font-weight: 700;
+}
+
+.sheva-fp__shipping {
+  font-family: 'Poppins', sans-serif;
+  opacity: .75;
+  letter-spacing: 1px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .sheva-fp { padding: 100px 24px; gap: 40px; }
+  .sheva-fp__product-img { width: 300px; }
+}
+
+@media (max-width: 768px) {
+  .sheva-fp {
+    grid-template-columns: 1fr;
+    padding: 70px 20px;
+    gap: 40px;
+  }
+  .sheva-fp__gallery { min-height: 360px; }
+  .sheva-fp__product-img { width: 240px; }
+  .sheva-fp__orbit-ring   { width: 320px; height: 320px; }
+  .sheva-fp__orbit-ring--r2 { width: 380px; height: 380px; }
+  .sheva-fp__glow-orb     { width: 300px; height: 300px; }
+  .sheva-fp__icons-row    { gap: 10px; justify-content: space-between; }
+  .sheva-fp__icon-item    { flex: 1 1 calc(20% - 8px); min-width: 0; }
+  .sheva-fp__icon         { width: 44px; height: 44px; font-size: 18px; }
+}
+
+@media (max-width: 420px) {
+  .sheva-fp { padding: 60px 16px; }
+  .sheva-fp__icon { width: 40px; height: 40px; font-size: 16px; }
+}

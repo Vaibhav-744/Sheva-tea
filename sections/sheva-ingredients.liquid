@@ -1,0 +1,306 @@
+{% comment %} ============================================================
+  SHEVA TEA — Ingredients Slider Section
+  Auto-scrolling CSS carousel (Right → Left).
+  Cards duplicated for seamless infinite loop.
+  Pauses on hover/touch. Pauses off-screen (IntersectionObserver).
+============================================================ {% endcomment %}
+
+{{ 'sheva-ingredients.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="sheva-ingredients"
+  class="sheva-ingredients"
+  style="
+    --ing-pad-top: {{ section.settings.padding_top }}px;
+    --ing-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --ing-eyebrow-color: {{ section.settings.eyebrow_color }};
+    --ing-speed: {{ section.settings.speed }}s;
+    --ing-card-w: {{ section.settings.card_width }}px;
+    --ing-gap: {{ section.settings.card_gap }}px;
+    --ing-name-color: {{ section.settings.name_color }};
+  "
+>
+  <div class="sheva-sec-head">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="sheva-eyebrow" style="color: var(--ing-eyebrow-color);">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h2 class="sheva-sec-title"
+        style="font-size: clamp({{ section.settings.title_fs_mobile }}px, 4vw, {{ section.settings.title_fs_desktop }}px);">
+        {%- if section.settings.title_plain != blank -%}{{ section.settings.title_plain }} {%- endif -%}
+        <em class="sheva-glow">{{ section.settings.title }}</em>
+      </h2>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <p class="sheva-sec-sub" style="font-size: {{ section.settings.sub_fs }}px;">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+  </div>
+
+  {%- comment %} ── Auto-scroll slider ── {% endcomment %}
+  <div class="sheva-ing-slider js-sheva-auto-slider">
+    <div class="sheva-ing-track">
+
+      {%- comment -%} First pass — real cards {%- endcomment -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'ingredient' -%}
+          <div class="sheva-ing-card" {{ block.shopify_attributes }}>
+            <div class="sheva-ing-emoji" style="font-size: {{ section.settings.emoji_size }}px;">{{ block.settings.emoji }}</div>
+            <h3 class="sheva-ing-card__name"
+              style="font-size: {{ section.settings.name_fs }}px;">{{ block.settings.name }}</h3>
+            <p class="sheva-ing-card__desc"
+              style="font-size: {{ section.settings.desc_fs }}px;">{{ block.settings.description }}</p>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- comment -%} Duplicate pass — seamless infinite loop {%- endcomment -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'ingredient' -%}
+          <div class="sheva-ing-card" aria-hidden="true">
+            <div class="sheva-ing-emoji" style="font-size: {{ section.settings.emoji_size }}px;">{{ block.settings.emoji }}</div>
+            <h3 class="sheva-ing-card__name"
+              style="font-size: {{ section.settings.name_fs }}px;">{{ block.settings.name }}</h3>
+            <p class="sheva-ing-card__desc"
+              style="font-size: {{ section.settings.desc_fs }}px;">{{ block.settings.description }}</p>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+
+    </div>
+  </div>
+
+  {%- comment %} ── Full Ingredients list ── {% endcomment %}
+  {%- if section.settings.full_ingredients != blank -%}
+    <div class="sheva-full-ing">
+      <h4 class="sheva-full-ing__title">Full Ingredients</h4>
+      <p class="sheva-full-ing__text" style="font-size: {{ section.settings.full_fs }}px;">
+        {{ section.settings.full_ingredients }}
+      </p>
+    </div>
+  {%- endif -%}
+
+</section>
+
+{% schema %}
+{
+  "name": "Sheva – Ingredients",
+  "tag": "section",
+  "class": "sheva-section sheva-ingredients-section",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "✦ SACRED HERBS"
+    },
+    {
+      "type": "text",
+      "id": "title_plain",
+      "label": "Title – Plain Part",
+      "default": "Key"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title – Gradient Part",
+      "default": "Ingredients"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Six sacred herbs from across the cosmos, hand-selected for potency."
+    },
+    {
+      "type": "header",
+      "content": "Full Ingredients List"
+    },
+    {
+      "type": "textarea",
+      "id": "full_ingredients",
+      "label": "Full Ingredients Text",
+      "default": "Made with Love, Peace & Freedom — Turmeric, Alfalfa, Lungwort, Ashwagandha, Motherwort, Basil Holy Tulsi, Neem, Bay, Orris, Black Walnut Hull, Parsley, Blue Vervain, Plantain, Brahmi, Ceylon Cinnamon, Rosemary, Burdock, Slippery Elm Bark, Yerba Santa, Caraway, Ginseng, Stevia, Gotu Kola, Cardamom, Mamaki, Thyme, Chamomile, Muicle, Trigona Pollen, Yellow Dock, Astragalus, Ginkgo, Red Clover, Cumin, Milk Thistle, Dandelion, Guaco, Rhodiola Rosea, Chia, Mullein, Dill, Ginger, Lavender, Hyssop, Fennel, Lemon Balm, Elderberry, Oatstraw, Nettle, Coriander."
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_fs_desktop",
+      "label": "Title Size – Desktop (px)",
+      "min": 24,
+      "max": 72,
+      "step": 1,
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "title_fs_mobile",
+      "label": "Title Size – Mobile (px)",
+      "min": 18,
+      "max": 48,
+      "step": 1,
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "sub_fs",
+      "label": "Subtitle Font Size (px)",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "emoji_size",
+      "label": "Card Emoji Size (px)",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "default": 38
+    },
+    {
+      "type": "range",
+      "id": "name_fs",
+      "label": "Card Name Font Size (px)",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "desc_fs",
+      "label": "Card Description Font Size (px)",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "full_fs",
+      "label": "Full Ingredients Font Size (px)",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "color",
+      "id": "name_color",
+      "label": "Card Name Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "header",
+      "content": "Slider"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Scroll Speed (seconds – lower = faster)",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "default": 35
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "label": "Card Width (px)",
+      "min": 180,
+      "max": 400,
+      "step": 10,
+      "default": 280
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Gap Between Cards (px)",
+      "min": 8,
+      "max": 48,
+      "step": 2,
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "default": 100
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji",
+          "default": "🌱"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Ingredient Name",
+          "default": "Ginseng"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Short Description",
+          "default": "Ancient root of vitality & energy."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva – Ingredients",
+      "blocks": [
+        { "type": "ingredient", "settings": { "emoji": "🌱", "name": "Ginseng",    "description": "Ancient root of vitality & energy." } },
+        { "type": "ingredient", "settings": { "emoji": "🍃", "name": "Ginkgo",     "description": "Enhances memory & circulation." } },
+        { "type": "ingredient", "settings": { "emoji": "🌺", "name": "Muicle",     "description": "Rich antioxidant & blood cleanser." } },
+        { "type": "ingredient", "settings": { "emoji": "🌿", "name": "Gotu Kola",  "description": "Brain tonic, herb of longevity." } },
+        { "type": "ingredient", "settings": { "emoji": "💫", "name": "Brahmi",     "description": "Calms mind, sharpens focus." } },
+        { "type": "ingredient", "settings": { "emoji": "🌴", "name": "Mamaki",     "description": "Hawaiian adaptogen for balance." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

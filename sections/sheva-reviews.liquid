@@ -1,0 +1,362 @@
+{% comment %} ============================================================
+  SHEVA TEA — Reviews Slider Section
+  Auto-scrolling CSS carousel — LEFT → RIGHT direction.
+  Cards duplicated for seamless infinite loop.
+============================================================ {% endcomment %}
+
+{{ 'sheva-reviews.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="sheva-reviews"
+  class="sheva-reviews"
+  style="
+    --rev-pad-top: {{ section.settings.padding_top }}px;
+    --rev-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --rev-speed: {{ section.settings.speed }}s;
+    --rev-card-w: {{ section.settings.card_width }}px;
+    --rev-eyebrow-color: {{ section.settings.eyebrow_color }};
+  "
+>
+  {%- comment %} ── Section Header ── {% endcomment %}
+  <div class="sheva-sec-head">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="sheva-eyebrow" style="color: var(--rev-eyebrow-color);">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h2 class="sheva-sec-title"
+        style="font-size: clamp({{ section.settings.title_fs_mobile }}px, 4vw, {{ section.settings.title_fs_desktop }}px);">
+        {%- if section.settings.title_plain != blank -%}{{ section.settings.title_plain }} {%- endif -%}
+        <em class="sheva-glow">{{ section.settings.title }}</em>
+      </h2>
+    {%- endif -%}
+
+    {%- if section.settings.show_overall_rating -%}
+      <div class="sheva-rev__overall">
+        <div class="sheva-rev__big-rating"
+          style="font-size: clamp(36px, 5vw, {{ section.settings.big_rating_fs }}px);">
+          {{ section.settings.rating_score }}
+          <span class="sheva-stars-rating" style="font-size: 22px;">★★★★★</span>
+        </div>
+        <p style="font-size: {{ section.settings.rating_label_fs }}px; opacity: .7; color: #f3f0ff; font-family: 'Poppins', sans-serif; margin-top: 6px;">
+          Based on {{ section.settings.rating_count }} verified reviews
+        </p>
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- comment %} ── Slider ── {% endcomment %}
+  <div class="sheva-reviews-slider js-sheva-auto-slider">
+    <div class="sheva-reviews-track">
+
+      {%- comment -%} First pass — real cards {%- endcomment -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'review' -%}
+          <div class="sheva-review-card" {{ block.shopify_attributes }}>
+            <div class="sheva-rev__head">
+              <div
+                class="sheva-rev__avatar"
+                style="background: linear-gradient(135deg, {{ block.settings.avatar_from }}, {{ block.settings.avatar_to }}); font-size: {{ section.settings.avatar_fs }}px;"
+                aria-hidden="true"
+              >{{ block.settings.initials }}</div>
+              <div>
+                <strong style="font-size: {{ section.settings.name_fs }}px; color: #fff; font-family: 'Poppins', sans-serif; letter-spacing: 1px; display: block;">{{ block.settings.name }}</strong>
+                {%- if block.settings.verified -%}
+                  <span class="sheva-rev__verified" style="font-size: {{ section.settings.verified_fs }}px;">✓ Verified Buyer</span>
+                {%- endif -%}
+              </div>
+            </div>
+            <div class="sheva-stars-rating" style="font-size: 14px; letter-spacing: 2px; margin-bottom: 8px;">★★★★★</div>
+            <h5 class="sheva-rev__quote"
+              style="font-size: {{ section.settings.quote_fs }}px;">"{{ block.settings.quote }}"</h5>
+            <p class="sheva-rev__body"
+              style="font-size: {{ section.settings.body_fs }}px;">{{ block.settings.body }}</p>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- comment -%} Duplicate pass — seamless infinite loop {%- endcomment -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'review' -%}
+          <div class="sheva-review-card" aria-hidden="true">
+            <div class="sheva-rev__head">
+              <div
+                class="sheva-rev__avatar"
+                style="background: linear-gradient(135deg, {{ block.settings.avatar_from }}, {{ block.settings.avatar_to }}); font-size: {{ section.settings.avatar_fs }}px;"
+                aria-hidden="true"
+              >{{ block.settings.initials }}</div>
+              <div>
+                <strong style="font-size: {{ section.settings.name_fs }}px; color: #fff; font-family: 'Poppins', sans-serif; letter-spacing: 1px; display: block;">{{ block.settings.name }}</strong>
+                {%- if block.settings.verified -%}
+                  <span class="sheva-rev__verified" style="font-size: {{ section.settings.verified_fs }}px;">✓ Verified Buyer</span>
+                {%- endif -%}
+              </div>
+            </div>
+            <div class="sheva-stars-rating" style="font-size: 14px; letter-spacing: 2px; margin-bottom: 8px;">★★★★★</div>
+            <h5 class="sheva-rev__quote"
+              style="font-size: {{ section.settings.quote_fs }}px;">"{{ block.settings.quote }}"</h5>
+            <p class="sheva-rev__body"
+              style="font-size: {{ section.settings.body_fs }}px;">{{ block.settings.body }}</p>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sheva – Reviews Slider",
+  "tag": "section",
+  "class": "sheva-section sheva-reviews-section",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "✦ COSMIC TESTIMONIALS"
+    },
+    {
+      "type": "text",
+      "id": "title_plain",
+      "label": "Title – Plain Part",
+      "default": "Loved by"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title – Gradient Part",
+      "default": "the Stars"
+    },
+    {
+      "type": "header",
+      "content": "Overall Rating"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_overall_rating",
+      "label": "Show Overall Rating",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_score",
+      "label": "Rating Score",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "rating_count",
+      "label": "Review Count",
+      "default": "2,143"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_fs_desktop",
+      "label": "Title Size – Desktop (px)",
+      "min": 24,
+      "max": 72,
+      "step": 1,
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "title_fs_mobile",
+      "label": "Title Size – Mobile (px)",
+      "min": 18,
+      "max": 48,
+      "step": 1,
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "big_rating_fs",
+      "label": "Big Rating Number Font Size (px)",
+      "min": 32,
+      "max": 72,
+      "step": 2,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "rating_label_fs",
+      "label": "Rating Label Font Size (px)",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "avatar_fs",
+      "label": "Avatar Letter Font Size (px)",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "name_fs",
+      "label": "Reviewer Name Font Size (px)",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "verified_fs",
+      "label": "Verified Badge Font Size (px)",
+      "min": 9,
+      "max": 14,
+      "step": 1,
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "quote_fs",
+      "label": "Quote Headline Font Size (px)",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "body_fs",
+      "label": "Review Body Font Size (px)",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "header",
+      "content": "Slider"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Scroll Speed (seconds – lower = faster)",
+      "min": 15,
+      "max": 90,
+      "step": 5,
+      "default": 45
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "label": "Card Width (px)",
+      "min": 240,
+      "max": 420,
+      "step": 10,
+      "default": 320
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "default": 100
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "initials",
+          "label": "Avatar Initials (1 letter)",
+          "default": "A"
+        },
+        {
+          "type": "color",
+          "id": "avatar_from",
+          "label": "Avatar Gradient – From",
+          "default": "#ff4db8"
+        },
+        {
+          "type": "color",
+          "id": "avatar_to",
+          "label": "Avatar Gradient – To",
+          "default": "#8b5cf6"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Reviewer Name",
+          "default": "Aria M."
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Show Verified Badge",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "quote",
+          "label": "Quote Headline",
+          "default": "Life-changing energy boost"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Review Body",
+          "default": "I replaced my morning coffee with Supernova and I've never felt more focused and calm. Pure magic. ✨"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva – Reviews Slider",
+      "blocks": [
+        { "type": "review", "settings": { "initials": "A", "avatar_from": "#ff4db8", "avatar_to": "#8b5cf6", "name": "Aria M.",    "quote": "Life-changing energy boost",    "body": "I replaced my morning coffee with Supernova and I've never felt more focused and calm. Pure magic. ✨" } },
+        { "type": "review", "settings": { "initials": "J", "avatar_from": "#22d3ee", "avatar_to": "#6366f1", "name": "Jordan L.", "quote": "My skin is GLOWING",              "body": "The collagen + antioxidants are unreal. 3 weeks in and my skin looks brighter. Cosmic packaging too!" } },
+        { "type": "review", "settings": { "initials": "S", "avatar_from": "#ff7a3d", "avatar_to": "#ff4db8", "name": "Sofia K.",  "quote": "Stars truly aligned",            "body": "Subscription is 100% worth it. Balanced, sharper, my anxiety is way down. Sheva Tea for life!" } },
+        { "type": "review", "settings": { "initials": "M", "avatar_from": "#8b5cf6", "avatar_to": "#22d3ee", "name": "Maya R.",  "quote": "Best herbal tea ever",           "body": "Beautiful taste, powerful ingredients. Hits harder than my $200 nootropic stack. Biohacker approved." } },
+        { "type": "review", "settings": { "initials": "L", "avatar_from": "#ff4db8", "avatar_to": "#ff7a3d", "name": "Luna V.",  "quote": "Absolutely transcendent",       "body": "This tea makes me feel connected to the universe. Clear mind, calm body, limitless energy." } },
+        { "type": "review", "settings": { "initials": "K", "avatar_from": "#6366f1", "avatar_to": "#ff4db8", "name": "Kai T.",   "quote": "Game changer for focus",        "body": "I work 10hr creative shifts and Supernova keeps my brain firing without the crash. Unreal." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

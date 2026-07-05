@@ -1,0 +1,266 @@
+{{ 'sheva-hero.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign s = section.settings
+  assign headline_size    = s.headline_size | append: 'px'
+  assign headline_size_mb = s.headline_size_mb | append: 'px'
+  assign sub_size         = s.sub_size | append: 'px'
+  assign tagline_size     = s.tagline_size | append: 'px'
+-%}
+
+<style>
+  #sheva-hero-{{ section.id }} {
+    --sheva-hero-pt: {{ s.padding_top }}px;
+    --sheva-hero-pb: {{ s.padding_bottom }}px;
+    --sheva-hero-tagline-color: {{ s.tagline_color }};
+    --sheva-hero-tagline-size: {{ tagline_size }};
+    --sheva-hero-headline-color: {{ s.headline_color }};
+    --sheva-hero-headline-size: {{ headline_size }};
+    --sheva-hero-headline-size-mb: {{ headline_size_mb }};
+    --sheva-hero-sub-color: {{ s.sub_color }};
+    --sheva-hero-sub-size: {{ sub_size }};
+    --sheva-btn1-from: {{ s.btn1_color_from }};
+    --sheva-btn1-to: {{ s.btn1_color_to }};
+  }
+</style>
+
+<section id="sheva-hero-{{ section.id }}" class="sheva-hero">
+  <div class="sheva-hero__planet" aria-hidden="true"></div>
+  <div class="sheva-hero__planet sheva-hero__planet--sm" aria-hidden="true"></div>
+  <div class="sheva-hero__mountain" aria-hidden="true"></div>
+  <div class="sheva-hero__shoot" aria-hidden="true"></div>
+  <div class="sheva-hero__shoot sheva-hero__shoot--2" aria-hidden="true"></div>
+  <div class="sheva-hero__shoot sheva-hero__shoot--3" aria-hidden="true"></div>
+
+  <div class="sheva-hero__content">
+    {%- if s.tagline != blank -%}
+      <p class="sheva-hero__tagline">{{ s.tagline }}</p>
+    {%- endif -%}
+
+    {%- if s.headline != blank -%}
+      <h1
+        class="sheva-hero__headline sheva-glow-text"
+        style="font-size:clamp({{ s.headline_size_mb }}px, 5vw, {{ s.headline_size }}px);"
+      >{{ s.headline }}</h1>
+    {%- endif -%}
+
+    {%- if s.subheading != blank -%}
+      <p class="sheva-hero__sub">{{ s.subheading }}</p>
+    {%- endif -%}
+
+    <div class="sheva-hero__btns">
+      {%- if s.btn1_label != blank -%}
+        <a href="{{ s.btn1_url }}" class="sheva-btn-primary">{{ s.btn1_label }}</a>
+      {%- endif -%}
+      {%- if s.btn2_label != blank -%}
+        <a href="{{ s.btn2_url }}" class="sheva-btn-ghost">{{ s.btn2_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="sheva-hero__ufo-wrap" aria-hidden="true">
+    <svg class="sheva-hero__ufo-svg" viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="shGDome{{ section.id }}" cx="40%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#e0f9ff" stop-opacity="0.95"/>
+          <stop offset="45%" stop-color="#7fd8ff" stop-opacity="0.7"/>
+          <stop offset="100%" stop-color="#0891b2" stop-opacity="0.5"/>
+        </radialGradient>
+        <linearGradient id="shGBody{{ section.id }}" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#d6dbe4"/>
+          <stop offset="50%" stop-color="#6b7280"/>
+          <stop offset="100%" stop-color="#1f2937"/>
+        </linearGradient>
+        <linearGradient id="shGRim{{ section.id }}" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f1f5f9"/>
+          <stop offset="100%" stop-color="#475569"/>
+        </linearGradient>
+        <radialGradient id="shGBeam{{ section.id }}" cx="50%" cy="0%" r="100%">
+          <stop offset="0%" stop-color="#fff7cc" stop-opacity="0.9"/>
+          <stop offset="40%" stop-color="#ff7a3d" stop-opacity="0.45"/>
+          <stop offset="100%" stop-color="#ff4db8" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <path class="sheva-ufo-beam" d="M180 140 L320 140 L410 330 L90 330 Z" fill="url(#shGBeam{{ section.id }})"/>
+      <ellipse cx="250" cy="110" rx="95" ry="70" fill="url(#shGDome{{ section.id }})" stroke="#bff0ff" stroke-width="1"/>
+      <ellipse cx="220" cy="85" rx="30" ry="15" fill="#ffffff" opacity="0.55"/>
+      <ellipse cx="275" cy="130" rx="10" ry="4" fill="#ffffff" opacity="0.4"/>
+      <ellipse cx="250" cy="155" rx="175" ry="30" fill="url(#shGBody{{ section.id }})"/>
+      <ellipse cx="250" cy="148" rx="175" ry="12" fill="url(#shGRim{{ section.id }})"/>
+      <ellipse cx="250" cy="160" rx="160" ry="8" fill="#0f172a" opacity="0.5"/>
+      <circle cx="130" cy="158" r="5" fill="#ff4db8" class="sheva-ufo-dot"/>
+      <circle cx="180" cy="162" r="5" fill="#22d3ee" class="sheva-ufo-dot d2"/>
+      <circle cx="230" cy="164" r="5" fill="#ff7a3d" class="sheva-ufo-dot d3"/>
+      <circle cx="280" cy="164" r="5" fill="#22d3ee" class="sheva-ufo-dot d4"/>
+      <circle cx="330" cy="162" r="5" fill="#ff4db8" class="sheva-ufo-dot d5"/>
+      <circle cx="370" cy="158" r="5" fill="#ff7a3d" class="sheva-ufo-dot d6"/>
+      <ellipse cx="250" cy="144" rx="100" ry="3" fill="#ffffff" opacity="0.6"/>
+    </svg>
+    {%- if s.tea_image != blank -%}
+      <img src="{{ s.tea_image | img_url: '600x' }}" class="sheva-hero__tea-img" alt="{{ s.tea_image.alt | default: 'Tea product' }}" loading="eager" width="600">
+    {%- endif -%}
+  </div>
+
+  <div class="sheva-hero__scroll" aria-hidden="true">
+    <span></span> scroll
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sheva — Hero Banner",
+  "tag": "section",
+  "class": "sheva-section-hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "✦ SEVEN STAR ENERGY®"
+    },
+    {
+      "type": "richtext",
+      "id": "headline",
+      "label": "Headline (use italic for gradient glow text)",
+      "default": "<p>ARE YOU READY<br><em>THE STARS ARE ALIGNING</em></p>"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "A cosmic herbal fusion crafted to elevate your energy, clarity, and soul."
+    },
+    {
+      "type": "image_picker",
+      "id": "tea_image",
+      "label": "Tea Product Image"
+    },
+    {
+      "type": "header",
+      "content": "Button 1 (Primary)"
+    },
+    {
+      "type": "text",
+      "id": "btn1_label",
+      "label": "Button 1 Label",
+      "default": "Shop Supernova →"
+    },
+    {
+      "type": "url",
+      "id": "btn1_url",
+      "label": "Button 1 Link"
+    },
+    {
+      "type": "header",
+      "content": "Button 2 (Ghost)"
+    },
+    {
+      "type": "text",
+      "id": "btn2_label",
+      "label": "Button 2 Label",
+      "default": "Explore Benefits"
+    },
+    {
+      "type": "url",
+      "id": "btn2_url",
+      "label": "Button 2 Link"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "tagline_color",
+      "label": "Tagline Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "color",
+      "id": "headline_color",
+      "label": "Headline Color",
+      "default": "#f3f0ff"
+    },
+    {
+      "type": "color",
+      "id": "sub_color",
+      "label": "Subheading Color",
+      "default": "#f3f0ff"
+    },
+    {
+      "type": "color",
+      "id": "btn1_color_from",
+      "label": "Primary Button Gradient From",
+      "default": "#ff4db8"
+    },
+    {
+      "type": "color",
+      "id": "btn1_color_to",
+      "label": "Primary Button Gradient To",
+      "default": "#8b5cf6"
+    },
+    {
+      "type": "header",
+      "content": "Typography — Desktop"
+    },
+    {
+      "type": "range",
+      "id": "tagline_size",
+      "label": "Tagline Font Size",
+      "min": 10, "max": 24, "step": 1, "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "headline_size",
+      "label": "Headline Font Size",
+      "min": 24, "max": 100, "step": 1, "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "sub_size",
+      "label": "Subheading Font Size",
+      "min": 12, "max": 28, "step": 1, "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Typography — Mobile"
+    },
+    {
+      "type": "range",
+      "id": "headline_size_mb",
+      "label": "Headline Font Size (Mobile)",
+      "min": 20, "max": 60, "step": 1, "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 60, "max": 200, "step": 4, "unit": "px",
+      "default": 140
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 20, "max": 120, "step": 4, "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva — Hero Banner"
+    }
+  ]
+}
+{% endschema %}

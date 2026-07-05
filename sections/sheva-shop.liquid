@@ -1,0 +1,647 @@
+{% comment %} ============================================================
+  SHEVA TEA — Shop / Collection Section
+  A. Bundle Hero card with floating emojis + orbit rings
+  B. Auto-scrolling product cards slider (Right → Left)
+============================================================ {% endcomment %}
+
+{{ 'sheva-shop.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="sheva-shop"
+  class="sheva-shop"
+  style="
+    --shop-pad-top: {{ section.settings.padding_top }}px;
+    --shop-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --shop-speed: {{ section.settings.slider_speed }}s;
+    --shop-card-w: {{ section.settings.card_width }}px;
+  "
+>
+
+  {%- comment %} ── Section Header ── {% endcomment %}
+  <div class="sheva-sec-head">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="sheva-eyebrow" style="color: {{ section.settings.eyebrow_color }};">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h2 class="sheva-sec-title"
+        style="font-size: clamp({{ section.settings.title_fs_mobile }}px, 4vw, {{ section.settings.title_fs_desktop }}px);">
+        {%- if section.settings.title_plain != blank -%}{{ section.settings.title_plain }} {%- endif -%}
+        <em class="sheva-glow">{{ section.settings.title }}</em>
+      </h2>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <p class="sheva-sec-sub" style="font-size: {{ section.settings.sub_fs }}px;">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+  </div>
+
+  {%- comment %} ────────────────────────────────
+    A. BUNDLE HERO
+  ──────────────────────────────── {% endcomment %}
+  {%- if section.settings.show_bundle -%}
+    <div class="sheva-bundle"
+      style="margin-bottom: {{ section.settings.bundle_mb }}px;">
+
+      {%- comment -%} Left: Text {%- endcomment -%}
+      <div class="sheva-bundle__left">
+        {%- if section.settings.bundle_tag != blank -%}
+          <span class="sheva-bundle__tag"
+            style="font-size: {{ section.settings.bundle_tag_fs }}px;">{{ section.settings.bundle_tag }}</span>
+        {%- endif -%}
+
+        <h3 class="sheva-bundle__title"
+          style="font-size: clamp({{ section.settings.bundle_title_fs_mb }}px, 3.4vw, {{ section.settings.bundle_title_fs }}px);">
+          {%- if section.settings.bundle_title_plain != blank -%}{{ section.settings.bundle_title_plain }} {%- endif -%}
+          <em class="sheva-glow">{{ section.settings.bundle_title }}</em>
+        </h3>
+
+        {%- if section.settings.bundle_desc != blank -%}
+          <p class="sheva-bundle__desc"
+            style="font-size: {{ section.settings.bundle_desc_fs }}px;">{{ section.settings.bundle_desc }}</p>
+        {%- endif -%}
+
+        {%- comment -%} Bundle items list (blocks) {%- endcomment -%}
+        {%- assign bundle_items = section.blocks | where: 'type', 'bundle_item' -%}
+        {%- if bundle_items.size > 0 -%}
+          <ul class="sheva-bundle__list">
+            {%- for block in bundle_items -%}
+              <li style="font-size: {{ section.settings.bundle_list_fs }}px;" {{ block.shopify_attributes }}>
+                {{ block.settings.emoji }} {{ block.settings.label }}
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- comment -%} Pricing {%- endcomment -%}
+        <div class="sheva-bundle__price">
+          {%- if section.settings.bundle_was != blank -%}
+            <span class="sheva-bundle__was"
+              style="font-size: {{ section.settings.bundle_was_fs }}px;">{{ section.settings.bundle_was }}</span>
+          {%- endif -%}
+          <span class="sheva-bundle__now"
+            style="font-size: clamp(28px, 4vw, {{ section.settings.bundle_now_fs }}px);">{{ section.settings.bundle_now }}</span>
+          {%- if section.settings.bundle_save != blank -%}
+            <span class="sheva-bundle__save-pill"
+              style="font-size: {{ section.settings.bundle_save_fs }}px;">{{ section.settings.bundle_save }}</span>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.bundle_btn_label != blank -%}
+          <a href="{{ section.settings.bundle_btn_link }}" class="sheva-btn-primary sheva-bundle__btn">
+            {{ section.settings.bundle_btn_label }}
+          </a>
+        {%- endif -%}
+
+        {%- if section.settings.bundle_footnote != blank -%}
+          <p class="sheva-bundle__foot"
+            style="font-size: {{ section.settings.bundle_foot_fs }}px;">{{ section.settings.bundle_footnote }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Right: Animated orb + floating emojis {%- endcomment -%}
+      <div class="sheva-bundle__right">
+        <div class="sheva-bundle__orb"></div>
+        <div class="sheva-bundle__ring"></div>
+        <div class="sheva-bundle__ring sheva-bundle__ring--r2"></div>
+        <div class="sheva-bundle__emoji-stack">
+          {%- assign be_index = 0 -%}
+          {%- for block in bundle_items limit: 7 -%}
+            {%- assign be_index = be_index | plus: 1 -%}
+            <span class="sheva-be sheva-be{{ be_index }}" aria-hidden="true">{{ block.settings.emoji }}</span>
+          {%- endfor -%}
+        </div>
+      </div>
+
+    </div>
+  {%- endif -%}
+
+  {%- comment %} ────────────────────────────────
+    B. SHOP PRODUCT SLIDER
+  ──────────────────────────────── {% endcomment %}
+  {%- assign shop_cards = section.blocks | where: 'type', 'shop_card' -%}
+  {%- if shop_cards.size > 0 -%}
+    <div class="sheva-shop-slider js-sheva-auto-slider">
+      <div class="sheva-shop-track">
+
+        {%- comment -%} First pass — real cards {%- endcomment -%}
+        {%- for block in shop_cards -%}
+          <div class="sheva-shop-card" {{ block.shopify_attributes }}>
+            {%- if block.settings.badge != blank -%}
+              <div class="sheva-shop-badge{% if block.settings.badge_alt %} sheva-shop-badge--alt{% endif %}"
+                style="font-size: {{ section.settings.badge_fs }}px;">{{ block.settings.badge }}</div>
+            {%- endif -%}
+            <div class="sheva-shop-img {{ block.settings.gradient_class }}"
+              style="height: {{ section.settings.card_img_h }}px;">
+              <span class="sheva-shop-emoji" style="font-size: {{ section.settings.card_emoji_fs }}px;">{{ block.settings.emoji }}</span>
+            </div>
+            <div class="sheva-shop-info">
+              {%- if block.settings.category != blank -%}
+                <span class="sheva-shop-cat" style="font-size: {{ section.settings.cat_fs }}px;">{{ block.settings.category }}</span>
+              {%- endif -%}
+              <h4 class="sheva-shop-name" style="font-size: {{ section.settings.card_name_fs }}px;">{{ block.settings.name }}</h4>
+              <p class="sheva-shop-desc" style="font-size: {{ section.settings.card_desc_fs }}px;">{{ block.settings.description }}</p>
+              <div class="sheva-shop-foot">
+                <span class="sheva-shop-price"
+                  style="font-size: {{ section.settings.price_fs }}px;">{{ block.settings.price }}</span>
+                {%- if block.settings.product_link != blank -%}
+                  <a href="{{ block.settings.product_link }}" class="sheva-btn-ghost sheva-btn-ghost--sm"
+                    style="font-size: {{ section.settings.card_btn_fs }}px;">Add +</a>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+
+        {%- comment -%} Duplicate pass — seamless infinite loop {%- endcomment -%}
+        {%- for block in shop_cards -%}
+          <div class="sheva-shop-card" aria-hidden="true">
+            {%- if block.settings.badge != blank -%}
+              <div class="sheva-shop-badge{% if block.settings.badge_alt %} sheva-shop-badge--alt{% endif %}"
+                style="font-size: {{ section.settings.badge_fs }}px;">{{ block.settings.badge }}</div>
+            {%- endif -%}
+            <div class="sheva-shop-img {{ block.settings.gradient_class }}"
+              style="height: {{ section.settings.card_img_h }}px;">
+              <span class="sheva-shop-emoji" style="font-size: {{ section.settings.card_emoji_fs }}px;">{{ block.settings.emoji }}</span>
+            </div>
+            <div class="sheva-shop-info">
+              {%- if block.settings.category != blank -%}
+                <span class="sheva-shop-cat" style="font-size: {{ section.settings.cat_fs }}px;">{{ block.settings.category }}</span>
+              {%- endif -%}
+              <h4 class="sheva-shop-name" style="font-size: {{ section.settings.card_name_fs }}px;">{{ block.settings.name }}</h4>
+              <p class="sheva-shop-desc" style="font-size: {{ section.settings.card_desc_fs }}px;">{{ block.settings.description }}</p>
+              <div class="sheva-shop-foot">
+                <span class="sheva-shop-price"
+                  style="font-size: {{ section.settings.price_fs }}px;">{{ block.settings.price }}</span>
+                {%- if block.settings.product_link != blank -%}
+                  <a href="{{ block.settings.product_link }}" class="sheva-btn-ghost sheva-btn-ghost--sm"
+                    style="font-size: {{ section.settings.card_btn_fs }}px;">Add +</a>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+
+      </div>
+    </div>
+  {%- endif -%}
+
+</section>
+
+{% schema %}
+{
+  "name": "Sheva – Shop Collection",
+  "tag": "section",
+  "class": "sheva-section sheva-shop-section",
+  "max_blocks": 30,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "✦ THE TITAN AURA COLLECTION"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "text",
+      "id": "title_plain",
+      "label": "Title – Plain Part",
+      "default": "Shop the"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title – Gradient Part",
+      "default": "Cosmos"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Curated cosmic essentials designed to align your ritual."
+    },
+    {
+      "type": "range",
+      "id": "title_fs_desktop",
+      "label": "Title Size – Desktop (px)",
+      "min": 24,
+      "max": 72,
+      "step": 1,
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "title_fs_mobile",
+      "label": "Title Size – Mobile (px)",
+      "min": 18,
+      "max": 48,
+      "step": 1,
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "sub_fs",
+      "label": "Subtitle Font Size (px)",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Bundle Hero"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bundle",
+      "label": "Show Bundle Hero",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "bundle_tag",
+      "label": "Bundle Tag",
+      "default": "✦ BEST VALUE · SAVE 28%"
+    },
+    {
+      "type": "range",
+      "id": "bundle_tag_fs",
+      "label": "Bundle Tag Font Size (px)",
+      "min": 9,
+      "max": 16,
+      "step": 1,
+      "default": 11
+    },
+    {
+      "type": "text",
+      "id": "bundle_title_plain",
+      "label": "Bundle Title – Plain Part",
+      "default": "Titan Aura"
+    },
+    {
+      "type": "text",
+      "id": "bundle_title",
+      "label": "Bundle Title – Gradient Part",
+      "default": "Complete Bundle"
+    },
+    {
+      "type": "range",
+      "id": "bundle_title_fs",
+      "label": "Bundle Title Size – Desktop (px)",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "default": 46
+    },
+    {
+      "type": "range",
+      "id": "bundle_title_fs_mb",
+      "label": "Bundle Title Size – Mobile (px)",
+      "min": 18,
+      "max": 40,
+      "step": 1,
+      "default": 26
+    },
+    {
+      "type": "textarea",
+      "id": "bundle_desc",
+      "label": "Bundle Description",
+      "default": "Seven cosmic essentials in one stellar collection — your daily ritual, fully aligned with the stars."
+    },
+    {
+      "type": "range",
+      "id": "bundle_desc_fs",
+      "label": "Bundle Desc Font Size (px)",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "bundle_list_fs",
+      "label": "Bundle List Font Size (px)",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "default": 13
+    },
+    {
+      "type": "text",
+      "id": "bundle_was",
+      "label": "Was Price",
+      "default": "$108.51"
+    },
+    {
+      "type": "range",
+      "id": "bundle_was_fs",
+      "label": "Was Price Font Size (px)",
+      "min": 14,
+      "max": 26,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "text",
+      "id": "bundle_now",
+      "label": "Now Price",
+      "default": "$77.77"
+    },
+    {
+      "type": "range",
+      "id": "bundle_now_fs",
+      "label": "Now Price Font Size – Desktop (px)",
+      "min": 24,
+      "max": 56,
+      "step": 2,
+      "default": 38
+    },
+    {
+      "type": "text",
+      "id": "bundle_save",
+      "label": "Save Pill Text",
+      "default": "Save $30.74"
+    },
+    {
+      "type": "range",
+      "id": "bundle_save_fs",
+      "label": "Save Pill Font Size (px)",
+      "min": 9,
+      "max": 16,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "text",
+      "id": "bundle_btn_label",
+      "label": "Bundle CTA Label",
+      "default": "Claim the Bundle →"
+    },
+    {
+      "type": "url",
+      "id": "bundle_btn_link",
+      "label": "Bundle CTA Link"
+    },
+    {
+      "type": "text",
+      "id": "bundle_footnote",
+      "label": "Bundle Footnote",
+      "default": "🚀 Free shipping · ♻️ Eco-friendly packaging"
+    },
+    {
+      "type": "range",
+      "id": "bundle_foot_fs",
+      "label": "Bundle Footnote Font Size (px)",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "bundle_mb",
+      "label": "Bundle Bottom Margin (px)",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Shop Card Slider – Typography"
+    },
+    {
+      "type": "range",
+      "id": "badge_fs",
+      "label": "Badge Font Size (px)",
+      "min": 8,
+      "max": 14,
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "cat_fs",
+      "label": "Category Font Size (px)",
+      "min": 8,
+      "max": 14,
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "card_name_fs",
+      "label": "Card Name Font Size (px)",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "default": 17
+    },
+    {
+      "type": "range",
+      "id": "card_desc_fs",
+      "label": "Card Desc Font Size (px)",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "price_fs",
+      "label": "Price Font Size (px)",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "card_btn_fs",
+      "label": "Add Button Font Size (px)",
+      "min": 9,
+      "max": 14,
+      "step": 1,
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "card_img_h",
+      "label": "Card Image Area Height (px)",
+      "min": 140,
+      "max": 320,
+      "step": 10,
+      "default": 220
+    },
+    {
+      "type": "range",
+      "id": "card_emoji_fs",
+      "label": "Card Emoji Size (px)",
+      "min": 40,
+      "max": 120,
+      "step": 4,
+      "default": 88
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "range",
+      "id": "slider_speed",
+      "label": "Slider Speed (seconds)",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "default": 55
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "label": "Card Width (px)",
+      "min": 220,
+      "max": 380,
+      "step": 10,
+      "default": 300
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "default": 100
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bundle_item",
+      "name": "Bundle Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji",
+          "default": "🍵"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Item Name",
+          "default": "Supernova Herbal Tea"
+        }
+      ]
+    },
+    {
+      "type": "shop_card",
+      "name": "Shop Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge Text",
+          "default": "MYSTIQUE"
+        },
+        {
+          "type": "checkbox",
+          "id": "badge_alt",
+          "label": "Use Alt Badge Style (cyan)",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Product Emoji",
+          "default": "🫖"
+        },
+        {
+          "type": "select",
+          "id": "gradient_class",
+          "label": "Card Background Gradient",
+          "options": [
+            { "value": "sheva-tea-grad",      "label": "Pink→Purple (Tea)" },
+            { "value": "sheva-mug-grad",      "label": "Orange→Pink (Mug)" },
+            { "value": "sheva-book-grad",     "label": "Cyan→Indigo (Book)" },
+            { "value": "sheva-card-grad",     "label": "Yellow→Orange (Card)" },
+            { "value": "sheva-key-grad",      "label": "Purple→Cyan (Key)" },
+            { "value": "sheva-pen-grad",      "label": "Indigo→Pink (Pen)" },
+            { "value": "sheva-bookmark-grad", "label": "Cyan→Pink (Bookmark)" }
+          ],
+          "default": "sheva-tea-grad"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category Label",
+          "default": "Teapots"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Product Name",
+          "default": "Mystique Glass Teapot"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Short Description",
+          "default": "Thermal-shock resistant simax glass — showcase your Supernova."
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price Display",
+          "default": "from $24.95"
+        },
+        {
+          "type": "url",
+          "id": "product_link",
+          "label": "Product Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva – Shop Collection",
+      "blocks": [
+        { "type": "bundle_item", "settings": { "emoji": "🍵", "label": "Supernova Herbal Tea" } },
+        { "type": "bundle_item", "settings": { "emoji": "☕", "label": "Titan Aura Stoneware Mug" } },
+        { "type": "bundle_item", "settings": { "emoji": "🔑", "label": "Holographic Keychain" } },
+        { "type": "bundle_item", "settings": { "emoji": "📑", "label": "Silver-Foil Bookmark" } },
+        { "type": "bundle_item", "settings": { "emoji": "📓", "label": "Vegan Leatherette Notebook" } },
+        { "type": "bundle_item", "settings": { "emoji": "🖊️", "label": "Ergonomic Ballpoint Pen" } },
+        { "type": "bundle_item", "settings": { "emoji": "🎴", "label": "Affirmation Card Deck" } },
+        { "type": "shop_card", "settings": { "badge": "MYSTIQUE", "badge_alt": false, "emoji": "🫖", "gradient_class": "sheva-tea-grad",      "category": "Teapots",    "name": "Mystique Glass Teapot",   "description": "Thermal-shock resistant simax glass — showcase your Supernova.", "price": "from $24.95" } },
+        { "type": "shop_card", "settings": { "badge": "TITAN AURA", "badge_alt": true, "emoji": "☕", "gradient_class": "sheva-mug-grad",      "category": "Drinkware",  "name": "Titan Aura Mug",          "description": "11oz stoneware — every sip, a reminder to rise.",               "price": "$15.95" } },
+        { "type": "shop_card", "settings": { "badge": "TITAN AURA", "badge_alt": true, "emoji": "📓", "gradient_class": "sheva-book-grad",     "category": "Books",      "name": "Titan Aura Notebook",     "description": "Vegan leatherette — made for cosmic downloads.",                 "price": "$18.50" } },
+        { "type": "shop_card", "settings": { "badge": "TITAN AURA", "badge_alt": true, "emoji": "🎴", "gradient_class": "sheva-card-grad",     "category": "Cards",      "name": "Affirmation Deck",        "description": "4×4\" deck — manifest one sip, one card at a time.",            "price": "$22.00" } },
+        { "type": "shop_card", "settings": { "badge": "TITAN AURA", "badge_alt": true, "emoji": "🔑", "gradient_class": "sheva-key-grad",      "category": "Keychains",  "name": "Holographic Keychain",    "description": "Epoxy resin with stars — carry the cosmos everywhere.",         "price": "$13.99" } },
+        { "type": "shop_card", "settings": { "badge": "TITAN AURA", "badge_alt": true, "emoji": "🖊️", "gradient_class": "sheva-pen-grad",      "category": "Pens",       "name": "Titan Aura Ballpoint",    "description": "Ergonomic 5.6\" pen — write your story into the stars.",        "price": "$6.50" } },
+        { "type": "shop_card", "settings": { "badge": "TITAN AURA", "badge_alt": true, "emoji": "📑", "gradient_class": "sheva-bookmark-grad", "category": "Bookmarks",  "name": "Silver-Foil Bookmark",    "description": "Seven Star Energy® engraved — a daily cosmic nudge.",           "price": "$6.50" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

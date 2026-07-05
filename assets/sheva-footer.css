@@ -1,0 +1,72 @@
+/* ============================================================
+   SHEVA TEA — Footer CSS
+============================================================ */
+
+.sheva-footer {
+  padding: var(--foot-pad-top, 80px) 8% var(--foot-pad-bottom, 30px);
+  position: relative;
+  z-index: 5;
+  background: linear-gradient(180deg, transparent, #07021a);
+  width: 100%;
+}
+
+.sheva-footer__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.sheva-footer__brand {
+  font-family: 'Orbitron', sans-serif;
+  font-size: var(--foot-heading-fs, 26px);
+  letter-spacing: 3px;
+  margin-bottom: 14px;
+}
+.sheva-footer__col-heading {
+  font-family: 'Orbitron', sans-serif;
+  font-size: var(--foot-col-heading-fs, 14px);
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+  color: var(--foot-heading-color, #22d3ee);
+}
+.sheva-footer__text {
+  margin-bottom: 8px;
+  font-size: var(--foot-text-fs, 14px);
+  opacity: .8;
+  color: var(--foot-text-color, #f3f0ff);
+  font-family: 'Poppins', sans-serif;
+  word-break: break-word;
+}
+.sheva-footer__link {
+  color: var(--foot-text-color, #f3f0ff);
+  text-decoration: none;
+  transition: color .2s;
+}
+.sheva-footer__link:hover {
+  color: var(--foot-link-hover, #ff4db8);
+}
+
+.sheva-footer__copyright {
+  border-top: 1px solid rgba(255,255,255,.1);
+  padding-top: 24px;
+  text-align: center;
+  font-size: var(--foot-copy-fs, 12px);
+  opacity: .5;
+  letter-spacing: 2px;
+  color: #f3f0ff;
+  font-family: 'Poppins', sans-serif;
+}
+
+@media (max-width: 1024px) {
+  .sheva-footer { padding: 80px 24px 30px; }
+}
+
+@media (max-width: 768px) {
+  .sheva-footer { padding: 60px 20px 20px; }
+  .sheva-footer__grid { gap: 30px; }
+}
+
+@media (max-width: 420px) {
+  .sheva-footer { padding: 50px 16px 20px; }
+}

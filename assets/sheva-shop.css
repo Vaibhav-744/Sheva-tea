@@ -1,0 +1,350 @@
+/* ============================================================
+   SHEVA TEA — Shop / Collection CSS
+============================================================ */
+
+.sheva-shop {
+  padding: var(--shop-pad-top, 100px) 6% var(--shop-pad-bottom, 100px);
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* ── Bundle Hero ── */
+.sheva-bundle {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px;
+  border-radius: 32px;
+  background:
+    linear-gradient(145deg, rgba(255,77,184,.12), rgba(139,92,246,.08) 45%, rgba(34,211,238,.08)),
+    rgba(5,0,20,.6);
+  border: 1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 30px 80px rgba(139,92,246,.25);
+  position: relative;
+  overflow: hidden;
+}
+.sheva-bundle::before {
+  content: '';
+  position: absolute; top: -50%; right: -30%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,77,184,.25), transparent 60%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+.sheva-bundle__tag {
+  display: inline-block;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 3px;
+  padding: 6px 14px;
+  background: linear-gradient(90deg, #ff7a3d, #ff4db8);
+  border-radius: 999px;
+  margin-bottom: 18px;
+  color: #fff;
+}
+.sheva-bundle__title {
+  font-family: 'Orbitron', sans-serif;
+  line-height: 1.05;
+  margin-bottom: 14px;
+  color: #fff;
+}
+.sheva-bundle__desc {
+  opacity: .85;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  max-width: 500px;
+  color: #f3f0ff;
+  font-family: 'Poppins', sans-serif;
+}
+.sheva-bundle__list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 18px;
+  margin-bottom: 28px;
+  padding: 0;
+}
+.sheva-bundle__list li {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  letter-spacing: .5px;
+  color: #f3f0ff;
+  font-family: 'Poppins', sans-serif;
+}
+.sheva-bundle__price {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.sheva-bundle__was {
+  text-decoration: line-through;
+  opacity: .5;
+  color: #f3f0ff;
+  font-family: 'Poppins', sans-serif;
+}
+.sheva-bundle__now {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  background: linear-gradient(90deg, #ff4db8, #ff7a3d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.sheva-bundle__save-pill {
+  padding: 6px 14px;
+  background: rgba(34,211,238,.15);
+  border: 1px solid #22d3ee;
+  color: #22d3ee;
+  border-radius: 999px;
+  letter-spacing: 2px;
+  font-family: 'Orbitron', sans-serif;
+}
+.sheva-bundle__btn { display: inline-block; }
+.sheva-bundle__foot {
+  margin-top: 24px;
+  opacity: .7;
+  letter-spacing: 1.5px;
+  color: #f3f0ff;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Bundle Right: orb + rings + emojis */
+.sheva-bundle__right {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sheva-bundle__orb {
+  display: block !important;
+  position: absolute;
+  width: 340px; height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffb37a, #ff4db8 35%, #8b5cf6 70%, #1e1065 100%);
+  box-shadow: inset -40px -40px 80px rgba(0,0,0,.6), 0 0 100px rgba(255,77,184,.5);
+  animation: shevaFpPulse 5s ease-in-out infinite;
+}
+.sheva-bundle__ring {
+  display: block !important;
+  position: absolute;
+  width: 420px; height: 420px;
+  border: 2px dashed rgba(255,77,184,.4);
+  border-radius: 50%;
+  animation: shevaFpSpin 30s linear infinite;
+}
+.sheva-bundle__ring--r2 {
+  width: 500px; height: 500px;
+  border-color: rgba(34,211,238,.25);
+  animation: shevaFpSpin 50s linear infinite reverse;
+}
+.sheva-bundle__emoji-stack {
+  display: block !important;
+  position: absolute;
+  width: 500px; height: 500px;
+  max-width: 100%; max-height: 100%;
+}
+.sheva-be {
+  position: absolute;
+  font-size: 32px;
+  width: 60px; height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5,0,20,.8);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  animation: shevaBeFloat 4s ease-in-out infinite;
+}
+.sheva-be1 { top: 5%;  left: 45%; animation-delay: 0s;   }
+.sheva-be2 { top: 20%; right: 5%; animation-delay: .4s;  }
+.sheva-be3 { top: 50%; right: -3%;animation-delay: .8s;  }
+.sheva-be4 { bottom: 12%; right: 15%; animation-delay: 1.2s; }
+.sheva-be5 { bottom: 0%;  left: 40%;  animation-delay: 1.6s; }
+.sheva-be6 { bottom: 18%; left: 0%;   animation-delay: 2s;   }
+.sheva-be7 { top: 28%; left: 2%;      animation-delay: 2.4s; }
+@keyframes shevaBeFloat {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+/* ── Shop Card Slider ── */
+.sheva-shop-slider {
+  position: relative;
+  /* overflow: hidden; */
+  width: 100%;
+  padding: 20px 0;
+  /* -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); */
+}
+.sheva-shop-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  padding: 0 24px;
+  will-change: transform;
+  animation: shevaShopScroll var(--shop-speed, 55s) linear infinite;
+}
+.sheva-shop-slider:hover .sheva-shop-track { animation-play-state: paused; }
+@keyframes shevaShopScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Shop Card ── */
+.sheva-shop-card {
+  flex: 0 0 var(--shop-card-w, 300px);
+  position: relative;
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+  border: 1px solid rgba(255,255,255,.1);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .4s cubic-bezier(.2,.8,.2,1), border-color .4s, box-shadow .4s;
+}
+.sheva-shop-card:hover {
+  transform: translateY(-10px);
+  border-color: #ff4db8;
+  box-shadow: 0 25px 60px rgba(255,77,184,.3);
+}
+
+/* Badge */
+.sheva-shop-badge {
+  display: block !important;
+  position: absolute;
+  top: 14px; left: 14px; z-index: 3;
+  padding: 5px 12px;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #ff4db8, #8b5cf6);
+  border-radius: 999px;
+  color: #fff;
+}
+.sheva-shop-badge--alt { background: linear-gradient(90deg, #22d3ee, #8b5cf6); }
+
+/* Image area */
+.sheva-shop-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.sheva-shop-img::after {
+  content: '';
+  display: block !important;
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 60%, rgba(255,255,255,.15), transparent 60%);
+}
+.sheva-shop-emoji {
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,.5));
+  animation: shevaBeFloat 5s ease-in-out infinite;
+  z-index: 2;
+}
+
+/* Gradient classes */
+.sheva-tea-grad      { background: linear-gradient(145deg, #ff4db8, #8b5cf6); }
+.sheva-mug-grad      { background: linear-gradient(145deg, #ff7a3d, #ff4db8); }
+.sheva-book-grad     { background: linear-gradient(145deg, #22d3ee, #6366f1); }
+.sheva-card-grad     { background: linear-gradient(145deg, #ffd93d, #ff7a3d); }
+.sheva-key-grad      { background: linear-gradient(145deg, #8b5cf6, #22d3ee); }
+.sheva-pen-grad      { background: linear-gradient(145deg, #6366f1, #ff4db8); }
+.sheva-bookmark-grad { background: linear-gradient(145deg, #22d3ee, #ff4db8); }
+
+/* Card info */
+.sheva-shop-info {
+  padding: 22px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.sheva-shop-cat {
+  letter-spacing: 3px;
+  color: #22d3ee;
+  text-transform: uppercase;
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 8px;
+  display: block;
+}
+.sheva-shop-name {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.sheva-shop-desc {
+  opacity: .75;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  color: #f3f0ff;
+  font-family: 'Poppins', sans-serif;
+}
+.sheva-shop-foot {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.sheva-shop-price {
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(90deg, #ff4db8, #ff7a3d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+.sheva-btn-ghost--sm {
+  padding: 10px 18px !important;
+  font-size: 11px !important;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .sheva-bundle {
+    grid-template-columns: 1fr;
+    padding: 40px 28px;
+    gap: 40px;
+  }
+  .sheva-bundle__right { min-height: 340px; }
+  .sheva-bundle__orb   { width: 240px; height: 240px; }
+  .sheva-bundle__ring  { width: 300px; height: 300px; }
+  .sheva-bundle__ring--r2 { width: 360px; height: 360px; }
+  .sheva-bundle__emoji-stack { width: 360px; height: 360px; }
+  .sheva-be { width: 48px; height: 48px; font-size: 24px; }
+}
+
+@media (max-width: 768px) {
+  .sheva-shop { padding: 70px 20px; }
+  .sheva-bundle { padding: 32px 22px; border-radius: 24px; }
+  .sheva-bundle__list { grid-template-columns: 1fr; gap: 6px; }
+  .sheva-bundle__now { font-size: 32px !important; }
+  .sheva-bundle__was { font-size: 16px !important; }
+  .sheva-shop-track  { gap: 16px !important; padding: 0 16px; animation-duration: 40s; }
+  .sheva-shop-card   { flex: 0 0 260px !important; }
+  .sheva-shop-img    { height: 180px !important; }
+}
+
+@media (max-width: 420px) {
+  .sheva-shop { padding: 60px 16px; }
+  .sheva-bundle { padding: 28px 18px; }
+  .sheva-bundle__orb  { width: 160px; height: 160px; }
+  .sheva-bundle__ring { width: 220px; height: 220px; }
+  .sheva-bundle__ring--r2 { width: 270px; height: 270px; }
+  .sheva-shop-card { flex: 0 0 240px !important; }
+}

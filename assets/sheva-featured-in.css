@@ -1,0 +1,39 @@
+/* ============================================================
+   SHEVA TEA — Featured In CSS
+============================================================ */
+
+.sheva-featured {
+  text-align: center;
+  padding: var(--feat-pad-top, 70px) 20px var(--feat-pad-bottom, 70px);
+  position: relative;
+  z-index: 5;
+  background: rgba(0,0,0,.4);
+  border-top: 1px solid rgba(255,255,255,.1);
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  width: 100%;
+}
+.sheva-featured__heading {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--feat-heading-color, #22d3ee);
+  margin-bottom: 14px;
+}
+.sheva-featured__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  justify-content: center;
+  align-items: center;
+}
+.sheva-featured__link {
+  color: var(--feat-link-color, #ff4db8);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid var(--feat-link-color, #ff4db8);
+  font-family: 'Poppins', sans-serif;
+  transition: opacity .2s;
+}
+.sheva-featured__link:hover { opacity: .75; }
+
+@media (max-width: 768px) {
+  .sheva-featured { padding: 50px 20px; }
+}

@@ -1,0 +1,302 @@
+{% comment %} ============================================================
+  SHEVA TEA — Benefits Grid Section
+  Auto-fit grid of benefit cards with hover shimmer.
+  All cards are blocks — fully editable in theme editor.
+============================================================ {% endcomment %}
+
+{{ 'sheva-benefits.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="sheva-benefits"
+  class="sheva-benefits"
+  style="
+    --ben-pad-top: {{ section.settings.padding_top }}px;
+    --ben-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --ben-eyebrow-color: {{ section.settings.eyebrow_color }};
+    --ben-card-border-hover: {{ section.settings.card_hover_border }};
+    --ben-card-shadow-hover: {{ section.settings.card_hover_shadow | color_modify: 'alpha', 0.3 }};
+  "
+>
+
+  {%- comment %} ── Section Header ── {% endcomment %}
+  <div class="sheva-sec-head">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="sheva-eyebrow">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+
+    {%- if section.settings.title != blank -%}
+      <h2
+        class="sheva-sec-title"
+        style="font-size: clamp({{ section.settings.title_fs_mobile }}px, 4vw, {{ section.settings.title_fs_desktop }}px);"
+      >
+        {%- if section.settings.title_plain != blank -%}
+          {{ section.settings.title_plain }}
+          <em class="sheva-glow">{{ section.settings.title }}</em>
+        {%- else -%}
+          {{ section.settings.title }}
+        {%- endif -%}
+      </h2>
+    {%- endif -%}
+
+    {%- if section.settings.subtitle != blank -%}
+      <p class="sheva-sec-sub"
+        style="font-size: {{ section.settings.sub_fs }}px;">
+        {{ section.settings.subtitle }}
+      </p>
+    {%- endif -%}
+  </div>
+
+  {%- comment %} ── Benefits Grid ── {% endcomment %}
+  {%- if section.blocks.size > 0 -%}
+    <div
+      class="sheva-benefits__grid"
+      style="grid-template-columns: repeat(auto-fit, minmax({{ section.settings.min_card_width }}px, 1fr)); gap: {{ section.settings.grid_gap }}px;"
+    >
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'benefit' -%}
+          <div
+            class="sheva-b-card"
+            style="border-radius: {{ section.settings.card_radius }}px;"
+            {{ block.shopify_attributes }}
+          >
+            <div
+              class="sheva-b-icon"
+              style="font-size: {{ block.settings.icon_size }}px; border-radius: {{ section.settings.card_radius | minus: 6 }}px;"
+            >{{ block.settings.emoji }}</div>
+            <h4
+              class="sheva-b-card__title"
+              style="font-size: {{ section.settings.card_title_fs }}px;"
+            >{{ block.settings.title }}</h4>
+            <p
+              class="sheva-b-card__desc"
+              style="font-size: {{ section.settings.card_desc_fs }}px;"
+            >{{ block.settings.description }}</p>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+</section>
+
+{% schema %}
+{
+  "name": "Sheva – Benefits Grid",
+  "tag": "section",
+  "class": "sheva-section sheva-benefits-section",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "✦ WHY SHEVA TEA"
+    },
+    {
+      "type": "text",
+      "id": "title_plain",
+      "label": "Title – Plain Part",
+      "default": "Cosmic",
+      "info": "This part renders in plain white."
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title – Gradient Part",
+      "default": "Benefits",
+      "info": "This part renders in the animated gradient."
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "17 powerful benefits in every sip — fueled by 50+ sacred herbs."
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_fs_desktop",
+      "label": "Title Size – Desktop (px)",
+      "min": 24,
+      "max": 72,
+      "step": 1,
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "title_fs_mobile",
+      "label": "Title Size – Mobile (px)",
+      "min": 18,
+      "max": 48,
+      "step": 1,
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "sub_fs",
+      "label": "Subtitle Font Size (px)",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "card_title_fs",
+      "label": "Card Title Font Size (px)",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "card_desc_fs",
+      "label": "Card Description Font Size (px)",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "color",
+      "id": "card_hover_border",
+      "label": "Card Hover Border Color",
+      "default": "#ff4db8"
+    },
+    {
+      "type": "color",
+      "id": "card_hover_shadow",
+      "label": "Card Hover Shadow Color",
+      "default": "#ff4db8"
+    },
+    {
+      "type": "header",
+      "content": "Grid Layout"
+    },
+    {
+      "type": "range",
+      "id": "min_card_width",
+      "label": "Min Card Width (px)",
+      "min": 140,
+      "max": 280,
+      "step": 10,
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid Gap (px)",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card Border Radius (px)",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "default": 100
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji / Icon",
+          "default": "⚡"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Boost Energy"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Clean, sustained cosmic fuel."
+        },
+        {
+          "type": "range",
+          "id": "icon_size",
+          "label": "Icon Font Size (px)",
+          "min": 16,
+          "max": 48,
+          "step": 2,
+          "default": 26
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva – Benefits Grid",
+      "blocks": [
+        { "type": "benefit", "settings": { "emoji": "⚡", "title": "Boost Energy",        "description": "Clean, sustained cosmic fuel." } },
+        { "type": "benefit", "settings": { "emoji": "🌿", "title": "Collagen",             "description": "Skin glow from within." } },
+        { "type": "benefit", "settings": { "emoji": "☯️", "title": "Harmony",              "description": "Align body, mind, spirit." } },
+        { "type": "benefit", "settings": { "emoji": "🌸", "title": "Calmness",             "description": "Soothes the nervous system." } },
+        { "type": "benefit", "settings": { "emoji": "🏆", "title": "Performance",          "description": "Enhance peak output." } },
+        { "type": "benefit", "settings": { "emoji": "🧠", "title": "Brain Rejuvenation",   "description": "Revitalize neural cells." } },
+        { "type": "benefit", "settings": { "emoji": "💭", "title": "Memory",               "description": "Sharper recall, long term." } },
+        { "type": "benefit", "settings": { "emoji": "😊", "title": "Mood",                 "description": "Elevate daily vibes." } },
+        { "type": "benefit", "settings": { "emoji": "⚖️", "title": "Balance",              "description": "Hormonal & emotional." } },
+        { "type": "benefit", "settings": { "emoji": "🧬", "title": "DNA Repair",           "description": "Cellular regeneration." } },
+        { "type": "benefit", "settings": { "emoji": "🔥", "title": "Anti-inflammatory",    "description": "Soothes internal fire." } },
+        { "type": "benefit", "settings": { "emoji": "🦠", "title": "Antibacterial",        "description": "Natural defense shield." } },
+        { "type": "benefit", "settings": { "emoji": "🍇", "title": "Antioxidant",          "description": "Fights free radicals." } },
+        { "type": "benefit", "settings": { "emoji": "🧘", "title": "Stress Relief",        "description": "Cosmic calm delivered." } },
+        { "type": "benefit", "settings": { "emoji": "💧", "title": "Electrolytes",         "description": "Hydrate at cellular level." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

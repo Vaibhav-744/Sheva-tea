@@ -1,0 +1,243 @@
+/* ============================================================
+   SHEVA TEA — Base Spacing & Typography Reset
+   Scoped to all .sheva-* sections so the theme's base.css
+   margins/padding on h1-h6, p, ul, li etc. don't bleed in.
+   Loaded once via snippets/sheva-cosmic-bg.liquid (global).
+============================================================ */
+
+/* ── 1. Section wrappers: remove any theme-injected margin/padding ── */
+.sheva-hero,
+.sheva-mq-bar,
+.sheva-fp,
+.sheva-benefits,
+.sheva-ingredients,
+.sheva-reviews,
+.sheva-shop,
+.sheva-strip,
+.sheva-featured,
+.sheva-footer {
+  margin-top: 0;
+  margin-bottom: 0;
+  box-sizing: border-box;
+}
+
+/* ── 2. Headings inside ALL sheva sections ── */
+/* The theme sets margin on h1-h6 globally via base.css.
+   We zero them out and re-apply only what the design calls for. */
+
+/* h1 — hero headline */
+.sheva-hero .sheva-hero__headline,
+.sheva-hero h1 {
+  margin: 0 0 24px;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+/* h2 — section titles */
+.sheva-sec-head .sheva-sec-title,
+.sheva-fp__title,
+.sheva-bundle__title,
+.sheva-strip__title,
+[class*="sheva-"] h2 {
+  margin: 0 0 14px;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  line-height: 1.1;
+}
+
+/* h3 — card names (ingredients) */
+.sheva-ing-card__name,
+.sheva-rev__quote,
+[class*="sheva-"] h3 {
+  margin: 0 0 12px;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* h4 — eyebrow/tag labels, card titles, footer col headings */
+.sheva-fp__tag,
+.sheva-bundle__tag,
+.sheva-b-card__title,
+.sheva-shop-name,
+.sheva-footer__brand,
+.sheva-footer__col-heading,
+.sheva-featured__heading,
+[class*="sheva-"] h4 {
+  margin: 0 0 12px;
+  padding: 0;
+}
+
+/* h5 — review quote titles */
+[class*="sheva-"] h5 {
+  margin: 0 0 8px;
+  padding: 0;
+}
+
+/* h6 */
+[class*="sheva-"] h6 {
+  margin: 0 0 6px;
+  padding: 0;
+}
+
+/* ── 3. Paragraphs inside ALL sheva sections ── */
+/* theme base.css adds margin-bottom to p; we normalise per context */
+[class*="sheva-"] p {
+  /* margin-top: 0;
+  margin-bottom: 0; */
+  padding: 0;
+}
+
+/* Hero sub-text: needs bottom gap before buttons */
+.sheva-hero__sub,
+.sheva-hero__tagline {
+  margin-bottom: 24px;
+}
+
+/* Tagline: gap before headline */
+.sheva-hero__tagline {
+  margin-bottom: 20px;
+}
+
+/* Section sub-heading: centred paragraph */
+.sheva-sec-sub {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Product desc: gap before benefit icons */
+.sheva-fp__desc { margin-bottom: 28px; }
+
+/* Shipping note */
+.sheva-fp__shipping { margin-top: 0; }
+
+/* Bundle desc */
+.sheva-bundle__desc { margin-bottom: 24px; }
+
+/* Bundle footer note */
+.sheva-bundle__foot { margin-top: 16px; }
+
+/* Ingredient / review body copy */
+.sheva-ing-card__desc,
+.sheva-rev__body,
+.sheva-full-ing__text {
+  margin: 0;
+}
+
+/* Footer text lines */
+.sheva-footer__text { margin-bottom: 8px; }
+.sheva-footer__text:last-child { margin-bottom: 0; }
+
+/* ── 4. Lists ── */
+/* Theme adds padding-left on ul/ol — remove inside sheva cards */
+.sheva-bundle__list {
+  list-style: none;
+  margin: 0 0 28px;
+  padding: 0;
+}
+.sheva-bundle__list li {
+  margin: 0;
+  padding: 8px 10px;
+}
+
+[class*="sheva-"] ul:not(.sheva-bundle__list),
+[class*="sheva-"] ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ── 5. Section header block: consistent internal spacing ── */
+.sheva-sec-head {
+  text-align: center;
+  padding: 0 20px;
+  margin-bottom: 50px;    /* default; overridden by --sheva-head-mb var where needed */
+}
+.sheva-sec-head > * + * {
+  /* vertical rhythm: gap between eyebrow → title → subtitle */
+  margin-top: 0;
+}
+.sheva-eyebrow {
+  display: inline-block;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 4px;
+  font-size: 12px;
+  margin-bottom: 12px;
+  color: var(--ben-eyebrow-color, #22d3ee);  /* sections override via CSS var */
+}
+.sheva-sec-title {
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 14px;
+  line-height: 1.1;
+  color: #f3f0ff;
+}
+.sheva-sec-sub {
+  opacity: .7;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+  color: #f3f0ff;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 0;
+}
+
+/* ── 6. Benefit card internal spacing ── */
+.sheva-b-icon  { margin-bottom: 16px; }
+.sheva-b-card__title { margin-bottom: 8px; }
+
+/* ── 7. Ingredient card internal spacing ── */
+.sheva-ing-emoji   { margin-bottom: 14px; }
+.sheva-ing-card__name { margin-bottom: 12px; }
+
+/* ── 8. Review card internal spacing ── */
+.sheva-rev__head   { margin-bottom: 14px; }
+.sheva-rev__quote  { margin: 10px 0 8px; }
+
+/* ── 9. Product info block internal spacing ── */
+.sheva-fp__tag           { margin-bottom: 12px; }
+.sheva-fp__title         { margin-bottom: 14px; }
+.sheva-fp__rating-row    { margin-bottom: 18px; }
+.sheva-fp__desc          { margin-bottom: 28px; }
+.sheva-fp__icons-row     { margin-bottom: 30px; }
+.sheva-fp__qty-row       { margin-bottom: 18px; }
+
+/* ── 10. Shop card internal spacing ── */
+.sheva-shop-cat  { margin-bottom: 8px; }
+.sheva-shop-name { margin-bottom: 10px; }
+.sheva-shop-desc { margin-bottom: 16px; }
+
+/* ── 11. Footer internal spacing ── */
+.sheva-footer__grid     { margin-bottom: 50px; }
+.sheva-footer__brand    { margin-bottom: 14px; }
+.sheva-footer__col-heading { margin-bottom: 14px; }
+
+/* ── 12. Strip overlay spacing ── */
+.sheva-strip__title { margin-bottom: 8px; }
+
+/* ── 13. Full ingredients box ── */
+.sheva-full-ing__title { margin-bottom: 14px; }
+
+/* ── 14. Prevent the theme wrapper-body from adding extra padding
+         on the homepage (template-index) that squashes sections ── */
+.template-index .wrapper-body {
+  padding-bottom: 0 !important;
+}
+
+/* ── 15. Responsive spacing corrections ── */
+@media (max-width: 768px) {
+  .sheva-sec-head   { margin-bottom: 40px; padding: 0 20px; }
+  .sheva-fp__desc   { margin-bottom: 22px; }
+  .sheva-fp__icons-row { margin-bottom: 22px; }
+  .sheva-fp__qty-row   { margin-bottom: 14px; }
+  .sheva-footer__grid  { margin-bottom: 36px; gap: 30px; }
+  .sheva-bundle__list  { margin-bottom: 20px; }
+  .sheva-bundle__price { margin-bottom: 18px; }
+  .sheva-bundle__foot{margin-top:18px;}
+}
+
+@media (max-width: 420px) {
+  .sheva-sec-head   { margin-bottom: 32px; padding: 0 16px; }
+  .sheva-fp__desc   { margin-bottom: 18px; }
+  .sheva-footer__grid  { margin-bottom: 28px; }
+}

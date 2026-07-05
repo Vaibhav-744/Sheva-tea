@@ -1,0 +1,45 @@
+/* ============================================================
+   SHEVA TEA — Marquee Bar CSS
+   Right → Left infinite CSS marquee
+============================================================ */
+
+.sheva-mq-bar {
+  background: var(--mq-grad);
+  padding: var(--mq-pt, 14px) 0 var(--mq-pb, 14px);
+  overflow: hidden;
+  position: relative;
+  z-index: 5;
+  width: 100%;
+}
+
+.sheva-mq-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: shevaMqScroll var(--mq-speed, 30s) linear infinite;
+}
+
+/* Pause on hover (desktop) */
+.sheva-mq-bar:hover .sheva-mq-track {
+  animation-play-state: paused;
+}
+
+.sheva-mq-text {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 4px;
+  font-size: var(--mq-fs, 14px);
+  color: var(--mq-color, #fff);
+  font-weight: 700;
+  white-space: nowrap;
+  padding-right: 40px;
+}
+
+/* Right → Left */
+@keyframes shevaMqScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (max-width: 768px) {
+  .sheva-mq-text { font-size: var(--mq-fs-mb, 12px); letter-spacing: 2px; }
+}

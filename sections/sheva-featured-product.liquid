@@ -1,0 +1,363 @@
+{{ 'sheva-featured-product.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign fp = section.settings.product
+  if fp == blank
+    assign fp = product
+  endif
+-%}
+
+<section
+  id="sheva-product"
+  class="sheva-fp"
+  style="
+    --fp-pad-top: {{ section.settings.padding_top }}px;
+    --fp-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --fp-tag-color: {{ section.settings.tag_color }};
+    --fp-title-from: {{ section.settings.title_grad_from }};
+    --fp-title-to: {{ section.settings.title_grad_to }};
+    --fp-price-color: {{ section.settings.price_color }};
+    --fp-shipping-color: {{ section.settings.shipping_color }};
+  "
+>
+
+  {%- comment %} ── LEFT: Product Gallery ── {% endcomment %}
+  <div class="sheva-fp__gallery">
+    <div class="sheva-fp__glow-orb"></div>
+    <div class="sheva-fp__orbit-ring"></div>
+    <div class="sheva-fp__orbit-ring sheva-fp__orbit-ring--r2"></div>
+
+    {%- if fp != blank and fp != empty -%}
+      <img
+        src="{{ fp.featured_image | img_url: '600x' }}"
+        srcset="{{ fp.featured_image | img_url: '400x' }} 400w, {{ fp.featured_image | img_url: '600x' }} 600w, {{ fp.featured_image | img_url: '800x' }} 800w"
+        alt="{{ fp.featured_image.alt | default: fp.title }}"
+        class="sheva-fp__product-img"
+        loading="lazy"
+        width="460"
+      >
+    {%- elsif section.settings.fallback_image != blank -%}
+      <img
+        src="{{ section.settings.fallback_image | img_url: '600x' }}"
+        alt="{{ section.settings.fallback_image.alt | default: 'Product' }}"
+        class="sheva-fp__product-img"
+        loading="lazy"
+        width="460"
+      >
+    {%- else -%}
+      <div class="sheva-fp__product-img sheva-fp__product-img--placeholder">🍵</div>
+    {%- endif -%}
+  </div>
+
+  {%- comment %} ── RIGHT: Product Info ── {% endcomment %}
+  <div class="sheva-fp__info">
+
+    {%- if section.settings.tag_label != blank -%}
+      <h4 class="sheva-fp__tag">{{ section.settings.tag_label }}</h4>
+    {%- endif -%}
+
+    {%- if fp != blank and fp != empty -%}
+      <h2 class="sheva-fp__title"
+        style="font-size: clamp({{ section.settings.title_fs_mobile }}px, 4vw, {{ section.settings.title_fs_desktop }}px);"
+      >{{ fp.title }}</h2>
+    {%- else -%}
+      <h2 class="sheva-fp__title"
+        style="font-size: clamp({{ section.settings.title_fs_mobile }}px, 4vw, {{ section.settings.title_fs_desktop }}px);"
+      >{{ section.settings.fallback_title }}</h2>
+    {%- endif -%}
+
+    {%- comment -%} Rating row (static / metafield driven) {%- endcomment -%}
+    {%- if section.settings.show_rating -%}
+      <div class="sheva-fp__rating-row">
+        <span class="sheva-stars-rating">★★★★★</span>
+        <span class="sheva-fp__rating-count">
+          {{ section.settings.rating_score }} · {{ section.settings.rating_count }} reviews
+        </span>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.product_desc != blank -%}
+      <p class="sheva-fp__desc"
+        style="font-size: {{ section.settings.desc_fs }}px;">
+        {{ section.settings.product_desc }}
+      </p>
+    {%- elsif fp != blank and fp != empty and fp.description != blank -%}
+      <div class="sheva-fp__desc"
+        style="font-size: {{ section.settings.desc_fs }}px;">
+        {{ fp.description | strip_html | truncate: 200 }}
+      </div>
+    {%- endif -%}
+
+    {%- comment %} ── Benefit icons row (blocks) ── {% endcomment %}
+    {%- if section.blocks.size > 0 -%}
+      <div class="sheva-fp__icons-row">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'benefit_icon' -%}
+            <div class="sheva-fp__icon-item" {{ block.shopify_attributes }}>
+              <div class="sheva-fp__icon">{{ block.settings.emoji }}</div>
+              <span style="font-size: {{ block.settings.label_fs }}px;">{{ block.settings.label }}</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment %} ── Add to Cart (theme default) ── {% endcomment %}
+    {%- if fp != blank and fp != empty -%}
+      {%- form 'product', fp, class: 'sheva-fp__form' -%}
+        <input type="hidden" name="id" value="{{ fp.selected_or_first_available_variant.id }}">
+
+        <div class="sheva-fp__qty-row">
+          <div class="sheva-fp__qty">
+            <button type="button" class="sheva-fp__qty-btn sheva-fp__qty-minus" aria-label="Decrease quantity">−</button>
+            <span class="sheva-fp__qval" id="sheva-qval">1</span>
+            <button type="button" class="sheva-fp__qty-btn sheva-fp__qty-plus" aria-label="Increase quantity">+</button>
+            <input type="hidden" name="quantity" class="sheva-fp__qty-input" value="1">
+          </div>
+
+          <button
+            type="submit"
+            name="add"
+            class="sheva-btn-primary sheva-fp__atc"
+            {%- if fp.selected_or_first_available_variant.available == false -%}disabled{%- endif -%}
+          >
+            {%- if fp.selected_or_first_available_variant.available -%}
+              {{ section.settings.atc_label }} — <span class="sheva-fp__price-display">{{ fp.selected_or_first_available_variant.price | money }}</span>
+            {%- else -%}
+              Sold Out
+            {%- endif -%}
+          </button>
+        </div>
+
+      {%- endform -%}
+    {%- endif -%}
+
+    {%- if section.settings.shipping_note != blank -%}
+      <p class="sheva-fp__shipping"
+        style="font-size: {{ section.settings.shipping_fs }}px; color: var(--fp-shipping-color);">
+        {{ section.settings.shipping_note }}
+      </p>
+    {%- endif -%}
+
+  </div>
+</section>
+
+<script src="{{ 'sheva-product.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Sheva – Featured Product",
+  "tag": "section",
+  "class": "sheva-section sheva-fp-section",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "image_picker",
+      "id": "fallback_image",
+      "label": "Fallback Product Image (if no product selected)"
+    },
+    {
+      "type": "text",
+      "id": "fallback_title",
+      "label": "Fallback Product Title",
+      "default": "SUPERNOVA Herbal Tea"
+    },
+    {
+      "type": "header",
+      "content": "Labels"
+    },
+    {
+      "type": "text",
+      "id": "tag_label",
+      "label": "Eyebrow / Tag",
+      "default": "✦ SEVEN STAR ENERGY®"
+    },
+    {
+      "type": "text",
+      "id": "atc_label",
+      "label": "Add to Cart Button Label",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "text",
+      "id": "shipping_note",
+      "label": "Shipping Note",
+      "default": "🚀 FREE Shipping when you spend over $50"
+    },
+    {
+      "type": "textarea",
+      "id": "product_desc",
+      "label": "Custom Description (overrides product description)",
+      "info": "Leave blank to use the product's Shopify description."
+    },
+    {
+      "type": "header",
+      "content": "Rating"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show Rating Row",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_score",
+      "label": "Rating Score",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "rating_count",
+      "label": "Review Count",
+      "default": "2,143"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_fs_desktop",
+      "label": "Title Size – Desktop (px)",
+      "min": 24,
+      "max": 72,
+      "step": 1,
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "title_fs_mobile",
+      "label": "Title Size – Mobile (px)",
+      "min": 20,
+      "max": 48,
+      "step": 1,
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "desc_fs",
+      "label": "Description Font Size (px)",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "shipping_fs",
+      "label": "Shipping Note Font Size (px)",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "tag_color",
+      "label": "Eyebrow Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "color",
+      "id": "title_grad_from",
+      "label": "Title Gradient – From",
+      "default": "#ff7a3d"
+    },
+    {
+      "type": "color",
+      "id": "title_grad_to",
+      "label": "Title Gradient – To",
+      "default": "#ff4db8"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price Color",
+      "default": "#ff4db8"
+    },
+    {
+      "type": "color",
+      "id": "shipping_color",
+      "label": "Shipping Note Color",
+      "default": "#f3f0ff"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "default": 120
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit_icon",
+      "name": "Benefit Icon",
+      "settings": [
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji / Icon",
+          "default": "⚡"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Energy+"
+        },
+        {
+          "type": "range",
+          "id": "label_fs",
+          "label": "Label Font Size (px)",
+          "min": 9,
+          "max": 16,
+          "step": 1,
+          "default": 11
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva – Featured Product",
+      "blocks": [
+        { "type": "benefit_icon", "settings": { "emoji": "⚡", "label": "Energy+" } },
+        { "type": "benefit_icon", "settings": { "emoji": "🛡️", "label": "Immune+" } },
+        { "type": "benefit_icon", "settings": { "emoji": "✨", "label": "Clarity+" } },
+        { "type": "benefit_icon", "settings": { "emoji": "☮️", "label": "Mood+" } },
+        { "type": "benefit_icon", "settings": { "emoji": "🧠", "label": "Memory+" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

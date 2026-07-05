@@ -1,0 +1,268 @@
+{% comment %} ============================================================
+  SHEVA TEA — Galaxy Image Strip Section
+  2-column image grid with hover overlay.
+  Blocks for each image panel.
+============================================================ {% endcomment %}
+
+{{ 'sheva-image-strip.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="sheva-gallery"
+  class="sheva-strip"
+  style="
+    --strip-pad-top: {{ section.settings.padding_top }}px;
+    --strip-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --strip-img-h: {{ section.settings.img_height }}px;
+    --strip-img-h-mb: {{ section.settings.img_height_mb }}px;
+    --strip-gap: {{ section.settings.grid_gap }}px;
+    --strip-cols: {{ section.settings.columns }};
+  "
+>
+  <div class="sheva-sec-head" style="margin-bottom: 40px;">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="sheva-eyebrow" style="color: {{ section.settings.eyebrow_color }};">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h2 class="sheva-sec-title"
+        style="font-size: clamp({{ section.settings.title_fs_mobile }}px, 4vw, {{ section.settings.title_fs_desktop }}px);">
+        {%- if section.settings.title_plain != blank -%}{{ section.settings.title_plain }} {%- endif -%}
+        <em class="sheva-glow">{{ section.settings.title }}</em>
+      </h2>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <p class="sheva-sec-sub" style="font-size: {{ section.settings.sub_fs }}px;">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="sheva-strip__grid">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'strip_image' -%}
+        <div
+          class="sheva-strip__img"
+          style="
+            {%- if block.settings.image != blank -%}
+              background-image: url('{{ block.settings.image | img_url: 'master' }}');
+            {%- else -%}
+              background-color: #1a0538;
+            {%- endif -%}
+          "
+          {{ block.shopify_attributes }}
+        >
+          <div class="sheva-strip__overlay">
+            {%- if block.settings.title != blank -%}
+              <h3 class="sheva-strip__title"
+                style="font-size: {{ section.settings.overlay_title_fs }}px; letter-spacing: {{ section.settings.overlay_title_ls }}px;">
+                {{ block.settings.title }}
+              </h3>
+            {%- endif -%}
+            {%- if block.settings.subtitle != blank -%}
+              <p class="sheva-strip__sub"
+                style="font-size: {{ section.settings.overlay_sub_fs }}px;">
+                {{ block.settings.subtitle }}
+              </p>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sheva – Image Strip",
+  "tag": "section",
+  "class": "sheva-section sheva-strip-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "✦ COSMIC UNIVERSE"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "text",
+      "id": "title_plain",
+      "label": "Title – Plain Part",
+      "default": "Step Into"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title – Gradient Part",
+      "default": "Our World"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "A glimpse into the Sheva Tea universe — where ancient herbs meet the stars."
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_fs_desktop",
+      "label": "Title Size – Desktop (px)",
+      "min": 24,
+      "max": 72,
+      "step": 1,
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "title_fs_mobile",
+      "label": "Title Size – Mobile (px)",
+      "min": 18,
+      "max": 48,
+      "step": 1,
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "sub_fs",
+      "label": "Subtitle Font Size (px)",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "overlay_title_fs",
+      "label": "Overlay Title Font Size (px)",
+      "min": 16,
+      "max": 48,
+      "step": 1,
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "overlay_title_ls",
+      "label": "Overlay Title Letter Spacing (px)",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "overlay_sub_fs",
+      "label": "Overlay Subtitle Font Size (px)",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Grid Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns – Desktop",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid Gap (px)",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "img_height",
+      "label": "Image Height – Desktop (px)",
+      "min": 200,
+      "max": 700,
+      "step": 10,
+      "default": 420
+    },
+    {
+      "type": "range",
+      "id": "img_height_mb",
+      "label": "Image Height – Mobile (px)",
+      "min": 160,
+      "max": 400,
+      "step": 10,
+      "default": 280
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "strip_image",
+      "name": "Image Panel",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Overlay Title",
+          "default": "The Journey"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Overlay Subtitle",
+          "default": "Align with the cosmos"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva – Image Strip",
+      "blocks": [
+        { "type": "strip_image", "settings": { "title": "The Journey", "subtitle": "Align with the cosmos" } },
+        { "type": "strip_image", "settings": { "title": "The Ritual",  "subtitle": "Sip the stars" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

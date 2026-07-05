@@ -1,0 +1,384 @@
+{% comment %} ============================================================
+  SHEVA TEA — Custom Footer Section
+  4-column grid: Brand · Contact · Shop Links · Social
+  Fully editable via blocks and settings.
+============================================================ {% endcomment %}
+
+{{ 'sheva-footer.css' | asset_url | stylesheet_tag }}
+
+<footer
+  id="sheva-contact"
+  class="sheva-footer"
+  style="
+    --foot-pad-top: {{ section.settings.padding_top }}px;
+    --foot-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --foot-heading-color: {{ section.settings.heading_color }};
+    --foot-text-color: {{ section.settings.text_color }};
+    --foot-link-hover: {{ section.settings.link_hover_color }};
+    --foot-heading-fs: {{ section.settings.heading_fs }}px;
+    --foot-col-heading-fs: {{ section.settings.col_heading_fs }}px;
+    --foot-text-fs: {{ section.settings.text_fs }}px;
+    --foot-copy-fs: {{ section.settings.copyright_fs }}px;
+  "
+>
+  <div class="sheva-footer__grid">
+
+    {%- comment -%} Column 1: Brand {%- endcomment -%}
+    <div class="sheva-footer__col">
+      <h3 class="sheva-footer__brand">
+        <em class="sheva-glow">{{ section.settings.brand_name | default: shop.name }}</em>
+      </h3>
+      {%- if section.settings.brand_tagline != blank -%}
+        <p class="sheva-footer__text">{{ section.settings.brand_tagline }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Dynamic columns via blocks {%- endcomment -%}
+    {%- for block in section.blocks -%}
+
+      {%- if block.type == 'contact_column' -%}
+        <div class="sheva-footer__col" {{ block.shopify_attributes }}>
+          <h4 class="sheva-footer__col-heading">{{ block.settings.heading }}</h4>
+          {%- if block.settings.help_email != blank -%}
+            <p class="sheva-footer__text">
+              HELP · <a href="mailto:{{ block.settings.help_email }}" class="sheva-footer__link">{{ block.settings.help_email }}</a>
+            </p>
+          {%- endif -%}
+          {%- if block.settings.marketing_email != blank -%}
+            <p class="sheva-footer__text">
+              MARKETING · <a href="mailto:{{ block.settings.marketing_email }}" class="sheva-footer__link">{{ block.settings.marketing_email }}</a>
+            </p>
+          {%- endif -%}
+          {%- if block.settings.collab_email != blank -%}
+            <p class="sheva-footer__text">
+              COLLAB · <a href="mailto:{{ block.settings.collab_email }}" class="sheva-footer__link">{{ block.settings.collab_email }}</a>
+            </p>
+          {%- endif -%}
+        </div>
+
+      {%- elsif block.type == 'link_column' -%}
+        <div class="sheva-footer__col" {{ block.shopify_attributes }}>
+          <h4 class="sheva-footer__col-heading">{{ block.settings.heading }}</h4>
+          {%- if block.settings.menu != blank -%}
+            {%- for link in linklists[block.settings.menu].links -%}
+              <p class="sheva-footer__text">
+                <a href="{{ link.url }}" class="sheva-footer__link">{{ link.title }}</a>
+              </p>
+            {%- endfor -%}
+          {%- else -%}
+            {%- if block.settings.link1_label != blank -%}
+              <p class="sheva-footer__text">
+                <a href="{{ block.settings.link1_url }}" class="sheva-footer__link">{{ block.settings.link1_label }}</a>
+              </p>
+            {%- endif -%}
+            {%- if block.settings.link2_label != blank -%}
+              <p class="sheva-footer__text">
+                <a href="{{ block.settings.link2_url }}" class="sheva-footer__link">{{ block.settings.link2_label }}</a>
+              </p>
+            {%- endif -%}
+            {%- if block.settings.link3_label != blank -%}
+              <p class="sheva-footer__text">
+                <a href="{{ block.settings.link3_url }}" class="sheva-footer__link">{{ block.settings.link3_label }}</a>
+              </p>
+            {%- endif -%}
+            {%- if block.settings.link4_label != blank -%}
+              <p class="sheva-footer__text">
+                <a href="{{ block.settings.link4_url }}" class="sheva-footer__link">{{ block.settings.link4_label }}</a>
+              </p>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+
+      {%- elsif block.type == 'social_column' -%}
+        <div class="sheva-footer__col" {{ block.shopify_attributes }}>
+          <h4 class="sheva-footer__col-heading">{{ block.settings.heading }}</h4>
+          {%- if block.settings.instagram_url != blank -%}
+            <p class="sheva-footer__text">
+              <a href="{{ block.settings.instagram_url }}" target="_blank" rel="noopener" class="sheva-footer__link">Instagram</a>
+            </p>
+          {%- endif -%}
+          {%- if block.settings.tiktok_url != blank -%}
+            <p class="sheva-footer__text">
+              <a href="{{ block.settings.tiktok_url }}" target="_blank" rel="noopener" class="sheva-footer__link">TikTok</a>
+            </p>
+          {%- endif -%}
+          {%- if block.settings.youtube_url != blank -%}
+            <p class="sheva-footer__text">
+              <a href="{{ block.settings.youtube_url }}" target="_blank" rel="noopener" class="sheva-footer__link">YouTube</a>
+            </p>
+          {%- endif -%}
+          {%- if block.settings.facebook_url != blank -%}
+            <p class="sheva-footer__text">
+              <a href="{{ block.settings.facebook_url }}" target="_blank" rel="noopener" class="sheva-footer__link">Facebook</a>
+            </p>
+          {%- endif -%}
+        </div>
+
+      {%- endif -%}
+    {%- endfor -%}
+
+  </div>
+
+  <div class="sheva-footer__copyright">
+    © {{ 'now' | date: '%Y' }} {{ section.settings.copyright_text }}
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Sheva – Footer",
+  "tag": "section",
+  "class": "sheva-section sheva-footer-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand Column"
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand Name",
+      "default": "SHEVA TEA"
+    },
+    {
+      "type": "text",
+      "id": "brand_tagline",
+      "label": "Brand Tagline",
+      "default": "Seven Star Energy® — A cosmic herbal ritual to align your stars."
+    },
+    {
+      "type": "header",
+      "content": "Copyright"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright Text (year is added automatically)",
+      "default": "Sheva Tea · Seven Star Energy® · All rights reserved."
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_fs",
+      "label": "Brand Name Font Size (px)",
+      "min": 18,
+      "max": 40,
+      "step": 1,
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "col_heading_fs",
+      "label": "Column Heading Font Size (px)",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "text_fs",
+      "label": "Body Text Font Size (px)",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "copyright_fs",
+      "label": "Copyright Font Size (px)",
+      "min": 9,
+      "max": 16,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Column Heading Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#f3f0ff"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Link Hover Color",
+      "default": "#ff4db8"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 40,
+      "max": 160,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 10,
+      "max": 80,
+      "step": 2,
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "contact_column",
+      "name": "Contact Column",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Contact Us"
+        },
+        {
+          "type": "text",
+          "id": "help_email",
+          "label": "Help Email",
+          "default": "hello@shevatea.com"
+        },
+        {
+          "type": "text",
+          "id": "marketing_email",
+          "label": "Marketing Email",
+          "default": "pr@shevatea.com"
+        },
+        {
+          "type": "text",
+          "id": "collab_email",
+          "label": "Collab Email",
+          "default": "sydneyalexis@shevatea.com"
+        }
+      ]
+    },
+    {
+      "type": "link_column",
+      "name": "Links Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Navigation Menu",
+          "info": "Select a menu, or enter manual links below."
+        },
+        {
+          "type": "text",
+          "id": "link1_label",
+          "label": "Link 1 Label",
+          "default": "Supernova Tea"
+        },
+        {
+          "type": "url",
+          "id": "link1_url",
+          "label": "Link 1 URL"
+        },
+        {
+          "type": "text",
+          "id": "link2_label",
+          "label": "Link 2 Label",
+          "default": "Titan Aura Collection"
+        },
+        {
+          "type": "url",
+          "id": "link2_url",
+          "label": "Link 2 URL"
+        },
+        {
+          "type": "text",
+          "id": "link3_label",
+          "label": "Link 3 Label",
+          "default": "Complete Bundle"
+        },
+        {
+          "type": "url",
+          "id": "link3_url",
+          "label": "Link 3 URL"
+        },
+        {
+          "type": "text",
+          "id": "link4_label",
+          "label": "Link 4 Label",
+          "default": "Benefits"
+        },
+        {
+          "type": "url",
+          "id": "link4_url",
+          "label": "Link 4 URL"
+        }
+      ]
+    },
+    {
+      "type": "social_column",
+      "name": "Social Column",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Follow"
+        },
+        {
+          "type": "url",
+          "id": "instagram_url",
+          "label": "Instagram URL"
+        },
+        {
+          "type": "url",
+          "id": "tiktok_url",
+          "label": "TikTok URL"
+        },
+        {
+          "type": "url",
+          "id": "youtube_url",
+          "label": "YouTube URL"
+        },
+        {
+          "type": "url",
+          "id": "facebook_url",
+          "label": "Facebook URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva – Footer",
+      "blocks": [
+        { "type": "contact_column" },
+        { "type": "link_column" },
+        { "type": "social_column" }
+      ]
+    }
+  ]
+}
+{% endschema %}

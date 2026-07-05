@@ -1,0 +1,109 @@
+/* ============================================================
+   SHEVA TEA — Ingredients Slider CSS
+   Direction: Right → Left
+============================================================ */
+
+.sheva-ingredients {
+  padding: var(--ing-pad-top, 100px) 0 var(--ing-pad-bottom, 100px);
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* ── Slider wrapper ── */
+.sheva-ing-slider {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 20px 0;
+  /* -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); */
+}
+
+/* ── Track ── */
+.sheva-ing-track {
+  display: flex;
+  gap: var(--ing-gap, 24px);
+  width: max-content;
+  will-change: transform;
+  padding: 0 24px;
+  animation: shevaIngScroll var(--ing-speed, 35s) linear infinite;
+}
+
+/* Pause on hover (desktop) */
+.sheva-ing-slider:hover .sheva-ing-track { animation-play-state: paused; }
+
+/* Right → Left */
+@keyframes shevaIngScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Card ── */
+.sheva-ing-card {
+  flex: 0 0 var(--ing-card-w, 280px);
+  padding: 32px 26px;
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(255,77,184,.1), rgba(139,92,246,.1));
+  border: 1px solid rgba(255,255,255,.12);
+  transition: transform .4s, border-color .4s, box-shadow .4s;
+  text-align: left;
+}
+.sheva-ing-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  border-color: #22d3ee;
+  box-shadow: 0 25px 60px rgba(139,92,246,.4);
+}
+.sheva-ing-emoji { margin-bottom: 14px; display: block; }
+.sheva-ing-card__name {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--ing-name-color, #22d3ee);
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+.sheva-ing-card__desc {
+  opacity: .8;
+  line-height: 1.6;
+  color: #f3f0ff;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+}
+
+/* ── Full ingredients box ── */
+.sheva-full-ing {
+  padding: 28px;
+  background: rgba(0,0,0,.5);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.1);
+  max-width: 1200px;
+  margin: 40px auto 0;
+  width: calc(100% - 40px);
+}
+.sheva-full-ing__title {
+  font-family: 'Orbitron', sans-serif;
+  color: #ff4db8;
+  letter-spacing: 3px;
+  margin-bottom: 14px;
+  font-size: 14px;
+}
+.sheva-full-ing__text {
+  line-height: 1.8;
+  opacity: .7;
+  color: #f3f0ff;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .sheva-ingredients { padding: 70px 0; }
+  .sheva-ing-track   { gap: 16px !important; padding: 0 16px; animation-duration: 28s; }
+  .sheva-ing-card    { flex: 0 0 240px !important; padding: 26px 20px; }
+  .sheva-full-ing    { padding: 22px; width: calc(100% - 32px); margin: 30px auto 0; }
+}
+
+@media (max-width: 420px) {
+  .sheva-ing-card { flex: 0 0 220px !important; padding: 22px 18px; }
+}

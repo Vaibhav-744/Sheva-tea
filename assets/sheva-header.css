@@ -1,0 +1,225 @@
+/* ============================================================
+   SHEVA TEA — Custom Header CSS
+============================================================ */
+
+/* ── Navbar ── */
+.sheva-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--nav-pad-y, 16px) var(--nav-pad-x, 48px);
+  background: rgba(5,0,20,.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  width: 100%;
+  transition: background .3s;
+}
+
+/* ── Logo ── */
+.sheva-nav__logo {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: var(--nav-logo-size, 22px);
+  letter-spacing: 3px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(90deg,
+    var(--nav-logo-from, #ff4db8),
+    var(--nav-logo-mid,  #22d3ee),
+    var(--nav-logo-to,   #ff7a3d)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  flex-shrink: 0;
+}
+.sheva-nav__logo img {
+  display: block;
+  height: auto;
+}
+.sheva-nav__logo-star {
+  color: #fff;
+  filter: drop-shadow(0 0 10px #ff4db8);
+  -webkit-text-fill-color: #fff;
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+}
+
+/* ── Desktop Links ── */
+.sheva-nav__links {
+  list-style: none;
+  display: flex;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+}
+.sheva-nav__link {
+  color: var(--nav-link-color, #f3f0ff);
+  text-decoration: none;
+  font-size: var(--nav-link-size, 13px);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-family: 'Poppins', sans-serif;
+  transition: color .3s, text-shadow .3s;
+}
+.sheva-nav__link:hover,
+.sheva-nav__link--active {
+  color: var(--nav-link-hover, #ff4db8);
+  text-shadow: 0 0 12px var(--nav-link-hover, #ff4db8);
+}
+
+/* ── Right side ── */
+.sheva-nav__right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Search button */
+.sheva-nav__search-btn {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: color .2s;
+}
+.sheva-nav__search-btn:hover { color: #ff4db8; }
+
+/* Cart */
+.sheva-nav__cart {
+  position: relative;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: color .2s;
+}
+.sheva-nav__cart:hover { color: #ff4db8; }
+.sheva-nav__cart-count {
+  position: absolute;
+  top: -8px; right: -10px;
+  background: var(--nav-cart-badge-bg, #ff4db8);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1;
+}
+
+/* ── Hamburger (hidden desktop) ── */
+.sheva-nav__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.sheva-nav__hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform .3s, opacity .3s;
+}
+/* Active state — X */
+.sheva-nav__hamburger[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.sheva-nav__hamburger[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+.sheva-nav__hamburger[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── Mobile Menu Overlay ── */
+.sheva-mobile-menu {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(5,0,20,.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 60px 30px 40px;
+  overflow-y: auto;
+}
+.sheva-mobile-menu[hidden] { display: none; }
+
+.sheva-mobile-menu__close {
+  position: absolute;
+  top: 20px; right: 24px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 26px;
+  cursor: pointer;
+  line-height: 1;
+  transition: color .2s;
+}
+.sheva-mobile-menu__close:hover { color: #ff4db8; }
+
+.sheva-mobile-menu__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+}
+.sheva-mobile-menu__link {
+  display: block;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  color: #f3f0ff;
+  text-decoration: none;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  transition: color .2s;
+}
+.sheva-mobile-menu__link:hover { color: #ff4db8; }
+
+.sheva-mobile-menu__cart-link {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  position: relative;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .sheva-nav { padding: var(--nav-pad-y, 16px) 24px; }
+}
+
+@media (max-width: 768px) {
+  .sheva-nav       { padding: 14px 20px; }
+  .sheva-nav__links { display: none; }
+  .sheva-nav__hamburger { display: flex; }
+}

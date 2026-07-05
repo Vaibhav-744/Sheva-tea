@@ -1,0 +1,783 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "sheva-hero": {
+      "type": "sheva-hero-banner",
+      "settings": {
+        "tagline": "✦ SEVEN STAR ENERGY®",
+        "headline": "<p>ARE YOU READY<br/><em>THE STARS ARE ALIGNING</em></p>",
+        "subheading": "A cosmic herbal fusion crafted to elevate your energy, clarity, and soul.",
+        "tea_image": "shopify://shop_images/pack.png",
+        "btn1_label": "Shop Supernova →",
+        "btn1_url": "",
+        "btn2_label": "Explore Benefits",
+        "btn2_url": "",
+        "tagline_color": "#22d3ee",
+        "headline_color": "#f3f0ff",
+        "sub_color": "#f3f0ff",
+        "btn1_color_from": "#ff4db8",
+        "btn1_color_to": "#8b5cf6",
+        "tagline_size": 13,
+        "headline_size": 72,
+        "sub_size": 16,
+        "headline_size_mb": 36,
+        "padding_top": 140,
+        "padding_bottom": 80
+      }
+    },
+    "sheva-marquee": {
+      "type": "sheva-marquee-bar",
+      "settings": {
+        "marquee_text": "✦ SEVEN STAR ENERGY ✦ COSMIC HERBAL TEA ✦ THE STARS ARE ALIGNING ✦ SHEVA TEA ✦ SUPERNOVA ✦ SEVEN STAR ENERGY ✦ COSMIC HERBAL TEA ✦ THE STARS ARE ALIGNING ✦ SHEVA TEA ✦ SUPERNOVA ✦",
+        "speed": 30,
+        "font_size": 14,
+        "font_size_mb": 12,
+        "grad_from": "#ff4db8",
+        "grad_mid": "#ff7a3d",
+        "grad_to": "#8b5cf6",
+        "text_color": "#ffffff",
+        "padding_top": 14,
+        "padding_bottom": 14
+      }
+    },
+    "sheva-product": {
+      "type": "sheva-featured-product",
+      "blocks": {
+        "icon-1": {
+          "type": "benefit_icon",
+          "settings": {
+            "emoji": "⚡",
+            "label": "Energy+",
+            "label_fs": 11
+          }
+        },
+        "icon-2": {
+          "type": "benefit_icon",
+          "settings": {
+            "emoji": "🛡️",
+            "label": "Immune+",
+            "label_fs": 11
+          }
+        },
+        "icon-3": {
+          "type": "benefit_icon",
+          "settings": {
+            "emoji": "✨",
+            "label": "Clarity+",
+            "label_fs": 11
+          }
+        },
+        "icon-4": {
+          "type": "benefit_icon",
+          "settings": {
+            "emoji": "☮️",
+            "label": "Mood+",
+            "label_fs": 11
+          }
+        },
+        "icon-5": {
+          "type": "benefit_icon",
+          "settings": {
+            "emoji": "🧠",
+            "label": "Memory+",
+            "label_fs": 11
+          }
+        }
+      },
+      "block_order": [
+        "icon-1",
+        "icon-2",
+        "icon-3",
+        "icon-4",
+        "icon-5"
+      ],
+      "settings": {
+        "product": "",
+        "fallback_image": "shopify://shop_images/pack.png",
+        "fallback_title": "SUPERNOVA Herbal Tea",
+        "tag_label": "✦ SEVEN STAR ENERGY®",
+        "atc_label": "Add to Cart",
+        "shipping_note": "🚀 FREE Shipping when you spend over $50",
+        "product_desc": "Net Wt 2oz Loose Leaf (56g) · 30 Servings. An otherworldly blend of ancient herbs to boost energy, clarity, and cosmic balance",
+        "show_rating": true,
+        "rating_score": "4.9",
+        "rating_count": "2,143",
+        "title_fs_desktop": 52,
+        "title_fs_mobile": 30,
+        "desc_fs": 14,
+        "shipping_fs": 13,
+        "tag_color": "#22d3ee",
+        "title_grad_from": "#ff7a3d",
+        "title_grad_to": "#ff4db8",
+        "price_color": "#ff4db8",
+        "shipping_color": "#f3f0ff",
+        "padding_top": 120,
+        "padding_bottom": 120
+      }
+    },
+    "sheva-benefits": {
+      "type": "sheva-benefits",
+      "blocks": {
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "emoji": "⚡",
+            "title": "Boost Energy",
+            "description": "Clean, sustained cosmic fuel.",
+            "icon_size": 26
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "emoji": "🌿",
+            "title": "Collagen",
+            "description": "Skin glow from within.",
+            "icon_size": 26
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "emoji": "☯️",
+            "title": "Harmony",
+            "description": "Align body, mind, spirit.",
+            "icon_size": 26
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "emoji": "🌸",
+            "title": "Calmness",
+            "description": "Soothes the nervous system.",
+            "icon_size": 26
+          }
+        },
+        "b5": {
+          "type": "benefit",
+          "settings": {
+            "emoji": "🏆",
+            "title": "Performance",
+            "description": "Enhance peak output.",
+            "icon_size": 26
+          }
+        },
+        "b6": {
+          "type": "benefit",
+          "settings": {
+            "emoji": "🧠",
+            "title": "Brain Rejuvenation",
+            "description": "Revitalize neural cells.",
+            "icon_size": 26
+          }
+        },
+        "b7": {
+          "type": "benefit",
+          "settings": {
+            "emoji": "💭",
+            "title": "Memory",
+            "description": "Sharper recall, long term.",
+            "icon_size": 26
+          }
+        },
+        "b8": {
+          "type": "benefit",
+          "settings": {
+            "emoji": "😊",
+            "title": "Mood",
+            "description": "Elevate daily vibes.",
+            "icon_size": 26
+          }
+        },
+        "b9": {
+          "type": "benefit",
+          "settings": {
+            "emoji": "⚖️",
+            "title": "Balance",
+            "description": "Hormonal and emotional.",
+            "icon_size": 26
+          }
+        },
+        "b10": {
+          "type": "benefit",
+          "settings": {
+            "emoji": "🧬",
+            "title": "DNA Repair",
+            "description": "Cellular regeneration.",
+            "icon_size": 26
+          }
+        },
+        "b11": {
+          "type": "benefit",
+          "settings": {
+            "emoji": "🔥",
+            "title": "Anti-inflammatory",
+            "description": "Soothes internal fire.",
+            "icon_size": 26
+          }
+        },
+        "b12": {
+          "type": "benefit",
+          "settings": {
+            "emoji": "🦠",
+            "title": "Antibacterial",
+            "description": "Natural defense shield.",
+            "icon_size": 26
+          }
+        },
+        "b13": {
+          "type": "benefit",
+          "settings": {
+            "emoji": "🍇",
+            "title": "Antioxidant",
+            "description": "Fights free radicals.",
+            "icon_size": 26
+          }
+        },
+        "b14": {
+          "type": "benefit",
+          "settings": {
+            "emoji": "🧘",
+            "title": "Stress Relief",
+            "description": "Cosmic calm delivered.",
+            "icon_size": 26
+          }
+        },
+        "b15": {
+          "type": "benefit",
+          "settings": {
+            "emoji": "💧",
+            "title": "Electrolytes",
+            "description": "Hydrate at cellular level.",
+            "icon_size": 26
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10",
+        "b11",
+        "b12",
+        "b13",
+        "b14",
+        "b15"
+      ],
+      "settings": {
+        "eyebrow": "✦ WHY SHEVA TEA",
+        "title_plain": "Cosmic",
+        "title": "Benefits",
+        "subtitle": "17 powerful benefits in every sip — fueled by 50+ sacred herbs.",
+        "title_fs_desktop": 52,
+        "title_fs_mobile": 28,
+        "sub_fs": 15,
+        "card_title_fs": 14,
+        "card_desc_fs": 12,
+        "eyebrow_color": "#22d3ee",
+        "card_hover_border": "#ff4db8",
+        "card_hover_shadow": "#ff4db8",
+        "min_card_width": 200,
+        "grid_gap": 18,
+        "card_radius": 20,
+        "padding_top": 100,
+        "padding_bottom": 100
+      }
+    },
+    "sheva-ingredients": {
+      "type": "sheva-ingredients",
+      "blocks": {
+        "i1": {
+          "type": "ingredient",
+          "settings": {
+            "emoji": "🌱",
+            "name": "Ginseng",
+            "description": "Ancient root of vitality and energy."
+          }
+        },
+        "i2": {
+          "type": "ingredient",
+          "settings": {
+            "emoji": "🍃",
+            "name": "Ginkgo",
+            "description": "Enhances memory and circulation."
+          }
+        },
+        "i3": {
+          "type": "ingredient",
+          "settings": {
+            "emoji": "��",
+            "name": "Muicle",
+            "description": "Rich antioxidant and blood cleanser."
+          }
+        },
+        "i4": {
+          "type": "ingredient",
+          "settings": {
+            "emoji": "🌿",
+            "name": "Gotu Kola",
+            "description": "Brain tonic, herb of longevity."
+          }
+        },
+        "i5": {
+          "type": "ingredient",
+          "settings": {
+            "emoji": "💫",
+            "name": "Brahmi",
+            "description": "Calms mind, sharpens focus."
+          }
+        },
+        "i6": {
+          "type": "ingredient",
+          "settings": {
+            "emoji": "🌴",
+            "name": "Mamaki",
+            "description": "Hawaiian adaptogen for balance."
+          }
+        }
+      },
+      "block_order": [
+        "i1",
+        "i2",
+        "i3",
+        "i4",
+        "i5",
+        "i6"
+      ],
+      "settings": {
+        "eyebrow": "✦ SACRED HERBS",
+        "title_plain": "Key",
+        "title": "Ingredients",
+        "subtitle": "Six sacred herbs from across the cosmos, hand-selected for potency.",
+        "full_ingredients": "Made with Love, Peace & Freedom — Turmeric, Alfalfa, Lungwort, Ashwagandha, Motherwort, Basil Holy Tulsi, Neem, Bay, Orris, Black Walnut Hull, Parsley, Blue Vervain, Plantain, Brahmi, Ceylon Cinnamon, Rosemary, Burdock, Slippery Elm Bark, Yerba Santa, Caraway, Ginseng, Stevia, Gotu Kola, Cardamom, Mamaki, Thyme, Chamomile, Muicle, Trigona Pollen, Yellow Dock, Astragalus, Ginkgo, Red Clover, Cumin, Milk Thistle, Dandelion, Guaco, Rhodiola Rosea, Chia, Mullein, Dill, Ginger, Lavender, Hyssop, Fennel, Lemon Balm, Elderberry, Oatstraw, Nettle, Coriander.",
+        "title_fs_desktop": 52,
+        "title_fs_mobile": 28,
+        "sub_fs": 15,
+        "emoji_size": 38,
+        "name_fs": 18,
+        "desc_fs": 14,
+        "full_fs": 12,
+        "eyebrow_color": "#22d3ee",
+        "name_color": "#22d3ee",
+        "speed": 35,
+        "card_width": 280,
+        "card_gap": 24,
+        "padding_top": 100,
+        "padding_bottom": 100
+      }
+    },
+    "sheva-shop": {
+      "type": "sheva-shop",
+      "blocks": {
+        "bi1": {
+          "type": "bundle_item",
+          "settings": {
+            "emoji": "🍵",
+            "label": "Supernova Herbal Tea"
+          }
+        },
+        "bi2": {
+          "type": "bundle_item",
+          "settings": {
+            "emoji": "☕",
+            "label": "Titan Aura Stoneware Mug"
+          }
+        },
+        "bi3": {
+          "type": "bundle_item",
+          "settings": {
+            "emoji": "🔑",
+            "label": "Holographic Keychain"
+          }
+        },
+        "bi4": {
+          "type": "bundle_item",
+          "settings": {
+            "emoji": "📑",
+            "label": "Silver-Foil Bookmark"
+          }
+        },
+        "bi5": {
+          "type": "bundle_item",
+          "settings": {
+            "emoji": "📓",
+            "label": "Vegan Leatherette Notebook"
+          }
+        },
+        "bi6": {
+          "type": "bundle_item",
+          "settings": {
+            "emoji": "🖊️",
+            "label": "Ergonomic Ballpoint Pen"
+          }
+        },
+        "bi7": {
+          "type": "bundle_item",
+          "settings": {
+            "emoji": "🎴",
+            "label": "Affirmation Card Deck"
+          }
+        },
+        "sc1": {
+          "type": "shop_card",
+          "settings": {
+            "badge": "MYSTIQUE",
+            "badge_alt": false,
+            "emoji": "🫖",
+            "gradient_class": "sheva-tea-grad",
+            "category": "Teapots",
+            "name": "Mystique Glass Teapot",
+            "description": "Thermal-shock resistant glass.",
+            "price": "from $24.95",
+            "product_link": ""
+          }
+        },
+        "sc2": {
+          "type": "shop_card",
+          "settings": {
+            "badge": "TITAN AURA",
+            "badge_alt": true,
+            "emoji": "☕",
+            "gradient_class": "sheva-mug-grad",
+            "category": "Drinkware",
+            "name": "Titan Aura Mug",
+            "description": "11oz stoneware, every sip a reminder to rise.",
+            "price": "$15.95",
+            "product_link": ""
+          }
+        },
+        "sc3": {
+          "type": "shop_card",
+          "settings": {
+            "badge": "TITAN AURA",
+            "badge_alt": true,
+            "emoji": "📓",
+            "gradient_class": "sheva-book-grad",
+            "category": "Books",
+            "name": "Titan Aura Notebook",
+            "description": "Vegan leatherette, made for cosmic downloads.",
+            "price": "$18.50",
+            "product_link": ""
+          }
+        },
+        "sc4": {
+          "type": "shop_card",
+          "settings": {
+            "badge": "TITAN AURA",
+            "badge_alt": true,
+            "emoji": "🎴",
+            "gradient_class": "sheva-card-grad",
+            "category": "Cards",
+            "name": "Affirmation Deck",
+            "description": "4x4 deck, manifest one sip one card at a time.",
+            "price": "$22.00",
+            "product_link": ""
+          }
+        },
+        "sc5": {
+          "type": "shop_card",
+          "settings": {
+            "badge": "TITAN AURA",
+            "badge_alt": true,
+            "emoji": "🔑",
+            "gradient_class": "sheva-key-grad",
+            "category": "Keychains",
+            "name": "Holographic Keychain",
+            "description": "Epoxy resin with stars.",
+            "price": "$13.99",
+            "product_link": ""
+          }
+        },
+        "sc6": {
+          "type": "shop_card",
+          "settings": {
+            "badge": "TITAN AURA",
+            "badge_alt": true,
+            "emoji": "🖊️",
+            "gradient_class": "sheva-pen-grad",
+            "category": "Pens",
+            "name": "Titan Aura Ballpoint",
+            "description": "Ergonomic 5.6 inch pen.",
+            "price": "$6.50",
+            "product_link": ""
+          }
+        },
+        "sc7": {
+          "type": "shop_card",
+          "settings": {
+            "badge": "TITAN AURA",
+            "badge_alt": true,
+            "emoji": "📑",
+            "gradient_class": "sheva-bookmark-grad",
+            "category": "Bookmarks",
+            "name": "Silver-Foil Bookmark",
+            "description": "Seven Star Energy engraved.",
+            "price": "$6.50",
+            "product_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "bi1",
+        "bi2",
+        "bi3",
+        "bi4",
+        "bi5",
+        "bi6",
+        "bi7",
+        "sc1",
+        "sc2",
+        "sc3",
+        "sc4",
+        "sc5",
+        "sc6",
+        "sc7"
+      ],
+      "settings": {
+        "eyebrow": "✦ THE TITAN AURA COLLECTION",
+        "eyebrow_color": "#22d3ee",
+        "title_plain": "Shop the",
+        "title": "Cosmos",
+        "subtitle": "Curated cosmic essentials designed to align your ritual — from the Mystique glass teapot to the complete Titan Aura bundle",
+        "title_fs_desktop": 52,
+        "title_fs_mobile": 28,
+        "sub_fs": 15,
+        "show_bundle": true,
+        "bundle_tag": "✦ BEST VALUE · SAVE 28%",
+        "bundle_tag_fs": 11,
+        "bundle_title_plain": "Titan Aura",
+        "bundle_title": "Complete Bundle",
+        "bundle_title_fs": 46,
+        "bundle_title_fs_mb": 26,
+        "bundle_desc": "Seven cosmic essentials in one stellar collection — your daily ritual, fully aligned with the stars.",
+        "bundle_desc_fs": 15,
+        "bundle_list_fs": 13,
+        "bundle_was": "$108.51",
+        "bundle_was_fs": 20,
+        "bundle_now": "$77.77",
+        "bundle_now_fs": 38,
+        "bundle_save": "Save $30.74",
+        "bundle_save_fs": 12,
+        "bundle_btn_label": "Claim the Bundle →",
+        "bundle_btn_link": "",
+        "bundle_footnote": "🚀 Free shipping · ♻️ Eco-friendly packaging",
+        "bundle_foot_fs": 12,
+        "bundle_mb": 80,
+        "badge_fs": 10,
+        "cat_fs": 10,
+        "card_name_fs": 17,
+        "card_desc_fs": 13,
+        "price_fs": 18,
+        "card_btn_fs": 11,
+        "card_img_h": 220,
+        "card_emoji_fs": 88,
+        "slider_speed": 55,
+        "card_width": 300,
+        "padding_top": 100,
+        "padding_bottom": 100
+      }
+    },
+    "sheva-reviews": {
+      "type": "sheva-reviews",
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "initials": "A",
+            "avatar_from": "#ff4db8",
+            "avatar_to": "#8b5cf6",
+            "name": "Aria M.",
+            "verified": true,
+            "quote": "Life-changing energy boost",
+            "body": "Replaced my morning coffee with Supernova. Never felt more focused and calm."
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "initials": "J",
+            "avatar_from": "#22d3ee",
+            "avatar_to": "#6366f1",
+            "name": "Jordan L.",
+            "verified": true,
+            "quote": "My skin is GLOWING",
+            "body": "Collagen and antioxidants are unreal. 3 weeks in, skin looks brighter."
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "initials": "S",
+            "avatar_from": "#ff7a3d",
+            "avatar_to": "#ff4db8",
+            "name": "Sofia K.",
+            "verified": true,
+            "quote": "Stars truly aligned",
+            "body": "Balanced, sharper, my anxiety is way down. Sheva Tea for life!"
+          }
+        },
+        "r4": {
+          "type": "review",
+          "settings": {
+            "initials": "M",
+            "avatar_from": "#8b5cf6",
+            "avatar_to": "#22d3ee",
+            "name": "Maya R.",
+            "verified": true,
+            "quote": "Best herbal tea ever",
+            "body": "Powerful ingredients. Hits harder than my $200 nootropic stack."
+          }
+        },
+        "r5": {
+          "type": "review",
+          "settings": {
+            "initials": "L",
+            "avatar_from": "#ff4db8",
+            "avatar_to": "#ff7a3d",
+            "name": "Luna V.",
+            "verified": true,
+            "quote": "Absolutely transcendent",
+            "body": "Feel connected to the universe. Clear mind, calm body, limitless energy."
+          }
+        },
+        "r6": {
+          "type": "review",
+          "settings": {
+            "initials": "K",
+            "avatar_from": "#6366f1",
+            "avatar_to": "#ff4db8",
+            "name": "Kai T.",
+            "verified": true,
+            "quote": "Game changer for focus",
+            "body": "Work 10hr creative shifts. Supernova keeps brain firing without the crash."
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6"
+      ],
+      "settings": {
+        "eyebrow": "✦ COSMIC TESTIMONIALS",
+        "title_plain": "Loved by",
+        "title": "the Stars",
+        "show_overall_rating": true,
+        "rating_score": "4.9",
+        "rating_count": "2,143",
+        "title_fs_desktop": 52,
+        "title_fs_mobile": 28,
+        "big_rating_fs": 48,
+        "rating_label_fs": 13,
+        "avatar_fs": 18,
+        "name_fs": 14,
+        "verified_fs": 11,
+        "quote_fs": 14,
+        "body_fs": 13,
+        "eyebrow_color": "#22d3ee",
+        "speed": 45,
+        "card_width": 320,
+        "padding_top": 100,
+        "padding_bottom": 100
+      }
+    },
+    "sheva-strip": {
+      "type": "sheva-image-strip",
+      "blocks": {
+        "img1": {
+          "type": "strip_image",
+          "settings": {
+            "image": "shopify://shop_images/The_Journey.png",
+            "title": "The Journey",
+            "subtitle": "Align with the cosmos"
+          }
+        },
+        "img2": {
+          "type": "strip_image",
+          "settings": {
+            "image": "shopify://shop_images/The_Ritual.png",
+            "title": "The Ritual",
+            "subtitle": "Sip the stars"
+          }
+        }
+      },
+      "block_order": [
+        "img1",
+        "img2"
+      ],
+      "settings": {
+        "eyebrow": "✦ COSMIC UNIVERSE",
+        "eyebrow_color": "#22d3ee",
+        "title_plain": "Step Into",
+        "title": "Our World",
+        "subtitle": "A glimpse into the Sheva Tea universe — where ancient herbs meet the stars.",
+        "title_fs_desktop": 52,
+        "title_fs_mobile": 28,
+        "sub_fs": 15,
+        "overlay_title_fs": 28,
+        "overlay_title_ls": 3,
+        "overlay_sub_fs": 14,
+        "columns": 2,
+        "grid_gap": 4,
+        "img_height": 420,
+        "img_height_mb": 280,
+        "padding_top": 80,
+        "padding_bottom": 60
+      }
+    },
+    "sheva-press": {
+      "type": "sheva-featured-in",
+      "blocks": {
+        "press1": {
+          "type": "press_link",
+          "settings": {
+            "label": "NY Weekly Magazine - Top 30 Inspirational Women",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "press1"
+      ],
+      "settings": {
+        "heading": "✦ Featured In ✦",
+        "heading_fs": 16,
+        "heading_ls": 4,
+        "link_fs": 14,
+        "heading_color": "#22d3ee",
+        "link_color": "#ff4db8",
+        "padding_top": 70,
+        "padding_bottom": 70
+      }
+    }
+  },
+  "order": [
+    "sheva-hero",
+    "sheva-marquee",
+    "sheva-product",
+    "sheva-benefits",
+    "sheva-ingredients",
+    "sheva-shop",
+    "sheva-reviews",
+    "sheva-strip",
+    "sheva-press"
+  ]
+}
