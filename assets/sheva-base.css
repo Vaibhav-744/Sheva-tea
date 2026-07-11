@@ -227,6 +227,7 @@
 /* ── 15. Responsive spacing corrections ── */
 @media (max-width: 768px) {
   .sheva-sec-head   { margin-bottom: 40px; padding: 0; }
+  .sheva-reviews .sheva-sec-head{padding:0 20px;}
   .sheva-fp__desc   { margin-bottom: 22px; }
   .sheva-fp__icons-row { margin-bottom: 22px; }
   .sheva-fp__qty-row   { margin-bottom: 14px; }
