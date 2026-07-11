@@ -230,7 +230,7 @@
         "header_navigation_bg": "#000000",
         "header_navigation_bg_gradient": "",
         "sticky_header_type": "always",
-        "sticky_header_width": "full",
+        "sticky_header_width": "default",
         "enable_transparent": false,
         "transparent_color": "#ffffff",
         "transparent_color_hover": "#ffffff"
@@ -242,7 +242,7 @@
         "7de2266e-0cd4-4fda-9f09-06f75a17f944": {
           "type": "menu",
           "settings": {
-            "color": "#FFFFFF",
+            "color": "#ffffff",
             "menu_tab_bg": "#000000"
           }
         },
