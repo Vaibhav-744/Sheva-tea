@@ -412,3 +412,15 @@
   font-size: 18px;
   opacity: 1;
 }
+.sheva-bundle__image_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.sheva-bundle__image_wrapper img {
+    max-width: 60%;
+    height: auto;
+    width: auto;
+    object-fit: cover;
+}
