@@ -82,7 +82,7 @@
   border-radius: 18px;
   border: 1px solid rgba(255,255,255,.1);
   max-width: 1200px;
-  margin: 40px 20px 0;
+  margin: 40px auto 0;
   width: calc(100% - 40px);
 }
 .sheva-full-ing__title {
@@ -105,7 +105,7 @@
   .sheva-ingredients { padding: 70px 0; }
   .sheva-ing-track   { gap: 16px !important; padding: 0 16px; animation-duration: 28s; }
   .sheva-ing-card    { flex: 0 0 240px !important; padding: 26px 20px; }
-  .sheva-full-ing    { padding: 22px; width: calc(100% - 32px); margin: 30px auto 0; }
+  .sheva-full-ing    { padding: 22px; width: calc(100% - 32px); margin: 30px 20px 0; }
 }
 @media (max-width: 420px) {
   .sheva-ing-card { flex: 0 0 220px !important; padding: 22px 18px; }
