@@ -562,6 +562,7 @@
         "title_fs_desktop": 52,
         "title_fs_mobile": 28,
         "sub_fs": 15,
+        "product_image": "shopify://shop_images/pack.png",
         "layout_type": "slider",
         "pause_on_hover": true,
         "marquee_direction": "rtl",
