@@ -3,7 +3,7 @@
 ============================================================ */
 
 .sheva-footer {
-  padding: var(--foot-pad-top, 80px) 8% var(--foot-pad-bottom, 30px);
+  padding: var(--foot-pad-top, 80px) 7% var(--foot-pad-bottom, 30px);
   position: relative;
   z-index: 5;
   background: linear-gradient(180deg, transparent, #07021a);
