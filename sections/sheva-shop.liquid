@@ -101,7 +101,9 @@
         <div class="sheva-bundle__ring sheva-bundle__ring--r2"></div>
         <div class="sheva-bundle__emoji-stack">
           {% if section.settings.product_image != blank %}
+            <div class="sheva-bundle__image_wrapper">
             <img src="{{ section.settings.product_image | img_url:'master' }}" height="100%" width="100%" alt="{{ section.settings.product_image.alt }}"/>
+            </div>
           {% endif %}
           {%- assign be_index = 0 -%}
           {%- for block in bundle_items limit: 7 -%}
