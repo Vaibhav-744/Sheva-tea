@@ -1,0 +1,83 @@
+{% comment %} ============================================================
+  SHEVA TEA — Product Ingredients List Section
+  Matching exactly the product.html markup.
+============================================================ {% endcomment %}
+
+{{ 'sheva-product.css' | asset_url | stylesheet_tag }}
+
+<section class="product-details">
+  <div class="sec-head">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h2 class="section-title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="ingredient-list">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'ingredient' -%}
+          {%- if block.settings.name != blank -%}
+            <div class="ingredient-item" {{ block.shopify_attributes }}>
+              {{ block.settings.name }}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Product Ingredients",
+  "tag": "section",
+  "class": "product-ingredients-section",
+  "max_blocks": 50,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "✦ SACRED INGREDIENTS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "What’s inside"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Ingredient Name",
+          "default": "Turmeric"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Ingredients",
+      "blocks": [
+        { "type": "ingredient", "settings": { "name": "Turmeric" } },
+        { "type": "ingredient", "settings": { "name": "Ashwagandha" } },
+        { "type": "ingredient", "settings": { "name": "Holy Tulsi" } },
+        { "type": "ingredient", "settings": { "name": "Ginseng" } },
+        { "type": "ingredient", "settings": { "name": "Gotu Kola" } },
+        { "type": "ingredient", "settings": { "name": "Ginkgo" } },
+        { "type": "ingredient", "settings": { "name": "Brahmi" } },
+        { "type": "ingredient", "settings": { "name": "Rhodiola Rosea" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,207 @@
+{{ 'sheva-product.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+-%}
+
+<section class="product-page-hero">
+  <div class="product-page-left">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+
+    <h1>{{ product.title | default: 'Supernova Tea' }}</h1>
+
+    <p class="product-tagline">
+      {%- if product.description != blank -%}
+        {{ product.description | strip_html }}
+      {%- elsif section.settings.tagline != blank -%}
+        {{ section.settings.tagline }}
+      {%- endif -%}
+    </p>
+
+    {%- if section.settings.show_rating -%}
+      <div class="rating-row">
+        <span class="stars-rating">★★★★★</span>
+        <span class="rating-count">{{ section.settings.rating_score }} · {{ section.settings.rating_count }} reviews</span>
+      </div>
+    {%- endif -%}
+
+    <div class="product-desc">
+      {%- if product.metafields.custom.product_inclution != blank -%}
+        {{ product.metafields.custom.product_inclution | metafield_tag }}
+      {%- else -%}
+        {{ section.settings.product_desc }}
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Styled Add to Cart Form {%- endcomment -%}
+    {%- if product != blank -%}
+      {%- assign product_form_id = 'product-form-' | append: product.id -%}
+      <product-form class="productView-form product-form">
+        {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+          
+          <input type="hidden" name="id" value="{{ current_variant.id }}" class="product-variant-id">
+
+          <div class="qty-row">
+            <div class="qty">
+              <button type="button" class="minus">−</button>
+              <span class="qval">1</span>
+              <button type="button" class="plus">+</button>
+              <input type="hidden" name="quantity" class="qty-input" value="1" />
+            </div>
+
+            {%- assign allow_oversell = false -%}
+            {%- if current_variant.inventory_management == blank or current_variant.inventory_policy == 'continue' -%}
+              {%- assign allow_oversell = true -%}
+            {%- endif -%}
+
+            <button 
+              type="submit" 
+              name="add" 
+              id="product-add-to-cart"
+              data-btn-addtocart
+              data-inventory-quantity="{{ current_variant.inventory_quantity | default: 0 }}"
+              data-available="{{ allow_oversell }}"
+              class="btn-primary add-cart product-form__submit"
+              {% unless current_variant.available %}disabled{% endunless %}
+            >
+              {%- if current_variant.available -%}
+                Add to Cart — $<span class="cart-price">{{ current_variant.price | money_without_currency }}</span>
+              {%- else -%}
+                Sold Out
+              {%- endif -%}
+            </button>
+          </div>
+
+        {%- endform -%}
+      </product-form>
+    {%- endif -%}
+
+    {%- if section.settings.shipping_note != blank -%}
+      <p class="shipping" style="margin-top: 20px;">{{ section.settings.shipping_note }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="product-page-right">
+    <div class="product-page-orb"></div>
+    {%- if product.featured_image != blank -%}
+      <img src="{{ product.featured_image | img_url: '600x' }}" alt="{{ product.title | escape }}" class="product-page-image" />
+    {%- else -%}
+      <img src="{{ 'packaging.jpg' | asset_url }}" alt="Supernova Tea packaging" class="product-page-image" />
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+(function() {
+  function initProductHero(section) {
+    var cartPrice = section.querySelector('.cart-price');
+    var qtyVal = section.querySelector('.qval');
+    var qtyInput = section.querySelector('.qty-input');
+    var plusBtn = section.querySelector('.plus');
+    var minusBtn = section.querySelector('.minus');
+
+    {% assign current_price = current_variant.price | divided_by: 100.0 %}
+    var currentPrice = {{ current_price }};
+    var qty = 1;
+
+    if (plusBtn) {
+      plusBtn.addEventListener('click', function () {
+        qty++;
+        if (qtyVal) qtyVal.textContent = qty;
+        if (qtyInput) qtyInput.value = qty;
+        updatePrice();
+      });
+    }
+
+    if (minusBtn) {
+      minusBtn.addEventListener('click', function () {
+        if (qty > 1) {
+          qty--;
+          if (qtyVal) qtyVal.textContent = qty;
+          if (qtyInput) qtyInput.value = qty;
+          updatePrice();
+        }
+      });
+    }
+
+    function updatePrice() {
+      if (cartPrice) {
+        cartPrice.textContent = (currentPrice * qty).toFixed(2);
+      }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.product-page-hero').forEach(initProductHero);
+    });
+  } else {
+    document.querySelectorAll('.product-page-hero').forEach(initProductHero);
+  }
+
+  document.addEventListener('shopify:section:load', function(e) {
+    var section = e.target.querySelector('.product-page-hero');
+    if (section) initProductHero(section);
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Product Hero",
+  "tag": "section",
+  "class": "product-hero-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "✦ SEVEN STAR ENERGY®"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "A cosmic herbal blend crafted to elevate energy, clarity, and calm."
+    },
+    {
+      "type": "textarea",
+      "id": "product_desc",
+      "label": "Custom Description",
+      "default": "Net Wt 2oz Loose Leaf (56g) · 30 Servings. An otherworldly blend of ancient herbs to boost energy, clarity, and cosmic balance."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show Rating",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_score",
+      "label": "Rating Score",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "rating_count",
+      "label": "Review Count",
+      "default": "2,143"
+    },
+    {
+      "type": "text",
+      "id": "shipping_note",
+      "label": "Shipping Note",
+      "default": "🚀 FREE Shipping when you spend over $50"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Hero"
+    }
+  ]
+}
+{% endschema %}

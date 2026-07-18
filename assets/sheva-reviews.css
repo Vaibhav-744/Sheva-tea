@@ -13,7 +13,10 @@
 }
 
 /* ── Overall rating ── */
-.sheva-rev__overall { margin-top: 20px; }
+.sheva-rev__overall {
+  margin-top: 20px;
+}
+
 .sheva-rev__big-rating {
   font-family: 'Orbitron', sans-serif;
   font-weight: 900;
@@ -46,21 +49,41 @@
   animation: shevaRevScroll var(--rev-speed, 45s) linear infinite;
 }
 
-.sheva-reviews-slider:hover .sheva-reviews-track { animation-play-state: paused; }
+.sheva-reviews-slider:hover .sheva-reviews-track {
+  animation-play-state: paused;
+}
 
-.sheva-reviews-track--ltr { animation-name: shevaRevScroll; }
+.sheva-reviews-track--ltr {
+  animation-name: shevaRevScroll;
+}
+
 @keyframes shevaRevScroll {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
 }
 
 @keyframes shevaRevScrollRTL {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-.sheva-reviews-track--rtl { animation-name: shevaRevScrollRTL; }
+  from {
+    transform: translateX(0);
+  }
 
-.sheva-rev-pause-hover:hover .sheva-reviews-track { animation-play-state: paused; }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.sheva-reviews-track--rtl {
+  animation-name: shevaRevScrollRTL;
+}
+
+.sheva-rev-pause-hover:hover .sheva-reviews-track {
+  animation-play-state: paused;
+}
 
 /* ── Card ── */
 .sheva-review-card {
@@ -68,15 +91,16 @@
   min-height: 240px;
   padding: 26px;
   border-radius: 20px;
-  background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  border: 1px solid rgba(255,255,255,.1);
+  background: linear-gradient(145deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02));
+  border: 1px solid rgba(255, 255, 255, .1);
   backdrop-filter: blur(10px);
   transition: transform .3s, border-color .3s, box-shadow .3s;
 }
+
 .sheva-review-card:hover {
   transform: translateY(-6px) scale(1.02);
-  border-color: rgba(255,77,184,.5);
-  box-shadow: 0 20px 50px rgba(255,77,184,.25);
+  border-color: rgba(255, 77, 184, .5);
+  box-shadow: 0 20px 50px rgba(255, 77, 184, .25);
 }
 
 .sheva-rev__head {
@@ -85,8 +109,10 @@
   align-items: center;
   margin-bottom: 14px;
 }
+
 .sheva-rev__avatar {
-  width: 46px; height: 46px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   flex-shrink: 0;
   display: flex;
@@ -96,18 +122,21 @@
   font-weight: 700;
   color: #fff;
 }
+
 .sheva-rev__verified {
   font-size: 11px;
   color: #22d3ee;
   letter-spacing: 1px;
   font-family: 'Poppins', sans-serif;
 }
+
 .sheva-rev__quote {
   font-family: 'Orbitron', sans-serif;
   letter-spacing: 1px;
   margin: 10px 0 8px;
   color: #fff;
 }
+
 .sheva-rev__body {
   opacity: .85;
   line-height: 1.6;
@@ -118,12 +147,28 @@
 
 /* ── Marquee responsive ── */
 @media (max-width: 768px) {
-  .sheva-reviews { padding: 70px 0; }
-  .sheva-reviews-track { gap: 16px; padding: 0 16px; animation-duration: 32s; }
-  .sheva-review-card { flex: 0 0 270px !important; padding: 22px; min-height: 220px; }
+  .sheva-reviews {
+    padding: 50px 0;
+  }
+
+  .sheva-reviews-track {
+    gap: 16px;
+    padding: 0 16px;
+    animation-duration: 32s;
+  }
+
+  .sheva-review-card {
+    flex: 0 0 270px !important;
+    padding: 22px;
+    min-height: 220px;
+  }
 }
+
 @media (max-width: 420px) {
-  .sheva-review-card { flex: 0 0 250px !important; padding: 20px; }
+  .sheva-review-card {
+    flex: 0 0 250px !important;
+    padding: 20px;
+  }
 }
 
 /* ============================================================
@@ -142,14 +187,16 @@
   width: 100%;
   /* padding-bottom: 50px; */
 }
-  .sheva-rev-swiper .slick-list{
-      margin:0 -7px;
-  }
+
+.sheva-rev-swiper .slick-list {
+  margin: 0 -7px;
+}
+
 /* Each slide: spacing between cards */
 .sheva-rev-swiper .slick-slide {
   box-sizing: border-box !important;
   height: auto !important;
-  margin:0 7px;
+  margin: 0 7px;
 }
 
 /* Compensate slide padding on the list */
@@ -180,12 +227,14 @@
   bottom: auto;
   margin-top: 20px;
 }
+
 .sheva-rev-swiper .slick-dots li button {
   background: rgba(255, 255, 255, 0.25);
   border: none;
   border-radius: 50%;
   transition: background 0.3s, transform 0.3s;
 }
+
 .sheva-rev-swiper .slick-dots li.slick-active button {
   background: linear-gradient(90deg, #ff4db8, #ff7a3d, #22d3ee);
   border: none;
@@ -198,26 +247,39 @@
   z-index: 10;
   width: 44px;
   height: 44px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 50%;
   backdrop-filter: blur(10px);
   transition: background .3s, border-color .3s;
 }
-.sheva-rev-swiper .slick-prev { left: -22px; }
-.sheva-rev-swiper .slick-next { right: -22px; }
+
+.sheva-rev-swiper .slick-prev {
+  left: -22px;
+}
+
+.sheva-rev-swiper .slick-next {
+  right: -22px;
+}
+
 .sheva-rev-swiper .slick-prev:hover,
 .sheva-rev-swiper .slick-next:hover {
-  background: rgba(255,77,184,0.25);
+  background: rgba(255, 77, 184, 0.25);
   border-color: #ff4db8;
 }
+
 .sheva-rev-swiper .slick-prev:before,
 .sheva-rev-swiper .slick-next:before {
   font-size: 18px;
   opacity: 1;
 }
 
-@media(max-width:600px){
-  .sheva-rev-swiper .slick-list{margin:0;}
-  .sheva-rev-swiper .slick-slide{margin:0 20px}
+@media(max-width:600px) {
+  .sheva-rev-swiper .slick-list {
+    margin: 0;
+  }
+
+  .sheva-rev-swiper .slick-slide {
+    margin: 0 20px
+  }
 }

@@ -338,6 +338,7 @@
 
   .sheva-about-hero__art {
     min-height: 320px;
+    order: -1;
   }
 
   .sheva-about-orb {

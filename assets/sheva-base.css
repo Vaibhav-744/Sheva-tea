@@ -107,16 +107,24 @@
 }
 
 /* Product desc: gap before benefit icons */
-.sheva-fp__desc { margin-bottom: 28px; }
+.sheva-fp__desc {
+  margin-bottom: 28px;
+}
 
 /* Shipping note */
-.sheva-fp__shipping { margin-top: 0; }
+.sheva-fp__shipping {
+  margin-top: 0;
+}
 
 /* Bundle desc */
-.sheva-bundle__desc { margin-bottom: 24px; }
+.sheva-bundle__desc {
+  margin-bottom: 24px;
+}
 
 /* Bundle footer note */
-.sheva-bundle__foot { margin-top: 16px; }
+.sheva-bundle__foot {
+  margin-top: 16px;
+}
 
 /* Ingredient / review body copy */
 .sheva-ing-card__desc,
@@ -126,8 +134,13 @@
 }
 
 /* Footer text lines */
-.sheva-footer__text { margin-bottom: 8px; }
-.sheva-footer__text:last-child { margin-bottom: 0; }
+.sheva-footer__text {
+  margin-bottom: 8px;
+}
+
+.sheva-footer__text:last-child {
+  margin-bottom: 0;
+}
 
 /* ── 4. Lists ── */
 /* Theme adds padding-left on ul/ol — remove inside sheva cards */
@@ -136,6 +149,7 @@
   margin: 0 0 28px;
   padding: 0;
 }
+
 .sheva-bundle__list li {
   margin: 0;
   padding: 8px 10px;
@@ -152,26 +166,32 @@
 .sheva-sec-head {
   text-align: center;
   padding: 0 20px;
-  margin-bottom: 50px;    /* default; overridden by --sheva-head-mb var where needed */
+  margin-bottom: 50px;
+  /* default; overridden by --sheva-head-mb var where needed */
 }
-.sheva-sec-head > * + * {
+
+.sheva-sec-head>*+* {
   /* vertical rhythm: gap between eyebrow → title → subtitle */
   margin-top: 0;
 }
+
 .sheva-eyebrow {
   display: inline-block;
   font-family: 'Orbitron', sans-serif;
   letter-spacing: 4px;
   font-size: 12px;
   margin-bottom: 12px;
-  color: var(--ben-eyebrow-color, #22d3ee);  /* sections override via CSS var */
+  color: var(--ben-eyebrow-color, #22d3ee);
+  /* sections override via CSS var */
 }
+
 .sheva-sec-title {
   font-family: 'Orbitron', sans-serif;
   margin-bottom: 14px;
   line-height: 1.1;
   color: #f3f0ff;
 }
+
 .sheva-sec-sub {
   opacity: .7;
   max-width: 500px;
@@ -183,40 +203,92 @@
 }
 
 /* ── 6. Benefit card internal spacing ── */
-.sheva-b-icon  { margin-bottom: 16px; }
-.sheva-b-card__title { margin-bottom: 8px; }
+.sheva-b-icon {
+  margin-bottom: 16px;
+}
+
+.sheva-b-card__title {
+  margin-bottom: 8px;
+}
 
 /* ── 7. Ingredient card internal spacing ── */
-.sheva-ing-emoji   { margin-bottom: 14px; }
-.sheva-ing-card__name { margin-bottom: 12px; }
+.sheva-ing-emoji {
+  margin-bottom: 14px;
+}
+
+.sheva-ing-card__name {
+  margin-bottom: 12px;
+}
 
 /* ── 8. Review card internal spacing ── */
-.sheva-rev__head   { margin-bottom: 14px; }
-.sheva-rev__quote  { margin: 10px 0 8px; }
+.sheva-rev__head {
+  margin-bottom: 14px;
+}
+
+.sheva-rev__quote {
+  margin: 10px 0 8px;
+}
 
 /* ── 9. Product info block internal spacing ── */
-.sheva-fp__tag           { margin-bottom: 12px; }
-.sheva-fp__title         { margin-bottom: 14px; }
-.sheva-fp__rating-row    { margin-bottom: 18px; }
-.sheva-fp__desc          { margin-bottom: 28px; }
-.sheva-fp__icons-row     { margin-bottom: 30px; }
-.sheva-fp__qty-row       { margin-bottom: 18px; }
+.sheva-fp__tag {
+  margin-bottom: 12px;
+}
+
+.sheva-fp__title {
+  margin-bottom: 14px;
+}
+
+.sheva-fp__rating-row {
+  margin-bottom: 18px;
+}
+
+.sheva-fp__desc {
+  margin-bottom: 28px;
+}
+
+.sheva-fp__icons-row {
+  margin-bottom: 30px;
+}
+
+.sheva-fp__qty-row {
+  margin-bottom: 18px;
+}
 
 /* ── 10. Shop card internal spacing ── */
-.sheva-shop-cat  { margin-bottom: 8px; }
-.sheva-shop-name { margin-bottom: 10px; }
-.sheva-shop-desc { margin-bottom: 16px; }
+.sheva-shop-cat {
+  margin-bottom: 8px;
+}
+
+.sheva-shop-name {
+  margin-bottom: 10px;
+}
+
+.sheva-shop-desc {
+  margin-bottom: 16px;
+}
 
 /* ── 11. Footer internal spacing ── */
-.sheva-footer__grid     { margin-bottom: 50px; }
-.sheva-footer__brand    { margin-bottom: 14px; }
-.sheva-footer__col-heading { margin-bottom: 14px; }
+.sheva-footer__grid {
+  margin-bottom: 50px;
+}
+
+.sheva-footer__brand {
+  margin-bottom: 14px;
+}
+
+.sheva-footer__col-heading {
+  margin-bottom: 14px;
+}
 
 /* ── 12. Strip overlay spacing ── */
-.sheva-strip__title { margin-bottom: 8px; }
+.sheva-strip__title {
+  margin-bottom: 8px;
+}
 
 /* ── 13. Full ingredients box ── */
-.sheva-full-ing__title { margin-bottom: 14px; }
+.sheva-full-ing__title {
+  margin-bottom: 14px;
+}
 
 /* ── 14. Prevent the theme wrapper-body from adding extra padding
          on the homepage (template-index) that squashes sections ── */
@@ -226,19 +298,326 @@
 
 /* ── 15. Responsive spacing corrections ── */
 @media (max-width: 768px) {
-  .sheva-sec-head   { margin-bottom: 40px; padding: 0; }
-  .sheva-reviews .sheva-sec-head{padding:0 20px;}
-  .sheva-fp__desc   { margin-bottom: 22px; }
-  .sheva-fp__icons-row { margin-bottom: 22px; }
-  .sheva-fp__qty-row   { margin-bottom: 14px; }
-  .sheva-footer__grid  { margin-bottom: 36px; gap: 30px; }
-  .sheva-bundle__list  { margin-bottom: 20px; }
-  .sheva-bundle__price { margin-bottom: 18px; }
-  .sheva-bundle__foot{margin-top:18px;}
+  .sheva-sec-head {
+    margin-bottom: 40px;
+    padding: 0;
+  }
+
+  .sheva-reviews .sheva-sec-head {
+    padding: 0 20px;
+  }
+
+  .sheva-fp__desc {
+    margin-bottom: 22px;
+  }
+
+  .sheva-fp__icons-row {
+    margin-bottom: 22px;
+  }
+
+  .sheva-fp__qty-row {
+    margin-bottom: 14px;
+  }
+
+  .sheva-footer__grid {
+    margin-bottom: 36px;
+    gap: 30px;
+  }
+
+  .sheva-bundle__list {
+    margin-bottom: 20px;
+  }
+
+  .sheva-bundle__price {
+    margin-bottom: 18px;
+  }
+
+  .sheva-bundle__foot {
+    margin-top: 18px;
+  }
 }
 
 @media (max-width: 420px) {
-  .sheva-sec-head   { margin-bottom: 32px; padding: 0 16px; }
-  .sheva-fp__desc   { margin-bottom: 18px; }
-  .sheva-footer__grid  { margin-bottom: 28px; }
+  .sheva-sec-head {
+    margin-bottom: 32px;
+    padding: 0 16px;
+  }
+
+  .sheva-fp__desc {
+    margin-bottom: 18px;
+  }
+
+  .sheva-footer__grid {
+    margin-bottom: 28px;
+  }
+}
+
+/* ── 16. Sheva Tea: Styled Cart Sidebar Drawer ── */
+#halo-cart-sidebar.halo-cart-sidebar,
+#halo-cart-sidebar .halo-sidebar-header,
+#halo-cart-sidebar .halo-sidebar-wrapper,
+#halo-cart-sidebar .halo-sidebar-close {
+  background: #050014 !important;
+  background-color: #050014 !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+#halo-cart-sidebar.halo-cart-sidebar {
+  border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+#halo-cart-sidebar .halo-sidebar-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding: 24px 20px 16px 20px !important;
+}
+
+#halo-cart-sidebar .halo-sidebar-header .title {
+  font-family: 'Orbitron', sans-serif !important;
+  color: #fff !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+}
+
+#halo-cart-sidebar .wrapper-cartCount {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 13px !important;
+}
+
+#halo-cart-sidebar .halo-sidebar-close {
+  color: #fff !important;
+  background: transparent !important;
+  font-family: 'Orbitron', sans-serif !important;
+  text-transform: uppercase !important;
+  font-size: 11px !important;
+  letter-spacing: 1px !important;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+  right: 20px;
+}
+
+#halo-cart-sidebar .halo-sidebar-close:hover {
+  opacity: 1;
+}
+
+#halo-cart-sidebar .halo-sidebar-close svg {
+  color: #fff !important;
+  fill: #fff !important;
+  stroke: #fff !important;
+}
+
+/* Cart Item Styling */
+#halo-cart-sidebar .previewCartItem {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: transparent !important;
+  padding-bottom: 24px !important;
+  padding-top: 24px !important;
+  margin: 0 !important;
+}
+
+#halo-cart-sidebar .previewCartItem-name {
+  font-family: 'Orbitron', sans-serif !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  line-height: 1.3 !important;
+  margin-bottom: 8px !important;
+}
+
+#halo-cart-sidebar .previewCartItem-name a {
+  color: #fff !important;
+  text-decoration: none !important;
+  transition: color 0.3s;
+}
+
+#halo-cart-sidebar .previewCartItem-name a:hover {
+  color: #ff4db8 !important;
+}
+
+#halo-cart-sidebar .previewCartItem-vendor,
+#halo-cart-sidebar .previewCartItem-variant,
+#halo-cart-sidebar .previewCartItem-content .cart-item-allocation {
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 12px !important;
+}
+
+/* Price elements: force visibility */
+#halo-cart-sidebar .previewCartItem-price,
+#halo-cart-sidebar .previewCartItem-price *,
+#halo-cart-sidebar .previewCartItem-saving-price,
+#halo-cart-sidebar .previewCartItem-saving-price *,
+#halo-cart-sidebar .price,
+#halo-cart-sidebar [data-current-price-display] {
+  color: #ff4db8 !important;
+  font-family: 'Orbitron', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  background: none !important;
+}
+
+#halo-cart-sidebar .previewCartItem-remove {
+  color: #fff !important;
+  cursor: pointer !important;
+  background: transparent !important;
+}
+
+#halo-cart-sidebar .previewCartItem-remove svg {
+  fill: #fff !important;
+}
+
+#halo-cart-sidebar .previewCartItem-remove:hover svg {
+  fill: #ff4db8 !important;
+}
+
+/* Cart Quantity Capsule Stepper */
+#halo-cart-sidebar .previewCartItem-qty {
+  width: 90px !important;
+  height: 36px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 999px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+
+#halo-cart-sidebar .previewCartItem-qty input {
+  width: 100% !important;
+  height: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  color: #fff !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+#halo-cart-sidebar .previewCartItem-qty .btn-quantity {
+  width: 28px !important;
+  height: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
+#halo-cart-sidebar .previewCartItem-qty .btn-quantity:hover {
+  background: rgba(255, 77, 184, 0.3) !important;
+}
+
+#halo-cart-sidebar .previewCartItem-qty .btn-quantity:before,
+#halo-cart-sidebar .previewCartItem-qty .btn-quantity.plus:after {
+  background: #fff !important;
+}
+
+/* Cart Subtotals & Summary */
+#halo-cart-sidebar .previewCartInfo {
+  background: transparent !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding: 20px 20px 50px !important;
+}
+
+#halo-cart-sidebar .previewCartTotals .previewCartTotals-label {
+  color: #fff !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+}
+
+#halo-cart-sidebar .previewCartTotals .previewCartTotals-value {
+  color: #ff4db8 !important;
+  font-family: 'Orbitron', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+}
+
+#halo-cart-sidebar .previewCartAction,
+#halo-cart-sidebar .previewCartAction p,
+#halo-cart-sidebar .previewCartInfo p {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+  margin-top: 8px !important;
+  font-style: normal !important;
+}
+
+#halo-cart-sidebar .previewCartCheckbox input[type="checkbox"] {
+  accent-color: #ff4db8 !important;
+}
+
+#halo-cart-sidebar .previewCartCheckbox input[type="checkbox"]+label {
+  color: rgba(255, 255, 255) !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 12px !important;
+}
+
+#halo-cart-sidebar .previewCartCheckbox input[type="checkbox"]~button {
+  color: #fff !important;
+}
+
+#halo-cart-sidebar .previewCartCheckbox a {
+  color: #22d3ee !important;
+  text-decoration: underline !important;
+}
+
+/* Checkout and View Cart Buttons */
+#halo-cart-sidebar .previewCartGroup .button {
+  display: block !important;
+  width: 100% !important;
+  padding: 16px 20px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  border-radius: 999px !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  transition: .3s !important;
+}
+
+#halo-cart-sidebar .previewCartGroup .button.button-checkout,
+#halo-cart-sidebar .previewCartGroup button[name="checkout"],
+#halo-cart-sidebar .previewCartGroup button[type="submit"],
+#halo-cart-sidebar .previewCartGroup .button[href*="checkout"] {
+  background: linear-gradient(90deg, #ff4db8, #8b5cf6) !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: 0 0 30px rgba(255, 77, 184, 0.5) !important;
+  font-family: 'Orbitron', sans-serif !important;
+  font-weight: 700 !important;
+}
+
+#halo-cart-sidebar .previewCartGroup .button.button-checkout:hover,
+#halo-cart-sidebar .previewCartGroup button[name="checkout"]:hover,
+#halo-cart-sidebar .previewCartGroup button[type="submit"]:hover,
+#halo-cart-sidebar .previewCartGroup .button[href*="checkout"]:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 0 50px rgba(255, 77, 184, 0.8) !important;
+}
+
+#halo-cart-sidebar .previewCartGroup .button.button-view-cart,
+#halo-cart-sidebar .previewCartGroup .button[href*="/cart"],
+#halo-cart-sidebar .previewCartGroup a[href*="/cart"] {
+  background: rgba(255, 255, 255, 0.03) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(8px) !important;
+  margin-top: 12px !important;
+  font-family: 'Orbitron', sans-serif !important;
+  font-weight: 700 !important;
+}
+
+#halo-cart-sidebar .previewCartGroup .button.button-view-cart:hover,
+#halo-cart-sidebar .previewCartGroup .button[href*="/cart"]:hover,
+#halo-cart-sidebar .previewCartGroup a[href*="/cart"]:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: #22d3ee !important;
 }

@@ -1,0 +1,97 @@
+{% comment %} ============================================================
+  SHEVA TEA — Product Benefits Grid Section
+  Matching exactly the product.html markup.
+============================================================ {% endcomment %}
+
+{{ 'sheva-product.css' | asset_url | stylesheet_tag }}
+
+<section class="product-details">
+  <div class="sec-head">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h2 class="section-title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="benefits-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'benefit' -%}
+          <div class="b-card" {{ block.shopify_attributes }}>
+            {%- if block.settings.emoji != blank -%}
+              <div class="b-icon">{{ block.settings.emoji }}</div>
+            {%- endif -%}
+            {%- if block.settings.title != blank -%}
+              <h4>{{ block.settings.title }}</h4>
+            {%- endif -%}
+            {%- if block.settings.description != blank -%}
+              <p>{{ block.settings.description }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Product Benefits",
+  "tag": "section",
+  "class": "product-benefits-section",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "✦ WHY IT WORKS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Benefits that feel cosmic"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji / Icon",
+          "default": "⚡"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Energy"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Clean, sustained cosmic fuel."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Benefits",
+      "blocks": [
+        { "type": "benefit", "settings": { "emoji": "⚡", "title": "Energy", "description": "Clean, sustained cosmic fuel." } },
+        { "type": "benefit", "settings": { "emoji": "🧠", "title": "Focus", "description": "Sharper recall and mental clarity." } },
+        { "type": "benefit", "settings": { "emoji": "🌿", "title": "Balance", "description": "Align body, mind, and spirit." } },
+        { "type": "benefit", "settings": { "emoji": "🧘", "title": "Calm", "description": "Soothes the nervous system." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
