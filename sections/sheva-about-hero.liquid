@@ -1,0 +1,244 @@
+{% comment %} ============================================================
+  SHEVA TEA — About Hero Section
+  Dynamic cosmic hero section for the about page.
+============================================================ {% endcomment %}
+
+{{ 'sheva-about.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+-%}
+
+<style>
+  #sheva-about-hero-{{ section.id }} {
+    --about-hero-pt: {{ s.padding_top }}px;
+    --about-hero-pb: {{ s.padding_bottom }}px;
+    --about-eyebrow-color: {{ s.eyebrow_color }};
+    --about-desc-color: {{ s.description_color }};
+    --btn-from: {{ s.btn1_color_from }};
+    --btn-to: {{ s.btn1_color_to }};
+    --btn-text-color: {{ s.btn1_text_color }};
+    --btn-ghost-color: {{ s.btn2_text_color }};
+    --btn-ghost-border: {{ s.btn2_border_color }};
+  }
+  #sheva-about-hero-{{ section.id }} .sheva-about-hero__headline,
+  #sheva-about-hero-{{ section.id }} .sheva-about-hero__headline p {
+    background: linear-gradient(90deg, {{ s.headline_grad_from }}, {{ s.headline_grad_mid }}, {{ s.headline_grad_to }});
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent !important;
+    margin: 0;
+  }
+  #sheva-about-hero-{{ section.id }} .sheva-about-hero__desc {
+    color: var(--about-desc-color);
+  }
+  #sheva-about-hero-{{ section.id }} .sheva-btn-primary {
+    color: var(--btn-text-color);
+  }
+  #sheva-about-hero-{{ section.id }} .sheva-btn-ghost {
+    color: var(--btn-ghost-color);
+    border-color: var(--btn-ghost-border);
+  }
+</style>
+
+<section id="sheva-about-hero-{{ section.id }}" class="sheva-about-hero">
+  <div class="sheva-about-hero__content">
+    {%- if s.eyebrow != blank -%}
+      <span class="sheva-about-hero__eyebrow">{{ s.eyebrow }}</span>
+    {%- endif -%}
+
+    {%- if s.headline != blank -%}
+      <h1 class="sheva-about-hero__headline sheva-glow-text">{{ s.headline }}</h1>
+    {%- endif -%}
+
+    {%- if s.description != blank -%}
+      <p class="sheva-about-hero__desc">{{ s.description }}</p>
+    {%- endif -%}
+
+    <div class="sheva-about-hero__btns">
+      {%- if s.btn1_label != blank -%}
+        <a href="{{ s.btn1_url }}" class="sheva-btn-primary">{{ s.btn1_label }}</a>
+      {%- endif -%}
+      {%- if s.btn2_label != blank -%}
+        <a href="{{ s.btn2_url }}" class="sheva-btn-ghost">{{ s.btn2_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="sheva-about-hero__art" aria-hidden="true">
+    <div class="sheva-about-orb"></div>
+    {%- if s.hero_image != blank -%}
+      <img
+        src="{{ s.hero_image | img_url: '600x' }}"
+        alt="{{ s.hero_image.alt | default: 'Sheva Tea packaging' }}"
+        class="sheva-about-pack"
+        loading="eager"
+        width="280"
+        height="auto"
+      />
+    {%- else -%}
+      {%- comment %} Fallback placeholder if no image picked {% endcomment %}
+      {{ 'image' | placeholder_svg_tag: 'sheva-about-pack' }}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sheva — About Hero",
+  "tag": "section",
+  "class": "sheva-section-about-hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "✦ ABOUT SHEVA TEA"
+    },
+    {
+      "type": "richtext",
+      "id": "headline",
+      "label": "Headline (use italic for gradient glow text)",
+      "default": "<p>Crafted for the ones who align with the <em>stars.</em></p>"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Sheva Tea is a cosmic wellness brand built around ritual, clarity, and daily energy. From Supernova Tea to the Titan Aura Collection, every product is designed to turn a simple moment into a meaningful experience."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "header",
+      "content": "Button 1 (Primary)"
+    },
+    {
+      "type": "text",
+      "id": "btn1_label",
+      "label": "Button 1 Label",
+      "default": "Explore Collection"
+    },
+    {
+      "type": "url",
+      "id": "btn1_url",
+      "label": "Button 1 Link"
+    },
+    {
+      "type": "header",
+      "content": "Button 2 (Ghost)"
+    },
+    {
+      "type": "text",
+      "id": "btn2_label",
+      "label": "Button 2 Label",
+      "default": "Our Story"
+    },
+    {
+      "type": "url",
+      "id": "btn2_url",
+      "label": "Button 2 Link"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "color",
+      "id": "headline_grad_from",
+      "label": "Headline Gradient From",
+      "default": "#ff4db8"
+    },
+    {
+      "type": "color",
+      "id": "headline_grad_mid",
+      "label": "Headline Gradient Mid",
+      "default": "#ff7a3d"
+    },
+    {
+      "type": "color",
+      "id": "headline_grad_to",
+      "label": "Headline Gradient To",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#f3f0ff"
+    },
+    {
+      "type": "color",
+      "id": "btn1_color_from",
+      "label": "Primary Button Gradient From",
+      "default": "#ff4db8"
+    },
+    {
+      "type": "color",
+      "id": "btn1_color_to",
+      "label": "Primary Button Gradient To",
+      "default": "#8b5cf6"
+    },
+    {
+      "type": "color",
+      "id": "btn1_text_color",
+      "label": "Primary Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn2_text_color",
+      "label": "Ghost Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn2_border_color",
+      "label": "Ghost Button Border Color",
+      "default": "rgba(255,255,255,0.3)"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 60,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 140
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva — About Hero"
+    }
+  ]
+}
+{% endschema %}

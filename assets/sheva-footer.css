@@ -23,6 +23,22 @@
   letter-spacing: 3px;
   margin-bottom: 14px;
 }
+.sheva-footer__brand .sheva-glow,
+.sheva-footer__brand em.sheva-glow {
+  font-style: normal;
+  background: linear-gradient(90deg, #ff4db8, #ff7a3d, #22d3ee, #ff4db8);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shevaShimmer 5s linear infinite;
+  display: inline-block;
+}
+
+@keyframes shevaShimmer {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
 .sheva-footer__col-heading {
   font-family: 'Orbitron', sans-serif;
   font-size: var(--foot-col-heading-fs, 14px);

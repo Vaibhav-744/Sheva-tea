@@ -1,0 +1,117 @@
+{% comment %} ============================================================
+  SHEVA TEA — About CTA Section
+  Call to action banner at the bottom of the page.
+============================================================ {% endcomment %}
+
+{{ 'sheva-about.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+-%}
+
+<style>
+  #sheva-about-cta-{{ section.id }} {
+    --btn-from: {{ s.btn_color_from }};
+    --btn-to: {{ s.btn_color_to }};
+    --cta-title-color: {{ s.title_color }};
+    --cta-sub-color: {{ s.subtitle_color }};
+    --btn-text-color: {{ s.btn_text_color }};
+  }
+  #sheva-about-cta-{{ section.id }} h2 {
+    color: var(--cta-title-color);
+  }
+  #sheva-about-cta-{{ section.id }} p {
+    color: var(--cta-sub-color);
+  }
+  #sheva-about-cta-{{ section.id }} .sheva-btn-primary {
+    color: var(--btn-text-color);
+  }
+</style>
+
+<section id="sheva-about-cta-{{ section.id }}" class="sheva-about-cta">
+  {%- if s.title != blank -%}
+    <h2>{{ s.title }}</h2>
+  {%- endif -%}
+  {%- if s.subtitle != blank -%}
+    <p>{{ s.subtitle }}</p>
+  {%- endif -%}
+  {%- if s.btn_label != blank -%}
+    <a href="{{ s.btn_url }}" class="sheva-btn-primary">{{ s.btn_label }}</a>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Sheva — About CTA",
+  "tag": "section",
+  "class": "sheva-section-about-cta",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Ready to step into the Sheva Tea universe?"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Explore the collection and make your daily ritual feel cosmic."
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button Label",
+      "default": "Shop the Collection"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#f3f0ff"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#f3f0ff"
+    },
+    {
+      "type": "color",
+      "id": "btn_color_from",
+      "label": "Button Gradient From",
+      "default": "#ff4db8"
+    },
+    {
+      "type": "color",
+      "id": "btn_color_to",
+      "label": "Button Gradient To",
+      "default": "#8b5cf6"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva — About CTA"
+    }
+  ]
+}
+{% endschema %}

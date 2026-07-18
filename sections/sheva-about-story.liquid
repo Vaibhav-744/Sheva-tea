@@ -1,0 +1,158 @@
+{% comment %} ============================================================
+  SHEVA TEA — Our Story Section
+  Shows mission, vision, energy grid layout.
+============================================================ {% endcomment %}
+
+{{ 'sheva-about.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+-%}
+
+<style>
+  #sheva-about-story-{{ section.id }} {
+    --about-eyebrow-color: {{ s.eyebrow_color }};
+    --story-title-color: {{ s.title_color }};
+    --story-card-title-color: {{ s.card_title_color }};
+    --story-card-desc-color: {{ s.card_desc_color }};
+  }
+  #sheva-about-story-{{ section.id }} .sheva-sec-title {
+    color: var(--story-title-color);
+  }
+  #sheva-about-story-{{ section.id }} .sheva-about-card h3 {
+    color: var(--story-card-title-color);
+  }
+  #sheva-about-story-{{ section.id }} .sheva-about-card p {
+    color: var(--story-card-desc-color);
+  }
+</style>
+
+<section id="sheva-about-story-{{ section.id }}" class="sheva-about-section">
+  <div class="sheva-about-sec-head">
+    {%- if s.eyebrow != blank -%}
+      <span class="sheva-eyebrow">{{ s.eyebrow }}</span>
+    {%- endif -%}
+    {%- if s.title != blank -%}
+      <h2 class="sheva-sec-title">{{ s.title }}</h2>
+    {%- endif -%}
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="sheva-about-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'story_card' -%}
+          <div class="sheva-about-card" {{ block.shopify_attributes }}>
+            {%- if block.settings.title != blank -%}
+              <h3>{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.description != blank -%}
+              <p>{{ block.settings.description }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Sheva — Our Story",
+  "tag": "section",
+  "class": "sheva-section-about-story",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "✦ OUR STORY"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "From a daily ritual to a cosmic brand"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Section Title Color",
+      "default": "#f3f0ff"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Card Title Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_desc_color",
+      "label": "Card Description Color",
+      "default": "#f3f0ff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "story_card",
+      "name": "Story Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Our Mission"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "To create products that support energy, mindfulness, and self-expression while making every part of the ritual feel elevated and personal."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva — Our Story",
+      "blocks": [
+        {
+          "type": "story_card",
+          "settings": {
+            "title": "Our Mission",
+            "description": "To create products that support energy, mindfulness, and self-expression while making every part of the ritual feel elevated and personal."
+          }
+        },
+        {
+          "type": "story_card",
+          "settings": {
+            "title": "Our Vision",
+            "description": "To build a world where tea, stationery, and lifestyle objects are not just functional, but inspiring symbols of who you are and what you value."
+          }
+        },
+        {
+          "type": "story_card",
+          "settings": {
+            "title": "Our Energy",
+            "description": "Seven Star Energy® is our way of turning intention into design — blending cosmic imagery, vibrant color, and a sense of wonder into every experience."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,372 @@
+/* ============================================================
+   SHEVA TEA — About Page CSS
+============================================================ */
+
+/* ── Shared Buttons (scoped to sheva-about styles in case sheva-hero is absent) ── */
+.sheva-about-hero .sheva-btn-primary,
+.sheva-about-cta .sheva-btn-primary {
+  display: inline-block;
+  padding: 16px 36px;
+  background: linear-gradient(90deg, var(--btn-from, #ff4db8), var(--btn-to, #8b5cf6));
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 13px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(255, 77, 184, .5);
+  transition: transform .3s, box-shadow .3s;
+}
+
+.sheva-about-hero .sheva-btn-primary:hover,
+.sheva-about-cta .sheva-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 50px rgba(255, 77, 184, .8);
+  color: #fff;
+  text-decoration: none;
+}
+
+.sheva-about-hero .sheva-btn-ghost {
+  display: inline-block;
+  padding: 15px 32px;
+  border: 1px solid rgba(255, 255, 255, .3);
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 13px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, .03);
+  transition: background .3s, border-color .3s, transform .3s;
+  cursor: pointer;
+}
+
+.sheva-about-hero .sheva-btn-ghost:hover {
+  background: rgba(255, 255, 255, .1);
+  border-color: #22d3ee;
+  transform: translateY(-3px);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* ── About Hero Section ── */
+.sheva-about-hero {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  align-items: center;
+  padding: var(--about-hero-pt, 140px) 8% var(--about-hero-pb, 80px);
+  width: 100%;
+  background: transparent;
+  box-sizing: border-box;
+}
+
+.sheva-about-hero__content {
+  max-width: 800px;
+}
+
+.sheva-about-hero__eyebrow {
+  display: inline-block;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 4px;
+  font-size: 12px;
+  margin-bottom: 12px;
+  color: var(--about-eyebrow-color, #22d3ee);
+}
+
+.sheva-about-hero__headline {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(36px, 5vw, 72px);
+  line-height: 1.05;
+  margin: 18px 0 20px;
+  color: #f3f0ff;
+  letter-spacing: normal !important;
+}
+
+.sheva-about-hero__desc {
+  font-size: 17px;
+  line-height: 1.7;
+  opacity: .88;
+  max-width: 620px;
+  margin-bottom: 30px;
+  color: #f3f0ff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.sheva-about-hero__btns {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.sheva-about-hero__art {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sheva-about-orb {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffb37a, #ff4db8 35%, #8b5cf6 70%, #1e1065 100%);
+  box-shadow: inset -40px -40px 80px rgba(0, 0, 0, .6), 0 0 100px rgba(255, 77, 184, .45);
+  animation: pulseOrb 5s ease-in-out infinite;
+  display: block !important;
+}
+
+.sheva-about-pack {
+  width: 280px;
+  max-width: 80%;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 25px 45px rgba(0, 0, 0, .45));
+}
+
+/* ── About Section Head ── */
+.sheva-about-sec-head {
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 0 20px;
+}
+
+.sheva-about-sec-head .sheva-eyebrow {
+  display: inline-block;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 4px;
+  font-size: 12px;
+  margin-bottom: 12px;
+  color: var(--about-eyebrow-color, #22d3ee);
+}
+
+.sheva-about-sec-head .sheva-sec-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(28px, 4vw, 52px);
+  margin-bottom: 14px;
+  line-height: 1.1;
+  color: #f3f0ff;
+  letter-spacing: normal !important;
+}
+
+/* ── About Section Base ── */
+.sheva-about-section {
+  padding: 100px 8%;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── About Story / Values Grid ── */
+.sheva-about-grid,
+.sheva-values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sheva-about-card,
+.sheva-value-card {
+  padding: 28px;
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.4s, border-color 0.4s, box-shadow 0.4s;
+}
+
+.sheva-about-card:hover,
+.sheva-value-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 77, 184, 0.4);
+  box-shadow: 0 15px 35px rgba(255, 77, 184, 0.15);
+}
+
+.sheva-about-card h3,
+.sheva-value-card h4 {
+  font-family: 'Orbitron', sans-serif;
+  margin: 0 0 12px;
+  padding: 0;
+  letter-spacing: normal !important;
+  color: #fff;
+  font-weight: 700;
+}
+
+.sheva-about-card p,
+.sheva-value-card p {
+  font-size: 13px;
+  opacity: .8;
+  line-height: 1.6;
+  color: #f3f0ff;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+}
+
+.sheva-value-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(255, 77, 184, 0.25), rgba(34, 211, 238, 0.25));
+  font-size: 24px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ── About Why / Highlights ── */
+.sheva-about-highlight {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.sheva-highlight-item {
+  padding: 24px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.sheva-highlight-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--about-eyebrow-color, #22d3ee);
+}
+
+.sheva-highlight-item h4 {
+  color: var(--about-eyebrow-color, #22d3ee);
+  font-family: 'Orbitron', sans-serif;
+  margin: 0 0 10px;
+  padding: 0;
+  font-weight: 700;
+  letter-spacing: normal !important;
+}
+
+.sheva-highlight-item p {
+  font-size: 13px;
+  opacity: .8;
+  line-height: 1.6;
+  color: #f3f0ff;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+}
+
+/* ── About CTA Section ── */
+.sheva-about-cta {
+  text-align: center;
+  padding: 90px 20px 70px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.sheva-about-cta h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(28px, 4vw, 54px);
+  margin: 0 0 14px;
+  padding: 0;
+  font-weight: 900;
+  color: #f3f0ff;
+  letter-spacing: normal !important;
+}
+
+.sheva-about-cta p {
+  opacity: .8;
+  margin: 0 0 28px;
+  color: #f3f0ff;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ── General Shimmer text ── */
+.sheva-glow-text em {
+  font-style: normal;
+  background: linear-gradient(90deg, #ff4db8, #ff7a3d, #22d3ee, #ff4db8);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shevaShimmer 5s linear infinite;
+}
+
+@keyframes shevaShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes pulseOrb {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+/* ── Responsive Spacing ── */
+@media (max-width: 768px) {
+  .sheva-about-hero {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 60px 20px;
+    min-height: auto;
+  }
+
+  .sheva-about-hero__art {
+    min-height: 320px;
+  }
+
+  .sheva-about-orb {
+    width: 240px;
+    height: 240px;
+  }
+
+  .sheva-about-pack {
+    width: 220px;
+  }
+
+  .sheva-about-section {
+    padding: 30px 20px;
+  }
+
+  .sheva-about-grid,
+  .sheva-values-grid,
+  .sheva-about-highlight {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .sheva-about-card,
+  .sheva-value-card,
+  .sheva-highlight-item {
+    padding: 22px;
+  }
+
+  .sheva-about-cta {
+    padding: 30px 20px;
+  }
+}

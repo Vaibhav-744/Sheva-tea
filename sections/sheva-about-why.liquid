@@ -1,0 +1,158 @@
+{% comment %} ============================================================
+  SHEVA TEA — Why Sheva Tea (More Than Tea Highlights)
+  Grid of highlights for the about page.
+============================================================ {% endcomment %}
+
+{{ 'sheva-about.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+-%}
+
+<style>
+  #sheva-about-why-{{ section.id }} {
+    --about-eyebrow-color: {{ s.eyebrow_color }};
+    --why-title-color: {{ s.title_color }};
+    --why-item-title-color: {{ s.highlight_title_color }};
+    --why-item-desc-color: {{ s.highlight_desc_color }};
+  }
+  #sheva-about-why-{{ section.id }} .sheva-sec-title {
+    color: var(--why-title-color);
+  }
+  #sheva-about-why-{{ section.id }} .sheva-highlight-item h4 {
+    color: var(--why-item-title-color);
+  }
+  #sheva-about-why-{{ section.id }} .sheva-highlight-item p {
+    color: var(--why-item-desc-color);
+  }
+</style>
+
+<section id="sheva-about-why-{{ section.id }}" class="sheva-about-section">
+  <div class="sheva-about-sec-head">
+    {%- if s.eyebrow != blank -%}
+      <span class="sheva-eyebrow">{{ s.eyebrow }}</span>
+    {%- endif -%}
+    {%- if s.title != blank -%}
+      <h2 class="sheva-sec-title">{{ s.title }}</h2>
+    {%- endif -%}
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="sheva-about-highlight">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'highlight_item' -%}
+          <div class="sheva-highlight-item" {{ block.shopify_attributes }}>
+            {%- if block.settings.title != blank -%}
+              <h4>{{ block.settings.title }}</h4>
+            {%- endif -%}
+            {%- if block.settings.description != blank -%}
+              <p>{{ block.settings.description }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Sheva — Why Sheva",
+  "tag": "section",
+  "class": "sheva-section-about-why",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "✦ WHY SHEVA TEA"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "More than tea"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Section Title Color",
+      "default": "#f3f0ff"
+    },
+    {
+      "type": "color",
+      "id": "highlight_title_color",
+      "label": "Highlight Item Title Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "color",
+      "id": "highlight_desc_color",
+      "label": "Highlight Item Description Color",
+      "default": "#f3f0ff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "highlight_item",
+      "name": "Highlight Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Supernova Tea"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "A signature blend made to support energy, clarity, and balance."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva — Why Sheva",
+      "blocks": [
+        {
+          "type": "highlight_item",
+          "settings": {
+            "title": "Supernova Tea",
+            "description": "A signature blend made to support energy, clarity, and balance."
+          }
+        },
+        {
+          "type": "highlight_item",
+          "settings": {
+            "title": "Titan Aura Collection",
+            "description": "Everyday essentials designed to extend the ritual beyond the cup."
+          }
+        },
+        {
+          "type": "highlight_item",
+          "settings": {
+            "title": "Designed for mobile and desktop",
+            "description": "A product experience that feels smooth, clean, and premium across every screen."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
