@@ -11,6 +11,8 @@
 
 <style>
   #sheva-about-cta-{{ section.id }} {
+    --cta-pt: {{ s.padding_top }}px;
+    --cta-pb: {{ s.padding_bottom }}px;
     --btn-from: {{ s.btn_color_from }};
     --btn-to: {{ s.btn_color_to }};
     --cta-title-color: {{ s.title_color }};
@@ -106,6 +108,30 @@
       "id": "btn_text_color",
       "label": "Button Text Color",
       "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 72
     }
   ],
   "presets": [

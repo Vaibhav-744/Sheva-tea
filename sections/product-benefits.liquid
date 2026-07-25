@@ -5,7 +5,14 @@
 
 {{ 'sheva-product.css' | asset_url | stylesheet_tag }}
 
-<section class="product-details">
+<style>
+  #product-benefits-{{ section.id }} {
+    --sec-pt: {{ section.settings.padding_top }}px;
+    --sec-pb: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+<section id="product-benefits-{{ section.id }}" class="product-details">
   <div class="sec-head">
     {%- if section.settings.eyebrow != blank -%}
       <span class="eyebrow">{{ section.settings.eyebrow }}</span>
@@ -54,6 +61,30 @@
       "id": "title",
       "label": "Title",
       "default": "Benefits that feel cosmic"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 100
     }
   ],
   "blocks": [

@@ -621,3 +621,606 @@
   background: rgba(255, 255, 255, 0.1) !important;
   border-color: #22d3ee !important;
 }
+
+/* ============================================================
+   SHEVA TEA — Cosmic Search Theme Styling (Mobile & Desktop)
+============================================================ */
+
+/* Prevent header search icon and search_details container from shifting or moving down when search opens */
+.sticky-search-open .search_details,
+.open_search_menu .search_details,
+.sticky-search-menu-open .search_details,
+.sticky-search-open details.search_details,
+.open_search_menu details.search_details,
+.sticky-search-menu-open details.search_details {
+  top: 0 !important;
+  position: relative !important;
+  max-width: none !important;
+  margin: 0 !important;
+  text-align: left !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+.sticky-search-open .header__icon--search,
+.open_search_menu .header__icon--search,
+.sticky-search-menu-open .header__icon--search,
+.sticky-search-open summary.header__icon--search,
+.open_search_menu summary.header__icon--search,
+.sticky-search-menu-open summary.header__icon--search {
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  transform: none !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* ── 1. Desktop Search Modal Container (.search-modal: 1025px+) ── */
+@media screen and (min-width: 1025px) {
+  .sticky-search-menu-open details > .search-modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(5, 0, 20, 0.88) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    padding-top: 8vh !important;
+    z-index: 99999 !important;
+    margin: 0 !important;
+    border: none !important;
+  }
+
+  .sticky-search-menu-open .search-modal__content {
+    width: 100% !important;
+    max-width: 720px !important;
+    background: rgba(12, 4, 34, 0.96) !important;
+    border: 1px solid rgba(34, 211, 238, 0.35) !important;
+    box-shadow: 0 0 50px rgba(34, 211, 238, 0.25), 0 0 100px rgba(255, 77, 184, 0.18) !important;
+    border-radius: 24px !important;
+    padding: 24px 28px !important;
+    position: relative !important;
+    margin: 0 auto !important;
+    display: block !important;
+  }
+
+  /* Reserve 52px space on the right side of the form for close button */
+  .sticky-search-menu-open .search-modal__form,
+  .sticky-search-menu-open form.search {
+    position: relative !important;
+    width: 100% !important;
+    padding-right: 52px !important;
+    box-sizing: border-box !important;
+  }
+
+  .sticky-search-menu-open .field {
+    position: relative !important;
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* Search Input Field */
+  .sticky-search-menu-open .search__input {
+    width: 100% !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1.5px solid rgba(255, 77, 184, 0.4) !important;
+    border-radius: 14px !important;
+    color: #ffffff !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 15px !important;
+    padding: 14px 44px 14px 18px !important;
+    box-sizing: border-box !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .sticky-search-menu-open .search__input::placeholder {
+    color: rgba(243, 240, 255, 0.5) !important;
+    font-family: 'Poppins', sans-serif !important;
+  }
+
+  .sticky-search-menu-open .search__input:focus {
+    border-color: #22d3ee !important;
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.4) !important;
+    outline: none !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* Magnifying Glass Icon inside input */
+  .sticky-search-menu-open .search__button {
+    position: absolute !important;
+    right: 14px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+    z-index: 2 !important;
+  }
+
+  .sticky-search-menu-open .search__button svg {
+    fill: #22d3ee !important;
+    width: 20px !important;
+    height: 20px !important;
+    filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.6)) !important;
+  }
+
+  /* Close Button (X) Positioned outside search input box */
+  .sticky-search-menu-open .header-search-close,
+  .sticky-search-menu-open .search-modal__close-button {
+    position: absolute !important;
+    top: 24px !important;
+    right: 28px !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 50% !important;
+    width: 38px !important;
+    height: 38px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    z-index: 10 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .sticky-search-menu-open .header-search-close svg,
+  .sticky-search-menu-open .search-modal__close-button svg {
+    fill: #f3f0ff !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 !important;
+  }
+
+  .sticky-search-menu-open .header-search-close:hover,
+  .sticky-search-menu-open .search-modal__close-button:hover {
+    background: rgba(255, 77, 184, 0.25) !important;
+    border-color: #ff4db8 !important;
+    box-shadow: 0 0 15px rgba(255, 77, 184, 0.5) !important;
+  }
+
+  .sticky-search-menu-open .header-search-close:hover svg,
+  .sticky-search-menu-open .search-modal__close-button:hover svg {
+    fill: #ff4db8 !important;
+    transform: rotate(90deg) !important;
+  }
+}
+
+/* ── 2. Mobile Search Sidebar Drawer (.halo-sidebar_search: 0-1024px) ── */
+@media screen and (max-width: 1024px) {
+  .halo-sidebar.halo-sidebar_search {
+    background: rgba(5, 0, 20, 0.98) !important;
+    border-right: 1px solid rgba(34, 211, 238, 0.35) !important;
+    box-shadow: 10px 0 50px rgba(0, 0, 0, 0.85), 0 0 35px rgba(34, 211, 238, 0.25) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+  }
+
+  .halo-sidebar_search .halo-sidebar-header {
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+    padding: 20px 24px !important;
+  }
+
+  .halo-sidebar_search .halo-sidebar-header .title {
+    font-family: 'Orbitron', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px !important;
+    color: #f3f0ff !important;
+    text-transform: uppercase !important;
+    text-shadow: 0 0 12px rgba(34, 211, 238, 0.5) !important;
+  }
+
+  .halo-sidebar_search .halo-sidebar-close {
+    color: #22d3ee !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    transition: color 0.3s !important;
+  }
+
+  .halo-sidebar_search .halo-sidebar-close:hover {
+    color: #ff4db8 !important;
+  }
+
+  .halo-sidebar_search .halo-sidebar-close svg {
+    fill: #22d3ee !important;
+  }
+
+  /* Clear any theme white backgrounds from summary, form and field wrappers */
+  .halo-sidebar_search summary,
+  .halo-sidebar_search .header__search-full,
+  .halo-sidebar_search .search-modal__form,
+  .halo-sidebar_search form.search,
+  .halo-sidebar_search .field,
+  .halo-sidebar_search .search_details {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    position: relative !important;
+  }
+
+  /* Hide extra close button inside search form summary on mobile */
+  .halo-sidebar_search .header-search-close {
+    display: none !important;
+  }
+
+  .halo-sidebar_search .field {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin-bottom: 16px !important;
+  }
+
+  /* Mobile Search Input Box */
+  .halo-sidebar_search .search__input,
+  .halo-sidebar_search .field__input,
+  .halo-sidebar_search input[type="search"] {
+    background: rgba(255, 255, 255, 0.06) !important;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border: 1.5px solid rgba(255, 77, 184, 0.5) !important;
+    border-radius: 14px !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 15px !important;
+    padding: 12px 45px 12px 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+    box-shadow: none !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .halo-sidebar_search .search__input::placeholder,
+  .halo-sidebar_search .field__input::placeholder,
+  .halo-sidebar_search input[type="search"]::placeholder {
+    color: rgba(243, 240, 255, 0.55) !important;
+    -webkit-text-fill-color: rgba(243, 240, 255, 0.55) !important;
+    font-family: 'Poppins', sans-serif !important;
+  }
+
+  .halo-sidebar_search .search__input:focus,
+  .halo-sidebar_search .field__input:focus,
+  .halo-sidebar_search input[type="search"]:focus {
+    border-color: #22d3ee !important;
+    box-shadow: 0 0 18px rgba(34, 211, 238, 0.4) !important;
+    background: rgba(255, 255, 255, 0.09) !important;
+    background-color: rgba(255, 255, 255, 0.09) !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    outline: none !important;
+  }
+
+  /* Magnifying Glass Search Button */
+  .halo-sidebar_search .search__button {
+    position: absolute !important;
+    right: 12px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    z-index: 2 !important;
+  }
+
+  .halo-sidebar_search .search__button svg {
+    fill: #22d3ee !important;
+    width: 20px !important;
+    height: 20px !important;
+    filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.6)) !important;
+  }
+}
+
+/* Hide search results panel when predictive search is closed or results attribute is absent */
+predictive-search:not([open]) #predictive-search-results,
+predictive-search:not([open]) .predictive-search-results,
+predictive-search:not([results]) #predictive-search-results,
+predictive-search:not([results]) .predictive-search-results {
+  display: none !important;
+}
+
+/* ── 3. Predictive Results Panel & Outer Wrappers ── */
+.quickSearchResults,
+.quickSearchResultsWrap,
+.predictive-search-results,
+#predictive-search-results {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin-top: 16px !important;
+  padding: 0 !important;
+  max-height: 60vh !important;
+  overflow-y: auto !important;
+}
+
+/* Custom Scrollbar for Search Panel */
+.quickSearchResults::-webkit-scrollbar,
+.quickSearchResultsWrap::-webkit-scrollbar,
+.predictive-search-results::-webkit-scrollbar,
+#predictive-search-results::-webkit-scrollbar,
+.halo-sidebar-wrapper::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+.quickSearchResults::-webkit-scrollbar-track,
+.quickSearchResultsWrap::-webkit-scrollbar-track,
+.predictive-search-results::-webkit-scrollbar-track,
+#predictive-search-results::-webkit-scrollbar-track,
+.halo-sidebar-wrapper::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-radius: 999px !important;
+}
+
+.quickSearchResults::-webkit-scrollbar-thumb,
+.quickSearchResultsWrap::-webkit-scrollbar-thumb,
+.predictive-search-results::-webkit-scrollbar-thumb,
+#predictive-search-results::-webkit-scrollbar-thumb,
+.halo-sidebar-wrapper::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff4db8, #22d3ee) !important;
+  border-radius: 999px !important;
+}
+
+/* ── 4. Heading Title ("PRODUCT RESULTS") — Remove White Box ── */
+.quickSearchResultsBlock .search-block-title,
+.predictive-search__heading,
+.search-block-title {
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  color: #22d3ee !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  margin: 16px 0 16px 0 !important;
+  padding-bottom: 10px !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.quickSearchResultsBlock .search-block-title .text,
+.predictive-search__heading .text,
+.search-block-title .text {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #22d3ee !important;
+  padding: 0 !important;
+  text-shadow: 0 0 10px rgba(34, 211, 238, 0.5) !important;
+}
+
+/* ── 5. Product Grid & Cards — Remove White Media Background ── */
+.search-modal .products-grid,
+.halo-sidebar_search .products-grid,
+#predictive-search-results .products-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)) !important;
+  gap: 16px !important;
+  padding: 4px 0 !important;
+}
+
+.search-modal .product,
+.halo-sidebar_search .product,
+#predictive-search-results .product,
+.quickSearchResultsBlock .product {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 16px !important;
+  padding: 12px !important;
+  transition: all 0.3s ease !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+.search-modal .product:hover,
+.halo-sidebar_search .product:hover,
+#predictive-search-results .product:hover,
+.quickSearchResultsBlock .product:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(34, 211, 238, 0.4) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(34, 211, 238, 0.2) !important;
+}
+
+/* Force TRANSPARENT background on Card, Media & Wrapper */
+.search-modal .card,
+.search-modal .card-wrapper,
+.search-modal .card-media,
+.search-modal .media,
+.halo-sidebar_search .card,
+.halo-sidebar_search .card-wrapper,
+.halo-sidebar_search .card-media,
+.halo-sidebar_search .media,
+#predictive-search-results .card,
+#predictive-search-results .card-wrapper,
+#predictive-search-results .card-media,
+#predictive-search-results .media,
+.quickSearchResultsBlock .card,
+.quickSearchResultsBlock .card-media,
+.quickSearchResultsBlock .media {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+.search-modal .card-media img,
+.halo-sidebar_search .card-media img,
+#predictive-search-results .card-media img,
+.quickSearchResultsBlock .card-media img {
+  object-fit: contain !important;
+  transition: transform 0.4s ease !important;
+  mix-blend-mode: normal !important;
+  background: transparent !important;
+}
+
+.search-modal .product:hover .card-media img,
+.halo-sidebar_search .product:hover .card-media img,
+#predictive-search-results .product:hover .card-media img,
+.quickSearchResultsBlock .product:hover .card-media img {
+  transform: scale(1.05) !important;
+}
+
+/* ── 6. Card Information, Vendor, Title, Price & Badges ── */
+.search-modal .card-vendor,
+.halo-sidebar_search .card-vendor,
+#predictive-search-results .card-vendor,
+.quickSearchResultsBlock .card-vendor {
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: 10px !important;
+  letter-spacing: 1.5px !important;
+  color: #22d3ee !important;
+  text-transform: uppercase !important;
+  margin-top: 8px !important;
+  margin-bottom: 4px !important;
+  display: block !important;
+}
+
+.search-modal .card-title,
+.search-modal .card-information .card-title,
+.halo-sidebar_search .card-title,
+#predictive-search-results .card-title,
+.quickSearchResultsBlock .card-title {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #ffffff !important;
+  line-height: 1.3 !important;
+  margin: 4px 0 !important;
+  transition: color 0.2s ease !important;
+}
+
+.search-modal .product:hover .card-title,
+.halo-sidebar_search .product:hover .card-title,
+#predictive-search-results .product:hover .card-title {
+  color: #ff4db8 !important;
+}
+
+.search-modal .price,
+.halo-sidebar_search .price,
+#predictive-search-results .price,
+.quickSearchResultsBlock .price {
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #ff4db8 !important;
+  margin-top: 6px !important;
+  text-shadow: 0 0 8px rgba(255, 77, 184, 0.4) !important;
+}
+
+.search-modal .price .price-item--regular,
+.search-modal .price .price-item--sale,
+.halo-sidebar_search .price .price-item--regular,
+.halo-sidebar_search .price .price-item--sale,
+#predictive-search-results .price .price-item {
+  color: #ff4db8 !important;
+}
+
+.search-modal .badge,
+.halo-sidebar_search .badge,
+#predictive-search-results .badge,
+.quickSearchResultsBlock .badge {
+  background: linear-gradient(90deg, #ff4db8, #8b5cf6) !important;
+  color: #ffffff !important;
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+  padding: 3px 10px !important;
+  border-radius: 999px !important;
+  border: none !important;
+  text-transform: uppercase !important;
+}
+
+/* ── 7. View All Button & Trending Items ── */
+.predictive-search__item--term,
+.predictive-search__list-item .button-view-all,
+.quickSearchResultsBlock .productViewAll .button {
+  display: inline-block !important;
+  width: 100% !important;
+  margin-top: 16px !important;
+  padding: 12px 24px !important;
+  background: linear-gradient(90deg, #ff4db8, #8b5cf6) !important;
+  color: #ffffff !important;
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  border-radius: 999px !important;
+  text-align: center !important;
+  box-shadow: 0 0 20px rgba(255, 77, 184, 0.4) !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
+}
+
+.predictive-search__item--term:hover,
+.predictive-search__list-item .button-view-all:hover,
+.quickSearchResultsBlock .productViewAll .button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 0 35px rgba(255, 77, 184, 0.7) !important;
+  color: #ffffff !important;
+}
+
+.quickSearchTrending .list-item {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-top: 12px !important;
+  padding: 0 !important;
+}
+
+.quickSearchTrending .list-item .item {
+  margin: 0 !important;
+}
+
+.quickSearchTrending .list-item .link {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 6px 14px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 999px !important;
+  color: #f3f0ff !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 13px !important;
+  transition: all 0.2s ease !important;
+}
+
+.quickSearchTrending .list-item .link:hover {
+  background: rgba(34, 211, 238, 0.15) !important;
+  border-color: #22d3ee !important;
+  color: #22d3ee !important;
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.3) !important;
+}
+
+.quickSearchTrending .list-item .link svg {
+  fill: #22d3ee !important;
+  width: 14px !important;
+  height: 14px !important;
+}
+

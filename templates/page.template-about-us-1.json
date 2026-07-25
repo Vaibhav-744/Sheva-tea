@@ -68,8 +68,8 @@
         "btn1_text_color": "#ffffff",
         "btn2_text_color": "#ffffff",
         "btn2_border_color": "#ffffff4d",
-        "padding_top": 140,
-        "padding_bottom": 80
+        "padding_top": 80,
+        "padding_bottom": 60
       }
     },
     "sheva_about_story_XY7DR3": {
@@ -109,7 +109,9 @@
         "eyebrow_color": "#22d3ee",
         "title_color": "#f3f0ff",
         "card_title_color": "#ffffff",
-        "card_desc_color": "#f3f0ff"
+        "card_desc_color": "#f3f0ff",
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
     "sheva_about_values_hnw7tV": {
@@ -163,7 +165,9 @@
         "card_title_color": "#ffffff",
         "card_desc_color": "#f3f0ff",
         "icon_bg_from": "#ff4db840",
-        "icon_bg_to": "#22d3ee40"
+        "icon_bg_to": "#22d3ee40",
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
     "sheva_about_why_TfM4wX": {
@@ -203,7 +207,9 @@
         "eyebrow_color": "#22d3ee",
         "title_color": "#f3f0ff",
         "highlight_title_color": "#22d3ee",
-        "highlight_desc_color": "#f3f0ff"
+        "highlight_desc_color": "#f3f0ff",
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
     "sheva_about_cta_NJFzhy": {
@@ -218,7 +224,9 @@
         "subtitle_color": "#f3f0ff",
         "btn_color_from": "#ff4db8",
         "btn_color_to": "#8b5cf6",
-        "btn_text_color": "#ffffff"
+        "btn_text_color": "#ffffff",
+        "padding_top": 52,
+        "padding_bottom": 72
       }
     }
   },

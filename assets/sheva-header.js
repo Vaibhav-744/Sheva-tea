@@ -59,6 +59,56 @@
     if (e.target === mobileMenu) closeMenu();
   });
 
+  /* ── Search Modal ── */
+  var searchTrigger  = document.getElementById('sheva-search-trigger');
+  var searchModal    = document.getElementById('sheva-search-modal');
+  var searchCloseBtn = document.getElementById('sheva-search-close');
+  var searchBackdrop = document.getElementById('sheva-search-backdrop');
+  var searchInput    = document.getElementById('ShevaSearchInput');
+
+  if (searchTrigger && searchModal) {
+    function openSearchModal() {
+      searchModal.hidden = false;
+      searchTrigger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      if (searchInput) {
+        setTimeout(function () {
+          searchInput.focus();
+        }, 100);
+      }
+    }
+
+    function closeSearchModal() {
+      searchModal.hidden = true;
+      searchTrigger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      searchTrigger.focus();
+    }
+
+    searchTrigger.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (searchModal.hidden) {
+        openSearchModal();
+      } else {
+        closeSearchModal();
+      }
+    });
+
+    if (searchCloseBtn) {
+      searchCloseBtn.addEventListener('click', closeSearchModal);
+    }
+
+    if (searchBackdrop) {
+      searchBackdrop.addEventListener('click', closeSearchModal);
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !searchModal.hidden) {
+        closeSearchModal();
+      }
+    });
+  }
+
   /* ── Navbar scroll darkening ── */
   if (nav) {
     window.addEventListener('scroll', function () {

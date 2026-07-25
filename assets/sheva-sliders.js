@@ -116,6 +116,68 @@
     });
   }
 
+  /* ── 6. Sheva Universal Search Handler (0-1024px: .halo-sidebar_search, 1025px+: .search-modal) ── */
+  function initUniversalSearch() {
+    var searchSelector = '[data-search-mobile], [data-search-menu], [data-search-menu-sticky-form], [data-search-sticky-form], .header__icon--search, .header__icon--search *';
+
+    document.addEventListener('click', function (e) {
+      var trigger = e.target.closest(searchSelector);
+      if (!trigger) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      var isMobile = window.innerWidth <= 1024;
+
+      if (isMobile) {
+        /* Mobile / Tablet (0-1024px): Open .halo-sidebar_search drawer */
+        document.body.classList.add('open_search_mobile');
+        var sidebarDetails = document.querySelector('#search-form-mobile .search_details');
+        if (sidebarDetails) sidebarDetails.setAttribute('open', 'true');
+        setTimeout(function () {
+          var mobileInput = document.querySelector('#Search-In-Modal-Sidebar');
+          if (mobileInput) mobileInput.focus();
+        }, 120);
+      } else {
+        /* Desktop (1025px+): Open .search-modal */
+        var header = trigger.closest('[class*="section-header-"], .section-header-navigation, .shopify-section-header-navigation-plain, .header-navigation-wrapper, .shopify-section')
+                     || document.querySelector('[class*="section-header-"], .section-header-navigation, .shopify-section');
+        if (header) {
+          header.classList.add('sticky-search-menu-open');
+          header.style.zIndex = '101';
+        }
+        document.body.classList.add('sticky-search-open', 'open_search_menu');
+        document.querySelectorAll('.header-navigation .search_details, .header-desktop .search_details').forEach(function (d) {
+          d.setAttribute('open', 'true');
+        });
+        setTimeout(function () {
+          var desktopInput = document.querySelector('.header-navigation .search__input, #Search-In-Modal-Menu-Plain');
+          if (desktopInput) desktopInput.focus();
+        }, 120);
+      }
+    });
+
+    /* Mobile search drawer close trigger */
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('[data-search-close-sidebar], .halo-sidebar_search .halo-sidebar-close, .background-overlay')) {
+        document.body.classList.remove('open_search_mobile');
+      }
+    });
+
+    /* ESC Key listener for closing search overlays */
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        document.body.classList.remove('open_search_mobile', 'sticky-search-open', 'open_search_menu');
+        document.querySelectorAll('.sticky-search-menu-open').forEach(function (h) {
+          h.classList.remove('sticky-search-menu-open', 'sticky-search-menu-custom-open');
+        });
+        document.querySelectorAll('.search_details').forEach(function (d) {
+          if (!d.closest('#search-form-mobile')) d.removeAttribute('open');
+        });
+      }
+    });
+  }
+
   /* ── Init all ── */
   function init() {
     initAutoSliders();
@@ -123,6 +185,7 @@
     initNavbar();
     initParallax();
     initSmoothScroll();
+    initUniversalSearch();
   }
 
   if (document.readyState === 'loading') {

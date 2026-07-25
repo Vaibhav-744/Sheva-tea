@@ -11,6 +11,8 @@
 
 <style>
   #sheva-about-values-{{ section.id }} {
+    --sec-pt: {{ s.padding_top }}px;
+    --sec-pb: {{ s.padding_bottom }}px;
     --about-eyebrow-color: {{ s.eyebrow_color }};
     --val-title-color: {{ s.title_color }};
     --val-card-title-color: {{ s.card_title_color }};
@@ -127,6 +129,30 @@
       "id": "icon_bg_to",
       "label": "Icon Gradient Background To",
       "default": "rgba(34,211,238,0.25)"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 100
     }
   ],
   "blocks": [

@@ -11,6 +11,8 @@
 
 <style>
   #sheva-about-why-{{ section.id }} {
+    --sec-pt: {{ s.padding_top }}px;
+    --sec-pb: {{ s.padding_bottom }}px;
     --about-eyebrow-color: {{ s.eyebrow_color }};
     --why-title-color: {{ s.title_color }};
     --why-item-title-color: {{ s.highlight_title_color }};
@@ -104,6 +106,30 @@
       "id": "highlight_desc_color",
       "label": "Highlight Item Description Color",
       "default": "#f3f0ff"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 100
     }
   ],
   "blocks": [

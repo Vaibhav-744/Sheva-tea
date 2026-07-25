@@ -5,7 +5,14 @@
   assign current_variant = product.selected_or_first_available_variant
 -%}
 
-<section class="product-page-hero">
+<style>
+  #product-hero-{{ section.id }} {
+    --hero-pt: {{ section.settings.padding_top }}px;
+    --hero-pb: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+<section id="product-hero-{{ section.id }}" class="product-page-hero">
   <div class="product-page-left">
     {%- if section.settings.eyebrow != blank -%}
       <span class="eyebrow">{{ section.settings.eyebrow }}</span>
@@ -196,6 +203,30 @@
       "id": "shipping_note",
       "label": "Shipping Note",
       "default": "🚀 FREE Shipping when you spend over $50"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 140
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
     }
   ],
   "presets": [

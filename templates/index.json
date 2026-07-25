@@ -119,8 +119,8 @@
         "title_grad_to": "#ff4db8",
         "price_color": "#ff4db8",
         "shipping_color": "#f3f0ff",
-        "padding_top": 120,
-        "padding_bottom": 120
+        "padding_top": 60,
+        "padding_bottom": 52
       }
     },
     "sheva-benefits": {
@@ -295,8 +295,8 @@
         "min_card_width": 200,
         "grid_gap": 18,
         "card_radius": 20,
-        "padding_top": 100,
-        "padding_bottom": 100
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
     "sheva-ingredients": {
@@ -382,8 +382,8 @@
         "name_color": "#22d3ee",
         "card_width": 280,
         "card_gap": 24,
-        "padding_top": 100,
-        "padding_bottom": 100
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
     "sheva-shop": {
@@ -599,8 +599,8 @@
         "card_img_h": 220,
         "card_emoji_fs": 88,
         "card_width": 300,
-        "padding_top": 100,
-        "padding_bottom": 100
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
     "sheva-reviews": {
@@ -711,8 +711,8 @@
         "body_fs": 13,
         "eyebrow_color": "#22d3ee",
         "card_width": 320,
-        "padding_top": 100,
-        "padding_bottom": 100
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
     "sheva-strip": {
@@ -755,8 +755,8 @@
         "grid_gap": 4,
         "img_height": 420,
         "img_height_mb": 280,
-        "padding_top": 80,
-        "padding_bottom": 60
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
     "sheva-press": {

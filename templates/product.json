@@ -14,10 +14,13 @@
       "settings": {
         "eyebrow": "✦ SEVEN STAR ENERGY®",
         "tagline": "A cosmic herbal blend crafted to elevate energy, clarity, and calm.",
+        "product_desc": "Net Wt 2oz Loose Leaf (56g) · 30 Servings. An otherworldly blend of ancient herbs to boost energy, clarity, and cosmic balance.",
         "show_rating": true,
         "rating_score": "4.9",
         "rating_count": "2,143",
-        "shipping_note": "🚀 FREE Shipping when you spend over $50"
+        "shipping_note": "🚀 FREE Shipping when you spend over $50",
+        "padding_top": 80,
+        "padding_bottom": 52
       }
     },
     "product-benefits": {
@@ -64,7 +67,9 @@
       ],
       "settings": {
         "eyebrow": "✦ WHY IT WORKS",
-        "title": "Benefits that feel cosmic"
+        "title": "Benefits that feel cosmic",
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
     "product-ingredients": {
@@ -131,7 +136,9 @@
       ],
       "settings": {
         "eyebrow": "✦ SACRED INGREDIENTS",
-        "title": "What’s inside"
+        "title": "What’s inside",
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
     "product-reviews": {
@@ -242,12 +249,13 @@
         "body_fs": 13,
         "eyebrow_color": "#22d3ee",
         "card_width": 320,
-        "padding_top": 100,
-        "padding_bottom": 100
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
     "product-recommendations": {
       "type": "product-recommendations",
+      "disabled": true,
       "settings": {
         "display_product_block": true,
         "product_block_container": "container",

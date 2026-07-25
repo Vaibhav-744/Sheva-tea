@@ -536,11 +536,11 @@
 
         headerStickySearchForm: function() {
             var iconSearchSlt = '[data-search-sticky-form]';
-            var iconSearchMenu = '[data-search-menu-sticky-form] .icon-search';
+            var iconSearchMenu = '[data-search-menu-sticky-form], [data-search-menu-sticky-form] *, [data-search-menu], [data-search-menu] *, .header__icon--search, .header__icon--search *';
             var iconSearchMenuCustom = '[data-search-menu-sticky-form] .icon-search-custom';
 
             if ($(window).width() > 1025) {
-                $(document).off('click.toggleSearch', iconSearchSlt).on('click.toggleSearch', iconSearchSlt, function(event) {
+                $(document).off('click.toggleSearchSlt', iconSearchSlt).on('click.toggleSearchSlt', iconSearchSlt, function(event) {
                     event.preventDefault();
                     event.stopPropagation();
                     $('body').addClass('sticky-search-open');
@@ -551,8 +551,8 @@
                     var formSearch = $('.search-modal__form'),
                         quickSearch = $('.quickSearchResultsWrap');
                     if ($('body').hasClass('sticky-search-open') && !formSearch.has(event.target).length && !quickSearch.has(event.target).length && !$(event.target).hasClass('search-modal__content') && $(event.target).closest('.search-modal__content').length == 0) {
-                        $('body').removeClass('sticky-search-open');
-                        $('[class*="section-header-"]').removeClass('sticky-search-menu-open');
+                        $('body').removeClass('sticky-search-open open_search_menu');
+                        $('[class*="section-header-"], .section-header-navigation, .shopify-section').removeClass('sticky-search-menu-open');
                         $('.search_details').removeAttr('open');
                     }
                 });
@@ -561,24 +561,38 @@
                 $(document).off('click.toggleSearch', iconSearchMenu).on('click.toggleSearch', iconSearchMenu, function(event) {
                     event.preventDefault();
                     event.stopPropagation();
-                    $(event.target).closest('[class*="section-header-"]').addClass('sticky-search-menu-open');
-                    $(event.target).closest('.section-header-navigation').css('z-index', '101');
+                    var header = $(event.target).closest('[class*="section-header-"], .section-header-navigation, .shopify-section-header-navigation-plain, .header-navigation-wrapper, .shopify-section');
+                    if (!header.length) header = $('[class*="section-header-"], .section-header-navigation, .shopify-section');
+                    header.addClass('sticky-search-menu-open');
+                    header.css('z-index', '101');
+                    $('body').addClass('sticky-search-open open_search_menu');
                     $('.search_details').attr('open','true');
+                    setTimeout(function() {
+                        $('.search__input:visible').focus();
+                    }, 100);
+                });
+
+                // Click Search Close Button
+                $(document).off('click.closeSearchButton').on('click.closeSearchButton', '.header-search-close, .search-modal__close-button', function(event) {
+                    event.preventDefault();
+                    $('[class*="section-header-"], .section-header-navigation, .shopify-section').removeClass('sticky-search-menu-open sticky-search-menu-custom-open');
+                    $('body').removeClass('sticky-search-open open_search_menu');
+                    $('.search_details').removeAttr('open');
                 });
 
                 // Click Search Icon On Header Hamburger - Search Dropdown Style Layout Custom
-                $(document).off('click.toggleSearch', iconSearchMenuCustom).on('click.toggleSearch', iconSearchMenuCustom, function(event) {
+                $(document).off('click.toggleSearchCustom', iconSearchMenuCustom).on('click.toggleSearchCustom', iconSearchMenuCustom, function(event) {
                     $(event.target).closest('[class*="section-header-"]').addClass('sticky-search-menu-custom-open');
                 });
 
                 $(document).off('click.hideSearchSticky').on('click.hideSearchSticky', function(event) {
                     var formSearch = $('.header-navigation .search-modal__form'),
                         quickSearch = $('.header-navigation .quickSearchResultsWrap');
-                    if ($('[class*="section-header-"]').hasClass('sticky-search-menu-open') && !formSearch.has(event.target).length && !quickSearch.has(event.target).length && !$(event.target).hasClass('search-modal__content') && $(event.target).closest('.search-modal__content').length == 0) {
-                        const header = $(iconSearchMenu).closest('.section-header-navigation');
-                        const index = header.data('index');
+                    if ($('[class*="section-header-"], .section-header-navigation, .shopify-section').hasClass('sticky-search-menu-open') && !formSearch.has(event.target).length && !quickSearch.has(event.target).length && !$(event.target).hasClass('search-modal__content') && $(event.target).closest('.search-modal__content').length == 0) {
+                        const header = $('[class*="section-header-"], .section-header-navigation');
+                        const index = header.data('index') || 20;
 
-                        $('[class*="section-header-"]').removeClass('sticky-search-menu-open');
+                        $('[class*="section-header-"], .section-header-navigation, .shopify-section').removeClass('sticky-search-menu-open');
                         
                         header.css('z-index', index);
                         $('.header-navigation .search_details').removeAttr('open');
@@ -587,8 +601,8 @@
                         }
                     }
                     if (($(event.target).closest('.search-modal__content').length === 0)){
-                        $('body').removeClass('open_search_menu');
-                        $('[class*="section-header-"]').removeClass('sticky-search-menu-custom-open');
+                        $('body').removeClass('open_search_menu sticky-search-open');
+                        $('[class*="section-header-"], .section-header-navigation, .shopify-section').removeClass('sticky-search-menu-custom-open');
                     }
                 });
             }
