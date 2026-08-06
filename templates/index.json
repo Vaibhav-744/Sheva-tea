@@ -13,7 +13,7 @@
       "type": "sheva-hero-banner",
       "settings": {
         "tagline": "✦ SEVEN STAR ENERGY®",
-        "headline": "<p>ARE YOU READY<br/><em>THE STARS <br/>ARE ALIGNING</em></p>",
+        "headline": "<p>GET READY<br/><em>THE STARS ARE ALIGNING</em></p>",
         "subheading": "A cosmic herbal fusion crafted to elevate your energy, clarity, and soul.",
         "tea_image": "shopify://shop_images/pack.png",
         "btn1_label": "Shop Supernova →",
@@ -29,7 +29,7 @@
         "headline_size": 72,
         "sub_size": 16,
         "headline_size_mb": 36,
-        "padding_top": 140,
+        "padding_top": 80,
         "padding_bottom": 80
       }
     },
