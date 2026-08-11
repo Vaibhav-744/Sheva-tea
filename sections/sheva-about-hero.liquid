@@ -1,8 +1,3 @@
-{% comment %} ============================================================
-  SHEVA TEA — About Hero Section
-  Dynamic cosmic hero section for the about page.
-============================================================ {% endcomment %}
-
 {{ 'sheva-about.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
@@ -11,77 +6,103 @@
 
 <style>
   #sheva-about-hero-{{ section.id }} {
-    --about-hero-pt: {{ s.padding_top }}px;
-    --about-hero-pb: {{ s.padding_bottom }}px;
-    --about-eyebrow-color: {{ s.eyebrow_color }};
-    --about-desc-color: {{ s.description_color }};
+    --sec-pt: {{ s.padding_top }}px;
+    --sec-pb: {{ s.padding_bottom }}px;
+    --eyebrow-color: {{ s.eyebrow_color }};
+    --eyebrow-fs: {{ s.eyebrow_size }}px;
+    --headline-color: {{ s.description_color }};
+    --headline-fs-desktop: {{ s.headline_fs_desktop }}px;
+    --headline-fs-mobile: {{ s.headline_fs_mobile }}px;
+    --desc-fs: {{ s.desc_fs }}px;
+    --desc-color: {{ s.description_color }};
+    --grad-from: {{ s.headline_grad_from }};
+    --grad-mid: {{ s.headline_grad_mid }};
+    --grad-to: {{ s.headline_grad_to }};
     --btn-from: {{ s.btn1_color_from }};
     --btn-to: {{ s.btn1_color_to }};
     --btn-text-color: {{ s.btn1_text_color }};
     --btn-ghost-color: {{ s.btn2_text_color }};
     --btn-ghost-border: {{ s.btn2_border_color }};
   }
-  #sheva-about-hero-{{ section.id }} .sheva-about-hero__headline,
-  #sheva-about-hero-{{ section.id }} .sheva-about-hero__headline p {
-    background: linear-gradient(90deg, {{ s.headline_grad_from }}, {{ s.headline_grad_mid }}, {{ s.headline_grad_to }});
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent !important;
-    margin: 0;
-  }
-  #sheva-about-hero-{{ section.id }} .sheva-about-hero__desc {
-    color: var(--about-desc-color);
-  }
-  #sheva-about-hero-{{ section.id }} .sheva-btn-primary {
-    color: var(--btn-text-color);
-  }
-  #sheva-about-hero-{{ section.id }} .sheva-btn-ghost {
-    color: var(--btn-ghost-color);
-    border-color: var(--btn-ghost-border);
-  }
 </style>
 
-<section id="sheva-about-hero-{{ section.id }}" class="sheva-about-hero">
-  <div class="sheva-about-hero__content">
-    {%- if s.eyebrow != blank -%}
-      <span class="sheva-about-hero__eyebrow">{{ s.eyebrow }}</span>
-    {%- endif -%}
+<div class="sheva-about-hero-wrapper">
+  {%- if s.vertical_text != blank -%}
+    <div class="abt-vert">{{ s.vertical_text }}</div>
+  {%- endif -%}
 
-    {%- if s.headline != blank -%}
-      <h1 class="sheva-about-hero__headline sheva-glow-text">{{ s.headline }}</h1>
-    {%- endif -%}
-
-    {%- if s.description != blank -%}
-      <p class="sheva-about-hero__desc">{{ s.description }}</p>
-    {%- endif -%}
-
-    <div class="sheva-about-hero__btns">
-      {%- if s.btn1_label != blank -%}
-        <a href="{{ s.btn1_url }}" class="sheva-btn-primary">{{ s.btn1_label }}</a>
+  <section
+    id="sheva-about-hero-{{ section.id }}"
+    class="sheva-about-hero abt-hero"
+  >
+    <div class="sheva-about-hero__content abt-hero-copy">
+      {%- if s.eyebrow != blank -%}
+        <span class="sheva-about-hero__eyebrow eyebrow">
+          {{ s.eyebrow }}
+        </span>
       {%- endif -%}
-      {%- if s.btn2_label != blank -%}
-        <a href="{{ s.btn2_url }}" class="sheva-btn-ghost">{{ s.btn2_label }}</a>
+
+      {%- if s.headline != blank -%}
+        <h1 class="sheva-about-hero__headline sheva-glow-text">
+          {{ s.headline }}
+        </h1>
+      {%- endif -%}
+
+      {%- if s.description != blank -%}
+        <p class="sheva-about-hero__desc">
+          {{ s.description }}
+        </p>
+      {%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="abt-hero-meta">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'stat_item' -%}
+              <div {{ block.shopify_attributes }}>
+                <strong>{{ block.settings.number }}</strong>
+                <span>{{ block.settings.label }}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if s.btn1_label != blank or s.btn2_label != blank -%}
+        <div class="sheva-about-hero__btns">
+          {%- if s.btn1_label != blank -%}
+            <a href="{{ s.btn1_url }}" class="sheva-btn-primary">{{ s.btn1_label }}</a>
+          {%- endif -%}
+          {%- if s.btn2_label != blank -%}
+            <a href="{{ s.btn2_url }}" class="sheva-btn-ghost">{{ s.btn2_label }}</a>
+          {%- endif -%}
+        </div>
       {%- endif -%}
     </div>
-  </div>
 
-  <div class="sheva-about-hero__art" aria-hidden="true">
-    <div class="sheva-about-orb"></div>
-    {%- if s.hero_image != blank -%}
-      <img
-        src="{{ s.hero_image | img_url: '600x' }}"
-        alt="{{ s.hero_image.alt | default: 'Sheva Tea packaging' }}"
-        class="sheva-about-pack"
-        loading="eager"
-        width="280"
-        height="auto"
-      />
-    {%- else -%}
-      {%- comment %} Fallback placeholder if no image picked {% endcomment %}
-      {{ 'image' | placeholder_svg_tag: 'sheva-about-pack' }}
-    {%- endif -%}
-  </div>
-</section>
+    <div class="sheva-about-hero__art abt-hero-art" aria-hidden="true">
+      <div class="sheva-about-orb abt-halo"></div>
+      {%- if s.hero_image != blank -%}
+        <img
+          src="{{ s.hero_image | img_url: '600x' }}"
+          alt="{{ s.hero_image.alt | default: 'Sheva Tea Supernova herbal tea' }}"
+          class="sheva-about-pack abt-pack"
+          loading="eager"
+          width="300"
+          height="auto"
+        />
+      {%- else -%}
+        <img
+          src="{{ 'hero-cast.webp' | asset_url }}"
+          alt="Sheva Tea Supernova herbal tea"
+          class="sheva-about-pack abt-pack"
+          loading="eager"
+          width="300"
+          height="auto"
+        />
+      {%- endif -%}
+    </div>
+  </section>
+</div>
 
 {% schema %}
 {
@@ -95,21 +116,27 @@
     },
     {
       "type": "text",
+      "id": "vertical_text",
+      "label": "Vertical Brand Watermark",
+      "default": "SHEVA TEA®"
+    },
+    {
+      "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow Label",
-      "default": "✦ ABOUT SHEVA TEA"
+      "default": "✦ ABOUT SHEVA TEA®"
     },
     {
       "type": "richtext",
       "id": "headline",
-      "label": "Headline (use italic for gradient glow text)",
-      "default": "<p>Crafted for the ones who align with the <em>stars.</em></p>"
+      "label": "Headline",
+      "default": "<p>Unique blends that <em>delight the palate</em> and promote well-being.</p>"
     },
     {
       "type": "textarea",
       "id": "description",
       "label": "Description",
-      "default": "Sheva Tea is a cosmic wellness brand built around ritual, clarity, and daily energy. From Supernova Tea to the Titan Aura Collection, every product is designed to turn a simple moment into a meaningful experience."
+      "default": "Sheva Tea® is dedicated to providing unique blends that not only delight the palate but also promote well-being — a ritual crafted for the body, mind, and spirit."
     },
     {
       "type": "image_picker",
@@ -118,13 +145,56 @@
     },
     {
       "type": "header",
+      "content": "Typography Settings"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "label": "Eyebrow Font Size (px)",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "headline_fs_desktop",
+      "label": "Headline Font Size Desktop (px)",
+      "min": 28,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "headline_fs_mobile",
+      "label": "Headline Font Size Mobile (px)",
+      "min": 20,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "desc_fs",
+      "label": "Description Font Size (px)",
+      "min": 13,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
       "content": "Button 1 (Primary)"
     },
     {
       "type": "text",
       "id": "btn1_label",
-      "label": "Button 1 Label",
-      "default": "Explore Collection"
+      "label": "Button 1 Label"
     },
     {
       "type": "url",
@@ -138,8 +208,7 @@
     {
       "type": "text",
       "id": "btn2_label",
-      "label": "Button 2 Label",
-      "default": "Our Story"
+      "label": "Button 2 Label"
     },
     {
       "type": "url",
@@ -208,7 +277,7 @@
       "type": "color",
       "id": "btn2_border_color",
       "label": "Ghost Button Border Color",
-      "default": "rgba(255,255,255,0.3)"
+      "default": "#ffffff4d"
     },
     {
       "type": "header",
@@ -235,9 +304,52 @@
       "default": 80
     }
   ],
+  "blocks": [
+    {
+      "type": "stat_item",
+      "name": "Stat Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Stat Number/Value",
+          "default": "50+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Stat Label",
+          "default": "Sacred herbs"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Sheva — About Hero"
+      "name": "Sheva — About Hero",
+      "blocks": [
+        {
+          "type": "stat_item",
+          "settings": {
+            "number": "50+",
+            "label": "Sacred herbs"
+          }
+        },
+        {
+          "type": "stat_item",
+          "settings": {
+            "number": "7",
+            "label": "Chakras recharged"
+          }
+        },
+        {
+          "type": "stat_item",
+          "settings": {
+            "number": "100%",
+            "label": "Ethically sourced"
+          }
+        }
+      ]
     }
   ]
 }

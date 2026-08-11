@@ -48,15 +48,48 @@
     },
     "sheva_about_hero_fVK86U": {
       "type": "sheva-about-hero",
+      "blocks": {
+        "stat_item_3jTxhy": {
+          "type": "stat_item",
+          "settings": {
+            "number": "50+",
+            "label": "Sacred herbs"
+          }
+        },
+        "stat_item_dN3pBT": {
+          "type": "stat_item",
+          "settings": {
+            "number": "7",
+            "label": "Chakras recharged"
+          }
+        },
+        "stat_item_L48x9z": {
+          "type": "stat_item",
+          "settings": {
+            "number": "100%",
+            "label": "Ethically sourced"
+          }
+        }
+      },
+      "block_order": [
+        "stat_item_3jTxhy",
+        "stat_item_dN3pBT",
+        "stat_item_L48x9z"
+      ],
       "name": "Sheva — About Hero",
       "settings": {
+        "vertical_text": "SHEVA TEA®",
         "eyebrow": "✦ ABOUT SHEVA TEA",
-        "headline": "<p>Crafted for the ones who align with the stars.</p>",
-        "description": "Sheva Tea is a cosmic wellness brand built around ritual, clarity, and daily energy. From Supernova Tea to the Titan Aura Collection, every product is designed to turn a simple moment into a meaningful experience.",
-        "hero_image": "shopify://shop_images/pack.png",
-        "btn1_label": "Explore Collection",
+        "headline": "<p>Unique blends that <em>delight the palate</em> and promote well-being.</p>",
+        "description": "Sheva Tea® is dedicated to providing unique blends that not only delight the palate but also promote well-being — a ritual crafted for the body, mind, and spirit.",
+        "hero_image": "shopify://shop_images/hero-cast.webp",
+        "eyebrow_size": 12,
+        "headline_fs_desktop": 56,
+        "headline_fs_mobile": 32,
+        "desc_fs": 16,
+        "btn1_label": "",
         "btn1_url": "",
-        "btn2_label": "Our Story",
+        "btn2_label": "",
         "btn2_url": "",
         "eyebrow_color": "#22d3ee",
         "headline_grad_from": "#ff4db8",
@@ -68,174 +101,246 @@
         "btn1_text_color": "#ffffff",
         "btn2_text_color": "#ffffff",
         "btn2_border_color": "#ffffff4d",
-        "padding_top": 80,
-        "padding_bottom": 60
-      }
-    },
-    "sheva_about_story_XY7DR3": {
-      "type": "sheva-about-story",
-      "blocks": {
-        "story_card_CtwJT6": {
-          "type": "story_card",
-          "settings": {
-            "title": "Our Mission",
-            "description": "To create products that support energy, mindfulness, and self-expression while making every part of the ritual feel elevated and personal."
-          }
-        },
-        "story_card_wKWpGa": {
-          "type": "story_card",
-          "settings": {
-            "title": "Our Vision",
-            "description": "To build a world where tea, stationery, and lifestyle objects are not just functional, but inspiring symbols of who you are and what you value."
-          }
-        },
-        "story_card_WFJMch": {
-          "type": "story_card",
-          "settings": {
-            "title": "Our Energy",
-            "description": "Seven Star Energy® is our way of turning intention into design — blending cosmic imagery, vibrant color, and a sense of wonder into every experience."
-          }
-        }
-      },
-      "block_order": [
-        "story_card_CtwJT6",
-        "story_card_wKWpGa",
-        "story_card_WFJMch"
-      ],
-      "name": "Sheva — Our Story",
-      "settings": {
-        "eyebrow": "✦ OUR STORY",
-        "title": "From a daily ritual to a cosmic brand",
-        "eyebrow_color": "#22d3ee",
-        "title_color": "#f3f0ff",
-        "card_title_color": "#ffffff",
-        "card_desc_color": "#f3f0ff",
         "padding_top": 52,
         "padding_bottom": 52
       }
     },
-    "sheva_about_values_hnw7tV": {
-      "type": "sheva-about-values",
+    "sheva_about_philosophy_Vd8DDW": {
+      "type": "sheva-about-philosophy",
       "blocks": {
-        "value_card_NgUydz": {
-          "type": "value_card",
+        "philosophy_row_RCNAqy": {
+          "type": "philosophy_row",
           "settings": {
-            "icon": "♻️",
-            "title": "Sustainability",
-            "description": "We care about conscious materials, responsible packaging, and long-term impact."
+            "number": "01",
+            "title": "Our Philosophy",
+            "description": "Our focus on organic and ethically sourced ingredients reflects our commitment to sustainability and health.",
+            "glyph": "🌿"
           }
         },
-        "value_card_K4KrL4": {
-          "type": "value_card",
+        "philosophy_row_QNXCGL": {
+          "type": "philosophy_row",
           "settings": {
-            "icon": "✨",
-            "title": "Premium Experience",
-            "description": "From the first glance to the final sip, everything is designed to feel elevated."
+            "number": "02",
+            "title": "Unique Blend",
+            "description": "Crafted with care, our tea is designed to harness the natural healing properties of botanicals. The blends are thoughtfully curated to support your health and wellness journey.",
+            "glyph": "✦"
           }
         },
-        "value_card_iQEgbH": {
-          "type": "value_card",
+        "philosophy_row_d9wtHc": {
+          "type": "philosophy_row",
           "settings": {
-            "icon": "💫",
-            "title": "Daily Ritual",
-            "description": "We believe small habits can shape your mood, your focus, and your mindset."
+            "number": "03",
+            "title": "Rich in Antioxidants",
+            "description": "Our tea uses botanical varieties that are packed with antioxidants, which help combat oxidative stress and promote overall health.",
+            "glyph": "🍇"
           }
         },
-        "value_card_Kif4D6": {
-          "type": "value_card",
+        "philosophy_row_kVn3mb": {
+          "type": "philosophy_row",
           "settings": {
-            "icon": "🌌",
-            "title": "Cosmic Identity",
-            "description": "Our universe is bold, dreamy, and a little surreal — because your brand should be too."
+            "number": "04",
+            "title": "Full-Bodied Experience",
+            "description": "Our blend is designed to align with and balance your chakras, enhancing your overall energy and well-being. Each sip is crafted to resonate with specific energy centers in the body, promoting harmony and balance.",
+            "glyph": "☯️"
+          }
+        },
+        "philosophy_row_UBFkeC": {
+          "type": "philosophy_row",
+          "settings": {
+            "number": "05",
+            "title": "Ethical Sourcing",
+            "description": "We prioritize sustainability and fair trade practices, ensuring that our ingredients are sourced responsibly. This commitment not only supports the environment but also empowers the communities' well-being.",
+            "glyph": "♻️"
           }
         }
       },
       "block_order": [
-        "value_card_NgUydz",
-        "value_card_K4KrL4",
-        "value_card_iQEgbH",
-        "value_card_Kif4D6"
+        "philosophy_row_RCNAqy",
+        "philosophy_row_QNXCGL",
+        "philosophy_row_d9wtHc",
+        "philosophy_row_kVn3mb",
+        "philosophy_row_UBFkeC"
       ],
-      "name": "Sheva — Values",
+      "name": "Sheva — Our Philosophy",
       "settings": {
-        "eyebrow": "✦ WHAT WE STAND FOR",
-        "title": "Values that guide the ritual",
+        "eyebrow": "✦ OUR PHILOSOPHY",
+        "title": "More than a beverage",
+        "description": "At Sheva Tea®, our tea is more than just a beverage; it is a nurturing ritual that connects the body, mind, and spirit.",
+        "eyebrow_size": 12,
+        "title_fs_desktop": 44,
+        "title_fs_mobile": 28,
+        "sub_fs": 15,
         "eyebrow_color": "#22d3ee",
         "title_color": "#f3f0ff",
-        "card_title_color": "#ffffff",
-        "card_desc_color": "#f3f0ff",
-        "icon_bg_from": "#ff4db840",
-        "icon_bg_to": "#22d3ee40",
+        "description_color": "#f3f0ff",
         "padding_top": 52,
         "padding_bottom": 52
       }
     },
-    "sheva_about_why_TfM4wX": {
-      "type": "sheva-about-why",
+    "sheva_about_mission_YpBxcg": {
+      "type": "sheva-about-mission",
       "blocks": {
-        "highlight_item_fWkbbq": {
-          "type": "highlight_item",
+        "chakra_item_PHJDdc": {
+          "type": "chakra_item",
           "settings": {
-            "title": "Supernova Tea",
-            "description": "A signature blend made to support energy, clarity, and balance."
+            "name": "Crown",
+            "details": "Sahasrara · higher awareness and connection",
+            "color": "#a78bfa"
           }
         },
-        "highlight_item_FKERyj": {
-          "type": "highlight_item",
+        "chakra_item_GM3EnK": {
+          "type": "chakra_item",
           "settings": {
-            "title": "Titan Aura Collection",
-            "description": "Everyday essentials designed to extend the ritual beyond the cup."
+            "name": "Third Eye",
+            "details": "Ajna · intuition, vision and clarity",
+            "color": "#6366f1"
           }
         },
-        "highlight_item_HMkKnt": {
-          "type": "highlight_item",
+        "chakra_item_XFCamr": {
+          "type": "chakra_item",
           "settings": {
-            "title": "Designed for mobile and desktop",
-            "description": "A product experience that feels smooth, clean, and premium across every screen."
+            "name": "Throat",
+            "details": "Vishuddha · truth, expression and communication",
+            "color": "#22d3ee"
+          }
+        },
+        "chakra_item_hUMmBq": {
+          "type": "chakra_item",
+          "settings": {
+            "name": "Heart",
+            "details": "Anahata · compassion, love and balance",
+            "color": "#4ade80"
+          }
+        },
+        "chakra_item_9wUbPe": {
+          "type": "chakra_item",
+          "settings": {
+            "name": "Solar Plexus",
+            "details": "Manipura · confidence, willpower and inner fire",
+            "color": "#ffd93d"
+          }
+        },
+        "chakra_item_Uh9EHJ": {
+          "type": "chakra_item",
+          "settings": {
+            "name": "Sacral",
+            "details": "Svadhisthana · creativity, joy and flow",
+            "color": "#ff7a3d"
+          }
+        },
+        "chakra_item_NQjPLA": {
+          "type": "chakra_item",
+          "settings": {
+            "name": "Root",
+            "details": "Muladhara · grounding, safety and stability",
+            "color": "#ff4d6d"
           }
         }
       },
       "block_order": [
-        "highlight_item_fWkbbq",
-        "highlight_item_FKERyj",
-        "highlight_item_HMkKnt"
+        "chakra_item_PHJDdc",
+        "chakra_item_GM3EnK",
+        "chakra_item_XFCamr",
+        "chakra_item_hUMmBq",
+        "chakra_item_9wUbPe",
+        "chakra_item_Uh9EHJ",
+        "chakra_item_NQjPLA"
       ],
-      "name": "Sheva — Why Sheva",
+      "name": "Sheva — Mission & Chakras",
       "settings": {
-        "eyebrow": "✦ WHY SHEVA TEA",
-        "title": "More than tea",
+        "eyebrow": "✦ OUR MISSION",
+        "headline": "<p>The ascension to <em>inner rebirth</em></p>",
+        "description": "The ascension to inner rebirth of your mind, body and spirit by elevating vibration frequency, recharging all seven chakras — crown, third eye, throat, heart, solar plexus, sacral and root.",
+        "eyebrow_size": 12,
+        "title_fs_desktop": 50,
+        "title_fs_mobile": 28,
+        "desc_fs": 15,
         "eyebrow_color": "#22d3ee",
         "title_color": "#f3f0ff",
-        "highlight_title_color": "#22d3ee",
-        "highlight_desc_color": "#f3f0ff",
+        "description_color": "#f3f0ff",
         "padding_top": 52,
         "padding_bottom": 52
       }
     },
-    "sheva_about_cta_NJFzhy": {
-      "type": "sheva-about-cta",
-      "name": "Sheva — About CTA",
+    "sheva_about_manifesto_34nBFc": {
+      "type": "sheva-about-manifesto",
+      "name": "Sheva — Manifesto",
       "settings": {
-        "title": "Ready to step into the Sheva Tea universe?",
-        "subtitle": "Explore the collection and make your daily ritual feel cosmic.",
-        "btn_label": "Shop the Collection",
+        "quote_mark": "“",
+        "quote": "<p>By choosing Sheva Tea®, you're <em>not just enjoying a cup of tea</em> — you're participating in a holistic journey towards better wellness.</p>",
+        "submark": "✦ SEVEN STAR ENERGY®",
+        "btn_label": "Begin the Journey",
         "btn_url": "",
-        "title_color": "#f3f0ff",
-        "subtitle_color": "#f3f0ff",
+        "quote_fs_desktop": 32,
+        "quote_fs_mobile": 20,
+        "submark_size": 11,
+        "quote_mark_color": "#ff4db880",
+        "submark_color": "#22d3ee",
         "btn_color_from": "#ff4db8",
         "btn_color_to": "#8b5cf6",
         "btn_text_color": "#ffffff",
         "padding_top": 52,
-        "padding_bottom": 72
+        "padding_bottom": 52
+      }
+    },
+    "sheva_about_sourcing_PneP39": {
+      "type": "sheva-about-sourcing",
+      "blocks": {
+        "checklist_item_aHM4hU": {
+          "type": "checklist_item",
+          "settings": {
+            "text": "Organic, ethically sourced botanicals"
+          }
+        },
+        "checklist_item_awKM9R": {
+          "type": "checklist_item",
+          "settings": {
+            "text": "Fair trade partnerships with growing communities"
+          }
+        },
+        "checklist_item_eXmaxc": {
+          "type": "checklist_item",
+          "settings": {
+            "text": "Sustainable, low-impact packaging choices"
+          }
+        },
+        "checklist_item_mDXqcJ": {
+          "type": "checklist_item",
+          "settings": {
+            "text": "Transparent sourcing across every blend"
+          }
+        }
+      },
+      "block_order": [
+        "checklist_item_aHM4hU",
+        "checklist_item_awKM9R",
+        "checklist_item_eXmaxc",
+        "checklist_item_mDXqcJ"
+      ],
+      "name": "Sheva — Ethical Sourcing",
+      "settings": {
+        "eyebrow": "✦ ETHICAL SOURCING",
+        "title": "Responsible from root to cup",
+        "description": "Sustainability and fair trade are not add-ons — they are how every Sheva Tea® blend is built, supporting the environment and empowering the communities' well-being.",
+        "eyebrow_size": 12,
+        "title_fs_desktop": 44,
+        "title_fs_mobile": 28,
+        "desc_fs": 15,
+        "eyebrow_color": "#22d3ee",
+        "title_color": "#f3f0ff",
+        "description_color": "#f3f0ff",
+        "bullet_color": "#22d3ee",
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     }
   },
   "order": [
     "main",
     "sheva_about_hero_fVK86U",
-    "sheva_about_story_XY7DR3",
-    "sheva_about_values_hnw7tV",
-    "sheva_about_why_TfM4wX",
-    "sheva_about_cta_NJFzhy"
+    "sheva_about_philosophy_Vd8DDW",
+    "sheva_about_mission_YpBxcg",
+    "sheva_about_manifesto_34nBFc",
+    "sheva_about_sourcing_PneP39"
   ]
 }

@@ -5,59 +5,60 @@
 -%}
 
 <style>
-  #sheva-about-why-{{ section.id }} {
+  #sheva-about-sourcing-{{ section.id }} {
     --sec-pt: {{ s.padding_top }}px;
     --sec-pb: {{ s.padding_bottom }}px;
     --eyebrow-color: {{ s.eyebrow_color }};
     --eyebrow-fs: {{ s.eyebrow_size }}px;
-    --title-color: {{ s.title_color }};
-    --title-fs-desktop: {{ s.title_fs_desktop }}px;
-    --title-fs-mobile: {{ s.title_fs_mobile }}px;
-    --why-item-title-color: {{ s.highlight_title_color }};
-    --why-item-desc-color: {{ s.highlight_desc_color }};
+    --src-title-color: {{ s.title_color }};
+    --src-title-fs-desktop: {{ s.title_fs_desktop }}px;
+    --src-title-fs-mobile: {{ s.title_fs_mobile }}px;
+    --src-desc-color: {{ s.description_color }};
+    --src-desc-fs: {{ s.desc_fs }}px;
+    --src-bullet-color: {{ s.bullet_color }};
   }
 </style>
 
 <section
-  id="sheva-about-why-{{ section.id }}"
-  class="sheva-about-section"
+  id="sheva-about-sourcing-{{ section.id }}"
+  class="sheva-about-section abt-source"
 >
-  <div class="sheva-about-sec-head">
+  <div class="abt-source-left">
     {%- if s.eyebrow != blank -%}
       <span class="sheva-eyebrow eyebrow">
         {{ s.eyebrow }}
       </span>
     {%- endif -%}
     {%- if s.title != blank -%}
-      <h2 class="sheva-sec-title">
+      <h2>
         {{ s.title }}
       </h2>
+    {%- endif -%}
+    {%- if s.description != blank -%}
+      <p>
+        {{ s.description }}
+      </p>
     {%- endif -%}
   </div>
 
   {%- if section.blocks.size > 0 -%}
-    <div class="sheva-about-highlight">
+    <ul class="abt-checklist">
       {%- for block in section.blocks -%}
-        {%- if block.type == 'highlight_item' -%}
-          <div class="sheva-highlight-item" {{ block.shopify_attributes }}>
-            {%- if block.settings.title != blank -%}
-              <h4>{{ block.settings.title }}</h4>
-            {%- endif -%}
-            {%- if block.settings.description != blank -%}
-              <p>{{ block.settings.description }}</p>
-            {%- endif -%}
-          </div>
+        {%- if block.type == 'checklist_item' -%}
+          <li {{ block.shopify_attributes }}>
+            {{ block.settings.text }}
+          </li>
         {%- endif -%}
       {%- endfor -%}
-    </div>
+    </ul>
   {%- endif -%}
 </section>
 
 {% schema %}
 {
-  "name": "Sheva — Why Sheva",
+  "name": "Sheva — Ethical Sourcing",
   "tag": "section",
-  "class": "sheva-section-about-why",
+  "class": "sheva-section-about-sourcing",
   "settings": [
     {
       "type": "header",
@@ -67,13 +68,19 @@
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow Label",
-      "default": "✦ WHY SHEVA TEA"
+      "default": "✦ ETHICAL SOURCING"
     },
     {
       "type": "text",
       "id": "title",
       "label": "Section Title",
-      "default": "More than tea"
+      "default": "Responsible from root to cup"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Sustainability and fair trade are not add-ons — they are how every Sheva Tea® blend is built, supporting the environment and empowering the communities' well-being."
     },
     {
       "type": "header",
@@ -97,7 +104,7 @@
       "max": 80,
       "step": 2,
       "unit": "px",
-      "default": 52
+      "default": 44
     },
     {
       "type": "range",
@@ -108,6 +115,16 @@
       "step": 2,
       "unit": "px",
       "default": 28
+    },
+    {
+      "type": "range",
+      "id": "desc_fs",
+      "label": "Description Font Size (px)",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
     },
     {
       "type": "header",
@@ -122,20 +139,20 @@
     {
       "type": "color",
       "id": "title_color",
-      "label": "Section Title Color",
+      "label": "Title Color",
       "default": "#f3f0ff"
     },
     {
       "type": "color",
-      "id": "highlight_title_color",
-      "label": "Highlight Item Title Color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#f3f0ff"
+    },
+    {
+      "type": "color",
+      "id": "bullet_color",
+      "label": "Star Bullet Glow Color",
       "default": "#22d3ee"
-    },
-    {
-      "type": "color",
-      "id": "highlight_desc_color",
-      "label": "Highlight Item Description Color",
-      "default": "#f3f0ff"
     },
     {
       "type": "header",
@@ -149,7 +166,7 @@
       "max": 200,
       "step": 4,
       "unit": "px",
-      "default": 80
+      "default": 100
     },
     {
       "type": "range",
@@ -159,52 +176,49 @@
       "max": 200,
       "step": 4,
       "unit": "px",
-      "default": 80
+      "default": 100
     }
   ],
   "blocks": [
     {
-      "type": "highlight_item",
-      "name": "Highlight Item",
+      "type": "checklist_item",
+      "name": "Checklist Item",
       "settings": [
         {
           "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Supernova Tea"
-        },
-        {
-          "type": "textarea",
-          "id": "description",
-          "label": "Description",
-          "default": "A signature blend made to support energy, clarity, and balance."
+          "id": "text",
+          "label": "Text",
+          "default": "Organic, ethically sourced botanicals"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Sheva — Why Sheva",
+      "name": "Sheva — Ethical Sourcing",
       "blocks": [
         {
-          "type": "highlight_item",
+          "type": "checklist_item",
           "settings": {
-            "title": "Supernova Tea",
-            "description": "A signature blend made to support energy, clarity, and balance."
+            "text": "Organic, ethically sourced botanicals"
           }
         },
         {
-          "type": "highlight_item",
+          "type": "checklist_item",
           "settings": {
-            "title": "Titan Aura Collection",
-            "description": "Everyday essentials designed to extend the ritual beyond the cup."
+            "text": "Fair trade partnerships with growing communities"
           }
         },
         {
-          "type": "highlight_item",
+          "type": "checklist_item",
           "settings": {
-            "title": "Designed for mobile and desktop",
-            "description": "A product experience that feels smooth, clean, and premium across every screen."
+            "text": "Sustainable, low-impact packaging choices"
+          }
+        },
+        {
+          "type": "checklist_item",
+          "settings": {
+            "text": "Transparent sourcing across every blend"
           }
         }
       ]

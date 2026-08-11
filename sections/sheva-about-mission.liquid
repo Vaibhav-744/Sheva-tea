@@ -1,0 +1,268 @@
+{{ 'sheva-about.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+-%}
+
+<style>
+  #sheva-about-mission-{{ section.id }} {
+    --sec-pt: {{ s.padding_top }}px;
+    --sec-pb: {{ s.padding_bottom }}px;
+    --eyebrow-color: {{ s.eyebrow_color }};
+    --eyebrow-fs: {{ s.eyebrow_size }}px;
+    --title-color: {{ s.title_color }};
+    --title-fs-desktop: {{ s.title_fs_desktop }}px;
+    --title-fs-mobile: {{ s.title_fs_mobile }}px;
+    --desc-color: {{ s.description_color }};
+    --desc-fs: {{ s.desc_fs }}px;
+  }
+</style>
+
+<section
+  id="sheva-about-mission-{{ section.id }}"
+  class="sheva-about-section abt-mission"
+>
+  <div id="mission"></div>
+  <div class="abt-mission-intro">
+    {%- if s.eyebrow != blank -%}
+      <span class="sheva-eyebrow eyebrow">
+        {{ s.eyebrow }}
+      </span>
+    {%- endif -%}
+    {%- if s.headline != blank -%}
+      <h2 class="sheva-glow-text">
+        {{ s.headline }}
+      </h2>
+    {%- endif -%}
+    {%- if s.description != blank -%}
+      <p>
+        {{ s.description }}
+      </p>
+    {%- endif -%}
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <ol class="abt-chakras">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'chakra_item' -%}
+          <li class="chk" style="--c: {{ block.settings.color }};" {{ block.shopify_attributes }}>
+            <span class="chk-dot"></span>
+            <b>{{ block.settings.name }}</b>
+            <em>{{ block.settings.details }}</em>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ol>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Sheva — Mission & Chakras",
+  "tag": "section",
+  "class": "sheva-section-about-mission",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Intro"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "✦ OUR MISSION"
+    },
+    {
+      "type": "richtext",
+      "id": "headline",
+      "label": "Headline",
+      "default": "<p>The ascension to <em>inner rebirth</em></p>"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "The ascension to inner rebirth of your mind, body and spirit by elevating vibration frequency, recharging all seven chakras — crown, third eye, throat, heart, solar plexus, sacral and root."
+    },
+    {
+      "type": "header",
+      "content": "Typography Settings"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "label": "Eyebrow Font Size (px)",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "title_fs_desktop",
+      "label": "Title Font Size Desktop (px)",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "title_fs_mobile",
+      "label": "Title Font Size Mobile (px)",
+      "min": 16,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "desc_fs",
+      "label": "Description Font Size (px)",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#f3f0ff"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#f3f0ff"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "chakra_item",
+      "name": "Chakra Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Chakra Name",
+          "default": "Crown"
+        },
+        {
+          "type": "text",
+          "id": "details",
+          "label": "Description / Details",
+          "default": "Sahasrara · higher awareness and connection"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Chakra Accent Color",
+          "default": "#a78bfa"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva — Mission & Chakras",
+      "blocks": [
+        {
+          "type": "chakra_item",
+          "settings": {
+            "name": "Crown",
+            "details": "Sahasrara · higher awareness and connection",
+            "color": "#a78bfa"
+          }
+        },
+        {
+          "type": "chakra_item",
+          "settings": {
+            "name": "Third Eye",
+            "details": "Ajna · intuition, vision and clarity",
+            "color": "#6366f1"
+          }
+        },
+        {
+          "type": "chakra_item",
+          "settings": {
+            "name": "Throat",
+            "details": "Vishuddha · truth, expression and communication",
+            "color": "#22d3ee"
+          }
+        },
+        {
+          "type": "chakra_item",
+          "settings": {
+            "name": "Heart",
+            "details": "Anahata · compassion, love and balance",
+            "color": "#4ade80"
+          }
+        },
+        {
+          "type": "chakra_item",
+          "settings": {
+            "name": "Solar Plexus",
+            "details": "Manipura · confidence, willpower and inner fire",
+            "color": "#ffd93d"
+          }
+        },
+        {
+          "type": "chakra_item",
+          "settings": {
+            "name": "Sacral",
+            "details": "Svadhisthana · creativity, joy and flow",
+            "color": "#ff7a3d"
+          }
+        },
+        {
+          "type": "chakra_item",
+          "settings": {
+            "name": "Root",
+            "details": "Muladhara · grounding, safety and stability",
+            "color": "#ff4d6d"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -194,8 +194,8 @@
 
 .sheva-sec-sub {
   opacity: .7;
-  max-width: 500px;
-  margin: 0 auto;
+  max-width: 640px;
+  margin: 0 auto auto 0;
   line-height: 1.6;
   color: #f3f0ff;
   font-family: 'Poppins', sans-serif;
@@ -659,7 +659,7 @@
 
 /* ── 1. Desktop Search Modal Container (.search-modal: 1025px+) ── */
 @media screen and (min-width: 1025px) {
-  .sticky-search-menu-open details > .search-modal {
+  .sticky-search-menu-open details>.search-modal {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
@@ -1223,4 +1223,3 @@ predictive-search:not([results]) .predictive-search-results {
   width: 14px !important;
   height: 14px !important;
 }
-

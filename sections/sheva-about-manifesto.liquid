@@ -1,0 +1,197 @@
+{{ 'sheva-about.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+-%}
+
+<style>
+  #sheva-about-manifesto-{{ section.id }} {
+    --sec-pt: {{ s.padding_top }}px;
+    --sec-pb: {{ s.padding_bottom }}px;
+    --man-quote-mark: {{ s.quote_mark_color }};
+    --man-quote-fs-desktop: {{ s.quote_fs_desktop }}px;
+    --man-quote-fs-mobile: {{ s.quote_fs_mobile }}px;
+    --man-submark: {{ s.submark_color }};
+    --man-submark-fs: {{ s.submark_size }}px;
+    --btn-from: {{ s.btn_color_from }};
+    --btn-to: {{ s.btn_color_to }};
+    --btn-text-color: {{ s.btn_text_color }};
+  }
+</style>
+
+<section
+  id="sheva-about-manifesto-{{ section.id }}"
+  class="abt-manifesto"
+>
+  {%- if s.seal_image != blank -%}
+    <img src="{{ s.seal_image | img_url: '400x' }}" alt="{{ s.seal_image.alt | default: 'Sheva Tea®' }}" class="abt-seal" loading="lazy" width="160" height="auto" />
+  {%- else -%}
+    <img src="{{ 'logo-lockup.webp' | asset_url }}" alt="Sheva Tea®" class="abt-seal" loading="lazy" width="160" height="auto" />
+  {%- endif -%}
+
+  {%- if s.quote_mark != blank -%}
+    <div class="abt-quote-mark">{{ s.quote_mark }}</div>
+  {%- endif -%}
+
+  {%- if s.quote != blank -%}
+    <blockquote class="sheva-glow-text">
+      {{ s.quote }}
+    </blockquote>
+  {%- endif -%}
+
+  <div class="abt-manifesto-foot">
+    {%- if s.submark != blank -%}
+      <span>
+        {{ s.submark }}
+      </span>
+    {%- endif -%}
+    {%- if s.btn_label != blank -%}
+      <a href="{{ s.btn_url }}" class="sheva-btn-primary btn-primary">{{ s.btn_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sheva — Manifesto",
+  "tag": "section",
+  "class": "sheva-section-about-manifesto",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "seal_image",
+      "label": "Logo Seal Image"
+    },
+    {
+      "type": "text",
+      "id": "quote_mark",
+      "label": "Quote Mark",
+      "default": "“"
+    },
+    {
+      "type": "richtext",
+      "id": "quote",
+      "label": "Quote Text",
+      "default": "<p>By choosing Sheva Tea®, you're <em>not just enjoying a cup of tea</em> — you're participating in a holistic journey towards better wellness.</p>"
+    },
+    {
+      "type": "text",
+      "id": "submark",
+      "label": "Submark / Tagline",
+      "default": "✦ SEVEN STAR ENERGY®"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button Label",
+      "default": "Begin the Journey"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Typography Settings"
+    },
+    {
+      "type": "range",
+      "id": "quote_fs_desktop",
+      "label": "Quote Font Size Desktop (px)",
+      "min": 18,
+      "max": 44,
+      "step": 1,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "quote_fs_mobile",
+      "label": "Quote Font Size Mobile (px)",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "submark_size",
+      "label": "Submark Font Size (px)",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "quote_mark_color",
+      "label": "Quote Mark Color",
+      "default": "#ff4db880"
+    },
+    {
+      "type": "color",
+      "id": "submark_color",
+      "label": "Submark Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "color",
+      "id": "btn_color_from",
+      "label": "Button Gradient From",
+      "default": "#ff4db8"
+    },
+    {
+      "type": "color",
+      "id": "btn_color_to",
+      "label": "Button Gradient To",
+      "default": "#8b5cf6"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva — Manifesto"
+    }
+  ]
+}
+{% endschema %}

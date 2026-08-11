@@ -17,6 +17,17 @@
   margin-bottom: 50px;
 }
 
+.sheva-footer__logo {
+  display: block;
+  max-width: 130px;
+  width: 100%;
+  height: auto;
+  margin-bottom: 18px;
+  margin-left: 0;
+  margin-right: auto;
+  object-fit: contain;
+}
+
 .sheva-footer__brand {
   font-family: 'Orbitron', sans-serif;
   font-size: var(--foot-heading-fs, 26px);

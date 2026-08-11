@@ -1,8 +1,3 @@
-{% comment %} ============================================================
-  SHEVA TEA — Our Story Section
-  Shows mission, vision, energy grid layout.
-============================================================ {% endcomment %}
-
 {{ 'sheva-about.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
@@ -13,29 +8,30 @@
   #sheva-about-story-{{ section.id }} {
     --sec-pt: {{ s.padding_top }}px;
     --sec-pb: {{ s.padding_bottom }}px;
-    --about-eyebrow-color: {{ s.eyebrow_color }};
-    --story-title-color: {{ s.title_color }};
+    --eyebrow-color: {{ s.eyebrow_color }};
+    --eyebrow-fs: {{ s.eyebrow_size }}px;
+    --title-color: {{ s.title_color }};
+    --title-fs-desktop: {{ s.title_fs_desktop }}px;
+    --title-fs-mobile: {{ s.title_fs_mobile }}px;
     --story-card-title-color: {{ s.card_title_color }};
     --story-card-desc-color: {{ s.card_desc_color }};
   }
-  #sheva-about-story-{{ section.id }} .sheva-sec-title {
-    color: var(--story-title-color);
-  }
-  #sheva-about-story-{{ section.id }} .sheva-about-card h3 {
-    color: var(--story-card-title-color);
-  }
-  #sheva-about-story-{{ section.id }} .sheva-about-card p {
-    color: var(--story-card-desc-color);
-  }
 </style>
 
-<section id="sheva-about-story-{{ section.id }}" class="sheva-about-section">
+<section
+  id="sheva-about-story-{{ section.id }}"
+  class="sheva-about-section"
+>
   <div class="sheva-about-sec-head">
     {%- if s.eyebrow != blank -%}
-      <span class="sheva-eyebrow">{{ s.eyebrow }}</span>
+      <span class="sheva-eyebrow eyebrow">
+        {{ s.eyebrow }}
+      </span>
     {%- endif -%}
     {%- if s.title != blank -%}
-      <h2 class="sheva-sec-title">{{ s.title }}</h2>
+      <h2 class="sheva-sec-title">
+        {{ s.title }}
+      </h2>
     {%- endif -%}
   </div>
 
@@ -81,6 +77,40 @@
     },
     {
       "type": "header",
+      "content": "Typography Settings"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "label": "Eyebrow Font Size (px)",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "title_fs_desktop",
+      "label": "Title Font Size Desktop (px)",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "title_fs_mobile",
+      "label": "Title Font Size Mobile (px)",
+      "min": 16,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "header",
       "content": "Colors"
     },
     {
@@ -119,7 +149,7 @@
       "max": 200,
       "step": 4,
       "unit": "px",
-      "default": 100
+      "default": 80
     },
     {
       "type": "range",
@@ -129,7 +159,7 @@
       "max": 200,
       "step": 4,
       "unit": "px",
-      "default": 100
+      "default": 80
     }
   ],
   "blocks": [

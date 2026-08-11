@@ -1,0 +1,268 @@
+{{ 'sheva-about.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+-%}
+
+<style>
+  #sheva-about-philosophy-{{ section.id }} {
+    --sec-pt: {{ s.padding_top }}px;
+    --sec-pb: {{ s.padding_bottom }}px;
+    --eyebrow-color: {{ s.eyebrow_color }};
+    --eyebrow-fs: {{ s.eyebrow_size }}px;
+    --title-color: {{ s.title_color }};
+    --title-fs-desktop: {{ s.title_fs_desktop }}px;
+    --title-fs-mobile: {{ s.title_fs_mobile }}px;
+    --sub-color: {{ s.description_color }};
+    --sub-fs: {{ s.sub_fs }}px;
+  }
+</style>
+
+<section
+  id="sheva-about-philosophy-{{ section.id }}"
+  class="sheva-about-section abt-rows"
+>
+  <div id="philosophy"></div>
+  <div class="sheva-about-sec-head abt-rows-head">
+    {%- if s.eyebrow != blank -%}
+      <span class="sheva-eyebrow eyebrow">
+        {{ s.eyebrow }}
+      </span>
+    {%- endif -%}
+    {%- if s.title != blank -%}
+      <h2 class="sheva-sec-title">
+        {{ s.title }}
+      </h2>
+    {%- endif -%}
+    {%- if s.description != blank -%}
+      <p class="sheva-sec-sub">
+        {{ s.description }}
+      </p>
+    {%- endif -%}
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="abt-rows-list">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'philosophy_row' -%}
+          <article class="abt-row" {{ block.shopify_attributes }}>
+            <div class="abt-num">{{ block.settings.number }}</div>
+            <div class="abt-row-body">
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.description }}</p>
+            </div>
+            {%- if block.settings.glyph != blank -%}
+              <div class="abt-row-glyph">{{ block.settings.glyph }}</div>
+            {%- endif -%}
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Sheva — Our Philosophy",
+  "tag": "section",
+  "class": "sheva-section-about-philosophy",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "✦ OUR PHILOSOPHY"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "More than a beverage"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Section Subtitle / Description",
+      "default": "At Sheva Tea®, our tea is more than just a beverage; it is a nurturing ritual that connects the body, mind, and spirit."
+    },
+    {
+      "type": "header",
+      "content": "Typography Settings"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "label": "Eyebrow Font Size (px)",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "title_fs_desktop",
+      "label": "Title Font Size Desktop (px)",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "title_fs_mobile",
+      "label": "Title Font Size Mobile (px)",
+      "min": 16,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "sub_fs",
+      "label": "Subtitle Font Size (px)",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#f3f0ff"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#f3f0ff"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "philosophy_row",
+      "name": "Philosophy Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number (e.g. 01)",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Our Philosophy"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Our focus on organic and ethically sourced ingredients reflects our commitment to sustainability and health."
+        },
+        {
+          "type": "text",
+          "id": "glyph",
+          "label": "Glyph / Emoji Icon",
+          "default": "🌿"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva — Our Philosophy",
+      "blocks": [
+        {
+          "type": "philosophy_row",
+          "settings": {
+            "number": "01",
+            "title": "Our Philosophy",
+            "description": "Our focus on organic and ethically sourced ingredients reflects our commitment to sustainability and health.",
+            "glyph": "🌿"
+          }
+        },
+        {
+          "type": "philosophy_row",
+          "settings": {
+            "number": "02",
+            "title": "Unique Blend",
+            "description": "Crafted with care, our tea is designed to harness the natural healing properties of botanicals. The blends are thoughtfully curated to support your health and wellness journey.",
+            "glyph": "✦"
+          }
+        },
+        {
+          "type": "philosophy_row",
+          "settings": {
+            "number": "03",
+            "title": "Rich in Antioxidants",
+            "description": "Our tea uses botanical varieties that are packed with antioxidants, which help combat oxidative stress and promote overall health.",
+            "glyph": "🍇"
+          }
+        },
+        {
+          "type": "philosophy_row",
+          "settings": {
+            "number": "04",
+            "title": "Full-Bodied Experience",
+            "description": "Our blend is designed to align with and balance your chakras, enhancing your overall energy and well-being. Each sip is crafted to resonate with specific energy centers in the body, promoting harmony and balance.",
+            "glyph": "☯️"
+          }
+        },
+        {
+          "type": "philosophy_row",
+          "settings": {
+            "number": "05",
+            "title": "Ethical Sourcing",
+            "description": "We prioritize sustainability and fair trade practices, ensuring that our ingredients are sourced responsibly. This commitment not only supports the environment but also empowers the communities' well-being.",
+            "glyph": "♻️"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
