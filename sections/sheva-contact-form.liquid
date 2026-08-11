@@ -1,0 +1,275 @@
+{{ 'sheva-contact.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+-%}
+
+<style>
+  #sheva-contact-form-{{ section.id }} {
+    --sec-pt: {{ s.padding_top }}px;
+    --sec-pb: {{ s.padding_bottom }}px;
+    --eyebrow-color: {{ s.eyebrow_color }};
+    --eyebrow-fs: {{ s.eyebrow_size }}px;
+    --title-color: {{ s.title_color }};
+    --title-fs-desktop: {{ s.title_fs_desktop }}px;
+    --title-fs-mobile: {{ s.title_fs_mobile }}px;
+    --sub-fs: {{ s.sub_fs }}px;
+    --btn-from: {{ s.btn_color_from }};
+    --btn-to: {{ s.btn_color_to }};
+  }
+</style>
+
+<section
+  id="sheva-contact-form-{{ section.id }}"
+  class="contact-form-wrap sheva-contact-form-wrap"
+>
+  <div id="form"></div>
+  <div class="sec-head sheva-contact-form-head">
+    {%- if s.eyebrow != blank -%}
+      <span class="eyebrow sheva-eyebrow">
+        {{ s.eyebrow }}
+      </span>
+    {%- endif -%}
+
+    {%- if s.title != blank -%}
+      <h2 class="section-title sheva-glow-text">
+        {{ s.title }}
+      </h2>
+    {%- endif -%}
+
+    {%- if s.subtitle != blank -%}
+      <p class="sec-sub sheva-sec-sub">
+        {{ s.subtitle }}
+      </p>
+    {%- endif -%}
+  </div>
+
+  {%- form 'contact', id: 'ContactForm', class: 'contact-form sheva-contact-form' -%}
+    {%- if form.posted_successfully? -%}
+      <div class="contact-form__success sheva-contact-form__success" role="status">
+        <p>✦ Thank you for reaching out! We usually reply within one earth-day.</p>
+      </div>
+    {%- endif -%}
+
+    {%- if form.errors -%}
+      <div class="contact-form__errors sheva-contact-form__errors" role="alert">
+        <p>{{ form.errors | default_errors }}</p>
+      </div>
+    {%- endif -%}
+
+    <div class="field-row sheva-contact-field-row">
+      <div class="field sheva-contact-field">
+        <label for="ContactForm-name">Full Name</label>
+        <input
+          type="text"
+          id="ContactForm-name"
+          name="contact[name]"
+          value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+          placeholder="Enter your full name"
+          required
+        >
+      </div>
+
+      <div class="field sheva-contact-field">
+        <label for="ContactForm-email">Email Address</label>
+        <input
+          type="email"
+          id="ContactForm-email"
+          name="contact[email]"
+          autocorrect="off"
+          autocapitalize="off"
+          value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+          placeholder="Enter your email"
+          required
+        >
+      </div>
+    </div>
+
+    <div class="field-row sheva-contact-field-row">
+      <div class="field sheva-contact-field">
+        <label for="ContactForm-subject">Subject</label>
+        <input
+          type="text"
+          id="ContactForm-subject"
+          name="contact[subject]"
+          value="{{ form.subject }}"
+          placeholder="What can we help you with?"
+        >
+      </div>
+
+      <div class="field sheva-contact-field">
+        <label for="ContactForm-topic">Topic</label>
+        <select id="ContactForm-topic" name="contact[Topic]" class="c-select">
+          <option value="General Support">General Support</option>
+          <option value="Order & Shipping">Order & Shipping</option>
+          <option value="Wholesale Inquiry">Wholesale Inquiry</option>
+          <option value="Collaboration / PR">Collaboration / PR</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field sheva-contact-field">
+      <label for="ContactForm-body">Message</label>
+      <textarea
+        rows="6"
+        id="ContactForm-body"
+        name="contact[body]"
+        placeholder="Write your message here..."
+        required
+      >{{- form.body -}}</textarea>
+    </div>
+
+    <button type="submit" class="btn-primary sheva-btn-primary contact-submit">
+      {{ s.btn_label | default: "Send Message" }}
+    </button>
+
+    {%- if s.form_note != blank -%}
+      <p class="contact-note sheva-contact-note">{{ s.form_note }}</p>
+    {%- endif -%}
+  {%- endform -%}
+</section>
+
+{% schema %}
+{
+  "name": "Sheva — Contact Form",
+  "tag": "section",
+  "class": "sheva-section-contact-form",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "✦ SEND A SIGNAL"
+    },
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "<p>Drop us a <em>message</em></p>"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "We usually reply within one earth-day."
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Submit Button Label",
+      "default": "Send Message"
+    },
+    {
+      "type": "text",
+      "id": "form_note",
+      "label": "Form Disclaimer / Note",
+      "default": "By submitting, you agree to be contacted by Sheva Tea® regarding your inquiry."
+    },
+    {
+      "type": "header",
+      "content": "Typography Settings"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "label": "Eyebrow Font Size (px)",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "title_fs_desktop",
+      "label": "Title Font Size Desktop (px)",
+      "min": 20,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "title_fs_mobile",
+      "label": "Title Font Size Mobile (px)",
+      "min": 16,
+      "max": 44,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "sub_fs",
+      "label": "Subtitle Font Size (px)",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#f3f0ff"
+    },
+    {
+      "type": "color",
+      "id": "btn_color_from",
+      "label": "Button Gradient From",
+      "default": "#ff4db8"
+    },
+    {
+      "type": "color",
+      "id": "btn_color_to",
+      "label": "Button Gradient To",
+      "default": "#8b5cf6"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 52
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva — Contact Form"
+    }
+  ]
+}
+{% endschema %}

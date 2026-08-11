@@ -11,6 +11,34 @@
   "sections": {
     "product-hero": {
       "type": "product-hero",
+      "blocks": {
+        "accordion_EwGCVK": {
+          "type": "accordion",
+          "settings": {
+            "title": "Key Features",
+            "description": "{{ product.metafields.custom.key_features | metafield_tag }}"
+          }
+        },
+        "accordion_QBBD8f": {
+          "type": "accordion",
+          "settings": {
+            "title": "Why Choose?",
+            "description": "{{ product.metafields.custom.why_choose | metafield_tag }}"
+          }
+        },
+        "accordion_DRHbYt": {
+          "type": "accordion",
+          "settings": {
+            "title": "Benefits",
+            "description": "{{ product.metafields.custom.benefits | metafield_tag }}"
+          }
+        }
+      },
+      "block_order": [
+        "accordion_EwGCVK",
+        "accordion_QBBD8f",
+        "accordion_DRHbYt"
+      ],
       "settings": {
         "eyebrow": "✦ SEVEN STAR ENERGY®",
         "tagline": "A cosmic herbal blend crafted to elevate energy, clarity, and calm.",

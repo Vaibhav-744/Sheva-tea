@@ -1,0 +1,556 @@
+/* ============================================================
+   SHEVA TEA — Contact Page CSS
+============================================================ */
+
+/* ── 1 · CONTACT HERO ── */
+.contact-hero,
+.sheva-contact-hero {
+  position: relative;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 60px;
+  align-items: center;
+  padding-top: var(--sec-pt, 140px);
+  padding-bottom: var(--sec-pb, 80px);
+  padding-left: 24px;
+  padding-right: 24px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-copy,
+.sheva-contact-copy {
+  max-width: 680px;
+}
+
+.contact-copy .eyebrow,
+.contact-copy .sheva-eyebrow {
+  display: inline-block;
+  font-family: var(--sheva-font-heading);
+  letter-spacing: 4px;
+  font-size: var(--eyebrow-fs, 12px);
+  margin-bottom: 12px;
+  color: var(--eyebrow-color, #22d3ee) !important;
+  text-transform: uppercase;
+}
+
+.contact-copy h1,
+.contact-copy h1 p {
+  font-family: var(--sheva-font-heading);
+  font-weight: 900;
+  font-size: clamp(var(--headline-fs-mobile, 30px), 4.2vw, var(--headline-fs-desktop, 58px));
+  line-height: 1.1;
+  margin: 18px 0 18px;
+  color: var(--headline-color, #f3f0ff) !important;
+  letter-spacing: 0 !important;
+}
+
+.contact-copy h1 em,
+.contact-copy h1 .glow {
+  font-style: normal;
+  background: linear-gradient(90deg, #ff4db8, #ff7a3d, #22d3ee, #ff4db8);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  animation: shevaShimmer 5s linear infinite;
+}
+
+.contact-copy>p,
+.contact-copy .contact-desc {
+  max-width: 620px;
+  font-size: var(--desc-fs, 16px);
+  line-height: 1.85;
+  opacity: .86;
+  color: var(--desc-color, #f3f0ff);
+  font-family: var(--sheva-font-body);
+  margin-bottom: 24px;
+}
+
+.contact-pill-row,
+.sheva-contact-pill-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.contact-pill,
+.sheva-contact-pill {
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.contact-pill strong,
+.sheva-contact-pill strong {
+  display: block;
+  font-family: var(--sheva-font-heading);
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  margin-bottom: 8px;
+  color: var(--cyan, #22d3ee);
+  text-transform: uppercase;
+}
+
+.contact-pill p,
+.sheva-contact-pill p {
+  margin: 3px 0;
+  opacity: .82;
+  font-size: 13px;
+  line-height: 1.5;
+  word-break: break-word;
+  color: #f3f0ff;
+  font-family: var(--sheva-font-body);
+}
+
+.contact-pill a,
+.sheva-contact-pill a {
+  color: #f3f0ff;
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.contact-pill a:hover,
+.sheva-contact-pill a:hover {
+  color: var(--pink, #ff4db8);
+}
+
+.contact-orb-wrap,
+.sheva-contact-orb-wrap {
+  position: relative;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-orb,
+.sheva-contact-orb {
+  position: absolute;
+  display: block !important;
+  width: 320px;
+  height: 320px;
+  max-width: 90%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffb37a, #ff4db8 35%, #8b5cf6 70%, #1e1065 100%);
+  box-shadow: inset -40px -40px 80px rgba(0, 0, 0, .6), 0 0 100px rgba(255, 77, 184, .45);
+  animation: pulseOrb 6s ease-in-out infinite;
+}
+
+.contact-orb-inner,
+.sheva-contact-orb-inner {
+  position: absolute;
+  display: block !important;
+  width: 400px;
+  height: 400px;
+  max-width: 100%;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.35);
+  animation: spin 22s linear infinite reverse;
+  pointer-events: none;
+}
+
+/* ── 2 · SECTION HEADINGS (MATCHING contact.html) ── */
+.sec-head,
+.sheva-contact-form-head,
+.sheva-contact-faq-head {
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 0 20px;
+}
+
+.sec-head .eyebrow,
+.sec-head .sheva-eyebrow,
+.contact-form-wrap .eyebrow,
+.contact-faq .eyebrow {
+  display: inline-block;
+  font-family: var(--sheva-font-heading);
+  letter-spacing: 4px;
+  font-size: var(--eyebrow-fs, 12px);
+  margin-bottom: 12px;
+  color: var(--eyebrow-color, #22d3ee) !important;
+  text-transform: uppercase;
+}
+
+.section-title,
+.sec-head .section-title,
+.sec-head .section-title p,
+.sheva-contact-form-head h2,
+.sheva-contact-faq-head h2 {
+  font-family: var(--sheva-font-heading);
+  font-size: clamp(var(--title-fs-mobile, 28px), 4vw, var(--title-fs-desktop, 52px));
+  line-height: 1.1;
+  margin: 0 0 14px;
+  padding: 0;
+  color: var(--title-color, #f3f0ff);
+  letter-spacing: 0 !important;
+}
+
+.section-title em,
+.section-title .glow,
+.sec-head .section-title em,
+.sec-head .section-title .glow,
+.sec-head h2 em,
+.sec-head h2 .glow {
+  font-style: normal;
+  background: linear-gradient(90deg, #ff4db8, #ff7a3d, #22d3ee, #ff4db8);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  animation: shevaShimmer 5s linear infinite;
+}
+
+.sec-sub,
+.sec-head .sec-sub,
+.sec-head .sec-sub p,
+.sheva-sec-sub {
+  opacity: .7;
+  font-size: var(--sub-fs, 15px);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+  color: #f3f0ff;
+  font-family: var(--sheva-font-body);
+}
+
+/* ── 3 · CONTACT FORM (MATCHING contact.html) ── */
+.contact-form-wrap,
+.sheva-contact-form-wrap {
+  position: relative;
+  z-index: 5;
+  padding: var(--sec-pt, 40px) 8% var(--sec-pb, 90px);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-form,
+.sheva-contact-form {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 34px;
+  border-radius: 26px;
+  background: rgba(5, 0, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-sizing: border-box;
+}
+
+.contact-form__success,
+.sheva-contact-form__success {
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: rgba(34, 211, 238, 0.15);
+  border: 1px solid #22d3ee;
+  color: #22d3ee;
+  font-family: var(--sheva-font-body);
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.contact-form__errors,
+.sheva-contact-form__errors {
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: rgba(255, 77, 184, 0.15);
+  border: 1px solid #ff4db8;
+  color: #ff4db8;
+  font-family: var(--sheva-font-body);
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.field-row,
+.sheva-contact-field-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.field,
+.sheva-contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-form label,
+.sheva-contact-form label {
+  font-family: var(--sheva-font-heading);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: .8;
+  color: #f3f0ff;
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form .c-select,
+.sheva-contact-form input,
+.sheva-contact-form textarea,
+.sheva-contact-form .c-select {
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(12, 6, 40, 0.9);
+  color: #fff;
+  padding: 14px 16px;
+  font-family: var(--sheva-font-body);
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color .3s, box-shadow .3s;
+}
+
+.contact-form textarea,
+.sheva-contact-form textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form .c-select:focus,
+.sheva-contact-form input:focus,
+.sheva-contact-form textarea:focus,
+.sheva-contact-form .c-select:focus {
+  outline: none;
+  border-color: var(--pink, #ff4db8);
+  box-shadow: 0 0 0 3px rgba(255, 77, 184, 0.18);
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder,
+.sheva-contact-form input::placeholder,
+.sheva-contact-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.contact-form .field:last-of-type,
+.sheva-contact-form .field:last-of-type {
+  margin-bottom: 22px;
+}
+
+/* ── Primary Submit Button (MATCHING contact.html) ── */
+.contact-submit,
+.btn-primary.contact-submit,
+.sheva-contact-form .sheva-btn-primary,
+.sheva-contact-form .btn-primary {
+  display: inline-block;
+  padding: 16px 36px;
+  background: linear-gradient(90deg, var(--btn-from, #ff4db8), var(--btn-to, #8b5cf6));
+  color: #fff !important;
+  font-family: var(--sheva-font-body);
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 13px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(255, 77, 184, .5);
+  transition: transform .3s, box-shadow .3s;
+  width: auto;
+}
+
+.contact-submit:hover,
+.btn-primary.contact-submit:hover,
+.sheva-contact-form .sheva-btn-primary:hover,
+.sheva-contact-form .btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 50px rgba(255, 77, 184, .8);
+  color: #fff !important;
+}
+
+.contact-note,
+.sheva-contact-note {
+  margin-top: 14px;
+  font-size: 12px;
+  opacity: .65;
+  line-height: 1.6;
+  color: #f3f0ff;
+  font-family: var(--sheva-font-body);
+}
+
+/* ── 4 · CONTACT FAQ (MATCHING contact.html) ── */
+.contact-faq,
+.sheva-contact-faq {
+  position: relative;
+  z-index: 5;
+  padding: var(--sec-pt, 20px) 8% var(--sec-pb, 100px);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.faq-list,
+.sheva-faq-list {
+  max-width: 860px;
+  margin: 0 auto;
+  display: grid;
+  gap: 12px;
+}
+
+.faq-item,
+.sheva-faq-item {
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 18px 22px;
+  transition: border-color .3s, background .3s;
+}
+
+.faq-item[open],
+.sheva-faq-item[open] {
+  border-color: rgba(255, 77, 184, 0.45);
+  background: rgba(255, 77, 184, 0.06);
+}
+
+.faq-item summary,
+.sheva-faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--sheva-font-heading);
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+
+.faq-item summary::-webkit-details-marker,
+.sheva-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after,
+.sheva-faq-item summary::after {
+  content: '+';
+  font-size: 20px;
+  color: var(--cyan, #22d3ee);
+  flex: 0 0 auto;
+  transition: transform .3s;
+}
+
+.faq-item[open] summary::after,
+.sheva-faq-item[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.faq-item p,
+.sheva-faq-item p {
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.8;
+  opacity: .8;
+  color: #f3f0ff;
+  font-family: var(--sheva-font-body);
+}
+
+/* ── Responsive Breakpoints ── */
+@media (max-width: 1024px) {
+  .contact-hero,
+  .sheva-contact-hero {
+    padding-top: 130px;
+    padding-bottom: 60px;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 900px) {
+  .contact-hero,
+  .sheva-contact-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-orb-wrap,
+  .sheva-contact-orb-wrap {
+    min-height: 280px;
+    order: -1;
+  }
+
+  .field-row,
+  .sheva-contact-field-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-hero,
+  .sheva-contact-hero {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .contact-pill-row,
+  .sheva-contact-pill-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-orb,
+  .sheva-contact-orb {
+    width: 220px;
+    height: 220px;
+  }
+
+  .contact-orb-inner,
+  .sheva-contact-orb-inner {
+    width: 280px;
+    height: 280px;
+  }
+
+  .contact-form-wrap,
+  .sheva-contact-form-wrap {
+    padding: 20px 20px 70px;
+  }
+
+  .contact-form,
+  .sheva-contact-form {
+    padding: 26px 20px;
+  }
+
+  .contact-faq,
+  .sheva-contact-faq {
+    padding: 20px 20px 80px;
+  }
+
+  .faq-item,
+  .sheva-faq-item {
+    padding: 16px 18px;
+  }
+}
+
+@media (max-width: 420px) {
+  .contact-copy h1,
+  .sheva-contact-copy h1 {
+    font-size: 26px;
+  }
+
+  .contact-form,
+  .sheva-contact-form {
+    padding: 22px 16px;
+    border-radius: 20px;
+  }
+
+  .contact-submit,
+  .btn-primary.contact-submit {
+    width: 100%;
+    text-align: center;
+  }
+
+  .faq-item summary,
+  .sheva-faq-item summary {
+    font-size: 13px;
+  }
+}

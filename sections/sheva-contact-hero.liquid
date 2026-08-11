@@ -1,0 +1,247 @@
+{{ 'sheva-contact.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+-%}
+
+<style>
+  #sheva-contact-hero-{{ section.id }} {
+    --sec-pt: {{ s.padding_top }}px;
+    --sec-pb: {{ s.padding_bottom }}px;
+    --eyebrow-color: {{ s.eyebrow_color }};
+    --eyebrow-fs: {{ s.eyebrow_size }}px;
+    --headline-color: {{ s.headline_color }};
+    --headline-fs-desktop: {{ s.headline_fs_desktop }}px;
+    --headline-fs-mobile: {{ s.headline_fs_mobile }}px;
+    --desc-color: {{ s.desc_color }};
+    --desc-fs: {{ s.desc_fs }}px;
+  }
+</style>
+
+<section
+  id="sheva-contact-hero-{{ section.id }}"
+  class="contact-hero sheva-contact-hero"
+>
+  <div id="contact"></div>
+  <div class="contact-copy sheva-contact-copy">
+    {%- if s.eyebrow != blank -%}
+      <span class="eyebrow sheva-eyebrow">
+        {{ s.eyebrow }}
+      </span>
+    {%- endif -%}
+
+    {%- if s.headline != blank -%}
+      <h1 class="sheva-glow-text">
+        {{ s.headline }}
+      </h1>
+    {%- endif -%}
+
+    {%- if s.description != blank -%}
+      <p class="contact-desc sheva-contact-desc">
+        {{ s.description }}
+      </p>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="contact-pill-row sheva-contact-pill-row">
+        {%- for block in section.blocks -%}
+          <div class="contact-pill sheva-contact-pill" {{ block.shopify_attributes }}>
+            {%- if block.settings.title != blank -%}
+              <strong>{{ block.settings.title }}</strong>
+            {%- endif -%}
+            {%- if block.settings.line_1 != blank -%}
+              <p>{{ block.settings.line_1 }}</p>
+            {%- endif -%}
+            {%- if block.settings.line_2 != blank -%}
+              <p>{{ block.settings.line_2 }}</p>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="contact-orb-wrap sheva-contact-orb-wrap" aria-hidden="true">
+    <div class="contact-orb sheva-contact-orb"></div>
+    <div class="contact-orb-inner sheva-contact-orb-inner"></div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sheva — Contact Hero",
+  "tag": "section",
+  "class": "sheva-section-contact-hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "✦ CONTACT SHEVA TEA®"
+    },
+    {
+      "type": "richtext",
+      "id": "headline",
+      "label": "Headline",
+      "default": "<p>Let's talk tea, ritual & <em>cosmic wellness</em>.</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Reach out for questions about Supernova Tea, the Titan Aura collection, wholesale inquiries, collaborations, or general support. We'd love to hear from you."
+    },
+    {
+      "type": "header",
+      "content": "Typography Settings"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "label": "Eyebrow Font Size (px)",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "headline_fs_desktop",
+      "label": "Headline Font Size Desktop (px)",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 58
+    },
+    {
+      "type": "range",
+      "id": "headline_fs_mobile",
+      "label": "Headline Font Size Mobile (px)",
+      "min": 18,
+      "max": 44,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "desc_fs",
+      "label": "Description Font Size (px)",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "color",
+      "id": "headline_color",
+      "label": "Headline Color",
+      "default": "#f3f0ff"
+    },
+    {
+      "type": "color",
+      "id": "desc_color",
+      "label": "Description Color",
+      "default": "#f3f0ff"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 40,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 140
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 20,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "contact_info",
+      "name": "Contact Info Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Email"
+        },
+        {
+          "type": "richtext",
+          "id": "line_1",
+          "label": "Line 1",
+          "default": "<p><a href='mailto:hello@shevatea.com'>hello@shevatea.com</a></p>"
+        },
+        {
+          "type": "richtext",
+          "id": "line_2",
+          "label": "Line 2",
+          "default": "<p><a href='mailto:pr@shevatea.com'>pr@shevatea.com</a></p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva — Contact Hero",
+      "blocks": [
+        {
+          "type": "contact_info",
+          "settings": {
+            "title": "Email",
+            "line_1": "<p><a href='mailto:hello@shevatea.com'>hello@shevatea.com</a></p>",
+            "line_2": "<p><a href='mailto:pr@shevatea.com'>pr@shevatea.com</a></p>"
+          }
+        },
+        {
+          "type": "contact_info",
+          "settings": {
+            "title": "Hours",
+            "line_1": "<p>Mon – Sat</p>",
+            "line_2": "<p>10:00 AM – 6:00 PM IST</p>"
+          }
+        },
+        {
+          "type": "contact_info",
+          "settings": {
+            "title": "Social",
+            "line_1": "<p>Instagram · TikTok</p>",
+            "line_2": "<p>YouTube</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

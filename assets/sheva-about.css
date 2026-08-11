@@ -2,14 +2,6 @@
    SHEVA TEA — About Page CSS (Editorial & Cosmic Theme)
 ============================================================ */
 
-/* ── Global CSS Variables Fallback ── */
-:root {
-  --pink: #ff4db8;
-  --orange: #ff7a3d;
-  --cyan: #22d3ee;
-  --purple: #8b5cf6;
-}
-
 /* ── Shared Eyebrows ── */
 .sheva-about-hero__eyebrow,
 .sheva-about-sec-head .sheva-eyebrow,
@@ -24,7 +16,7 @@
 .sheva-eyebrow,
 .eyebrow {
   display: inline-block;
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   letter-spacing: 4px;
   font-size: var(--eyebrow-fs, 12px);
   margin-bottom: 12px;
@@ -42,7 +34,7 @@
   background: linear-gradient(90deg, var(--btn-from, #ff4db8), var(--btn-to, #8b5cf6));
   color: var(--btn-text-color, #fff) !important;
   text-decoration: none !important;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sheva-font-body);
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -69,7 +61,7 @@
   border: 1px solid var(--btn-ghost-border, rgba(255, 255, 255, .3));
   color: var(--btn-ghost-color, #fff) !important;
   text-decoration: none !important;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sheva-font-body);
   letter-spacing: 2px;
   text-transform: uppercase;
   font-size: 13px;
@@ -119,7 +111,7 @@
   top: 42%;
   transform: rotate(-90deg);
   transform-origin: left center;
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   font-size: 12px;
   letter-spacing: 8px;
   color: rgba(255, 255, 255, 0.28);
@@ -136,13 +128,13 @@
 .abt-hero-copy h1,
 .sheva-about-hero__headline,
 .sheva-about-hero__headline p {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   font-weight: 900;
   font-size: clamp(var(--headline-fs-mobile, 30px), 4.4vw, var(--headline-fs-desktop, 62px));
   line-height: 1.08;
   margin: 16px 0 20px;
   color: var(--headline-color, #f3f0ff) !important;
-  letter-spacing: normal !important;
+  letter-spacing: 0 !important;
 }
 
 .abt-hero-copy h1 .glow,
@@ -165,7 +157,7 @@
   opacity: .85;
   max-width: 620px;
   color: var(--desc-color, var(--about-desc-color, #f3f0ff));
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sheva-font-body);
   margin-bottom: 24px;
 }
 
@@ -185,7 +177,7 @@
 }
 
 .abt-hero-meta strong {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   font-size: 30px;
   line-height: 1;
   background: linear-gradient(90deg, #ff4db8, #ff7a3d);
@@ -256,11 +248,12 @@
 }
 
 .abt-rows-head h2 {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   font-size: clamp(var(--title-fs-mobile, 26px), 3.4vw, var(--title-fs-desktop, 44px));
   line-height: 1.15;
   margin: 10px 0 12px;
   color: var(--title-color, var(--phil-title-color, #f3f0ff));
+  letter-spacing: 0 !important;
 }
 
 .abt-rows-head p {
@@ -291,7 +284,7 @@
 }
 
 .abt-num {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   font-size: 36px;
   font-weight: 900;
   color: transparent;
@@ -299,7 +292,7 @@
 }
 
 .abt-row-body h3 {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   font-size: 19px;
   letter-spacing: 1.5px;
   margin-bottom: 8px;
@@ -312,7 +305,7 @@
   opacity: .78;
   max-width: 780px;
   color: #f3f0ff;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sheva-font-body);
   margin: 0;
 }
 
@@ -349,11 +342,12 @@
 
 .abt-mission-intro h2,
 .abt-mission-intro h2 p {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   font-size: clamp(var(--title-fs-mobile, 28px), 3.8vw, var(--title-fs-desktop, 50px));
   line-height: 1.12;
   margin: 10px 0 16px;
   color: var(--title-color, var(--mis-title-color, #f3f0ff));
+  letter-spacing: 0 !important;
 }
 
 .abt-mission-intro h2 em,
@@ -457,7 +451,7 @@
 }
 
 .chk b {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   font-size: 14px;
   letter-spacing: 1.5px;
   color: #fff;
@@ -510,7 +504,7 @@
 }
 
 .abt-quote-mark {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   font-size: 90px;
   line-height: .6;
   color: var(--man-quote-mark, rgba(255, 77, 184, 0.5));
@@ -519,7 +513,7 @@
 
 .abt-manifesto blockquote,
 .abt-manifesto blockquote p {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   font-weight: 700;
   font-size: clamp(var(--man-quote-fs-mobile, 19px), 2.7vw, var(--man-quote-fs-desktop, 34px));
   line-height: 1.4;
@@ -529,7 +523,7 @@
   z-index: 2;
   color: #f3f0ff !important;
   padding: 0;
-  letter-spacing: 0;
+  letter-spacing: 0 !important;
 }
 
 .abt-manifesto blockquote .glow,
@@ -554,7 +548,7 @@
 }
 
 .abt-manifesto-foot span {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   font-size: var(--man-submark-fs, 11px);
   letter-spacing: 4px;
   color: var(--man-submark, var(--cyan, #22d3ee));
@@ -580,11 +574,12 @@
 }
 
 .abt-source h2 {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   font-size: clamp(var(--src-title-fs-mobile, 26px), 3.4vw, var(--src-title-fs-desktop, 44px));
   line-height: 1.15;
   margin: 10px 0 14px;
   color: var(--src-title-color, #f3f0ff);
+  letter-spacing: 0 !important;
 }
 
 .abt-source p {
@@ -646,11 +641,12 @@
 }
 
 .sheva-about-sec-head .sheva-sec-title {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   font-size: clamp(var(--title-fs-mobile, 28px), 4vw, var(--title-fs-desktop, 52px));
   margin-bottom: 14px;
   line-height: 1.1;
   color: var(--title-color, var(--story-title-color, var(--val-title-color, var(--why-title-color, #f3f0ff))));
+  letter-spacing: 0 !important;
 }
 
 .sheva-about-grid,
@@ -686,7 +682,7 @@
 .sheva-about-card h3,
 .sheva-value-card h4,
 .sheva-highlight-item h4 {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   margin: 0 0 12px;
   color: #fff;
   font-weight: 700;
@@ -699,7 +695,7 @@
   opacity: .8;
   line-height: 1.6;
   color: #f3f0ff;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sheva-font-body);
   margin: 0;
 }
 
@@ -733,11 +729,12 @@
 }
 
 .sheva-about-cta h2 {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   font-size: clamp(var(--cta-title-fs-mobile, 28px), 4vw, var(--cta-title-fs-desktop, 54px));
   margin: 0 0 14px;
   font-weight: 900;
   color: var(--cta-title-color, #f3f0ff);
+  letter-spacing: 0 !important;
 }
 
 .sheva-about-cta p {
@@ -745,7 +742,7 @@
   margin: 0 0 28px;
   color: var(--cta-sub-color, #f3f0ff);
   font-size: var(--cta-sub-fs, 16px);
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sheva-font-body);
 }
 
 /* ── Glow / Shimmer text ── */

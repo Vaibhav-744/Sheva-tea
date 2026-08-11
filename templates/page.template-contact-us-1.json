@@ -9,37 +9,9 @@
  */
 {
   "sections": {
-    "google-map": {
-      "type": "google-map",
-      "settings": {
-        "show_custom_map": true,
-        "container": "fullwidth",
-        "mg_top_desktop": 0,
-        "mg_top_tablet": 0,
-        "mg_top_mobile": 0,
-        "mg_bottom_desktop": 30,
-        "mg_bottom_tablet": 0,
-        "mg_bottom_mobile": 0,
-        "block_title": "",
-        "block_text": "",
-        "block_align": "center",
-        "block_max_width": 300,
-        "btn_text": "",
-        "btn_text_color": "",
-        "btn_border_color": "",
-        "btn_bg_color": "",
-        "btn_bg_color_gradient": "",
-        "btn_text_color_hover": "",
-        "btn_border_color_hover": "",
-        "btn_bg_color_hover": "",
-        "btn_bg_color_hover_gradient": "",
-        "btn_max_width": 205,
-        "btn_link": "",
-        "block_content": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0985086794008!2d-122.40480278434755!3d37.7877311191863!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808814a1b309%3A0x616fef8687897e9!2s685%20Market%20St%2C%20San%20Francisco%2C%20CA%2094105%2C%20Hoa%20K%E1%BB%B3!5e0!3m2!1svi!2s!4v1658982243728!5m2!1svi!2s\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
-      }
-    },
     "main": {
       "type": "main-contact-us-1",
+      "disabled": true,
       "settings": {
         "show_breadcrumb": true,
         "breadcrumb_alignment": "left",
@@ -65,10 +37,133 @@
         "contact_info_content_2": "<p>Opening Hours:\n<br>\nMON to SAT: \n9:00AM - 10:00PM\n<br>\nSUN: 10:00AM - 6:00PM</p>",
         "enable_border_top": true
       }
+    },
+    "sheva_contact_hero_niNKcp": {
+      "type": "sheva-contact-hero",
+      "blocks": {
+        "contact_info_czzVTb": {
+          "type": "contact_info",
+          "settings": {
+            "title": "Email",
+            "line_1": "<p><a href='mailto:hello@shevatea.com'>hello@shevatea.com</a></p>",
+            "line_2": "<p><a href='mailto:pr@shevatea.com'>pr@shevatea.com</a></p>"
+          }
+        },
+        "contact_info_9b4Gxb": {
+          "type": "contact_info",
+          "settings": {
+            "title": "Hours",
+            "line_1": "<p>Mon – Sat</p>",
+            "line_2": "<p>10:00 AM – 6:00 PM IST</p>"
+          }
+        },
+        "contact_info_6UhBQk": {
+          "type": "contact_info",
+          "settings": {
+            "title": "Social",
+            "line_1": "<p>Instagram · TikTok</p>",
+            "line_2": "<p>YouTube</p>"
+          }
+        }
+      },
+      "block_order": [
+        "contact_info_czzVTb",
+        "contact_info_9b4Gxb",
+        "contact_info_6UhBQk"
+      ],
+      "name": "Sheva — Contact Hero",
+      "settings": {
+        "eyebrow": "✦ CONTACT SHEVA TEA®",
+        "headline": "<p>Let's talk tea, ritual & <em>cosmic wellness</em>.</p>",
+        "description": "Reach out for questions about Supernova Tea, the Titan Aura collection, wholesale inquiries, collaborations, or general support. We'd love to hear from you.",
+        "eyebrow_size": 12,
+        "headline_fs_desktop": 58,
+        "headline_fs_mobile": 30,
+        "desc_fs": 16,
+        "eyebrow_color": "#22d3ee",
+        "headline_color": "#f3f0ff",
+        "desc_color": "#f3f0ff",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "sheva_contact_form_E6QLzG": {
+      "type": "sheva-contact-form",
+      "name": "Sheva — Contact Form",
+      "settings": {
+        "eyebrow": "✦ SEND A SIGNAL",
+        "title": "<p>Drop us a <em>message</em></p>",
+        "subtitle": "We usually reply within one earth-day.",
+        "btn_label": "Send Message",
+        "form_note": "By submitting, you agree to be contacted by Sheva Tea® regarding your inquiry.",
+        "eyebrow_size": 12,
+        "title_fs_desktop": 48,
+        "title_fs_mobile": 28,
+        "sub_fs": 15,
+        "eyebrow_color": "#22d3ee",
+        "title_color": "#f3f0ff",
+        "btn_color_from": "#ff4db8",
+        "btn_color_to": "#8b5cf6",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "sheva_contact_faq_4MNkU7": {
+      "type": "sheva-contact-faq",
+      "blocks": {
+        "faq_item_ExXaVN": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "Domestic orders ship within 1–2 business days and typically arrive in 3–6 days. Free shipping applies on orders over $50."
+          }
+        },
+        "faq_item_riLmaj": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I change or cancel my subscription?",
+            "answer": "Yes. Subscriptions can be paused, rescheduled, or cancelled anytime — just email us with your order number."
+          }
+        },
+        "faq_item_8UkRAY": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer wholesale or bulk pricing?",
+            "answer": "We do. Choose 'Wholesale Inquiry' in the form above and include your store name, location, and expected volume."
+          }
+        },
+        "faq_item_CQWwpN": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is Supernova Tea caffeine-free?",
+            "answer": "Supernova is a caffeine-free herbal blend. Its energy comes from adaptogenic botanicals, not stimulants."
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_ExXaVN",
+        "faq_item_riLmaj",
+        "faq_item_8UkRAY",
+        "faq_item_CQWwpN"
+      ],
+      "name": "Sheva — Contact FAQ",
+      "settings": {
+        "eyebrow": "✦ QUICK ANSWERS",
+        "title": "Before you write",
+        "eyebrow_size": 12,
+        "title_fs_desktop": 48,
+        "title_fs_mobile": 28,
+        "eyebrow_color": "#22d3ee",
+        "title_color": "#f3f0ff",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
-    "google-map",
-    "main"
+    "main",
+    "sheva_contact_hero_niNKcp",
+    "sheva_contact_form_E6QLzG",
+    "sheva_contact_faq_4MNkU7"
   ]
 }

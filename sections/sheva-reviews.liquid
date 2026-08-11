@@ -41,7 +41,7 @@
           {{ section.settings.rating_score }}
           <span class="sheva-stars-rating" style="font-size: 22px;">★★★★★</span>
         </div>
-        <p style="font-size: {{ section.settings.rating_label_fs }}px; opacity: .7; color: #f3f0ff; font-family: 'Poppins', sans-serif; margin-top: 6px;">
+        <p style="font-size: {{ section.settings.rating_label_fs }}px; opacity: .7; color: #f3f0ff; font-family: var(--sheva-font-body); margin-top: 6px;">
           Based on {{ section.settings.rating_count }} verified reviews
         </p>
       </div>
@@ -62,7 +62,7 @@
             aria-hidden="true"
           >{{ block.settings.initials }}</div>
           <div>
-            <strong style="font-size: {{ section.settings.name_fs }}px; color: #fff; font-family: 'Poppins', sans-serif; letter-spacing: 1px; display: block;">{{ block.settings.name }}</strong>
+            <strong style="font-size: {{ section.settings.name_fs }}px; color: #fff; font-family: var(--sheva-font-body); letter-spacing: 1px; display: block;">{{ block.settings.name }}</strong>
             {%- if block.settings.verified -%}
               <span class="sheva-rev__verified" style="font-size: {{ section.settings.verified_fs }}px;">✓ Verified Buyer</span>
             {%- endif -%}
@@ -104,7 +104,7 @@
                 aria-hidden="true"
               >{{ block.settings.initials }}</div>
               <div>
-                <strong style="font-size: {{ section.settings.name_fs }}px; color: #fff; font-family: 'Poppins', sans-serif; letter-spacing: 1px; display: block;">{{ block.settings.name }}</strong>
+                <strong style="font-size: {{ section.settings.name_fs }}px; color: #fff; font-family: var(--sheva-font-body); letter-spacing: 1px; display: block;">{{ block.settings.name }}</strong>
                 {%- if block.settings.verified -%}
                   <span class="sheva-rev__verified" style="font-size: {{ section.settings.verified_fs }}px;">✓ Verified Buyer</span>
                 {%- endif -%}

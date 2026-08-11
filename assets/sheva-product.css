@@ -1,11 +1,4 @@
-/* ============ DESIGN TOKENS (VARS) ============ */
-:root {
-  --pink: #ff4db8;
-  --purple: #8b5cf6;
-  --cyan: #22d3ee;
-  --orange: #ff7a3d;
-  --text: #f3f0ff;
-}
+
 
 /* ============ GENERIC COMPONENT BUTTONS ============ */
 .btn-primary {

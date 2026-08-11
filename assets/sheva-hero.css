@@ -4,15 +4,7 @@
    and snippets/sheva-cosmic-bg.liquid respectively.
 ============================================================ */
 
-/* ── Shared Sheva design tokens ── */
-:root {
-  --sheva-pink:   #ff4db8;
-  --sheva-purple: #8b5cf6;
-  --sheva-cyan:   #22d3ee;
-  --sheva-orange: #ff7a3d;
-  --sheva-text:   #f3f0ff;
-  --sheva-bg:     #050014;
-}
+
 
 /* ── Hero Section ── */
 .sheva-hero {
@@ -111,6 +103,7 @@
   margin-bottom: 24px;
   color: var(--headline-color, #f3f0ff);
   word-break: break-word;
+  letter-spacing: 0 !important;
 }
 
 /* ── Gradient glow — applied to <em> inside richtext headlines ── */

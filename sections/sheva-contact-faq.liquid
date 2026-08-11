@@ -1,65 +1,59 @@
-{{ 'sheva-about.css' | asset_url | stylesheet_tag }}
+{{ 'sheva-contact.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
   assign s = section.settings
 -%}
 
 <style>
-  #sheva-about-sourcing-{{ section.id }} {
+  #sheva-contact-faq-{{ section.id }} {
     --sec-pt: {{ s.padding_top }}px;
     --sec-pb: {{ s.padding_bottom }}px;
     --eyebrow-color: {{ s.eyebrow_color }};
     --eyebrow-fs: {{ s.eyebrow_size }}px;
-    --src-title-color: {{ s.title_color }};
-    --src-title-fs-desktop: {{ s.title_fs_desktop }}px;
-    --src-title-fs-mobile: {{ s.title_fs_mobile }}px;
-    --src-desc-color: {{ s.description_color }};
-    --src-desc-fs: {{ s.desc_fs }}px;
-    --src-bullet-color: {{ s.bullet_color }};
+    --title-color: {{ s.title_color }};
+    --title-fs-desktop: {{ s.title_fs_desktop }}px;
+    --title-fs-mobile: {{ s.title_fs_mobile }}px;
   }
 </style>
 
 <section
-  id="sheva-about-sourcing-{{ section.id }}"
-  class="sheva-about-section abt-source"
+  id="sheva-contact-faq-{{ section.id }}"
+  class="contact-faq sheva-contact-faq"
 >
-  <div id="sourcing"></div>
-  <div class="abt-source-left">
+  <div id="faq"></div>
+  <div class="sec-head sheva-contact-faq-head">
     {%- if s.eyebrow != blank -%}
-      <span class="sheva-eyebrow eyebrow">
+      <span class="eyebrow sheva-eyebrow">
         {{ s.eyebrow }}
       </span>
     {%- endif -%}
+
     {%- if s.title != blank -%}
-      <h2>
+      <h2 class="section-title">
         {{ s.title }}
       </h2>
-    {%- endif -%}
-    {%- if s.description != blank -%}
-      <p>
-        {{ s.description }}
-      </p>
     {%- endif -%}
   </div>
 
   {%- if section.blocks.size > 0 -%}
-    <ul class="abt-checklist">
+    <div class="faq-list sheva-faq-list">
       {%- for block in section.blocks -%}
-        {%- if block.type == 'checklist_item' -%}
-          <li {{ block.shopify_attributes }}>
-            {{ block.settings.text }}
-          </li>
+        {%- if block.type == 'faq_item' -%}
+          <details class="faq-item sheva-faq-item" {{ block.shopify_attributes }}>
+            <summary>{{ block.settings.question }}</summary>
+            <p>{{ block.settings.answer }}</p>
+          </details>
         {%- endif -%}
       {%- endfor -%}
-    </ul>
+    </div>
   {%- endif -%}
 </section>
 
 {% schema %}
 {
-  "name": "Sheva — Ethical Sourcing",
+  "name": "Sheva — Contact FAQ",
   "tag": "section",
-  "class": "sheva-section-about-sourcing",
+  "class": "sheva-section-contact-faq",
   "settings": [
     {
       "type": "header",
@@ -69,19 +63,13 @@
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow Label",
-      "default": "✦ ETHICAL SOURCING"
+      "default": "✦ QUICK ANSWERS"
     },
     {
       "type": "text",
       "id": "title",
       "label": "Section Title",
-      "default": "Responsible from root to cup"
-    },
-    {
-      "type": "textarea",
-      "id": "description",
-      "label": "Description",
-      "default": "Sustainability and fair trade are not add-ons — they are how every Sheva Tea® blend is built, supporting the environment and empowering the communities' well-being."
+      "default": "Before you write"
     },
     {
       "type": "header",
@@ -102,30 +90,20 @@
       "id": "title_fs_desktop",
       "label": "Title Font Size Desktop (px)",
       "min": 20,
-      "max": 80,
+      "max": 72,
       "step": 2,
       "unit": "px",
-      "default": 44
+      "default": 48
     },
     {
       "type": "range",
       "id": "title_fs_mobile",
       "label": "Title Font Size Mobile (px)",
       "min": 16,
-      "max": 50,
+      "max": 44,
       "step": 2,
       "unit": "px",
       "default": 28
-    },
-    {
-      "type": "range",
-      "id": "desc_fs",
-      "label": "Description Font Size (px)",
-      "min": 12,
-      "max": 24,
-      "step": 1,
-      "unit": "px",
-      "default": 15
     },
     {
       "type": "header",
@@ -144,18 +122,6 @@
       "default": "#f3f0ff"
     },
     {
-      "type": "color",
-      "id": "description_color",
-      "label": "Description Color",
-      "default": "#f3f0ff"
-    },
-    {
-      "type": "color",
-      "id": "bullet_color",
-      "label": "Star Bullet Glow Color",
-      "default": "#22d3ee"
-    },
-    {
       "type": "header",
       "content": "Spacing"
     },
@@ -167,7 +133,7 @@
       "max": 200,
       "step": 4,
       "unit": "px",
-      "default": 100
+      "default": 20
     },
     {
       "type": "range",
@@ -182,44 +148,54 @@
   ],
   "blocks": [
     {
-      "type": "checklist_item",
-      "name": "Checklist Item",
+      "type": "faq_item",
+      "name": "FAQ Accordion Item",
       "settings": [
         {
           "type": "text",
-          "id": "text",
-          "label": "Text",
-          "default": "Organic, ethically sourced botanicals"
+          "id": "question",
+          "label": "Question",
+          "default": "How long does shipping take?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Domestic orders ship within 1–2 business days and typically arrive in 3–6 days. Free shipping applies on orders over $50."
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Sheva — Ethical Sourcing",
+      "name": "Sheva — Contact FAQ",
       "blocks": [
         {
-          "type": "checklist_item",
+          "type": "faq_item",
           "settings": {
-            "text": "Organic, ethically sourced botanicals"
+            "question": "How long does shipping take?",
+            "answer": "Domestic orders ship within 1–2 business days and typically arrive in 3–6 days. Free shipping applies on orders over $50."
           }
         },
         {
-          "type": "checklist_item",
+          "type": "faq_item",
           "settings": {
-            "text": "Fair trade partnerships with growing communities"
+            "question": "Can I change or cancel my subscription?",
+            "answer": "Yes. Subscriptions can be paused, rescheduled, or cancelled anytime — just email us with your order number."
           }
         },
         {
-          "type": "checklist_item",
+          "type": "faq_item",
           "settings": {
-            "text": "Sustainable, low-impact packaging choices"
+            "question": "Do you offer wholesale or bulk pricing?",
+            "answer": "We do. Choose 'Wholesale Inquiry' in the form above and include your store name, location, and expected volume."
           }
         },
         {
-          "type": "checklist_item",
+          "type": "faq_item",
           "settings": {
-            "text": "Transparent sourcing across every blend"
+            "question": "Is Supernova Tea caffeine-free?",
+            "answer": "Supernova is a caffeine-free herbal blend. Its energy comes from adaptogenic botanicals, not stimulants."
           }
         }
       ]
