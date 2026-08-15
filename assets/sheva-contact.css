@@ -11,8 +11,8 @@
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
   gap: 60px;
   align-items: center;
-  padding-top: var(--sec-pt, 140px);
-  padding-bottom: var(--sec-pb, 80px);
+  padding-top: var(--sec-pt);
+  padding-bottom: var(--sec-pb);
   padding-left: 24px;
   padding-right: 24px;
   max-width: 1200px;
@@ -32,9 +32,9 @@
   display: inline-block;
   font-family: var(--sheva-font-heading);
   letter-spacing: 4px;
-  font-size: var(--eyebrow-fs, 12px);
+  font-size: var(--eyebrow-fs);
   margin-bottom: 12px;
-  color: var(--eyebrow-color, #22d3ee) !important;
+  color: var(--eyebrow-color) !important;
   text-transform: uppercase;
 }
 
@@ -42,10 +42,10 @@
 .contact-copy h1 p {
   font-family: var(--sheva-font-heading);
   font-weight: 900;
-  font-size: clamp(var(--headline-fs-mobile, 30px), 4.2vw, var(--headline-fs-desktop, 58px));
+  font-size: clamp(var(--headline-fs-mobile), 4.2vw, var(--headline-fs-desktop));
   line-height: 1.1;
   margin: 18px 0 18px;
-  color: var(--headline-color, #f3f0ff) !important;
+  color: var(--headline-color) !important;
   letter-spacing: 0 !important;
 }
 
@@ -63,10 +63,10 @@
 .contact-copy>p,
 .contact-copy .contact-desc {
   max-width: 620px;
-  font-size: var(--desc-fs, 16px);
+  font-size: var(--desc-fs);
   line-height: 1.85;
   opacity: .86;
-  color: var(--desc-color, #f3f0ff);
+  color: var(--desc-color);
   font-family: var(--sheva-font-body);
   margin-bottom: 24px;
 }
@@ -96,7 +96,7 @@
   font-size: 11px;
   letter-spacing: 2.5px;
   margin-bottom: 8px;
-  color: var(--cyan, #22d3ee);
+  color: var(--cyan);
   text-transform: uppercase;
 }
 
@@ -120,7 +120,7 @@
 
 .contact-pill a:hover,
 .sheva-contact-pill a:hover {
-  color: var(--pink, #ff4db8);
+  color: var(--pink);
 }
 
 .contact-orb-wrap,
@@ -174,9 +174,9 @@
   display: inline-block;
   font-family: var(--sheva-font-heading);
   letter-spacing: 4px;
-  font-size: var(--eyebrow-fs, 12px);
+  font-size: var(--eyebrow-fs);
   margin-bottom: 12px;
-  color: var(--eyebrow-color, #22d3ee) !important;
+  color: var(--eyebrow-color) !important;
   text-transform: uppercase;
 }
 
@@ -186,11 +186,11 @@
 .sheva-contact-form-head h2,
 .sheva-contact-faq-head h2 {
   font-family: var(--sheva-font-heading);
-  font-size: clamp(var(--title-fs-mobile, 28px), 4vw, var(--title-fs-desktop, 52px));
+  font-size: clamp(var(--title-fs-mobile), 4vw, var(--title-fs-desktop));
   line-height: 1.1;
   margin: 0 0 14px;
   padding: 0;
-  color: var(--title-color, #f3f0ff);
+  color: var(--title-color);
   letter-spacing: 0 !important;
 }
 
@@ -214,7 +214,7 @@
 .sec-head .sec-sub p,
 .sheva-sec-sub {
   opacity: .7;
-  font-size: var(--sub-fs, 15px);
+  font-size: var(--sub-fs);
   max-width: 500px;
   margin: 0 auto;
   line-height: 1.6;
@@ -227,7 +227,7 @@
 .sheva-contact-form-wrap {
   position: relative;
   z-index: 5;
-  padding: var(--sec-pt, 40px) 8% var(--sec-pb, 90px);
+  padding: var(--sec-pt) 8% var(--sec-pb);
   width: 100%;
   box-sizing: border-box;
 }
@@ -325,7 +325,7 @@
 .sheva-contact-form textarea:focus,
 .sheva-contact-form .c-select:focus {
   outline: none;
-  border-color: var(--pink, #ff4db8);
+  border-color: var(--pink);
   box-shadow: 0 0 0 3px rgba(255, 77, 184, 0.18);
 }
 
@@ -348,7 +348,7 @@
 .sheva-contact-form .btn-primary {
   display: inline-block;
   padding: 16px 36px;
-  background: linear-gradient(90deg, var(--btn-from, #ff4db8), var(--btn-to, #8b5cf6));
+  background: linear-gradient(90deg, var(--btn-from), var(--btn-to));
   color: #fff !important;
   font-family: var(--sheva-font-body);
   font-weight: 600;
@@ -387,7 +387,7 @@
 .sheva-contact-faq {
   position: relative;
   z-index: 5;
-  padding: var(--sec-pt, 20px) 8% var(--sec-pb, 100px);
+  padding: var(--sec-pt) 8% var(--sec-pb);
   width: 100%;
   box-sizing: border-box;
 }
@@ -438,7 +438,7 @@
 .sheva-faq-item summary::after {
   content: '+';
   font-size: 20px;
-  color: var(--cyan, #22d3ee);
+  color: var(--cyan);
   flex: 0 0 auto;
   transition: transform .3s;
 }

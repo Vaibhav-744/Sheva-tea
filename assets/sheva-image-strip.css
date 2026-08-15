@@ -3,7 +3,7 @@
 ============================================================ */
 
 .sheva-strip {
-  padding: var(--strip-pad-top, 80px) 0 var(--strip-pad-bottom, 60px);
+  padding: var(--strip-pad-top) 0 var(--strip-pad-bottom);
   position: relative;
   z-index: 5;
   width: 100%;
@@ -13,14 +13,14 @@
 
 .sheva-strip__grid {
   display: grid;
-  grid-template-columns: repeat(var(--strip-cols, 2), 1fr);
-  gap: var(--strip-gap, 4px);
+  grid-template-columns: repeat(var(--strip-cols), 1fr);
+  gap: var(--strip-gap);
   width: 100%;
 }
 
 .sheva-strip__img {
   position: relative;
-  height: var(--strip-img-h, 420px);
+  height: var(--strip-img-h);
   background-size: cover;
   background-position: center;
   background-color: #1a0538;
@@ -29,12 +29,15 @@
   overflow: hidden;
   cursor: pointer;
 }
+
 .sheva-strip__img::before {
   content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(5,0,20,.2) 0%, rgba(5,0,20,.5) 70%, rgba(5,0,20,.85) 100%);
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5, 0, 20, .2) 0%, rgba(5, 0, 20, .5) 70%, rgba(5, 0, 20, .85) 100%);
   transition: opacity .4s;
 }
+
 .sheva-strip__img:hover {
   transform: scale(1.01) !important;
   filter: saturate(1.4) brightness(1.1);
@@ -42,32 +45,47 @@
 
 .sheva-strip__overlay {
   position: absolute;
-  bottom: 30px; left: 30px; right: 30px;
+  bottom: 30px;
+  left: 30px;
+  right: 30px;
   z-index: 2;
   color: #fff;
 }
+
 .sheva-strip__title {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   margin-bottom: 8px;
   background: linear-gradient(90deg, #ff4db8, #22d3ee);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
+
 .sheva-strip__sub {
   letter-spacing: 2px;
   opacity: .85;
   text-transform: uppercase;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sheva-font-body);
   margin: 0;
 }
 
 @media (max-width: 768px) {
-  .sheva-strip { padding: 60px 0 40px; }
+  .sheva-strip {
+    padding: 60px 0 40px;
+  }
+
   .sheva-strip__grid {
     grid-template-columns: 1fr !important;
     gap: 2px !important;
   }
-  .sheva-strip__img    { height: var(--strip-img-h-mb, 280px) !important; }
-  .sheva-strip__overlay { bottom: 20px; left: 20px; right: 20px; }
+
+  .sheva-strip__img {
+    height: var(--strip-img-h-mb) !important;
+  }
+
+  .sheva-strip__overlay {
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+  }
 }

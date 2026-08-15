@@ -1,12 +1,19 @@
-{% comment %}
-  SHEVA TEA — Cosmic Background Snippet
-  Rendered once inside <body> via theme.liquid.
-  Fixed layers: deep gradient bg, nebula blur, animated star fields.
-  Controlled by sheva-cosmic-bg.css.
-{% endcomment %}
 
 {{ 'sheva-cosmic-bg.css' | asset_url | stylesheet_tag }}
 {{ 'sheva-base.css'    | asset_url | stylesheet_tag }}
+<script src="{{ 'sheva-anchor-scroll.js' | asset_url }}" defer></script>
+
+<div class="sheva-cosmic-bg"  aria-hidden="true"></div>
+<div class="sheva-nebula"     aria-hidden="true"></div>
+<div class="sheva-stars"      aria-hidden="true"></div>
+<div class="sheva-stars2"     aria-hidden="true"></div>
+  {%- if page.handle == 'about' -%}
+    {{ 'sheva-about.css' | asset_url | stylesheet_tag }}
+  {%- elsif page.handle == 'contact' -%}
+    {{ 'sheva-contact.css' | asset_url | stylesheet_tag }}
+  {%- elsif request.page_type == 'policy' -%}
+  {{ 'sheva-policy.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
 <script src="{{ 'sheva-anchor-scroll.js' | asset_url }}" defer></script>
 
 <div class="sheva-cosmic-bg"  aria-hidden="true"></div>

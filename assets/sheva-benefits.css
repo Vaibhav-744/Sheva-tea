@@ -4,7 +4,7 @@
 
 /* Allow section settings to override the default head margin via CSS var */
 .sheva-sec-head {
-  margin-bottom: var(--sheva-head-mb, 50px);
+  margin-bottom: var(--sheva-head-mb);
 }
 
 /* ── Benefits Section ── */
@@ -52,8 +52,8 @@
 
 .sheva-b-card:hover {
   transform: translateY(-8px);
-  border-color: var(--ben-card-border-hover, #ff4db8);
-  box-shadow: 0 20px 50px var(--ben-card-shadow-hover, rgba(255, 77, 184, .3));
+  border-color: var(--ben-card-border-hover);
+  box-shadow: 0 20px 50px var(--ben-card-shadow-hover);
   background: linear-gradient(145deg, rgba(255, 77, 184, .15), rgba(139, 92, 246, .08));
 }
 
@@ -69,7 +69,7 @@
 }
 
 .sheva-b-card__title {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   letter-spacing: 1.5px;
   margin-bottom: 8px;
   color: #fff;
@@ -79,7 +79,7 @@
   opacity: .7;
   line-height: 1.5;
   color: #f3f0ff;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sheva-font-body);
   margin: 0;
 }
 
@@ -138,8 +138,8 @@
 
 /* Eyebrow color from section var */
 .sheva-benefits .sheva-eyebrow {
-  color: var(--ben-eyebrow-color, #22d3ee);
-  font-size: var(--sheva-eyebrow-size, 12px);
+  color: var(--ben-eyebrow-color);
+  font-size: var(--sheva-eyebrow-size);
 }
 
 /* ── Scroll-reveal animation for benefit cards ── */
@@ -241,7 +241,7 @@
 
   .sheva-benefits__read-more-btn {
     display: inline-block;
-    font-family: 'Orbitron', sans-serif;
+    font-family: var(--sheva-font-heading);
     font-size: 11px;
     letter-spacing: 2px;
     text-transform: uppercase;

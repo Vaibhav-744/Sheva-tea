@@ -113,7 +113,7 @@
   }
 </style>
 
-<section id="product-hero-{{ section.id }}" class="product-page-hero">
+<section id="product-hero-{{ section.id }}" class="product-page-hero container-1470">
   <div class="product-page-left">
     {%- if section.settings.eyebrow != blank -%}
       <span class="eyebrow">{{ section.settings.eyebrow }}</span>
@@ -188,13 +188,38 @@
     {%- endif -%}
 
     {%- if section.settings.shipping_note != blank -%}
-      <p class="shipping" style="margin-top: 20px;">{{ section.settings.shipping_note }}</p>
+      <p class="shipping">{{ section.settings.shipping_note }}</p>
+    {%- endif -%}
+
+    {%- if product.metafields.custom.icon_and_texts != blank -%}
+      {%- assign icon_list = product.metafields.custom.icon_and_texts.value -%}
+      <div class="sheva-fp__icons-row">
+        {%- for item in icon_list -%}
+          {%- assign item_parts = item | split: '::' -%}
+          {%- assign icon_val = item_parts[0] | strip -%}
+          {%- assign label_val = item_parts[1] | strip -%}
+          {%- if icon_val != blank or label_val != blank -%}
+            <div class="sheva-fp__icon-item">
+              <div class="sheva-fp__icon">
+                {%- if icon_val contains 'http://' or icon_val contains 'https://' or icon_val contains '//cdn.shopify.com' or icon_val contains '.png' or icon_val contains '.svg' or icon_val contains '.jpg' or icon_val contains '.webp' -%}
+                  <img src="{{ icon_val }}" alt="{{ label_val | escape }}" loading="lazy" class="sheva-fp__icon-img">
+                {%- else -%}
+                  {{ icon_val }}
+                {%- endif -%}
+              </div>
+              {%- if label_val != blank -%}
+                <span>{{ label_val }}</span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
     {%- endif -%}
 
     {%- comment -%} Accordion Blocks (Rendered below .shipping when description is added) {%- endcomment -%}
     {%- assign accordion_blocks = section.blocks | where: 'type', 'accordion' -%}
     {%- if accordion_blocks.size > 0 -%}
-      <div class="product-accordions" style="margin-top: 20px;">
+      <div class="product-accordions">
         {%- for block in accordion_blocks -%}
           {%- if block.settings.description != blank -%}
             <details class="sheva-accordion-item" {{ block.shopify_attributes }}>
@@ -218,8 +243,6 @@
     <div class="product-page-orb"></div>
     {%- if product.featured_image != blank -%}
       <img src="{{ product.featured_image | img_url: '600x' }}" alt="{{ product.title | escape }}" class="product-page-image" />
-    {%- else -%}
-      <img src="{{ 'packaging.jpg' | asset_url }}" alt="Supernova Tea packaging" class="product-page-image" />
     {%- endif -%}
   </div>
 </section>

@@ -1,3 +1,4 @@
+{{ 'sheva-newsletter.css' | asset_url | stylesheet_tag }}
 <newsletter-popup class="halo-popup halo-newsletter-popup {% if settings.show_newsletter_popup_image %} customPopup-banner custom-scrollbar{% endif %}" data-newsletter-popup data-delay="{{ settings.newsletter_popup_delay | times:1000 }}" data-expire="{{ settings.newsletter_popup_expire }}" id="halo-newsletter-popup">
     {%- if settings.show_newsletter_popup_image -%}
         <div class="halo-popup-banner">
@@ -97,7 +98,7 @@
                         </div>
                     {%- endform -%}
                 </div>
-                {% render 'halo-social-media-icons' %}
+                {% comment %} {% render 'halo-social-media-icons' %} {% endcomment %}
                 {%- if settings.newsletter_popup_note != blank -%}
                     <div class="newsletter--checked text-center">
                         <input id="dismiss" type="checkbox" name="dismiss">

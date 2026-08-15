@@ -1,0 +1,114 @@
+/* ─────────────────────────────────────────────────────────────
+   COSMIC THEME NEWSLETTER POPUP (.halo-newsletter-popup)
+   ───────────────────────────────────────────────────────────── */
+.halo-newsletter-popup,
+#halo-newsletter-popup,
+.halo-popup.halo-newsletter-popup {
+  background: linear-gradient(135deg, #0c0422 0%, #050014 100%) !important;
+  color: #f3f0ff !important;
+  border: 1.5px solid rgba(34, 211, 238, 0.4) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 0 50px rgba(139, 92, 246, 0.5) !important;
+  overflow: hidden !important;
+}
+
+.halo-newsletter-popup .halo-popup-wrapper {
+  background: transparent !important;
+  color: #f3f0ff !important;
+  padding: 36px 32px !important;
+}
+
+.halo-newsletter-popup .halo-popup-close {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 50% !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease !important;
+  top: 16px !important;
+  right: 16px !important;
+}
+
+.halo-newsletter-popup .halo-popup-close:hover {
+  background: #ff4db8 !important;
+  color: #ffffff !important;
+  transform: rotate(90deg) !important;
+}
+
+.halo-newsletter-popup .newsletter-popup-title {
+  font-family: var(--sheva-font-heading) !important;
+  font-size: clamp(22px, 3vw, 30px) !important;
+  font-weight: 900 !important;
+  letter-spacing: 1.5px !important;
+  background: linear-gradient(90deg, #ff4db8, #ff7a3d) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  margin-bottom: 12px !important;
+}
+
+.halo-newsletter-popup .halo-popup-desc {
+  font-family: var(--sheva-font-body) !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  color: #f3f0ff !important;
+  opacity: 0.85 !important;
+}
+
+.halo-newsletter-popup input[type="email"],
+.halo-newsletter-popup #NewsletterForm--Popup {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1.5px solid rgba(255, 77, 184, 0.4) !important;
+  border-radius: 999px !important;
+  color: #ffffff !important;
+  font-family: var(--sheva-font-body) !important;
+  font-size: 14px !important;
+  padding: 14px 22px !important;
+  outline: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.halo-newsletter-popup input[type="email"]:focus,
+.halo-newsletter-popup #NewsletterForm--Popup:focus {
+  border-color: #22d3ee !important;
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.3) !important;
+}
+
+.halo-newsletter-popup input[type="email"]::placeholder {
+  color: rgba(243, 240, 255, 0.5) !important;
+}
+
+.halo-newsletter-popup .newsletter-form__button,
+.halo-newsletter-popup .button,
+.halo-newsletter-popup .newsletter-form__button .button {
+  background: linear-gradient(90deg, #ff4db8, #ff7a3d) !important;
+  color: #ffffff !important;
+  font-family: var(--sheva-font-heading) !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  border-radius: 999px !important;
+  border: none !important;
+  padding: 14px 28px !important;
+  cursor: pointer !important;
+  box-shadow: 0 0 20px rgba(255, 77, 184, 0.4) !important;
+  transition: all 0.3s ease !important;
+}
+
+.halo-newsletter-popup .newsletter-form__button:hover,
+.halo-newsletter-popup .button:hover {
+  box-shadow: 0 0 30px rgba(255, 77, 184, 0.7) !important;
+  transform: translateY(-2px) !important;
+}
+
+.halo-newsletter-popup .newsletter--checked,
+.halo-newsletter-popup .newsletter--checked label {
+  font-family: var(--sheva-font-body) !important;
+  font-size: 13px !important;
+  color: #f3f0ff !important;
+  opacity: 0.8 !important;
+}

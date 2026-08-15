@@ -12,6 +12,13 @@
     "product-hero": {
       "type": "product-hero",
       "blocks": {
+        "accordion_hNhRGP": {
+          "type": "accordion",
+          "settings": {
+            "title": "Key Ingredient",
+            "description": "{{ product.metafields.custom.key_ingredients | metafield_tag }}"
+          }
+        },
         "accordion_EwGCVK": {
           "type": "accordion",
           "settings": {
@@ -32,12 +39,21 @@
             "title": "Benefits",
             "description": "{{ product.metafields.custom.benefits | metafield_tag }}"
           }
+        },
+        "accordion_idHjDi": {
+          "type": "accordion",
+          "settings": {
+            "title": "Overall Benefits",
+            "description": "{{ product.metafields.custom.overall_benefits | metafield_tag }}"
+          }
         }
       },
       "block_order": [
+        "accordion_hNhRGP",
         "accordion_EwGCVK",
         "accordion_QBBD8f",
-        "accordion_DRHbYt"
+        "accordion_DRHbYt",
+        "accordion_idHjDi"
       ],
       "settings": {
         "eyebrow": "✦ SEVEN STAR ENERGY®",
@@ -47,7 +63,7 @@
         "rating_score": "4.9",
         "rating_count": "2,143",
         "shipping_note": "🚀 FREE Shipping when you spend over $50",
-        "padding_top": 80,
+        "padding_top": 52,
         "padding_bottom": 52
       }
     },

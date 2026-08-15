@@ -441,6 +441,7 @@
         "sc1": {
           "type": "shop_card",
           "settings": {
+            "card_product": "teapots",
             "badge": "MYSTIQUE",
             "badge_alt": false,
             "emoji": "🫖",
@@ -455,6 +456,7 @@
         "sc2": {
           "type": "shop_card",
           "settings": {
+            "card_product": "drinkware-titan-aura",
             "badge": "TITAN AURA",
             "badge_alt": true,
             "emoji": "☕",
@@ -469,6 +471,7 @@
         "sc3": {
           "type": "shop_card",
           "settings": {
+            "card_product": "books-titan-aura",
             "badge": "TITAN AURA",
             "badge_alt": true,
             "emoji": "📓",
@@ -483,6 +486,7 @@
         "sc4": {
           "type": "shop_card",
           "settings": {
+            "card_product": "cards-titan-aura",
             "badge": "TITAN AURA",
             "badge_alt": true,
             "emoji": "🎴",
@@ -497,6 +501,7 @@
         "sc5": {
           "type": "shop_card",
           "settings": {
+            "card_product": "keychains-titan-aura",
             "badge": "TITAN AURA",
             "badge_alt": true,
             "emoji": "🔑",
@@ -511,6 +516,7 @@
         "sc6": {
           "type": "shop_card",
           "settings": {
+            "card_product": "pens-titan-aura",
             "badge": "TITAN AURA",
             "badge_alt": true,
             "emoji": "🖊️",
@@ -525,6 +531,7 @@
         "sc7": {
           "type": "shop_card",
           "settings": {
+            "card_product": "bookmarks-titan-aura",
             "badge": "TITAN AURA",
             "badge_alt": true,
             "emoji": "📑",
@@ -570,7 +577,8 @@
         "show_dots": true,
         "show_arrows": false,
         "show_bundle": true,
-        "bundle_tag": "✦ BEST VALUE · SAVE 28%",
+        "bundle_product": "collections-titan-aura",
+        "bundle_tag": "✦ BEST VALUE",
         "bundle_tag_fs": 11,
         "bundle_title_plain": "Titan Aura",
         "bundle_title": "Complete Bundle",

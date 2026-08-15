@@ -3,7 +3,7 @@
 ============================================================ */
 
 .sheva-footer {
-  padding: var(--foot-pad-top, 80px) 7% var(--foot-pad-bottom, 30px);
+  padding: var(--foot-pad-top) 7% var(--foot-pad-bottom);
   position: relative;
   z-index: 5;
   background: linear-gradient(180deg, transparent, #07021a);
@@ -29,8 +29,8 @@
 }
 
 .sheva-footer__brand {
-  font-family: 'Orbitron', sans-serif;
-  font-size: var(--foot-heading-fs, 26px);
+  font-family: var(--sheva-font-heading);
+  font-size: var(--foot-heading-fs);
   letter-spacing: 3px;
   margin-bottom: 14px;
 }
@@ -51,38 +51,38 @@
   100% { background-position: 200% 50%; }
 }
 .sheva-footer__col-heading {
-  font-family: 'Orbitron', sans-serif;
-  font-size: var(--foot-col-heading-fs, 14px);
+  font-family: var(--sheva-font-heading);
+  font-size: var(--foot-col-heading-fs);
   letter-spacing: 2px;
   margin-bottom: 14px;
-  color: var(--foot-heading-color, #22d3ee);
+  color: var(--foot-heading-color);
 }
 .sheva-footer__text {
   margin-bottom: 8px;
-  font-size: var(--foot-text-fs, 14px);
+  font-size: var(--foot-text-fs);
   opacity: .8;
-  color: var(--foot-text-color, #f3f0ff);
-  font-family: 'Poppins', sans-serif;
+  color: var(--foot-text-color);
+  font-family: var(--sheva-font-body);
   word-break: break-word;
 }
 .sheva-footer__link {
-  color: var(--foot-text-color, #f3f0ff);
+  color: var(--foot-text-color);
   text-decoration: none;
   transition: color .2s;
 }
 .sheva-footer__link:hover {
-  color: var(--foot-link-hover, #ff4db8);
+  color: var(--foot-link-hover);
 }
 
 .sheva-footer__copyright {
   border-top: 1px solid rgba(255,255,255,.1);
   padding-top: 24px;
   text-align: center;
-  font-size: var(--foot-copy-fs, 12px);
+  font-size: var(--foot-copy-fs);
   opacity: .5;
   letter-spacing: 2px;
   color: #f3f0ff;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sheva-font-body);
 }
 
 @media (max-width: 1024px) {

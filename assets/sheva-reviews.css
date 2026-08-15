@@ -4,7 +4,7 @@
 ============================================================ */
 
 .sheva-reviews {
-  padding: var(--rev-pad-top, 100px) 0 var(--rev-pad-bottom, 100px);
+  padding: var(--rev-pad-top) 0 var(--rev-pad-bottom);
   position: relative;
   z-index: 5;
   width: 100%;
@@ -18,7 +18,7 @@
 }
 
 .sheva-rev__big-rating {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   font-weight: 900;
   display: flex;
   align-items: center;
@@ -46,7 +46,7 @@
   width: max-content;
   will-change: transform;
   padding: 0 24px;
-  animation: shevaRevScroll var(--rev-speed, 45s) linear infinite;
+  animation: shevaRevScroll var(--rev-speed) linear infinite;
 }
 
 .sheva-reviews-slider:hover .sheva-reviews-track {
@@ -87,7 +87,7 @@
 
 /* ── Card ── */
 .sheva-review-card {
-  flex: 0 0 var(--rev-card-w, 320px);
+  flex: 0 0 var(--rev-card-w);
   min-height: 240px;
   padding: 26px;
   border-radius: 20px;
@@ -118,7 +118,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   font-weight: 700;
   color: #fff;
 }
@@ -127,11 +127,11 @@
   font-size: 11px;
   color: #22d3ee;
   letter-spacing: 1px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sheva-font-body);
 }
 
 .sheva-rev__quote {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   letter-spacing: 1px;
   margin: 10px 0 8px;
   color: #fff;
@@ -141,7 +141,7 @@
   opacity: .85;
   line-height: 1.6;
   color: #f3f0ff;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sheva-font-body);
   margin: 0;
 }
 

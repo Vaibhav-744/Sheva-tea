@@ -37,14 +37,35 @@
     A. BUNDLE HERO
   ──────────────────────────────── {% endcomment %}
   {%- if section.settings.show_bundle -%}
+    {%- assign bundle_prod = section.settings.bundle_product -%}
+    {%- assign bundle_tag_text = section.settings.bundle_tag -%}
+    {%- if bundle_prod != blank and bundle_prod != empty -%}
+      {%- assign bundle_var = bundle_prod.selected_or_first_available_variant -%}
+      {%- assign now_price = bundle_var.price | money -%}
+
+      {%- if bundle_var.compare_at_price > bundle_var.price -%}
+        {%- assign was_price = bundle_var.compare_at_price | money -%}
+        {%- assign save_val = bundle_var.compare_at_price | minus: bundle_var.price -%}
+        {%- assign save_amount = save_val | money -%}
+        {%- assign save_pill_text = 'Save ' | append: save_amount -%}
+      {%- else -%}
+        {%- assign was_price = '' -%}
+        {%- assign save_pill_text = '' -%}
+      {%- endif -%}
+    {%- else -%}
+      {%- assign now_price = section.settings.bundle_now -%}
+      {%- assign was_price = section.settings.bundle_was -%}
+      {%- assign save_pill_text = section.settings.bundle_save -%}
+    {%- endif -%}
+
     <div class="sheva-bundle"
       style="margin-bottom: {{ section.settings.bundle_mb }}px;">
 
       {%- comment -%} Left: Text {%- endcomment -%}
       <div class="sheva-bundle__left">
-        {%- if section.settings.bundle_tag != blank -%}
+        {%- if bundle_tag_text != blank -%}
           <span class="sheva-bundle__tag"
-            style="font-size: {{ section.settings.bundle_tag_fs }}px;">{{ section.settings.bundle_tag }}</span>
+            style="font-size: {{ section.settings.bundle_tag_fs }}px;">{{ bundle_tag_text }}</span>
         {%- endif -%}
 
         <h3 class="sheva-bundle__title"
@@ -69,21 +90,46 @@
           </ul>
         {%- endif -%}
 
+        {%- assign bundle_link = section.settings.bundle_btn_link -%}
+        {%- if bundle_link == blank and bundle_prod != blank -%}
+          {%- assign bundle_link = bundle_prod.url -%}
+        {%- endif -%}
+
+        {%- if bundle_prod != blank and bundle_prod != empty and bundle_prod.variants.size > 1 -%}
+          <div class="sheva-bundle__variant-box">
+            <label for="sheva-bundle-select-{{ section.id }}" class="sheva-bundle__variant-label">Select Option:</label>
+            <select id="sheva-bundle-select-{{ section.id }}" class="sheva-bundle__variant-select js-sheva-bundle-variant-select" aria-label="Select Variant">
+              {%- for variant in bundle_prod.variants -%}
+                {%- assign v_save_amt = '' -%}
+                {%- if variant.compare_at_price > variant.price -%}
+                  {%- assign v_save_val = variant.compare_at_price | minus: variant.price -%}
+                  {%- assign v_save_amt = v_save_val | money -%}
+                {%- endif -%}
+                {%- assign v_url = section.settings.bundle_btn_link | default: variant.url -%}
+                <option
+                  value="{{ variant.id }}"
+                  data-price="{{ variant.price | money }}"
+                  data-compare-price="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
+                  data-save-pill="{% if variant.compare_at_price > variant.price %}Save {{ v_save_amt }}{% endif %}"
+                  data-url="{{ v_url }}"
+                  data-available="{{ variant.available }}"
+                  {% if variant == bundle_var %}selected{% endif %}
+                >
+                  {{ variant.title }} - {{ variant.price | money }}
+                </option>
+              {%- endfor -%}
+            </select>
+          </div>
+        {%- endif -%}
+
         <div class="sheva-bundle__price">
-          {%- if section.settings.bundle_was != blank -%}
-            <span class="sheva-bundle__was"
-              style="font-size: {{ section.settings.bundle_was_fs }}px;">{{ section.settings.bundle_was }}</span>
-          {%- endif -%}
-          <span class="sheva-bundle__now"
-            style="font-size: clamp(28px, 4vw, {{ section.settings.bundle_now_fs }}px);">{{ section.settings.bundle_now }}</span>
-          {%- if section.settings.bundle_save != blank -%}
-            <span class="sheva-bundle__save-pill"
-              style="font-size: {{ section.settings.bundle_save_fs }}px;">{{ section.settings.bundle_save }}</span>
-          {%- endif -%}
+          <span class="sheva-bundle__was" style="font-size: {{ section.settings.bundle_was_fs }}px;{% if was_price == blank %} display: none;{% endif %}">{{ was_price }}</span>
+          <span class="sheva-bundle__now" style="font-size: clamp(28px, 4vw, {{ section.settings.bundle_now_fs }}px);">{{ now_price }}</span>
+          <span class="sheva-bundle__save-pill" style="font-size: {{ section.settings.bundle_save_fs }}px;{% if save_pill_text == blank %} display: none;{% endif %}">{{ save_pill_text }}</span>
         </div>
 
         {%- if section.settings.bundle_btn_label != blank -%}
-          <a href="{{ section.settings.bundle_btn_link }}" class="sheva-btn-primary sheva-bundle__btn">
+          <a href="{{ bundle_link }}" class="sheva-btn-primary sheva-bundle__btn">
             {{ section.settings.bundle_btn_label }}
           </a>
         {%- endif -%}
@@ -102,7 +148,11 @@
         <div class="sheva-bundle__emoji-stack">
           {% if section.settings.product_image != blank %}
             <div class="sheva-bundle__image_wrapper">
-            <img src="{{ section.settings.product_image | img_url:'master' }}" height="100%" width="100%" alt="{{ section.settings.product_image.alt }}"/>
+              <img src="{{ section.settings.product_image | img_url:'master' }}" height="100%" width="100%" alt="{{ section.settings.product_image.alt }}"/>
+            </div>
+          {% elsif bundle_prod.featured_image != blank %}
+            <div class="sheva-bundle__image_wrapper">
+              <img src="{{ bundle_prod.featured_image | img_url:'master' }}" height="100%" width="100%" alt="{{ bundle_prod.featured_image.alt }}"/>
             </div>
           {% endif %}
           {%- assign be_index = 0 -%}
@@ -124,26 +174,91 @@
   {%- comment %} ── Shared card snippet ── {% endcomment %}
   {%- capture shop_card_html -%}
     {%- for block in shop_cards -%}
+      {%- assign card_prod = block.settings.card_product -%}
+      {%- assign card_price = block.settings.price -%}
+      {%- assign card_link = block.settings.product_link -%}
+
+      {%- if card_prod != blank and card_prod != empty -%}
+        {%- assign card_var = card_prod.selected_or_first_available_variant -%}
+        {%- if card_price == blank -%}
+          {%- assign card_price = card_var.price | money -%}
+        {%- endif -%}
+        {%- if card_link == blank -%}
+          {%- assign card_link = card_prod.url -%}
+        {%- endif -%}
+      {%- endif -%}
+
       <div class="sheva-shop-card" {{ block.shopify_attributes }}>
         {%- if block.settings.badge != blank -%}
           <div class="sheva-shop-badge{% if block.settings.badge_alt %} sheva-shop-badge--alt{% endif %}"
             style="font-size: {{ section.settings.badge_fs }}px;">{{ block.settings.badge }}</div>
         {%- endif -%}
+
+        {%- if card_link != blank -%}
+          <a href="{{ card_link }}" class="sheva-shop-img-link">
+        {%- endif -%}
         <div class="sheva-shop-img {{ block.settings.gradient_class }}"
           style="height: {{ section.settings.card_img_h }}px;">
-          <span class="sheva-shop-emoji" style="font-size: {{ section.settings.card_emoji_fs }}px;">{{ block.settings.emoji }}</span>
+          {%- if card_prod.featured_image != blank and block.settings.emoji == blank -%}
+            <img src="{{ card_prod.featured_image | img_url: '400x' }}" alt="{{ card_prod.title }}" class="sheva-shop-card-img" />
+          {%- else -%}
+            <span class="sheva-shop-emoji" style="font-size: {{ section.settings.card_emoji_fs }}px;">{{ block.settings.emoji }}</span>
+          {%- endif -%}
         </div>
+        {%- if card_link != blank -%}
+          </a>
+        {%- endif -%}
+
         <div class="sheva-shop-info">
           {%- if block.settings.category != blank -%}
             <span class="sheva-shop-cat" style="font-size: {{ section.settings.cat_fs }}px;">{{ block.settings.category }}</span>
           {%- endif -%}
-          <h4 class="sheva-shop-name" style="font-size: {{ section.settings.card_name_fs }}px;">{{ block.settings.name }}</h4>
+          <h4 class="sheva-shop-name" style="font-size: {{ section.settings.card_name_fs }}px;">
+            {%- if card_link != blank -%}
+              <a href="{{ card_link }}" style="color: inherit; text-decoration: none;">{{ block.settings.name | default: card_prod.title }}</a>
+            {%- else -%}
+              {{ block.settings.name }}
+            {%- endif -%}
+          </h4>
           <p class="sheva-shop-desc" style="font-size: {{ section.settings.card_desc_fs }}px;">{{ block.settings.description }}</p>
+
           <div class="sheva-shop-foot">
-            <span class="sheva-shop-price" style="font-size: {{ section.settings.price_fs }}px;">{{ block.settings.price }}</span>
-            {%- if block.settings.product_link != blank -%}
-              <a href="{{ block.settings.product_link }}" class="sheva-btn-ghost sheva-btn-ghost--sm"
-                style="font-size: {{ section.settings.card_btn_fs }}px;">Add +</a>
+            <span class="sheva-shop-price" style="font-size: {{ section.settings.price_fs }}px;">{{ card_price }}</span>
+
+            {%- if card_prod != blank and card_prod != empty -%}
+              {%- if card_prod.available -%}
+                <product-form class="sheva-shop-card__form">
+                  {%- assign card_form_id = 'sheva-card-form-' | append: block.id -%}
+                  {%- form 'product', card_prod, id: card_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                    <input type="hidden" name="id" value="{{ card_var.id }}">
+                    <input type="hidden" name="quantity" value="1">
+                    <button
+                      type="submit"
+                      name="add"
+                      data-btn-addToCart
+                      class="sheva-btn-ghost sheva-btn-ghost--sm sheva-shop-atc-btn"
+                      style="font-size: {{ section.settings.card_btn_fs }}px;"
+                    >
+                      ADD +
+                    </button>
+                  {%- endform -%}
+                </product-form>
+              {%- else -%}
+                <button
+                  type="button"
+                  class="sheva-btn-ghost sheva-btn-ghost--sm sheva-shop-atc-btn is-soldout"
+                  style="font-size: {{ section.settings.card_btn_fs }}px; pointer-events: none; opacity: 0.5;"
+                  disabled="disabled"
+                >
+                  SOLD OUT
+                </button>
+              {%- endif -%}
+            {%- elsif card_link != blank -%}
+              <a href="{{ card_link }}" class="sheva-btn-ghost sheva-btn-ghost--sm sheva-shop-atc-btn"
+                style="font-size: {{ section.settings.card_btn_fs }}px;">ADD +</a>
+            {%- else -%}
+              <a href="/collections/all" class="sheva-btn-ghost sheva-btn-ghost--sm sheva-shop-atc-btn"
+                style="font-size: {{ section.settings.card_btn_fs }}px;">ADD +</a>
             {%- endif -%}
           </div>
         </div>
@@ -165,32 +280,7 @@
         <div class="sheva-shop-track sheva-shop-track--{{ marquee_dir }}">
           {{ shop_card_html }}
           {%- comment -%} Duplicate pass — seamless loop {%- endcomment -%}
-          {%- for block in shop_cards -%}
-            <div class="sheva-shop-card" aria-hidden="true">
-              {%- if block.settings.badge != blank -%}
-                <div class="sheva-shop-badge{% if block.settings.badge_alt %} sheva-shop-badge--alt{% endif %}"
-                  style="font-size: {{ section.settings.badge_fs }}px;">{{ block.settings.badge }}</div>
-              {%- endif -%}
-              <div class="sheva-shop-img {{ block.settings.gradient_class }}"
-                style="height: {{ section.settings.card_img_h }}px;">
-                <span class="sheva-shop-emoji" style="font-size: {{ section.settings.card_emoji_fs }}px;">{{ block.settings.emoji }}</span>
-              </div>
-              <div class="sheva-shop-info">
-                {%- if block.settings.category != blank -%}
-                  <span class="sheva-shop-cat" style="font-size: {{ section.settings.cat_fs }}px;">{{ block.settings.category }}</span>
-                {%- endif -%}
-                <h4 class="sheva-shop-name" style="font-size: {{ section.settings.card_name_fs }}px;">{{ block.settings.name }}</h4>
-                <p class="sheva-shop-desc" style="font-size: {{ section.settings.card_desc_fs }}px;">{{ block.settings.description }}</p>
-                <div class="sheva-shop-foot">
-                  <span class="sheva-shop-price" style="font-size: {{ section.settings.price_fs }}px;">{{ block.settings.price }}</span>
-                  {%- if block.settings.product_link != blank -%}
-                    <a href="{{ block.settings.product_link }}" class="sheva-btn-ghost sheva-btn-ghost--sm"
-                      style="font-size: {{ section.settings.card_btn_fs }}px;">Add +</a>
-                  {%- endif -%}
-                </div>
-              </div>
-            </div>
-          {%- endfor -%}
+          {{ shop_card_html }}
         </div>
       </div>
 
@@ -246,6 +336,64 @@
   });
 </script>
 {%- endif -%}
+
+<script>
+  (function() {
+    function initBundleVariantSelect() {
+      var sectionEl = document.getElementById('sheva-shop');
+      if (!sectionEl) return;
+      var select = sectionEl.querySelector('.js-sheva-bundle-variant-select');
+      if (!select) return;
+
+      select.addEventListener('change', function() {
+        var opt = this.options[this.selectedIndex];
+        if (!opt) return;
+
+        var price = opt.getAttribute('data-price');
+        var comparePrice = opt.getAttribute('data-compare-price');
+        var savePill = opt.getAttribute('data-save-pill');
+        var url = opt.getAttribute('data-url');
+        var isAvailable = opt.getAttribute('data-available') === 'true';
+
+        var nowEl = sectionEl.querySelector('.sheva-bundle__now');
+        var wasEl = sectionEl.querySelector('.sheva-bundle__was');
+        var saveEl = sectionEl.querySelector('.sheva-bundle__save-pill');
+        var btn = sectionEl.querySelector('.sheva-bundle__btn');
+
+        if (nowEl && price) nowEl.textContent = price;
+
+        if (wasEl) {
+          if (comparePrice) {
+            wasEl.textContent = comparePrice;
+            wasEl.style.display = 'inline-block';
+          } else {
+            wasEl.style.display = 'none';
+          }
+        }
+
+        if (saveEl) {
+          if (savePill) {
+            saveEl.textContent = savePill;
+            saveEl.style.display = 'inline-block';
+          } else {
+            saveEl.style.display = 'none';
+          }
+        }
+
+        if (btn && url) {
+          btn.setAttribute('href', url);
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initBundleVariantSelect);
+    } else {
+      initBundleVariantSelect();
+    }
+    document.addEventListener('shopify:section:load', initBundleVariantSelect);
+  })();
+</script>
 
 {% schema %}
 {
@@ -396,6 +544,12 @@
       "id": "show_bundle",
       "label": "Show Bundle Hero",
       "default": true
+    },
+    {
+      "type": "product",
+      "id": "bundle_product",
+      "label": "Bundle Product (Optional)",
+      "info": "Select a product to automatically link prices, compare price, savings badge, variants, and Add to Cart."
     },
     {
       "type": "text",
@@ -671,6 +825,7 @@
       "type": "shop_card",
       "name": "Shop Card",
       "settings": [
+        { "type": "product",  "id": "card_product",   "label": "Product (for Add to Cart)",   "info": "Select a product to enable Add to Cart and auto-sync price and link." },
         { "type": "text",     "id": "badge",          "label": "Badge Text",                  "default": "MYSTIQUE" },
         { "type": "checkbox", "id": "badge_alt",       "label": "Use Alt Badge Style (cyan)",  "default": false },
         { "type": "text",     "id": "emoji",           "label": "Product Emoji",               "default": "🫖" },

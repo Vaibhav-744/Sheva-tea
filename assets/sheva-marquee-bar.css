@@ -5,7 +5,7 @@
 
 .sheva-mq-bar {
   background: var(--mq-grad);
-  padding: var(--mq-pt, 14px) 0 var(--mq-pb, 14px);
+  padding: var(--mq-pt) 0 var(--mq-pb);
   overflow: hidden;
   position: relative;
   z-index: 5;
@@ -16,7 +16,7 @@
   display: flex;
   width: max-content;
   will-change: transform;
-  animation: shevaMqScroll var(--mq-speed, 30s) linear infinite;
+  animation: shevaMqScroll var(--mq-speed) linear infinite;
 }
 
 /* Pause on hover (desktop) */
@@ -25,10 +25,10 @@
 }
 
 .sheva-mq-text {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   letter-spacing: 4px;
-  font-size: var(--mq-fs, 14px);
-  color: var(--mq-color, #fff);
+  font-size: var(--mq-fs);
+  color: var(--mq-color);
   font-weight: 700;
   white-space: nowrap;
   padding-right: 40px;
@@ -36,10 +36,18 @@
 
 /* Right → Left */
 @keyframes shevaMqScroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @media (max-width: 768px) {
-  .sheva-mq-text { font-size: var(--mq-fs-mb, 12px); letter-spacing: 2px; }
+  .sheva-mq-text {
+    font-size: var(--mq-fs-mb);
+    letter-spacing: 2px;
+  }
 }

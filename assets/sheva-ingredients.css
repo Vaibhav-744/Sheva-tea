@@ -4,7 +4,7 @@
 ============================================================ */
 
 .sheva-ingredients {
-  padding: var(--ing-pad-top, 100px) 0 var(--ing-pad-bottom, 100px);
+  padding: var(--ing-pad-top) 0 var(--ing-pad-bottom);
   position: relative;
   z-index: 5;
   width: 100%;
@@ -23,92 +23,142 @@
 /* ── Marquee track ── */
 .sheva-ing-track {
   display: flex;
-  gap: var(--ing-gap, 24px);
+  gap: var(--ing-gap);
   width: max-content;
   will-change: transform;
   padding: 0 24px;
-  animation: shevaIngScroll var(--ing-speed, 35s) linear infinite;
+  animation: shevaIngScroll var(--ing-speed) linear infinite;
 }
 
-.sheva-ing-slider:hover .sheva-ing-track { animation-play-state: paused; }
-.sheva-ing-pause-hover:hover .sheva-ing-track { animation-play-state: paused; }
+.sheva-ing-slider:hover .sheva-ing-track {
+  animation-play-state: paused;
+}
 
-.sheva-ing-track--rtl { animation-name: shevaIngScroll; }
+.sheva-ing-pause-hover:hover .sheva-ing-track {
+  animation-play-state: paused;
+}
+
+.sheva-ing-track--rtl {
+  animation-name: shevaIngScroll;
+}
+
 @keyframes shevaIngScroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes shevaIngScrollLTR {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
 }
-.sheva-ing-track--ltr { animation-name: shevaIngScrollLTR; }
+
+.sheva-ing-track--ltr {
+  animation-name: shevaIngScrollLTR;
+}
 
 /* ── Card ── */
 .sheva-ing-card {
-  flex: 0 0 var(--ing-card-w, 280px);
+  flex: 0 0 var(--ing-card-w);
   padding: 32px 26px;
   border-radius: 24px;
-  background: linear-gradient(145deg, rgba(255,77,184,.1), rgba(139,92,246,.1));
-  border: 1px solid rgba(255,255,255,.12);
+  background: linear-gradient(145deg, rgba(255, 77, 184, .1), rgba(139, 92, 246, .1));
+  border: 1px solid rgba(255, 255, 255, .12);
   transition: transform .4s, border-color .4s, box-shadow .4s;
   text-align: left;
 }
+
 .sheva-ing-card:hover {
   transform: translateY(-10px) scale(1.03);
   border-color: #22d3ee;
-  box-shadow: 0 25px 60px rgba(139,92,246,.4);
+  box-shadow: 0 25px 60px rgba(139, 92, 246, .4);
 }
-.sheva-ing-emoji { margin-bottom: 14px; display: block; }
+
+.sheva-ing-emoji {
+  margin-bottom: 14px;
+  display: block;
+}
+
 .sheva-ing-card__name {
-  font-family: 'Orbitron', sans-serif;
-  color: var(--ing-name-color, #22d3ee);
+  font-family: var(--sheva-font-heading);
+  color: var(--ing-name-color);
   margin-bottom: 12px;
   letter-spacing: 2px;
 }
+
 .sheva-ing-card__desc {
   opacity: .8;
   line-height: 1.6;
   color: #f3f0ff;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sheva-font-body);
   margin: 0;
 }
 
 /* ── Full ingredients box ── */
 .sheva-full-ing {
   padding: 28px;
-  background: rgba(0,0,0,.5);
+  background: rgba(0, 0, 0, .5);
   border-radius: 18px;
-  border: 1px solid rgba(255,255,255,.1);
+  border: 1px solid rgba(255, 255, 255, .1);
   max-width: 1200px;
   margin: 40px auto 0;
   width: calc(100% - 40px);
 }
+
 .sheva-full-ing__title {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--sheva-font-heading);
   color: #ff4db8;
   letter-spacing: 3px;
   margin-bottom: 14px;
   font-size: 14px;
 }
+
 .sheva-full-ing__text {
   line-height: 1.8;
   opacity: .7;
   color: #f3f0ff;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sheva-font-body);
   margin: 0;
 }
 
 /* ── Marquee responsive ── */
 @media (max-width: 768px) {
-  .sheva-ingredients { padding: 70px 0; }
-  .sheva-ing-track   { gap: 16px !important; padding: 0 16px; animation-duration: 28s; }
-  .sheva-ing-card    { flex: 0 0 240px !important; padding: 26px 20px; }
-  .sheva-full-ing    { padding: 22px; width: calc(100% - 40px); margin: 30px 20px 0; }
+  .sheva-ingredients {
+    padding: 70px 0;
+  }
+
+  .sheva-ing-track {
+    gap: 16px !important;
+    padding: 0 16px;
+    animation-duration: 28s;
+  }
+
+  .sheva-ing-card {
+    flex: 0 0 240px !important;
+    padding: 26px 20px;
+  }
+
+  .sheva-full-ing {
+    padding: 22px;
+    width: calc(100% - 40px);
+    margin: 30px 20px 0;
+  }
 }
+
 @media (max-width: 420px) {
-  .sheva-ing-card { flex: 0 0 220px !important; padding: 22px 18px; }
+  .sheva-ing-card {
+    flex: 0 0 220px !important;
+    padding: 22px 18px;
+  }
 }
 
 /* ============================================================
@@ -130,12 +180,14 @@
   bottom: auto;
   margin-top: 20px;
 }
+
 .sheva-ing-swiper .slick-dots li button {
   background: rgba(255, 255, 255, 0.25);
   border: none;
   border-radius: 50%;
   transition: background 0.3s, transform 0.3s;
 }
+
 .sheva-ing-swiper .slick-dots li.slick-active button {
   background: linear-gradient(90deg, #ff4db8, #ff7a3d, #22d3ee);
   border: none;
@@ -145,13 +197,13 @@
 .sheva-ing-swiper .slick-list {
   overflow: hidden !important;
   padding: 10px !important;
-  margin:0 -7px
+  margin: 0 -7px
 }
 
 .sheva-ing-swiper .slick-slide {
   box-sizing: border-box !important;
   height: auto !important;
-  margin:0 8px;
+  margin: 0 8px;
 }
 
 .sheva-ing-swiper .slick-slide .sheva-ing-card {
@@ -166,26 +218,39 @@
   z-index: 10;
   width: 44px;
   height: 44px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 50%;
   backdrop-filter: blur(10px);
   transition: background .3s, border-color .3s;
 }
-.sheva-ing-swiper .slick-prev { left: -22px; }
-.sheva-ing-swiper .slick-next { right: -22px; }
+
+.sheva-ing-swiper .slick-prev {
+  left: -22px;
+}
+
+.sheva-ing-swiper .slick-next {
+  right: -22px;
+}
+
 .sheva-ing-swiper .slick-prev:hover,
 .sheva-ing-swiper .slick-next:hover {
-  background: rgba(255,77,184,0.25);
+  background: rgba(255, 77, 184, 0.25);
   border-color: #ff4db8;
 }
+
 .sheva-ing-swiper .slick-prev:before,
 .sheva-ing-swiper .slick-next:before {
   font-size: 18px;
   opacity: 1;
 }
 
-@media(max-width:600px){
-  .sheva-ing-swiper .slick-list {margin:0;}
-  .sheva-ing-swiper .slick-slide {margin:0 16px;}
+@media(max-width:600px) {
+  .sheva-ing-swiper .slick-list {
+    margin: 0;
+  }
+
+  .sheva-ing-swiper .slick-slide {
+    margin: 0 16px;
+  }
 }

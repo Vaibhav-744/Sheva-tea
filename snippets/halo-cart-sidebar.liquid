@@ -1,7 +1,8 @@
+{{ 'sheva-cart-drawer.css' | asset_url | stylesheet_tag }}
 <link rel="stylesheet" href="{{ 'component-quick-cart.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript>{{ 'component-quick-cart.css' | asset_url | stylesheet_tag }}</noscript>
 <div class="halo-sidebar halo-sidebar-right halo-cart-sidebar" id="halo-cart-sidebar">
-    <button type="button" class="halo-sidebar-close button-effect" data-close-cart-sidebar aria-label="{{ 'general.common.close' | t }}">{% render 'icon-close' %} {{ 'general.common.close' | t }}</button>
+    <button type="button" class="halo-sidebar-close button-effect" data-close-cart-sidebar aria-label="{{ 'general.common.close' | t }}">{% render 'icon-close' %}</button>
     <div class="halo-sidebar-header text-left">
 		<span class="title">{{ 'sections.cart.my_cart' | t }}</span>
 		<div class="wrapper-cartCount"><span class="cartCount" data-cart-count>{{ cart.item_count }}</span> <span data-cart-text>{% if cart.item_count == 1 %}{{ 'sections.cart.item' | t }}{% else %}{{ 'sections.cart.items' | t }}{% endif %}</span></div>
