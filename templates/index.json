@@ -586,7 +586,7 @@
         "bundle_save": "Save $30.74",
         "bundle_save_fs": 12,
         "bundle_btn_label": "Claim the Bundle →",
-        "bundle_btn_link": "",
+        "bundle_btn_link": "shopify://products/bookmarks-titan-aura",
         "bundle_footnote": "🚀 Free shipping · ♻️ Eco-friendly packaging",
         "bundle_foot_fs": 12,
         "bundle_mb": 80,
