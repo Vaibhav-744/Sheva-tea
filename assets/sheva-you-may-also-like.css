@@ -1,0 +1,457 @@
+/* ============================================================
+   SHEVA TEA — You May Also Like Section CSS
+============================================================ */
+
+.sheva-yml {
+  padding: var(--yml-pad-top, 80px) 8% var(--yml-pad-bottom, 80px);
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* ── Section Header ── */
+.sheva-yml .sheva-sec-head {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 50px auto;
+  position: relative;
+  z-index: 2;
+}
+
+.sheva-yml .sheva-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--sheva-font-heading);
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--sheva-cyan, #22d3ee);
+  margin-bottom: 12px;
+}
+
+.sheva-yml .sheva-sec-title {
+  font-family: var(--sheva-font-heading);
+  color: #ffffff;
+  line-height: 1.15;
+  letter-spacing: 1.5px;
+  margin: 0 0 12px 0;
+  font-weight: 700;
+}
+
+.sheva-yml .sheva-glow {
+  font-style: normal;
+  color: #fff;
+}
+
+.sheva-yml .sheva-sec-sub {
+  font-family: var(--sheva-font-body);
+  color: rgba(243, 240, 255, 0.75);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Grid Container (<= 3 Products) ── */
+.sheva-yml-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1240px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.sheva-yml-grid--1 {
+  grid-template-columns: minmax(300px, 400px);
+  justify-content: center;
+}
+
+.sheva-yml-grid--2 {
+  grid-template-columns: repeat(2, minmax(300px, 400px));
+  justify-content: center;
+}
+
+/* ── Slider Container (> 3 Products) ── */
+.sheva-yml-slider-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  padding: 0 10px;
+}
+
+.sheva-yml-track {
+  margin: 0 -14px;
+}
+
+.sheva-yml-track .slick-slide {
+  padding: 0 14px;
+  outline: none;
+}
+
+.sheva-yml-track .slick-list {
+  overflow: visible;
+  padding: 15px 0;
+}
+
+/* ── Product Card Structure ── */
+.sheva-yml-card {
+  position: relative;
+  border-radius: 24px;
+  background: rgba(14, 7, 37, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.sheva-yml-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 20px 50px rgba(139, 92, 246, 0.3), 0 0 30px rgba(34, 211, 238, 0.2);
+}
+
+/* Card Header (Gradient + Image + Badge) */
+.sheva-yml-card__header {
+  height: 240px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.sheva-yml-card__header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), transparent 70%);
+  pointer-events: none;
+}
+
+/* Preset Gradient Backgrounds (Matching Reference Image) */
+.sheva-yml-grad-1 {
+  background: linear-gradient(135deg, #ff5388 0%, #ff7a3d 100%);
+}
+
+.sheva-yml-grad-2 {
+  background: linear-gradient(135deg, #22d3ee 0%, #4f46e5 100%);
+}
+
+.sheva-yml-grad-3 {
+  background: linear-gradient(135deg, #ffd93d 0%, #ff7a3d 100%);
+}
+
+.sheva-yml-grad-4 {
+  background: linear-gradient(135deg, #8b5cf6 0%, #ff4db8 100%);
+}
+
+.sheva-yml-grad-5 {
+  background: linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%);
+}
+
+/* Card Badge (Pill Top-Left) */
+.sheva-yml-card__badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 3;
+  padding: 5px 14px;
+  font-family: var(--sheva-font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Product Image Link & Image */
+.sheva-yml-card__img-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  text-decoration: none;
+}
+
+.sheva-yml-card__img {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.35));
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.sheva-yml-card:hover .sheva-yml-card__img {
+  transform: scale(1.08) translateY(-4px);
+}
+
+.sheva-yml-card__placeholder {
+  font-size: 64px;
+  z-index: 2;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+  animation: shevaYmlFloat 4s ease-in-out infinite;
+}
+
+@keyframes shevaYmlFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* ── Card Body Content ── */
+.sheva-yml-card__body {
+  padding: 24px 22px;
+  background: rgba(14, 7, 37, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.sheva-yml-card__cat {
+  display: block;
+  font-family: var(--sheva-font-heading);
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--sheva-cyan, #22d3ee);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.sheva-yml-card__title {
+  font-family: var(--sheva-font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+}
+
+.sheva-yml-card__title a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sheva-yml-card__title a:hover {
+  color: var(--sheva-cyan, #22d3ee);
+}
+
+.sheva-yml-card__desc {
+  font-family: var(--sheva-font-body);
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(243, 240, 255, 0.72);
+  margin: 0 0 20px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Card Footer (Price + ATC Button) ── */
+.sheva-yml-card__foot {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 10px;
+}
+
+.sheva-yml-card__price-box {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.sheva-yml-card__price {
+  font-family: var(--sheva-font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--sheva-pink, #ff4db8), var(--sheva-orange, #ff7a3d));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.sheva-yml-card__was-price {
+  font-family: var(--sheva-font-body);
+  font-size: 13px;
+  text-decoration: line-through;
+  color: rgba(243, 240, 255, 0.45);
+}
+
+.sheva-yml-card__btn-wrap {
+  margin: 0;
+  display: inline-block;
+}
+
+.sheva-yml-card__atc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px;
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-family: var(--sheva-font-heading);
+  font-weight: 700;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+}
+
+.sheva-yml-card__atc:hover {
+  background: rgba(255, 77, 184, 0.18);
+  border-color: var(--sheva-pink, #ff4db8);
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(255, 77, 184, 0.45);
+  text-decoration: none;
+}
+
+/* ── Slick Slider Customization ── */
+.sheva-yml-slider-wrapper .slick-prev,
+.sheva-yml-slider-wrapper .slick-next {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(14, 7, 37, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 10;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.sheva-yml-slider-wrapper .slick-prev {
+  left: -20px;
+}
+
+.sheva-yml-slider-wrapper .slick-next {
+  right: -20px;
+}
+
+.sheva-yml-slider-wrapper .slick-prev:before,
+.sheva-yml-slider-wrapper .slick-next:before {
+  font-family: inherit;
+  font-size: 18px;
+  color: #ffffff;
+  opacity: 0.9;
+  line-height: 1;
+}
+
+.sheva-yml-slider-wrapper .slick-prev:before {
+  content: '‹';
+}
+
+.sheva-yml-slider-wrapper .slick-next:before {
+  content: '›';
+}
+
+.sheva-yml-slider-wrapper .slick-prev:hover,
+.sheva-yml-slider-wrapper .slick-next:hover {
+  background: var(--sheva-pink, #ff4db8);
+  border-color: var(--sheva-pink, #ff4db8);
+  box-shadow: 0 0 20px rgba(255, 77, 184, 0.6);
+}
+
+.sheva-yml-dots {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 35px 0 0 0;
+}
+
+.sheva-yml-dots li {
+  margin: 0;
+}
+
+.sheva-yml-dots li button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sheva-yml-dots li.slick-active button {
+  width: 28px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--sheva-cyan, #22d3ee), var(--sheva-pink, #ff4db8));
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.6);
+}
+
+/* ── Responsive Design ── */
+@media (max-width: 1024px) {
+  .sheva-yml-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+}
+
+@media (max-width: 640px) {
+  .sheva-yml {
+    padding: 50px 20px;
+  }
+
+  .sheva-yml-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sheva-yml-card__header {
+    height: 200px;
+  }
+
+  .sheva-yml-card__title {
+    font-size: 16px;
+  }
+
+  .sheva-yml-slider-wrapper .slick-prev {
+    left: -8px;
+  }
+
+  .sheva-yml-slider-wrapper .slick-next {
+    right: -8px;
+  }
+}

@@ -297,6 +297,30 @@
         "padding_bottom": 52
       }
     },
+    "sheva_you_may_also_like_Hmh7fX": {
+      "type": "sheva-you-may-also-like",
+      "name": "Sheva – You May Also Like",
+      "settings": {
+        "eyebrow": "✦ YOU MAY ALSO LIKE",
+        "eyebrow_color": "#22d3ee",
+        "title_plain": "",
+        "title": "More from Titan Aura",
+        "title_fs_desktop": 38,
+        "title_fs_mobile": 26,
+        "subtitle": "",
+        "sub_fs": 15,
+        "product_list": [],
+        "collection": "frontpage",
+        "default_badge": "TITAN AURA",
+        "limit": 6,
+        "show_arrows": true,
+        "show_dots": true,
+        "autoplay": true,
+        "autoplay_speed": 4,
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
     "product-recommendations": {
       "type": "product-recommendations",
       "disabled": true,
@@ -413,6 +437,7 @@
     "product-benefits",
     "product-ingredients",
     "product-reviews",
+    "sheva_you_may_also_like_Hmh7fX",
     "product-recommendations",
     "product-recently-viewed"
   ]

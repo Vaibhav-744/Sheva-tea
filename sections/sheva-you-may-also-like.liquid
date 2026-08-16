@@ -1,0 +1,676 @@
+{{ 'sheva-you-may-also-like.css' | asset_url | stylesheet_tag }}
+
+{%- assign section_id = 'sheva-yml-' | append: section.id -%}
+
+{%- comment -%} Determine Product Selection Source {%- endcomment -%}
+{%- assign meta_prods = nil -%}
+{%- if product.metafields.custom.you_may_also_like.value != blank -%}
+  {%- assign meta_prods = product.metafields.custom.you_may_also_like.value -%}
+{%- elsif product.metafields.custom.you_may_also_like != blank -%}
+  {%- assign meta_prods = product.metafields.custom.you_may_also_like -%}
+{%- elsif product.metafields.custom.related_products.value != blank -%}
+  {%- assign meta_prods = product.metafields.custom.related_products.value -%}
+{%- elsif product.metafields.theme.you_may_also_like.value != blank -%}
+  {%- assign meta_prods = product.metafields.theme.you_may_also_like.value -%}
+{%- endif -%}
+
+{%- assign related_products = nil -%}
+{%- if meta_prods != blank -%}
+  {%- if meta_prods.value != blank -%}
+    {%- assign related_products = meta_prods.value -%}
+  {%- else -%}
+    {%- assign related_products = meta_prods -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- if related_products == blank or related_products.size == 0 -%}
+  {%- if section.settings.product_list != blank and section.settings.product_list.count > 0 -%}
+    {%- assign related_products = section.settings.product_list -%}
+  {%- elsif section.settings.product_list != blank and section.settings.product_list.size > 0 -%}
+    {%- assign related_products = section.settings.product_list -%}
+  {%- elsif section.settings.collection != blank and section.settings.collection.products_count > 0 -%}
+    {%- assign related_products = section.settings.collection.products -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- assign prod_limit = section.settings.limit | default: 10 -%}
+{%- assign product_count = 0 -%}
+
+{%- if related_products != blank -%}
+  {%- assign product_count = related_products.size -%}
+  {%- if product_count == 0 or product_count == nil -%}
+    {%- assign product_count = related_products.count -%}
+  {%- endif -%}
+{%- elsif section.blocks.size > 0 -%}
+  {%- assign product_count = section.blocks.size -%}
+{%- else -%}
+  {%- assign product_count = 3 -%}
+{%- endif -%}
+
+{%- comment -%} Automatic Slider Condition (> 3 products) {%- endcomment -%}
+{%- assign enable_slider = false -%}
+{%- if product_count > 3 -%}
+  {%- assign enable_slider = true -%}
+{%- endif -%}
+
+<section
+  id="{{ section_id }}"
+  class="sheva-yml{% if enable_slider %} sheva-yml--has-slider{% endif %}"
+  style="
+    --yml-pad-top: {{ section.settings.padding_top }}px;
+    --yml-pad-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  {%- comment -%} ── Section Header ── {%- endcomment -%}
+  <div class="sheva-sec-head">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="sheva-eyebrow" style="color: {{ section.settings.eyebrow_color }};">
+        {{ section.settings.eyebrow }}
+      </span>
+    {%- endif -%}
+
+    {%- if section.settings.title != blank -%}
+      <h2 class="sheva-sec-title" style="font-size: clamp({{ section.settings.title_fs_mobile }}px, 4vw, {{ section.settings.title_fs_desktop }}px);">
+        {%- if section.settings.title_plain != blank -%}{{ section.settings.title_plain }} {%- endif -%}
+        <em class="sheva-glow">{{ section.settings.title }}</em>
+      </h2>
+    {%- endif -%}
+
+    {%- if section.settings.subtitle != blank -%}
+      <p class="sheva-sec-sub" style="font-size: {{ section.settings.sub_fs }}px;">
+        {{ section.settings.subtitle }}
+      </p>
+    {%- endif -%}
+  </div>
+
+  {%- comment -%} ── Card Loop Snippet ── {%- endcomment -%}
+  {%- capture cards_markup -%}
+    {%- if related_products != blank and related_products.size > 0 -%}
+      {%- for item in related_products limit: prod_limit -%}
+        {%- assign card_var = item.selected_or_first_available_variant | default: item.variants.first -%}
+        {%- assign grad_num = forloop.index0 | modulo: 5 | plus: 1 -%}
+        {%- assign grad_class = 'sheva-yml-grad-' | append: grad_num -%}
+        {%- assign badge_text = section.settings.default_badge | default: item.vendor | default: item.collections.first.title | default: 'TITAN AURA' -%}
+        {%- assign category_text = item.type | default: item.collections.first.title | default: 'COLLECTION' -%}
+        {%- assign short_desc = item.metafields.custom.short_description.value | default: item.description | strip_html | truncate: 75 -%}
+        {%- assign item_price = item.price | default: card_var.price | money -%}
+        {%- assign item_was_price = item.compare_at_price | default: card_var.compare_at_price -%}
+        {%- assign item_img = item.featured_media | default: item.featured_image -%}
+
+        <div class="sheva-yml-card">
+          <div class="sheva-yml-card__header {{ grad_class }}">
+            {%- if badge_text != blank -%}
+              <span class="sheva-yml-card__badge">{{ badge_text }}</span>
+            {%- endif -%}
+
+            <a href="{{ item.url }}" class="sheva-yml-card__img-link" title="{{ item.title | escape }}">
+              {%- if item_img != blank -%}
+                <img
+                  src="{{ item_img | img_url: '450x' }}"
+                  alt="{{ item_img.alt | default: item.title | escape }}"
+                  class="sheva-yml-card__img"
+                  loading="lazy"
+                  width="350"
+                  height="350"
+                >
+              {%- else -%}
+                <span class="sheva-yml-card__placeholder">✨</span>
+              {%- endif -%}
+            </a>
+          </div>
+
+          <div class="sheva-yml-card__body">
+            {%- if category_text != blank -%}
+              <span class="sheva-yml-card__cat">{{ category_text }}</span>
+            {%- endif -%}
+
+            <h3 class="sheva-yml-card__title">
+              <a href="{{ item.url }}">{{ item.title }}</a>
+            </h3>
+
+            {%- if short_desc != blank -%}
+              <p class="sheva-yml-card__desc">{{ short_desc }}</p>
+            {%- endif -%}
+
+            <div class="sheva-yml-card__foot">
+              <div class="sheva-yml-card__price-box">
+                <span class="sheva-yml-card__price">{{ item_price }}</span>
+                {%- if item_was_price > card_var.price -%}
+                  <span class="sheva-yml-card__was-price">{{ item_was_price | money }}</span>
+                {%- endif -%}
+              </div>
+
+              {%- if item.available -%}
+                <product-form class="sheva-yml-card__btn-wrap">
+                  {%- assign form_id = 'sheva-yml-form-' | append: section.id | append: '-' | append: item.id -%}
+                  {%- form 'product', item, id: form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                    <input type="hidden" name="id" value="{{ card_var.id }}">
+                    <input type="hidden" name="quantity" value="1">
+                    <button
+                      type="submit"
+                      name="add"
+                      class="sheva-yml-card__atc"
+                      data-btn-addToCart
+                    >
+                      ADD +
+                    </button>
+                  {%- endform -%}
+                </product-form>
+              {%- else -%}
+                <button
+                  type="button"
+                  class="sheva-yml-card__atc"
+                  disabled="disabled"
+                  style="opacity: 0.5; pointer-events: none;"
+                >
+                  SOLD OUT
+                </button>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+
+    {%- elsif section.blocks.size > 0 -%}
+      {%- for block in section.blocks -%}
+        {%- assign card_prod = block.settings.card_product -%}
+        {%- assign grad_num = forloop.index0 | modulo: 5 | plus: 1 -%}
+        {%- assign grad_class = block.settings.gradient_class | default: '' -%}
+        {%- if grad_class == blank -%}
+          {%- assign grad_class = 'sheva-yml-grad-' | append: grad_num -%}
+        {%- endif -%}
+
+        {%- assign card_title = block.settings.name -%}
+        {%- assign card_price = block.settings.price -%}
+        {%- assign card_link = block.settings.product_link -%}
+        {%- assign card_cat = block.settings.category -%}
+        {%- assign card_badge = block.settings.badge | default: 'TITAN AURA' -%}
+        {%- assign card_desc = block.settings.description -%}
+
+        {%- if card_prod != blank and card_prod != empty -%}
+          {%- assign card_var = card_prod.selected_or_first_available_variant | default: card_prod.variants.first -%}
+          {%- if card_title == blank -%}{%- assign card_title = card_prod.title -%}{%- endif -%}
+          {%- if card_price == blank -%}{%- assign card_price = card_prod.price | default: card_var.price | money -%}{%- endif -%}
+          {%- if card_link == blank -%}{%- assign card_link = card_prod.url -%}{%- endif -%}
+          {%- if card_cat == blank -%}{%- assign card_cat = card_prod.type | default: 'COLLECTION' -%}{%- endif -%}
+          {%- if card_desc == blank -%}{%- assign card_desc = card_prod.description | strip_html | truncate: 75 -%}{%- endif -%}
+        {%- endif -%}
+
+        <div class="sheva-yml-card" {{ block.shopify_attributes }}>
+          <div class="sheva-yml-card__header {{ grad_class }}">
+            {%- if card_badge != blank -%}
+              <span class="sheva-yml-card__badge">{{ card_badge }}</span>
+            {%- endif -%}
+
+            {%- if card_link != blank -%}
+              <a href="{{ card_link }}" class="sheva-yml-card__img-link">
+            {%- else -%}
+              <div class="sheva-yml-card__img-link">
+            {%- endif -%}
+              {%- if card_prod.featured_image != blank -%}
+                <img
+                  src="{{ card_prod.featured_image | img_url: '450x' }}"
+                  alt="{{ card_title | escape }}"
+                  class="sheva-yml-card__img"
+                  loading="lazy"
+                  width="350"
+                  height="350"
+                >
+              {%- elsif block.settings.emoji != blank -%}
+                <span class="sheva-yml-card__placeholder">{{ block.settings.emoji }}</span>
+              {%- else -%}
+                <span class="sheva-yml-card__placeholder">🍵</span>
+              {%- endif -%}
+            {%- if card_link != blank -%}
+              </a>
+            {%- else -%}
+              </div>
+            {%- endif -%}
+          </div>
+
+          <div class="sheva-yml-card__body">
+            {%- if card_cat != blank -%}
+              <span class="sheva-yml-card__cat">{{ card_cat }}</span>
+            {%- endif -%}
+
+            <h3 class="sheva-yml-card__title">
+              {%- if card_link != blank -%}
+                <a href="{{ card_link }}">{{ card_title }}</a>
+              {%- else -%}
+                {{ card_title }}
+              {%- endif -%}
+            </h3>
+
+            {%- if card_desc != blank -%}
+              <p class="sheva-yml-card__desc">{{ card_desc }}</p>
+            {%- endif -%}
+
+            <div class="sheva-yml-card__foot">
+              <div class="sheva-yml-card__price-box">
+                <span class="sheva-yml-card__price">{{ card_price }}</span>
+              </div>
+
+              {%- if card_prod != blank and card_prod != empty -%}
+                {%- if card_prod.available -%}
+                  <product-form class="sheva-yml-card__btn-wrap">
+                    {%- assign b_form_id = 'sheva-yml-bform-' | append: block.id -%}
+                    {%- form 'product', card_prod, id: b_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                      <input type="hidden" name="id" value="{{ card_var.id }}">
+                      <input type="hidden" name="quantity" value="1">
+                      <button type="submit" name="add" class="sheva-yml-card__atc" data-btn-addToCart>
+                        ADD +
+                      </button>
+                    {%- endform -%}
+                  </product-form>
+                {%- else -%}
+                  <button type="button" class="sheva-yml-card__atc" disabled="disabled" style="opacity: 0.5; pointer-events: none;">
+                    SOLD OUT
+                  </button>
+                {%- endif -%}
+              {%- elsif card_link != blank -%}
+                <a href="{{ card_link }}" class="sheva-yml-card__atc">ADD +</a>
+              {%- else -%}
+                <a href="/collections/all" class="sheva-yml-card__atc">ADD +</a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+
+    {%- else -%}
+      {%- comment -%} ── Fallback Demo Cards (Preview Mode / Unassigned State) ── {%- endcomment -%}
+      <div class="sheva-yml-card">
+        <div class="sheva-yml-card__header sheva-yml-grad-1">
+          <span class="sheva-yml-card__badge">TITAN AURA</span>
+          <div class="sheva-yml-card__img-link">
+            <span class="sheva-yml-card__placeholder">☕</span>
+          </div>
+        </div>
+        <div class="sheva-yml-card__body">
+          <span class="sheva-yml-card__cat">DRINKWARE</span>
+          <h3 class="sheva-yml-card__title">Titan Aura Mug</h3>
+          <p class="sheva-yml-card__desc">11oz stoneware with cosmic art.</p>
+          <div class="sheva-yml-card__foot">
+            <div class="sheva-yml-card__price-box">
+              <span class="sheva-yml-card__price">$15.95</span>
+            </div>
+            <a href="/collections/all" class="sheva-yml-card__atc">ADD +</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sheva-yml-card">
+        <div class="sheva-yml-card__header sheva-yml-grad-2">
+          <span class="sheva-yml-card__badge">TITAN AURA</span>
+          <div class="sheva-yml-card__img-link">
+            <span class="sheva-yml-card__placeholder">📓</span>
+          </div>
+        </div>
+        <div class="sheva-yml-card__body">
+          <span class="sheva-yml-card__cat">BOOKS</span>
+          <h3 class="sheva-yml-card__title">Titan Aura Notebook</h3>
+          <p class="sheva-yml-card__desc">Vegan leatherette cover, bleed-resistant pages.</p>
+          <div class="sheva-yml-card__foot">
+            <div class="sheva-yml-card__price-box">
+              <span class="sheva-yml-card__price">$18.50</span>
+            </div>
+            <a href="/collections/all" class="sheva-yml-card__atc">ADD +</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sheva-yml-card">
+        <div class="sheva-yml-card__header sheva-yml-grad-3">
+          <span class="sheva-yml-card__badge">TITAN AURA</span>
+          <div class="sheva-yml-card__img-link">
+            <span class="sheva-yml-card__placeholder">🎴</span>
+          </div>
+        </div>
+        <div class="sheva-yml-card__body">
+          <span class="sheva-yml-card__cat">CARDS</span>
+          <h3 class="sheva-yml-card__title">Affirmation Deck</h3>
+          <p class="sheva-yml-card__desc">Daily reminders to stay aligned.</p>
+          <div class="sheva-yml-card__foot">
+            <div class="sheva-yml-card__price-box">
+              <span class="sheva-yml-card__price">$22.00</span>
+            </div>
+            <a href="/collections/all" class="sheva-yml-card__atc">ADD +</a>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endcapture -%}
+
+  {%- comment -%} ── Output Grid or Slider ── {%- endcomment -%}
+  {%- if enable_slider -%}
+    <div class="sheva-yml-slider-wrapper">
+      <div class="sheva-yml-track">
+        {{ cards_markup }}
+      </div>
+    </div>
+  {%- else -%}
+    <div class="sheva-yml-grid sheva-yml-grid--{{ product_count }}">
+      {{ cards_markup }}
+    </div>
+  {%- endif -%}
+</section>
+
+{%- if enable_slider -%}
+  <script>
+    (function () {
+      function initYmlSlider() {
+        if (typeof $ === 'undefined') return;
+        var $track = $('#{{ section_id }} .sheva-yml-track');
+        if ($track.length && !$track.hasClass('slick-initialized')) {
+          $track.slick({
+            dots: {{ section.settings.show_dots }},
+            arrows: {{ section.settings.show_arrows }},
+            infinite: true,
+            autoplay: {{ section.settings.autoplay }},
+            autoplaySpeed: {{ section.settings.autoplay_speed | times: 1000 }},
+            speed: 400,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            dotsClass: 'sheva-yml-dots',
+            responsive: [
+              {
+                breakpoint: 1024,
+                settings: {
+                  slidesToShow: 2,
+                  slidesToScroll: 1
+                }
+              },
+              {
+                breakpoint: 640,
+                settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1
+                }
+              }
+            ]
+          });
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initYmlSlider);
+      } else {
+        initYmlSlider();
+      }
+      document.addEventListener('shopify:section:load', initYmlSlider);
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Sheva – You May Also Like",
+  "class": "sheva-you-may-also-like-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "✦ YOU MAY ALSO LIKE"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "text",
+      "id": "title_plain",
+      "label": "Title Plain Prefix"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Highlighted Title",
+      "default": "More from Titan Aura"
+    },
+    {
+      "type": "range",
+      "id": "title_fs_desktop",
+      "label": "Title Font Size (Desktop)",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 38
+    },
+    {
+      "type": "range",
+      "id": "title_fs_mobile",
+      "label": "Title Font Size (Mobile)",
+      "min": 20,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "range",
+      "id": "sub_fs",
+      "label": "Subtitle Font Size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Product Selection Settings"
+    },
+    {
+      "type": "paragraph",
+      "content": "Products will automatically load from product level metafields (e.g. custom.you_may_also_like or custom.related_products). If empty, the settings below or manual blocks will be used."
+    },
+    {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "Select Products (Theme Setting Fallback)"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Fallback Collection"
+    },
+    {
+      "type": "text",
+      "id": "default_badge",
+      "label": "Default Pill Badge Text",
+      "default": "TITAN AURA"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Max Products Limit",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings (Auto-activates when > 3 products)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show Slider Arrows",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "label": "Show Slider Dots",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay Slider",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay Speed (seconds)",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "unit": "s",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Section Layout Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 160,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 160,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "shop_card",
+      "name": "Manual Product Card",
+      "settings": [
+        {
+          "type": "product",
+          "id": "card_product",
+          "label": "Select Product"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Pill Badge Text",
+          "default": "TITAN AURA"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category Label",
+          "default": "DRINKWARE"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Custom Product Name"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Short Description",
+          "default": "11oz stoneware with cosmic art."
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Custom Price Display",
+          "default": "$15.95"
+        },
+        {
+          "type": "url",
+          "id": "product_link",
+          "label": "Custom Link"
+        },
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji Placeholder (if no image)",
+          "default": "☕"
+        },
+        {
+          "type": "select",
+          "id": "gradient_class",
+          "label": "Card Header Gradient Style",
+          "options": [
+            { "value": "sheva-yml-grad-1", "label": "Pink / Magenta -> Orange" },
+            { "value": "sheva-yml-grad-2", "label": "Cyan -> Indigo / Blue" },
+            { "value": "sheva-yml-grad-3", "label": "Yellow -> Orange" },
+            { "value": "sheva-yml-grad-4", "label": "Purple -> Pink" },
+            { "value": "sheva-yml-grad-5", "label": "Cyan -> Purple" }
+          ],
+          "default": "sheva-yml-grad-1"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva – You May Also Like",
+      "settings": {
+        "eyebrow": "✦ YOU MAY ALSO LIKE",
+        "title": "More from Titan Aura"
+      },
+      "blocks": [
+        {
+          "type": "shop_card",
+          "settings": {
+            "badge": "TITAN AURA",
+            "category": "DRINKWARE",
+            "name": "Titan Aura Mug",
+            "description": "11oz stoneware with cosmic art.",
+            "price": "$15.95",
+            "emoji": "☕",
+            "gradient_class": "sheva-yml-grad-1"
+          }
+        },
+        {
+          "type": "shop_card",
+          "settings": {
+            "badge": "TITAN AURA",
+            "category": "BOOKS",
+            "name": "Titan Aura Notebook",
+            "description": "Vegan leatherette cover, bleed-resistant pages.",
+            "price": "$18.50",
+            "emoji": "📓",
+            "gradient_class": "sheva-yml-grad-2"
+          }
+        },
+        {
+          "type": "shop_card",
+          "settings": {
+            "badge": "TITAN AURA",
+            "category": "CARDS",
+            "name": "Affirmation Deck",
+            "description": "Daily reminders to stay aligned.",
+            "price": "$22.00",
+            "emoji": "🎴",
+            "gradient_class": "sheva-yml-grad-3"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
