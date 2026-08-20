@@ -11,11 +11,8 @@
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
   gap: 60px;
   align-items: center;
-  padding-top: var(--sec-pt);
-  padding-bottom: var(--sec-pb);
-  padding-left: 24px;
-  padding-right: 24px;
-  max-width: 1200px;
+  padding: var(--sec-pt) 6% var(--sec-pb);
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
@@ -136,9 +133,9 @@
 .sheva-contact-orb {
   position: absolute;
   display: block !important;
-  width: 320px;
-  height: 320px;
-  max-width: 90%;
+  width: 360px;
+  height: 360px;
+  max-width: 100%;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, #ffb37a, #ff4db8 35%, #8b5cf6 70%, #1e1065 100%);
   box-shadow: inset -40px -40px 80px rgba(0, 0, 0, .6), 0 0 100px rgba(255, 77, 184, .45);
@@ -156,6 +153,30 @@
   border: 1px dashed rgba(255, 255, 255, 0.35);
   animation: spin 22s linear infinite reverse;
   pointer-events: none;
+}
+
+.contact-orb-img,
+.sheva-contact-orb-img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 30px 55px rgba(0, 0, 0, 0.55));
+  animation: productFloat 7s ease-in-out infinite;
+}
+
+@keyframes productFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-14px);
+  }
 }
 
 /* ── 2 · SECTION HEADINGS (MATCHING contact.html) ── */
@@ -460,6 +481,7 @@
 
 /* ── Responsive Breakpoints ── */
 @media (max-width: 1024px) {
+
   .contact-hero,
   .sheva-contact-hero {
     padding-top: 130px;
@@ -469,6 +491,7 @@
 }
 
 @media (max-width: 900px) {
+
   .contact-hero,
   .sheva-contact-hero {
     grid-template-columns: 1fr;
@@ -487,6 +510,7 @@
 }
 
 @media (max-width: 768px) {
+
   .contact-hero,
   .sheva-contact-hero {
     padding-top: 50px;
@@ -508,6 +532,11 @@
   .sheva-contact-orb-inner {
     width: 280px;
     height: 280px;
+  }
+
+  .contact-orb-img,
+  .sheva-contact-orb-img {
+    max-width: 320px;
   }
 
   .contact-form-wrap,
@@ -532,6 +561,7 @@
 }
 
 @media (max-width: 420px) {
+
   .contact-copy h1,
   .sheva-contact-copy h1 {
     font-size: 26px;
@@ -552,5 +582,10 @@
   .faq-item summary,
   .sheva-faq-item summary {
     font-size: 13px;
+  }
+
+  .contact-orb-img,
+  .sheva-contact-orb-img {
+    max-width: 260px;
   }
 }

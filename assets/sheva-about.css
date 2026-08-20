@@ -94,11 +94,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
   gap: 60px;
   align-items: center;
-  padding-top: var(--sec-pt);
-  padding-bottom: var(--sec-pb);
-  padding-left: 24px;
-  padding-right: 24px;
-  max-width: 1200px;
+  padding: var(--sec-pt) 6% var(--sec-pb);
   margin-left: auto;
   margin-right: auto;
   width: 100%;
@@ -621,14 +617,11 @@
 
 /* ── General Story / Values / Highlights Grid ── */
 .sheva-about-section {
-  padding-top: var(--sec-pt);
-  padding-bottom: var(--sec-pb);
-  padding-left: 24px;
-  padding-right: 24px;
-  max-width: 1200px;
+  padding: var(--sec-pt) 6% var(--sec-pb);
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
   position: relative;
   z-index: 5;

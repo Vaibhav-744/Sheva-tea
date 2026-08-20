@@ -106,10 +106,9 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
-  align-items: center;
+  align-items: flex-start;
   min-height: 100vh;
-  padding-top: var(--hero-pt);
-  padding-bottom: var(--hero-pb);
+  padding: var(--hero-pt) 6% var(--hero-pb);
 }
 
 .product-page-left h1 {
@@ -214,10 +213,7 @@
 
 /* ============ PRODUCT DETAILS (BENEFITS & INGREDIENTS) ============ */
 .product-details {
-  padding-top: var(--sec-pt);
-  padding-bottom: var(--sec-pb);
-  padding-left: 8%;
-  padding-right: 8%;
+  padding: var(--sec-pt) 6% var(--sec-pb);
   position: relative;
   z-index: 2;
 }
@@ -300,7 +296,7 @@
   gap: 14px;
   max-width: 1100px;
   margin: 0 auto;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .ingredient-item {

@@ -64,6 +64,26 @@
   <div class="contact-orb-wrap sheva-contact-orb-wrap" aria-hidden="true">
     <div class="contact-orb sheva-contact-orb"></div>
     <div class="contact-orb-inner sheva-contact-orb-inner"></div>
+    {%- assign orb_img = s.image | default: s.hero_image -%}
+    {%- if orb_img != blank -%}
+      <img
+        src="{{ orb_img | img_url: '600x' }}"
+        alt="{{ orb_img.alt | default: s.headline | strip_html | escape }}"
+        class="contact-orb-img sheva-contact-orb-img"
+        loading="eager"
+        width="420"
+        height="auto"
+      >
+    {%- else -%}
+      <img
+        src="{{ 'hero-cast.webp' | asset_url }}"
+        alt="{{ s.headline | strip_html | escape }}"
+        class="contact-orb-img sheva-contact-orb-img"
+        loading="eager"
+        width="420"
+        height="auto"
+      >
+    {%- endif -%}
   </div>
 </section>
 
@@ -76,6 +96,12 @@
     {
       "type": "header",
       "content": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Orb Image",
+      "info": "Image displayed on top of the glowing orb background"
     },
     {
       "type": "text",

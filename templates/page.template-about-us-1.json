@@ -78,7 +78,7 @@
       ],
       "name": "Sheva — About Hero",
       "settings": {
-        "vertical_text": "SHEVA TEA®",
+        "vertical_text": "",
         "eyebrow": "✦ ABOUT SHEVA TEA",
         "headline": "<p>Unique blends that <em>delight the palate</em> and promote well-being.</p>",
         "description": "Sheva Tea® is dedicated to providing unique blends that not only delight the palate but also promote well-being — a ritual crafted for the body, mind, and spirit.",
@@ -267,8 +267,8 @@
       "name": "Sheva — Manifesto",
       "settings": {
         "quote_mark": "“",
-        "quote": "<p>By choosing Sheva Tea®, you're <em>not just enjoying a cup of tea</em> — you're participating in a holistic journey towards better wellness.</p>",
-        "submark": "✦ SEVEN STAR ENERGY®",
+        "quote": "<p>By choosing Sheva Tea, you're <em>not just enjoying a cup of tea</em> — you're participating in a holistic journey towards better wellness.</p>",
+        "submark": "✦ SEVEN STAR ENERGY",
         "btn_label": "Begin the Journey",
         "btn_url": "",
         "quote_fs_desktop": 32,
@@ -330,7 +330,7 @@
         "title_color": "#f3f0ff",
         "description_color": "#f3f0ff",
         "bullet_color": "#22d3ee",
-        "padding_top": 52,
+        "padding_top": 72,
         "padding_bottom": 52
       }
     }

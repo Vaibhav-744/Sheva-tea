@@ -73,7 +73,8 @@
       ],
       "name": "Sheva — Contact Hero",
       "settings": {
-        "eyebrow": "✦ CONTACT SHEVA TEA®",
+        "image": "shopify://shop_images/hero-cast.webp",
+        "eyebrow": "✦ CONTACT SHEVA TEA",
         "headline": "<p>Let's talk tea, ritual & <em>cosmic wellness</em>.</p>",
         "description": "Reach out for questions about Supernova Tea, the Titan Aura collection, wholesale inquiries, collaborations, or general support. We'd love to hear from you.",
         "eyebrow_size": 12,

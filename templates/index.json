@@ -12,7 +12,7 @@
     "sheva-hero": {
       "type": "sheva-hero-banner",
       "settings": {
-        "tagline": "✦ SEVEN STAR ENERGY®",
+        "tagline": "✦ SEVEN STAR ENERGY",
         "headline": "<p>GET READY<br/><em>THE STARS ARE ALIGNING</em></p>",
         "subheading": "A cosmic herbal fusion crafted to elevate your energy, clarity, and soul.",
         "tea_image": "shopify://shop_images/hero-cast.webp",
@@ -29,8 +29,8 @@
         "headline_size": 72,
         "sub_size": 16,
         "headline_size_mb": 36,
-        "padding_top": 80,
-        "padding_bottom": 80
+        "padding_top": 60,
+        "padding_bottom": 120
       }
     },
     "sheva-marquee": {
@@ -103,7 +103,7 @@
         "product": "supernova-herbal-tea",
         "fallback_image": "shopify://shop_images/pack.png",
         "fallback_title": "SUPERNOVA Herbal Tea",
-        "tag_label": "✦ SEVEN STAR ENERGY®",
+        "tag_label": "✦ SEVEN STAR ENERGY",
         "atc_label": "Add to Cart",
         "shipping_note": "🚀 FREE Shipping when you spend over $50",
         "product_desc": "Net Wt 2oz Loose Leaf (56g) · 30 Servings. An otherworldly blend of ancient herbs to boost energy, clarity, and cosmic balance",

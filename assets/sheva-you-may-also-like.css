@@ -3,7 +3,7 @@
 ============================================================ */
 
 .sheva-yml {
-  padding: var(--yml-pad-top, 80px) 8% var(--yml-pad-bottom, 80px);
+  padding: var(--yml-pad-top, 80px) 6% var(--yml-pad-bottom, 80px);
   position: relative;
   z-index: 5;
   width: 100%;
