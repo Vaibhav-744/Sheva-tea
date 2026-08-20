@@ -90,7 +90,7 @@
         {%- assign card_var = item.selected_or_first_available_variant | default: item.variants.first -%}
         {%- assign grad_num = forloop.index0 | modulo: 5 | plus: 1 -%}
         {%- assign grad_class = 'sheva-yml-grad-' | append: grad_num -%}
-        {%- assign badge_text = section.settings.default_badge | default: item.vendor | default: item.collections.first.title | default: 'TITAN AURA' -%}
+        {%- assign badge_text = item.tags.first -%}
         {%- assign category_text = item.type | default: item.collections.first.title | default: 'COLLECTION' -%}
         {%- assign short_desc = item.metafields.custom.short_description.value | default: item.description | strip_html | truncate: 75 -%}
         {%- assign item_price = item.price | default: card_var.price | money -%}
@@ -184,7 +184,7 @@
         {%- assign card_price = block.settings.price -%}
         {%- assign card_link = block.settings.product_link -%}
         {%- assign card_cat = block.settings.category -%}
-        {%- assign card_badge = block.settings.badge | default: 'TITAN AURA' -%}
+        {%- assign card_badge = card_prod.tags.first -%}
         {%- assign card_desc = block.settings.description -%}
 
         {%- if card_prod != blank and card_prod != empty -%}

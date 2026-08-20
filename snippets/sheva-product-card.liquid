@@ -1,0 +1,96 @@
+{%- comment -%}
+  SHEVA TEA — Custom Product Card Snippet
+  Reusable custom product card matching Homepage & YML card design scheme.
+
+  Accepts:
+  - product_card_product: {Object} Product object (required)
+  - serial: {Number} Index in loop for alternating gradient backgrounds (optional)
+  - badge_text: {String} Custom badge label (optional, defaults to vendor or collection)
+{%- endcomment -%}
+
+{%- liquid
+  assign item = product_card_product
+  assign card_var = item.selected_or_first_available_variant | default: item.variants.first
+  assign index_num = serial | default: 1
+  assign grad_num = index_num | modulo: 5 | plus: 1
+  assign grad_class = 'sheva-yml-grad-' | append: grad_num
+  assign badge = badge_text | default: item.tags.first
+  assign category_text = item.type | default: item.collections.first.title | default: 'COLLECTION'
+  assign short_desc = item.metafields.custom.short_description.value | default: item.description | strip_html | truncate: 75
+  assign item_price = item.price | default: card_var.price | money
+  assign item_was_price = item.compare_at_price | default: card_var.compare_at_price
+  assign item_img = item.featured_media | default: item.featured_image
+-%}
+
+<div class="sheva-yml-card sheva-custom-product-card">
+  <div class="sheva-yml-card__header {{ grad_class }}">
+    {%- if badge != blank -%}
+      <span class="sheva-yml-card__badge">{{ badge }}</span>
+    {%- endif -%}
+
+    <a href="{{ item.url }}" class="sheva-yml-card__img-link" title="{{ item.title | escape }}">
+      {%- if item_img != blank -%}
+        <img
+          src="{{ item_img | img_url: '450x' }}"
+          alt="{{ item_img.alt | default: item.title | escape }}"
+          class="sheva-yml-card__img"
+          loading="lazy"
+          width="350"
+          height="350"
+        >
+      {%- else -%}
+        <span class="sheva-yml-card__placeholder">✨</span>
+      {%- endif -%}
+    </a>
+  </div>
+
+  <div class="sheva-yml-card__body">
+    {%- if category_text != blank -%}
+      <span class="sheva-yml-card__cat">{{ category_text }}</span>
+    {%- endif -%}
+
+    <h3 class="sheva-yml-card__title">
+      <a href="{{ item.url }}">{{ item.title }}</a>
+    </h3>
+
+    {%- if short_desc != blank -%}
+      <p class="sheva-yml-card__desc">{{ short_desc }}</p>
+    {%- endif -%}
+
+    <div class="sheva-yml-card__foot">
+      <div class="sheva-yml-card__price-box">
+        <span class="sheva-yml-card__price">{{ item_price }}</span>
+        {%- if item_was_price > card_var.price -%}
+          <span class="sheva-yml-card__was-price">{{ item_was_price | money }}</span>
+        {%- endif -%}
+      </div>
+
+      {%- if item.available -%}
+        <product-form class="sheva-yml-card__btn-wrap">
+          {%- assign form_id = 'sheva-card-form-' | append: section.id | append: '-' | append: item.id -%}
+          {%- form 'product', item, id: form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+            <input type="hidden" name="id" value="{{ card_var.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button
+              type="submit"
+              name="add"
+              class="sheva-yml-card__atc"
+              data-btn-addToCart
+            >
+              ADD +
+            </button>
+          {%- endform -%}
+        </product-form>
+      {%- else -%}
+        <button
+          type="button"
+          class="sheva-yml-card__atc"
+          disabled="disabled"
+          style="opacity: 0.5; pointer-events: none;"
+        >
+          SOLD OUT
+        </button>
+      {%- endif -%}
+    </div>
+  </div>
+</div>

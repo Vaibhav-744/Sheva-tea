@@ -1,3 +1,4 @@
+{{ 'sheva-you-may-also-like.css' | asset_url | stylesheet_tag }}
 {%- liquid
     assign colors_bg = section.settings.colors_bg
     assign colors_bg_gradient = section.settings.colors_bg_gradient
@@ -217,12 +218,9 @@
                             >
                                 {%- for product in collection.products -%}
                                     <li class="product{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}"{% if settings.banner_animation == 'effect_fade_up' %} data-cascade style="--animation-order: {{ forloop.index }};"{% endif %}>
-                                        {% render 'product-grid-layout',
+                                        {% render 'sheva-product-card',
                                             product_card_product: product,
-                                            serial: forloop.index,
-                                            sectionId: section.id,
-                                            show_list: true,
-                                            loading: true
+                                            serial: forloop.index
                                         %}
                                     </li>
                                 {%- endfor -%}

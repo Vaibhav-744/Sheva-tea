@@ -189,9 +189,13 @@
       {%- endif -%}
 
       <div class="sheva-shop-card" {{ block.shopify_attributes }}>
-        {%- if block.settings.badge != blank -%}
+        {%- assign badge_display = block.settings.badge -%}
+        {%- if card_prod != blank and card_prod != empty -%}
+          {%- assign badge_display = card_prod.tags.first -%}
+        {%- endif -%}
+        {%- if badge_display != blank -%}
           <div class="sheva-shop-badge{% if block.settings.badge_alt %} sheva-shop-badge--alt{% endif %}"
-            style="font-size: {{ section.settings.badge_fs }}px;">{{ block.settings.badge }}</div>
+            style="font-size: {{ section.settings.badge_fs }}px;">{{ badge_display }}</div>
         {%- endif -%}
 
         {%- if card_link != blank -%}
