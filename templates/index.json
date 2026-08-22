@@ -90,6 +90,27 @@
             "label": "Memory+",
             "label_fs": 11
           }
+        },
+        "accordion_HeK3mg": {
+          "type": "accordion",
+          "settings": {
+            "title": "Key Ingredients",
+            "description": "{{ section.settings.product.metafields.custom.key_ingredients | metafield_tag }}"
+          }
+        },
+        "accordion_gG88Jg": {
+          "type": "accordion",
+          "settings": {
+            "title": "Benefits",
+            "description": "{{ section.settings.product.metafields.custom.benefits | metafield_tag }}"
+          }
+        },
+        "accordion_RRmV4y": {
+          "type": "accordion",
+          "settings": {
+            "title": "Overall Benefits",
+            "description": "{{ section.settings.product.metafields.custom.overall_benefits | metafield_tag }}"
+          }
         }
       },
       "block_order": [
@@ -97,7 +118,10 @@
         "icon-2",
         "icon-3",
         "icon-4",
-        "icon-5"
+        "icon-5",
+        "accordion_HeK3mg",
+        "accordion_gG88Jg",
+        "accordion_RRmV4y"
       ],
       "settings": {
         "product": "supernova-herbal-tea",

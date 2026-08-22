@@ -80,7 +80,14 @@
       </div>
     {%- endif -%}
 
-    {%- if section.settings.product_desc != blank -%}
+    {%- if fp != blank and fp.metafields.custom.product_inclution != blank -%}
+      <div
+        class="sheva-fp__desc"
+        style="font-size: {{ section.settings.desc_fs }}px;"
+      >
+        {{ fp.metafields.custom.product_inclution | metafield_tag }}
+      </div>
+    {%- elsif section.settings.product_desc != blank -%}
       <p
         class="sheva-fp__desc"
         style="font-size: {{ section.settings.desc_fs }}px;"
@@ -96,8 +103,31 @@
       </div>
     {%- endif -%}
 
-    {%- comment %} ── Benefit icons row (blocks) ── {%- endcomment %}
-    {%- if section.blocks.size > 0 -%}
+    {%- comment %} ── Benefit icons row (metafields or section blocks) ── {%- endcomment %}
+    {%- if fp != blank and fp.metafields.custom.icon_and_texts != blank -%}
+      {%- assign icon_list = fp.metafields.custom.icon_and_texts.value -%}
+      <div class="sheva-fp__icons-row">
+        {%- for item in icon_list -%}
+          {%- assign item_parts = item | split: '::' -%}
+          {%- assign icon_val = item_parts[0] | strip -%}
+          {%- assign label_val = item_parts[1] | strip -%}
+          {%- if icon_val != blank or label_val != blank -%}
+            <div class="sheva-fp__icon-item">
+              <div class="sheva-fp__icon">
+                {%- if icon_val contains 'http://' or icon_val contains 'https://' or icon_val contains '//cdn.shopify.com' or icon_val contains '.png' or icon_val contains '.svg' or icon_val contains '.jpg' or icon_val contains '.webp' -%}
+                  <img src="{{ icon_val }}" alt="{{ label_val | escape }}" loading="lazy" class="sheva-fp__icon-img">
+                {%- else -%}
+                  {{ icon_val }}
+                {%- endif -%}
+              </div>
+              {%- if label_val != blank -%}
+                <span>{{ label_val }}</span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- elsif section.blocks.size > 0 -%}
       <div class="sheva-fp__icons-row">
         {%- for block in section.blocks -%}
           {%- if block.type == 'benefit_icon' -%}
@@ -139,6 +169,28 @@
         {{ section.settings.shipping_note }}
       </p>
     {%- endif -%}
+
+    {%- comment -%} Accordion Blocks / Metafield Tabs {%- endcomment -%}
+    {%- assign accordion_blocks = section.blocks | where: 'type', 'accordion' -%}
+    {%- if accordion_blocks.size > 0 -%}
+      <div class="product-accordions">
+        {%- for block in accordion_blocks -%}
+          {%- if block.settings.description != blank -%}
+            <details class="sheva-accordion-item" {{ block.shopify_attributes }}>
+              <summary class="sheva-accordion-header">
+                <span class="sheva-accordion-title">{{ block.settings.title | escape }}</span>
+                <span class="sheva-accordion-icon">
+                  <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </span>
+              </summary>
+              <div class="sheva-accordion-body rte">
+                {{ block.settings.description }}
+              </div>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </div>
 </section>
 
@@ -149,7 +201,7 @@
   "name": "Sheva – Featured Product",
   "tag": "section",
   "class": "sheva-section sheva-fp-section",
-  "max_blocks": 10,
+  "max_blocks": 15,
   "settings": [
     {
       "type": "header",
@@ -197,7 +249,7 @@
       "type": "textarea",
       "id": "product_desc",
       "label": "Custom Description (overrides product description)",
-      "info": "Leave blank to use the product's Shopify description."
+      "info": "Leave blank to use the product's Shopify description or metafield."
     },
     {
       "type": "header",
@@ -345,6 +397,24 @@
           "default": 11
         }
       ]
+    },
+    {
+      "type": "accordion",
+      "name": "Accordion Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Ingredients & Usage"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Ancient loose-leaf herbs blended for cosmic balance. Steep 1-2 tsp in hot water for 5-7 minutes.</p>"
+        }
+      ]
     }
   ],
   "presets": [
@@ -355,7 +425,21 @@
         { "type": "benefit_icon", "settings": { "emoji": "🛡️", "label": "Immune+" } },
         { "type": "benefit_icon", "settings": { "emoji": "✨", "label": "Clarity+" } },
         { "type": "benefit_icon", "settings": { "emoji": "☮️", "label": "Mood+" } },
-        { "type": "benefit_icon", "settings": { "emoji": "🧠", "label": "Memory+" } }
+        { "type": "benefit_icon", "settings": { "emoji": "🧠", "label": "Memory+" } },
+        {
+          "type": "accordion",
+          "settings": {
+            "title": "Ingredients & Usage",
+            "description": "<p>Ancient loose-leaf herbs blended for cosmic balance. Steep 1-2 tsp in hot water for 5-7 minutes.</p>"
+          }
+        },
+        {
+          "type": "accordion",
+          "settings": {
+            "title": "Shipping & Guarantee",
+            "description": "<p>Free worldwide shipping over $50. 100% satisfaction guarantee with 30-day returns.</p>"
+          }
+        }
       ]
     }
   ]
