@@ -2,7 +2,7 @@
   SHEVA TEA — Product Ingredients List Section
   Matching exactly the product.html markup.
 ============================================================ {% endcomment %}
-
+{% if product.metafields.custom.enable_what_s_inside == true %}
 {{ 'sheva-product.css' | asset_url | stylesheet_tag }}
 
 <style>
@@ -36,7 +36,7 @@
     </div>
   {%- endif -%}
 </section>
-
+{% endif %}
 {% schema %}
 {
   "name": "Product Ingredients",
