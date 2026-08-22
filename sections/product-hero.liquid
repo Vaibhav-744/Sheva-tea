@@ -11,6 +11,110 @@
     --hero-pb: {{ section.settings.padding_bottom }}px;
   }
 
+  /* Price Display Below Rating Row */
+  .product-hero__price-wrapper {
+    margin: 16px 0 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .product-hero__price {
+    font-family: var(--sheva-font-heading);
+    font-size: clamp(18px, 3vw, 26px);
+    font-weight: 700;
+    color: #22d3ee;
+    text-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
+    letter-spacing: 1px;
+  }
+
+  .product-hero__compare-price {
+    font-family: var(--sheva-font-body);
+    font-size: clamp(14px, 2vw, 18px);
+    color: rgba(243, 240, 255, 0.5);
+    text-decoration: line-through;
+  }
+
+  /* Custom Variant Picker Styling */
+  .custom-variant-picker {
+    margin: 20px 0 26px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .custom-variant-option {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .custom-option-label {
+    font-family: var(--sheva-font-heading);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #f3f0ff;
+  }
+
+  .custom-option-selected-val {
+    color: #22d3ee;
+    font-weight: 600;
+    margin-left: 6px;
+    text-transform: none;
+  }
+
+  .custom-option-values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .custom-variant-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 22px;
+    border-radius: 999px;
+    background: rgba(12, 4, 34, 0.7);
+    border: 1.5px solid rgba(255, 255, 255, 0.18);
+    color: #f3f0ff;
+    font-family: var(--sheva-font-body);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(8px);
+    user-select: none;
+  }
+
+  .custom-variant-btn:hover {
+    border-color: rgba(34, 211, 238, 0.6);
+    background: rgba(34, 211, 238, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .custom-variant-btn.active {
+    border-color: #22d3ee;
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.25), rgba(255, 77, 184, 0.25));
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.4), inset 0 0 10px rgba(34, 211, 238, 0.2);
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  .custom-variant-btn.sold-out {
+    opacity: 0.5;
+    text-decoration: line-through;
+    border-style: dashed;
+  }
+
+  .custom-soldout-tag {
+    font-size: 11px;
+    color: #ff4db8;
+    margin-left: 4px;
+  }
+
   .product-accordions {
     display: flex;
     flex-direction: column;
@@ -136,6 +240,18 @@
       </div>
     {%- endif -%}
 
+    {%- comment -%} Product Price Display (below rating-row) {%- endcomment -%}
+    <div class="product-hero__price-wrapper" id="product-price-{{ product.id }}">
+      <span class="product-hero__price money" data-product-hero-price>
+        {{ current_variant.price | money }}
+      </span>
+      <s class="product-hero__compare-price money" data-product-hero-compare-price style="{% unless current_variant.compare_at_price > current_variant.price %}display:none;{% endunless %}">
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+          {{ current_variant.compare_at_price | money }}
+        {%- endif -%}
+      </s>
+    </div>
+
     <div class="product-desc">
       {%- if product.metafields.custom.product_inclution != blank -%}
         {{ product.metafields.custom.product_inclution | metafield_tag }}
@@ -151,6 +267,48 @@
         {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
           
           <input type="hidden" name="id" value="{{ current_variant.id }}" class="product-variant-id">
+
+          {%- comment -%} Custom Variant Picker {%- endcomment -%}
+          {%- if product.has_only_default_variant != true and product.options_with_values.size > 0 -%}
+            <div class="custom-variant-picker" data-section-id="{{ section.id }}">
+              {%- for option in product.options_with_values -%}
+                {%- assign option_index = forloop.index0 -%}
+                <div class="custom-variant-option" data-option-index="{{ option_index }}">
+                  <label class="custom-option-label">
+                    {{ option.name }}: <span class="custom-option-selected-val">{{ option.selected_value }}</span>
+                  </label>
+                  <div class="custom-option-values">
+                    {%- for value in option.values -%}
+                      {%- assign value_available = false -%}
+                      {%- for variant in product.variants -%}
+                        {%- if variant.options[option_index] == value and variant.available -%}
+                          {%- assign value_available = true -%}
+                          {%- break -%}
+                        {%- endif -%}
+                      {%- endfor -%}
+
+                      <button
+                        type="button"
+                        class="custom-variant-btn{% if option.selected_value == value %} active{% endif %}{% unless value_available %} sold-out{% endunless %}"
+                        data-option-name="{{ option.name | escape }}"
+                        data-option-value="{{ value | escape }}"
+                        data-option-index="{{ option_index }}"
+                      >
+                        <span class="custom-btn-text">{{ value }}</span>
+                        {%- unless value_available -%}
+                          <span class="custom-soldout-tag">(Sold Out)</span>
+                        {%- endunless -%}
+                      </button>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+
+            <script type="application/json" class="custom-product-variants-json">
+              {{ product.variants | json }}
+            </script>
+          {%- endif -%}
 
           <div class="qty-row">
             <div class="qty">
@@ -176,7 +334,7 @@
               {% unless current_variant.available %}disabled{% endunless %}
             >
               {%- if current_variant.available -%}
-                Add to Cart — $<span class="cart-price">{{ current_variant.price | money_without_currency }}</span>
+                Add to Cart
               {%- else -%}
                 Sold Out
               {%- endif -%}
@@ -250,22 +408,81 @@
 <script>
 (function() {
   function initProductHero(section) {
-    var cartPrice = section.querySelector('.cart-price');
     var qtyVal = section.querySelector('.qval');
     var qtyInput = section.querySelector('.qty-input');
     var plusBtn = section.querySelector('.plus');
     var minusBtn = section.querySelector('.minus');
 
-    {% assign current_price = current_variant.price | divided_by: 100.0 %}
-    var currentPrice = {{ current_price }};
+    var priceEl = section.querySelector('[data-product-hero-price]');
+    var comparePriceEl = section.querySelector('[data-product-hero-compare-price]');
+    var variantInput = section.querySelector('.product-variant-id');
+    var atcBtn = section.querySelector('#product-add-to-cart');
+
+    var variantsJsonEl = section.querySelector('.custom-product-variants-json');
+    var variantsData = [];
+    if (variantsJsonEl) {
+      try {
+        variantsData = JSON.parse(variantsJsonEl.textContent);
+      } catch(e) {}
+    }
+
     var qty = 1;
 
+    // Determine currently selected variant
+    var currentVariantId = variantInput ? variantInput.value : null;
+    var selectedVariant = variantsData.find(function(v) {
+      return v.id == currentVariantId;
+    }) || variantsData[0];
+
+    function formatMoney(cents) {
+      if (window.Shopify && typeof Shopify.formatMoney === 'function' && window.money_format) {
+        try {
+          return Shopify.formatMoney(cents * qty, window.money_format);
+        } catch(e) {}
+      }
+      return '$' + ((cents * qty) / 100).toFixed(2);
+    }
+
+    function updateDisplay() {
+      if (!selectedVariant) return;
+
+      // Update hidden input ID for add to cart form
+      if (variantInput) variantInput.value = selectedVariant.id;
+
+      // Update main product price below .rating-row
+      if (priceEl) {
+        priceEl.innerHTML = formatMoney(selectedVariant.price);
+      }
+
+      // Update compare-at price if applicable
+      if (comparePriceEl) {
+        if (selectedVariant.compare_at_price && selectedVariant.compare_at_price > selectedVariant.price) {
+          comparePriceEl.innerHTML = formatMoney(selectedVariant.compare_at_price);
+          comparePriceEl.style.display = 'inline-block';
+        } else {
+          comparePriceEl.style.display = 'none';
+        }
+      }
+
+      // Update Add to Cart Button state
+      if (atcBtn) {
+        if (selectedVariant.available) {
+          atcBtn.removeAttribute('disabled');
+          atcBtn.textContent = 'Add to Cart';
+        } else {
+          atcBtn.setAttribute('disabled', 'disabled');
+          atcBtn.textContent = 'Sold Out';
+        }
+      }
+    }
+
+    // Quantity Handlers
     if (plusBtn) {
       plusBtn.addEventListener('click', function () {
         qty++;
         if (qtyVal) qtyVal.textContent = qty;
         if (qtyInput) qtyInput.value = qty;
-        updatePrice();
+        updateDisplay();
       });
     }
 
@@ -275,16 +492,53 @@
           qty--;
           if (qtyVal) qtyVal.textContent = qty;
           if (qtyInput) qtyInput.value = qty;
-          updatePrice();
+          updateDisplay();
         }
       });
     }
 
-    function updatePrice() {
-      if (cartPrice) {
-        cartPrice.textContent = (currentPrice * qty).toFixed(2);
-      }
-    }
+    // Custom Variant Selection Buttons Click Listener
+    var optionBlocks = section.querySelectorAll('.custom-variant-option');
+    optionBlocks.forEach(function(block) {
+      var buttons = block.querySelectorAll('.custom-variant-btn');
+      var labelVal = block.querySelector('.custom-option-selected-val');
+
+      buttons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          // Deselect sibling buttons in this option group
+          buttons.forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+
+          if (labelVal) {
+            labelVal.textContent = btn.getAttribute('data-option-value');
+          }
+
+          // Gather all current option selections
+          var currentSelections = [];
+          optionBlocks.forEach(function(ob) {
+            var activeBtn = ob.querySelector('.custom-variant-btn.active');
+            if (activeBtn) {
+              currentSelections.push(activeBtn.getAttribute('data-option-value'));
+            }
+          });
+
+          // Match corresponding variant from JSON
+          var match = variantsData.find(function(v) {
+            return v.options.every(function(optVal, idx) {
+              return optVal === currentSelections[idx];
+            });
+          });
+
+          if (match) {
+            selectedVariant = match;
+            updateDisplay();
+          }
+        });
+      });
+    });
+
+    // Run initial display update
+    updateDisplay();
   }
 
   if (document.readyState === 'loading') {
@@ -308,6 +562,22 @@
   "tag": "section",
   "class": "product-hero-section",
   "settings": [
+    {
+      "type": "select",
+      "id": "picker_type",
+      "label": "Variant Picker Type",
+      "default": "button",
+      "options": [
+        {
+          "value": "button",
+          "label": "Buttons / Swatches"
+        },
+        {
+          "value": "dropdown",
+          "label": "Dropdown"
+        }
+      ]
+    },
     {
       "type": "text",
       "id": "eyebrow",
