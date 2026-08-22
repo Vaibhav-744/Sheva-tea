@@ -154,7 +154,9 @@
   background-clip: text;
   color: transparent;
 }
-
+.sheva-fp__title a:hover {
+  color:inherit !important;
+}
 .sheva-fp__rating-row {
   display: flex;
   align-items: center;
@@ -278,6 +280,7 @@
   flex: 1;
   min-width: 180px;
   white-space: nowrap;
+  text-align:center;
 }
 
 .sheva-fp__atc:disabled {
