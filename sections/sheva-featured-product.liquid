@@ -106,7 +106,6 @@
     {%- if fp != blank and fp != empty -%}
       {%- assign product_form_id = 'sheva-fp-form-' | append: section.id -%}
       <product-form class="sheva-fp__form">
-          <input type="hidden" name="id" value="{{ fp.selected_or_first_available_variant.id }}">
 
           <div class="sheva-fp__qty-row">
             <div class="sheva-fp__qty">
@@ -116,14 +115,15 @@
               <input type="hidden" name="quantity" class="sheva-fp__qty-input" value="1">
             </div>
 
-        
-           
-                <a href="{{ fp.url }}" sheva-btn-primary sheva-fp__atc>
+       
+                <a href="{{ fp.url }}" class="sheva-btn-primary sheva-fp__atc">
                 {{ section.settings.atc_label }} — {{ fp.selected_or_first_available_variant.price | money }}
                 </a>
             
 
           </div>
+
+   
       </product-form>
     {%- endif -%}
 
