@@ -59,7 +59,9 @@
         class="sheva-fp__title"
         style="font-size: clamp({{ section.settings.title_fs_mobile }}px, 4vw, {{ section.settings.title_fs_desktop }}px);"
       >
+        <a href="{{ fp.url }}">
         {{ fp.title }}
+        </a>
       </h2>
     {%- else -%}
       <h2
@@ -145,17 +147,8 @@
       {%- assign product_form_id = 'sheva-fp-form-' | append: section.id -%}
       <product-form class="sheva-fp__form">
         <div class="sheva-fp__qty-row">
-          <div class="sheva-fp__qty">
-            <button type="button" class="sheva-fp__qty-btn sheva-fp__qty-minus" aria-label="Decrease quantity">
-              −
-            </button>
-            <span class="sheva-fp__qval">1</span>
-            <button type="button" class="sheva-fp__qty-btn sheva-fp__qty-plus" aria-label="Increase quantity">+</button>
-            <input type="hidden" name="quantity" class="sheva-fp__qty-input" value="1">
-          </div>
-
           <a href="{{ fp.url }}" class="sheva-btn-primary sheva-fp__atc">
-            {{ section.settings.atc_label }} — {{ fp.selected_or_first_available_variant.price | money }}
+            {{ section.settings.atc_label }}
           </a>
         </div>
       </product-form>
