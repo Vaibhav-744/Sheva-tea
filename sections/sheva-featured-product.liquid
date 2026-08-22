@@ -20,15 +20,14 @@
     --fp-shipping-color: {{ section.settings.shipping_color }};
   "
 >
-
-  {%- comment %} ── LEFT: Product Gallery ── {% endcomment %}
+  {%- comment %} ── LEFT: Product Gallery ── {%- endcomment %}
   <div class="sheva-fp__gallery">
     <div class="sheva-fp__glow-orb"></div>
     <div class="sheva-fp__orbit-ring"></div>
     <div class="sheva-fp__orbit-ring sheva-fp__orbit-ring--r2"></div>
 
     {%- if fp != blank and section.settings.fallback_image != blank -%}
-     <img
+      <img
         src="{{ section.settings.fallback_image | img_url: '600x' }}"
         alt="{{ section.settings.fallback_image.alt | default: 'Product' }}"
         class="sheva-fp__product-img"
@@ -36,7 +35,7 @@
         width="460"
       >
     {%- elsif fp != blank -%}
-         <img
+      <img
         src="{{ fp.featured_image | img_url: '600x' }}"
         srcset="{{ fp.featured_image | img_url: '400x' }} 400w, {{ fp.featured_image | img_url: '600x' }} 600w, {{ fp.featured_image | img_url: '800x' }} 800w"
         alt="{{ fp.featured_image.alt | default: fp.title }}"
@@ -49,21 +48,26 @@
     {%- endif -%}
   </div>
 
-  {%- comment %} ── RIGHT: Product Info ── {% endcomment %}
+  {%- comment %} ── RIGHT: Product Info ── {%- endcomment %}
   <div class="sheva-fp__info">
-
     {%- if section.settings.tag_label != blank -%}
       <h4 class="sheva-fp__tag">{{ section.settings.tag_label }}</h4>
     {%- endif -%}
 
     {%- if fp != blank and fp != empty -%}
-      <h2 class="sheva-fp__title"
+      <h2
+        class="sheva-fp__title"
         style="font-size: clamp({{ section.settings.title_fs_mobile }}px, 4vw, {{ section.settings.title_fs_desktop }}px);"
-      >{{ fp.title }}</h2>
+      >
+        {{ fp.title }}
+      </h2>
     {%- else -%}
-      <h2 class="sheva-fp__title"
+      <h2
+        class="sheva-fp__title"
         style="font-size: clamp({{ section.settings.title_fs_mobile }}px, 4vw, {{ section.settings.title_fs_desktop }}px);"
-      >{{ section.settings.fallback_title }}</h2>
+      >
+        {{ section.settings.fallback_title }}
+      </h2>
     {%- endif -%}
 
     {%- comment -%} Rating row (static / metafield driven) {%- endcomment -%}
@@ -77,18 +81,22 @@
     {%- endif -%}
 
     {%- if section.settings.product_desc != blank -%}
-      <p class="sheva-fp__desc"
-        style="font-size: {{ section.settings.desc_fs }}px;">
+      <p
+        class="sheva-fp__desc"
+        style="font-size: {{ section.settings.desc_fs }}px;"
+      >
         {{ section.settings.product_desc }}
       </p>
     {%- elsif fp != blank and fp != empty and fp.description != blank -%}
-      <div class="sheva-fp__desc"
-        style="font-size: {{ section.settings.desc_fs }}px;">
+      <div
+        class="sheva-fp__desc"
+        style="font-size: {{ section.settings.desc_fs }}px;"
+      >
         {{ fp.description | strip_html | truncate: 200 }}
       </div>
     {%- endif -%}
 
-    {%- comment %} ── Benefit icons row (blocks) ── {% endcomment %}
+    {%- comment %} ── Benefit icons row (blocks) ── {%- endcomment %}
     {%- if section.blocks.size > 0 -%}
       <div class="sheva-fp__icons-row">
         {%- for block in section.blocks -%}
@@ -102,38 +110,35 @@
       </div>
     {%- endif -%}
 
-    {%- comment %} ── Add to Cart — mirrors theme's product-button.liquid pattern ── {% endcomment %}
+    {%- comment %} ── Add to Cart — mirrors theme's product-button.liquid pattern ── {%- endcomment %}
     {%- if fp != blank and fp != empty -%}
       {%- assign product_form_id = 'sheva-fp-form-' | append: section.id -%}
       <product-form class="sheva-fp__form">
-
-          <div class="sheva-fp__qty-row">
-            <div class="sheva-fp__qty">
-              <button type="button" class="sheva-fp__qty-btn sheva-fp__qty-minus" aria-label="Decrease quantity">−</button>
-              <span class="sheva-fp__qval">1</span>
-              <button type="button" class="sheva-fp__qty-btn sheva-fp__qty-plus" aria-label="Increase quantity">+</button>
-              <input type="hidden" name="quantity" class="sheva-fp__qty-input" value="1">
-            </div>
-
-       
-                <a href="{{ fp.url }}" class="sheva-btn-primary sheva-fp__atc">
-                {{ section.settings.atc_label }} — {{ fp.selected_or_first_available_variant.price | money }}
-                </a>
-            
-
+        <div class="sheva-fp__qty-row">
+          <div class="sheva-fp__qty">
+            <button type="button" class="sheva-fp__qty-btn sheva-fp__qty-minus" aria-label="Decrease quantity">
+              −
+            </button>
+            <span class="sheva-fp__qval">1</span>
+            <button type="button" class="sheva-fp__qty-btn sheva-fp__qty-plus" aria-label="Increase quantity">+</button>
+            <input type="hidden" name="quantity" class="sheva-fp__qty-input" value="1">
           </div>
 
-   
+          <a href="{{ fp.url }}" class="sheva-btn-primary sheva-fp__atc">
+            {{ section.settings.atc_label }} — {{ fp.selected_or_first_available_variant.price | money }}
+          </a>
+        </div>
       </product-form>
     {%- endif -%}
 
     {%- if section.settings.shipping_note != blank -%}
-      <p class="sheva-fp__shipping"
-        style="font-size: {{ section.settings.shipping_fs }}px; color: var(--fp-shipping-color);">
+      <p
+        class="sheva-fp__shipping"
+        style="font-size: {{ section.settings.shipping_fs }}px; color: var(--fp-shipping-color);"
+      >
         {{ section.settings.shipping_note }}
       </p>
     {%- endif -%}
-
   </div>
 </section>
 
