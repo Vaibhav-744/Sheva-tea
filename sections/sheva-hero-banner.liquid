@@ -58,7 +58,7 @@
   </div>
 
   <div class="sheva-hero__ufo-wrap" aria-hidden="true">
-    <svg class="sheva-hero__ufo-svg" viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg">
+    {% comment %} <svg class="sheva-hero__ufo-svg" viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <radialGradient id="shGDome{{ section.id }}" cx="40%" cy="30%" r="70%">
           <stop offset="0%" stop-color="#e0f9ff" stop-opacity="0.95"/>
@@ -94,7 +94,7 @@
       <circle cx="330" cy="162" r="5" fill="#ff4db8" class="sheva-ufo-dot d5"/>
       <circle cx="370" cy="158" r="5" fill="#ff7a3d" class="sheva-ufo-dot d6"/>
       <ellipse cx="250" cy="144" rx="100" ry="3" fill="#ffffff" opacity="0.6"/>
-    </svg>
+    </svg> {% endcomment %}
     {%- if s.tea_image != blank -%}
       <img src="{{ s.tea_image | img_url: '600x' }}" class="sheva-hero__tea-img" alt="{{ s.tea_image.alt | default: 'Tea product' }}" loading="eager" width="600">
     {%- endif -%}
