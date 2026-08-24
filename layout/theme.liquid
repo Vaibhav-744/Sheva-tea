@@ -118,12 +118,13 @@
     allow-transparency
   >
     <div class="body-content-wrapper">
-      {%- comment %} ── Sheva Tea: Cosmic background layers (fixed, z-index 0) ── {%- endcomment %}
-      {% render 'sheva-cosmic-bg' %}
-
       <a class="skip-to-content-link button visually-hidden" href="#MainContent">
         {{- 'accessibility.skip_to_text' | t -}}
       </a>
+      {%- comment %} ── Sheva Tea: Cosmic background layers (fixed, z-index 0) ── {%- endcomment %}
+      {% render 'sheva-cosmic-bg' %}
+
+ 
       {% render 'preload-screen' %}
       {% sections 'header-group' %}
       {% render 'wrapper-header' %}
