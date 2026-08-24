@@ -73,13 +73,13 @@
         "sections--14682829619277__9c03747e-b054-4db8-8194-5a35c71f82ca-1680876693acfad79f-2": {
           "type": "header_icons",
           "settings": {
-            "show_language_currency": false,
+            "show_language_currency": true,
             "show_search": true,
             "show_customer": true,
             "show_wishlist": false,
             "show_cart": true,
             "text_font_size": 14,
-            "show_language_currency_sticky": false,
+            "show_language_currency_sticky": true,
             "show_search_sticky": true,
             "show_customer_sticky": true,
             "show_wishlist_sticky": false,
