@@ -180,8 +180,8 @@
 
 .product-page-orb {
   position: absolute;
-  width: 380px;
-  height: 380px;
+  width: 450px;
+  height: 450px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #ffb37a, #ff4db8 35%, #8b5cf6 70%, #1e1065 100%);
   box-shadow: inset -40px -40px 80px rgba(0, 0, 0, .6), 0 0 100px rgba(255, 77, 184, .45);
@@ -204,7 +204,7 @@
 }
 
 .product-page-image {
-  width: 300px;
+  width: 350px;
   max-width: 78%;
   position: relative;
   z-index: 2;
