@@ -171,7 +171,8 @@
 }
 
 .product-page-right {
-  position: relative;
+  position: sticky;
+  top:70px;
   min-height: 480px;
   display: flex;
   align-items: center;
