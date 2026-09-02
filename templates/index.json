@@ -125,6 +125,7 @@
       ],
       "settings": {
         "product": "supernova-herbal-tea",
+        "fallback_image": "shopify://shop_images/pack_b20a310c-ca9c-4283-954c-452e003481fc.png",
         "fallback_title": "SUPERNOVA Herbal Tea",
         "tag_label": "✦ SEVEN STAR ENERGY",
         "atc_label": "Shop Now",
