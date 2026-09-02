@@ -466,6 +466,8 @@
   .product-page-right {
     min-height: 320px;
     order: -1;
+    position:relative;
+    top:0;
   }
 
   .product-page-orb {
