@@ -18,8 +18,8 @@
           "type": "logo",
           "settings": {
             "logo_position": "always",
-            "logo": "shopify://shop_images/logo-lockup.png",
-            "logo_width": 80,
+            "logo": "shopify://shop_images/A-03_1.png",
+            "logo_width": 100,
             "logo_width_fixed": 100,
             "logo_text": "",
             "logo_font_size": 20,
@@ -130,8 +130,8 @@
         "550fbd21-75fb-4051-9dee-77d91b5239f0": {
           "type": "logo",
           "settings": {
-            "logo_mobile": "shopify://shop_images/logo-lockup.png",
-            "logo_width_mobile": 75,
+            "logo_mobile": "shopify://shop_images/A-03_1.png",
+            "logo_width_mobile": 90,
             "logo_text": "",
             "logo_font_size": 20,
             "logo_font_weight": "900",
