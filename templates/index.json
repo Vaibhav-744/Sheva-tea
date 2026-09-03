@@ -445,14 +445,14 @@
           "type": "bundle_item",
           "settings": {
             "emoji": "📓",
-            "label": "Vegan Leatherette Notebook"
+            "label": "Notebook"
           }
         },
         "bi6": {
           "type": "bundle_item",
           "settings": {
             "emoji": "🖊️",
-            "label": "Ergonomic Ballpoint Pen"
+            "label": "Ballpoint Pen"
           }
         },
         "bi7": {
@@ -561,7 +561,7 @@
             "emoji": "📑",
             "gradient_class": "sheva-bookmark-grad",
             "category": "Bookmarks",
-            "name": "Silver-Foil Bookmark",
+            "name": "Bookmark",
             "description": "Seven Star Energy engraved.",
             "price": "$6.50",
             "product_link": ""
