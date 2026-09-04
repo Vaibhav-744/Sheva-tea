@@ -1,0 +1,147 @@
+/* ============================================================
+   SHEVA TEA — Simple FAQ Section CSS
+============================================================ */
+
+.sheva-faq-section {
+  position: relative;
+  z-index: 5;
+  padding: var(--sec-pt, 80px) 6% var(--sec-pb, 100px);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sheva-faq-container {
+  max-width: var(--faq-max-w, 860px);
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ── FAQ List & Category Group Wrappers ── */
+.sheva-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.sheva-faq-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sheva-faq-category-title {
+  font-family: var(--sheva-font-heading);
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--sheva-cyan);
+  padding-bottom: 12px !important;
+  margin: 0 0 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sheva-faq-category-title:first-child {
+  margin-top: 0;
+}
+
+/* ── Accordion Items ── */
+.sheva-faq-item {
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 18px 22px;
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+}
+
+.sheva-faq-item[open] {
+  border-color: rgba(255, 77, 184, 0.45);
+  background: rgba(255, 77, 184, 0.06);
+  box-shadow: 0 8px 30px rgba(255, 77, 184, 0.08);
+}
+
+.sheva-faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--sheva-font-heading);
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  user-select: none;
+}
+
+.sheva-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.sheva-faq-item summary::after {
+  content: '+';
+  font-size: 22px;
+  line-height: 1;
+  color: var(--sheva-cyan);
+  flex: 0 0 auto;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.sheva-faq-item[open] summary::after {
+  transform: rotate(45deg);
+  color: var(--sheva-pink);
+}
+
+.sheva-faq-answer {
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.8;
+  opacity: 0.85;
+  color: #f3f0ff;
+  font-family: var(--sheva-font-body);
+}
+
+.sheva-faq-answer p {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.sheva-faq-answer p:first-child {
+  margin-top: 14px;
+}
+
+.sheva-faq-answer a {
+  color: var(--sheva-cyan);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+
+.sheva-faq-answer a:hover {
+  color: var(--sheva-pink);
+}
+
+.sheva-faq-answer ul,
+.sheva-faq-answer ol {
+  margin: 10px 0 0 20px;
+  padding: 0;
+  list-style: disc;
+}
+
+.sheva-faq-answer li {
+  margin-bottom: 6px;
+}
+
+@media (max-width: 768px) {
+  .sheva-faq-section {
+    padding: var(--sec-pt, 50px) 20px var(--sec-pb, 60px);
+  }
+
+  .sheva-faq-item summary {
+    font-size: 14px;
+  }
+
+  .sheva-faq-item {
+    padding: 16px 18px;
+  }
+}

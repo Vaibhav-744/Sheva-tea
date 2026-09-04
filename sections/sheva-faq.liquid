@@ -1,0 +1,315 @@
+{{ 'sheva-faq.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+-%}
+
+<style>
+  #sheva-faq-{{ section.id }} {
+    --sec-pt: {{ s.padding_top }}px;
+    --sec-pb: {{ s.padding_bottom }}px;
+    --faq-max-w: {{ s.max_width }}px;
+    --eyebrow-color: {{ s.eyebrow_color }};
+    --title-color: {{ s.title_color }};
+  }
+</style>
+
+<section
+  id="sheva-faq-{{ section.id }}"
+  class="sheva-faq-section"
+>
+  <div class="sheva-faq-container">
+    {%- comment %} ── Section Header ── {% endcomment %}
+    {%- if s.eyebrow != blank or s.title != blank or s.title_plain != blank or s.subtitle != blank -%}
+      <div class="sheva-sec-head">
+        {%- if s.eyebrow != blank -%}
+          <span class="sheva-eyebrow" style="color: {{ s.eyebrow_color }};">
+            {{ s.eyebrow }}
+          </span>
+        {%- endif -%}
+
+        {%- if s.title_plain != blank or s.title != blank -%}
+          <h2
+            class="sheva-sec-title"
+            style="font-size: clamp({{ s.title_fs_mobile }}px, 4vw, {{ s.title_fs_desktop }}px); color: {{ s.title_color }};"
+          >
+            {%- if s.title_plain != blank -%}
+              {{ s.title_plain }}
+            {%- endif -%}
+            {%- if s.title != blank -%}
+              <em class="sheva-glow">{{ s.title }}</em>
+            {%- endif -%}
+          </h2>
+        {%- endif -%}
+
+        {%- if s.subtitle != blank -%}
+          <p
+            class="sheva-sec-sub"
+            style="font-size: {{ s.sub_fs }}px;"
+          >
+            {{ s.subtitle }}
+          </p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment %} ── FAQ Items List with Category Wrappers ── {% endcomment %}
+    {%- if section.blocks.size > 0 -%}
+      <div class="sheva-faq-list">
+        {%- assign in_group = false -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'category_header' -%}
+            {%- if in_group -%}
+              </div>{% comment %} Close previous .sheva-faq-group {% endcomment %}
+            {%- endif -%}
+            <div class="sheva-faq-group" {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}
+                <h3 class="sheva-faq-category-title">
+                  {{ block.settings.heading }}
+                </h3>
+              {%- endif -%}
+              {%- assign in_group = true -%}
+
+          {%- elsif block.type == 'faq_item' -%}
+            {%- if in_group == false -%}
+              <div class="sheva-faq-group">
+                {%- assign in_group = true -%}
+            {%- endif -%}
+            <details
+              class="sheva-faq-item"
+              {% if block.settings.open_default %}open{% endif %}
+              {{ block.shopify_attributes }}
+            >
+              <summary>
+                <span>{{ block.settings.question }}</span>
+              </summary>
+              <div class="sheva-faq-answer">
+                {%- if block.settings.answer != blank -%}
+                  {{ block.settings.answer }}
+                {%- endif -%}
+              </div>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if in_group -%}
+          </div>{% comment %} Close last .sheva-faq-group {% endcomment %}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sheva – FAQ",
+  "tag": "section",
+  "class": "sheva-section sheva-faq-section-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "✦ FREQUENTLY ASKED QUESTIONS"
+    },
+    {
+      "type": "text",
+      "id": "title_plain",
+      "label": "Title – Plain Part",
+      "default": "Got Questions? We Have "
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title – Gradient Part",
+      "default": "Answers."
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Everything you need to know about Supernova Tea, shipping, subscriptions, and holistic wellness."
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_fs_desktop",
+      "label": "Title Size – Desktop (px)",
+      "min": 20,
+      "max": 72,
+      "step": 2,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "title_fs_mobile",
+      "label": "Title Size – Mobile (px)",
+      "min": 16,
+      "max": 44,
+      "step": 2,
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "sub_fs",
+      "label": "Subtitle Size (px)",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Colors & Layout"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#22d3ee"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#f3f0ff"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Max Container Width (px)",
+      "min": 600,
+      "max": 1200,
+      "step": 20,
+      "default": 860
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 100
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category_header",
+      "name": "Category Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Category Heading",
+          "default": "Shipping & Delivery"
+        }
+      ]
+    },
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How long does shipping take?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Domestic orders ship within 1–2 business days and typically arrive in 3–6 days. Free shipping applies on orders over $50.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_default",
+          "label": "Open by Default",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sheva – FAQ",
+      "blocks": [
+        {
+          "type": "category_header",
+          "settings": {
+            "heading": "General & Product Info"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is Supernova Tea caffeine-free?",
+            "answer": "<p>Yes! Supernova is a 100% caffeine-free herbal infusion. Its clean, vibrant energy comes naturally from adaptogenic botanicals rather than stimulants.</p>",
+            "open_default": true
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How should I brew and serve Supernova Tea?",
+            "answer": "<p>Steep 1 tea bag or 1 tablespoon of loose herbal blend in 8–10 oz of freshly boiled water for 5–7 minutes. Enjoy hot or pour over ice for a cosmic refreshment.</p>"
+          }
+        },
+        {
+          "type": "category_header",
+          "settings": {
+            "heading": "Shipping & Subscriptions"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>Domestic orders ship within 1–2 business days and typically arrive in 3–6 days. We offer free standard shipping on orders over $50.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I modify or cancel my subscription at any time?",
+            "answer": "<p>Absolutely. You can pause, skip, reschedule, or cancel your subscription anytime directly through your customer account portal or by contacting support.</p>"
+          }
+        },
+        {
+          "type": "category_header",
+          "settings": {
+            "heading": "Wholesale & Orders"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer wholesale or bulk pricing?",
+            "answer": "<p>We do! For wholesale inquiries, please reach out through our Contact page with your store details and volume expectations.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
