@@ -152,6 +152,12 @@
     width: calc(100% - 40px);
     margin: 30px 20px 0;
   }
+  .sheva-full-ing .sheva-full-ing__text{
+    display:none;
+  }
+  .sheva-full-ing.active .sheva-full-ing__text{
+    display:block;
+  }
 }
 
 @media (max-width: 420px) {
