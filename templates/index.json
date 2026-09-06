@@ -336,6 +336,7 @@
         },
         "i2": {
           "type": "ingredient",
+          "disabled": true,
           "settings": {
             "emoji": "🍃",
             "name": "Ginkgo",
