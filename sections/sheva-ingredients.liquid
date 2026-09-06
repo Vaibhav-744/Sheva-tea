@@ -111,6 +111,24 @@
   {%- endif -%}
 
 </section>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+  var containers = document.querySelectorAll('.sheva-full-ing');
+
+  containers.forEach(function (container) {
+    var title = container.querySelector('.sheva-full-ing__title');
+
+    if (!title) return;
+
+    title.addEventListener('click', function () {
+      // Only toggle when viewport is within 0–768px
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        container.classList.toggle('active');
+      }
+    });
+  });
+});
+</script>
 
 {%- if layout == 'slider' -%}
 <script>
