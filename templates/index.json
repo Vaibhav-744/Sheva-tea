@@ -94,7 +94,7 @@
         "accordion_HeK3mg": {
           "type": "accordion",
           "settings": {
-            "title": "Key Ingredients",
+            "title": "Key Ingredient",
             "description": "{{ section.settings.product.metafields.custom.key_ingredients | metafield_tag }}"
           }
         },
