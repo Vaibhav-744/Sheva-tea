@@ -55,7 +55,7 @@
           "type": "benefit_icon",
           "settings": {
             "emoji": "⚡",
-            "label": "Energy+",
+            "label": "Energy",
             "label_fs": 11
           }
         },
@@ -63,7 +63,7 @@
           "type": "benefit_icon",
           "settings": {
             "emoji": "🛡️",
-            "label": "Immune+",
+            "label": "Immune",
             "label_fs": 11
           }
         },
@@ -71,7 +71,7 @@
           "type": "benefit_icon",
           "settings": {
             "emoji": "✨",
-            "label": "Clarity+",
+            "label": "Clarity",
             "label_fs": 11
           }
         },
@@ -79,7 +79,7 @@
           "type": "benefit_icon",
           "settings": {
             "emoji": "☮️",
-            "label": "Mood+",
+            "label": "Mood",
             "label_fs": 11
           }
         },
@@ -87,7 +87,7 @@
           "type": "benefit_icon",
           "settings": {
             "emoji": "🧠",
-            "label": "Memory+",
+            "label": "Memory",
             "label_fs": 11
           }
         },
