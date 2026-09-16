@@ -284,6 +284,15 @@
             "description": "Hydrate at cellular level.",
             "icon_size": 26
           }
+        },
+        "benefit_FKGfjT": {
+          "type": "benefit",
+          "settings": {
+            "emoji": "💪",
+            "title": "Protine",
+            "description": "",
+            "icon_size": 26
+          }
         }
       },
       "block_order": [
@@ -301,7 +310,8 @@
         "b12",
         "b13",
         "b14",
-        "b15"
+        "b15",
+        "benefit_FKGfjT"
       ],
       "settings": {
         "eyebrow": "✦ WHY SHEVA TEA",
