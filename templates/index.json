@@ -55,7 +55,7 @@
           "type": "benefit_icon",
           "settings": {
             "emoji": "⚡",
-            "label": "Energy+",
+            "label": "Energy",
             "label_fs": 11
           }
         },
@@ -63,7 +63,7 @@
           "type": "benefit_icon",
           "settings": {
             "emoji": "🛡️",
-            "label": "Immune+",
+            "label": "Immune",
             "label_fs": 11
           }
         },
@@ -71,7 +71,7 @@
           "type": "benefit_icon",
           "settings": {
             "emoji": "✨",
-            "label": "Clarity+",
+            "label": "Clarity",
             "label_fs": 11
           }
         },
@@ -79,7 +79,7 @@
           "type": "benefit_icon",
           "settings": {
             "emoji": "☮️",
-            "label": "Mood+",
+            "label": "Mood",
             "label_fs": 11
           }
         },
@@ -87,14 +87,14 @@
           "type": "benefit_icon",
           "settings": {
             "emoji": "🧠",
-            "label": "Memory+",
+            "label": "Memory",
             "label_fs": 11
           }
         },
         "accordion_HeK3mg": {
           "type": "accordion",
           "settings": {
-            "title": "Key Ingredients",
+            "title": "Key Ingredient",
             "description": "{{ section.settings.product.metafields.custom.key_ingredients | metafield_tag }}"
           }
         },
@@ -284,6 +284,15 @@
             "description": "Hydrate at cellular level.",
             "icon_size": 26
           }
+        },
+        "benefit_FKGfjT": {
+          "type": "benefit",
+          "settings": {
+            "emoji": "💪",
+            "title": "Protine",
+            "description": "Pump your muscle",
+            "icon_size": 26
+          }
         }
       },
       "block_order": [
@@ -301,13 +310,14 @@
         "b12",
         "b13",
         "b14",
-        "b15"
+        "b15",
+        "benefit_FKGfjT"
       ],
       "settings": {
         "eyebrow": "✦ WHY SHEVA TEA",
         "title_plain": "Cosmic",
         "title": "Benefits",
-        "subtitle": "17 powerful benefits in every sip — fueled by 50+ sacred herbs.",
+        "subtitle": "16 powerful benefits in every sip — fueled by 50+ sacred herbs.",
         "title_fs_desktop": 52,
         "title_fs_mobile": 28,
         "sub_fs": 15,
@@ -336,6 +346,7 @@
         },
         "i2": {
           "type": "ingredient",
+          "disabled": true,
           "settings": {
             "emoji": "🍃",
             "name": "Ginkgo",
@@ -390,11 +401,11 @@
         "speed": 35,
         "show_dots": true,
         "show_arrows": false,
-        "eyebrow": "✦ SACRED HERBS",
+        "eyebrow": "",
         "title_plain": "Key",
         "title": "Ingredient",
-        "subtitle": "Six sacred herbs from across the cosmos, hand-selected for potency.",
-        "full_ingredients": "Made with love, peace & freedom Turmeric, Alfalfa, Lungwort, Ashwagandha, Motherwort, Basil Holy Tulsi, Neem, Bay, Orris, Black Walnut Hull, Parsley, Blue Vervain, Plantain, Brahmi, Ceylon Cinnamon, Rosemary, Burdock, Slippery Elm Bark, Yerba Santa, Caraway, Ginseng, Stevia, Gotu Kola, Cardamom, Mamkai, Thyme, Chamomile, Muicle, Yellow Dock, Astragalus, Moringa, Ginkgo, Red Clover, Cumin, Milk Thistle, Dandelion, Guaco, Rhodiola Rosea, Chia, Mullein, Dill, Ginger, Lavender, Hyssop, Fennel, Lemon Balm, Elderberry, Oatstraw, Nettle, Coriander",
+        "subtitle": "",
+        "full_ingredients": "Made with love, peace & freedom Turmeric, Alfalfa, Lungwort, Ashwagandha, Motherwort, Basil Holy Tulsi, Neem, Bay, Orris, Black Walnut Hull, Parsley, Blue Vervain, Plantain, Brahmi, Ceylon Cinnamon, Rosemary, Burdock, Slippery Elm Bark, Yerba Santa, Caraway, Ginseng, Stevia, Gotu Kola, Cardamom, Mamaki, Thyme, Chamomile, Muicle, Yellow Dock, Astragalus, Moringa, Ginkgo, Red Clover, Cumin, Milk Thistle, Dandelion, Guaco, Rhodiola Rosea, Chia, Mullein, Dill, Ginger, Lavender, Marjoram, Fennel, Lemon Balm, Elderberry, Oatstraw, Nettle, Coriander",
         "title_fs_desktop": 52,
         "title_fs_mobile": 28,
         "sub_fs": 15,
@@ -532,7 +543,7 @@
             "gradient_class": "sheva-key-grad",
             "category": "Keychains",
             "name": "Keychain",
-            "description": "Epoxy resin with stars.",
+            "description": "",
             "price": "$13.99",
             "product_link": ""
           }
@@ -562,7 +573,7 @@
             "gradient_class": "sheva-bookmark-grad",
             "category": "Bookmarks",
             "name": "Bookmark",
-            "description": "Seven Star Energy engraved.",
+            "description": "",
             "price": "$6.50",
             "product_link": ""
           }

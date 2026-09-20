@@ -3,6 +3,7 @@
   Matching exactly the product.html markup.
 ============================================================ {% endcomment %}
 
+{% if product.metafields.custom.enable_product_benefitls == true %}
 {{ 'sheva-product.css' | asset_url | stylesheet_tag }}
 
 <style>
@@ -42,7 +43,7 @@
     </div>
   {%- endif -%}
 </section>
-
+{% endif %}
 {% schema %}
 {
   "name": "Product Benefits",
