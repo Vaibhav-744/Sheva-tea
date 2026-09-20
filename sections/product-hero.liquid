@@ -422,10 +422,80 @@
   </div>
 
   <div class="product-page-right">
-    <div class="product-page-orb"></div>
-    {%- if product.featured_image != blank -%}
-      <img src="{{ product.featured_image | img_url: '600x' }}" alt="{{ product.title | escape }}" class="product-page-image" />
-    {%- endif -%}
+    <div class="pgal" id="pgal-{{ section.id }}">
+      <div class="pgal-stage">
+        <div class="pgal-aura" aria-hidden="true"></div>
+        <div class="pgal-ring" aria-hidden="true"></div>
+
+        <div class="pgal-viewport" id="pgalViewport-{{ section.id }}" role="region" aria-label="{{ product.title | default: 'Product gallery' | escape }}" aria-live="polite">
+          {%- liquid
+            assign media_list = product.media
+            if media_list == blank or media_list.size == 0
+              assign media_list = product.images
+            endif
+          -%}
+
+          {%- if media_list.size > 0 -%}
+            {%- for media in media_list -%}
+              {%- assign is_photo = false -%}
+              {%- if media.alt contains 'photo' or media.alt contains 'ritual' or media.alt contains 'journey' -%}
+                {%- assign is_photo = true -%}
+              {%- endif -%}
+              <figure class="pgal-slide {% if is_photo %}is-photo{% else %}is-cutout{% endif %}{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" data-media-id="{{ media.id }}">
+                {%- case media.media_type -%}
+                  {%- when 'image' or blank -%}
+                    <img
+                      src="{{ media | img_url: '1200x' }}"
+                      srcset="{{ media | img_url: '600x' }} 600w, {{ media | img_url: '900x' }} 900w, {{ media | img_url: '1200x' }} 1200w"
+                      sizes="(min-width: 1024px) 560px, 90vw"
+                      alt="{{ media.alt | default: product.title | escape }}"
+                      {% unless forloop.first %}loading="lazy"{% endunless %}
+                    />
+                  {%- when 'video' -%}
+                    {{ media | video_tag: controls: true, class: 'pgal-video' }}
+                  {%- when 'external_video' -%}
+                    {{ media | external_video_tag: class: 'pgal-video' }}
+                  {%- when 'model' -%}
+                    {{ media | model_viewer_tag }}
+                  {%- else -%}
+                    {{ media | media_tag }}
+                {%- endcase -%}
+              </figure>
+            {%- endfor -%}
+          {%- elsif product.featured_image != blank -%}
+            <figure class="pgal-slide is-cutout is-active" data-index="0" data-media-id="{{ product.featured_image.id }}">
+              <img src="{{ product.featured_image | img_url: '1200x' }}" alt="{{ product.title | escape }}" />
+            </figure>
+          {%- endif -%}
+        </div>
+
+        {%- assign total_slides = media_list.size -%}
+        {%- if total_slides == 0 and product.featured_image != blank -%}
+          {%- assign total_slides = 1 -%}
+        {%- endif -%}
+
+        {%- if total_slides > 1 -%}
+          <button class="pgal-nav prev" id="pgalPrev-{{ section.id }}" type="button" aria-label="Previous image">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+          </button>
+          <button class="pgal-nav next" id="pgalNext-{{ section.id }}" type="button" aria-label="Next image">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+          </button>
+        {%- endif -%}
+      </div>
+
+      {%- if total_slides > 1 -%}
+        <div class="pgal-thumbs" id="pgalThumbs-{{ section.id }}" role="tablist" aria-label="Choose a product view" style="--thumb-count: {{ total_slides | at_most: 5 }};">
+          {%- if media_list.size > 0 -%}
+            {%- for media in media_list -%}
+              <button class="pgal-thumb{% if forloop.first %} is-active{% endif %}" type="button" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" data-index="{{ forloop.index0 }}">
+                <img src="{{ media | img_url: '300x' }}" alt="{{ media.alt | default: product.title | escape }}" loading="lazy" />
+              </button>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
   </div>
 </section>
 
@@ -467,6 +537,119 @@
       return '$' + ((cents * qty) / 100).toFixed(2);
     }
 
+    // Initialize Gallery Slider
+    var gal = section.querySelector('.pgal');
+    if (gal) {
+      var slides = Array.prototype.slice.call(gal.querySelectorAll('.pgal-slide'));
+      var thumbs = Array.prototype.slice.call(gal.querySelectorAll('.pgal-thumb'));
+      var prevBtn = gal.querySelector('.pgal-nav.prev');
+      var nextBtn = gal.querySelector('.pgal-nav.next');
+      var viewport = gal.querySelector('.pgal-viewport');
+      var currentSlide = 0;
+
+      if (slides.length <= 1) {
+        if (prevBtn) prevBtn.style.display = 'none';
+        if (nextBtn) nextBtn.style.display = 'none';
+        var thumbsWrap = gal.querySelector('.pgal-thumbs');
+        if (thumbsWrap) thumbsWrap.style.display = 'none';
+      }
+
+      function goToSlide(next) {
+        if (slides.length <= 1) return;
+        next = (next + slides.length) % slides.length;
+        if (next === currentSlide) return;
+
+        slides[currentSlide].classList.remove('is-active');
+        if (thumbs[currentSlide]) {
+          thumbs[currentSlide].classList.remove('is-active');
+          thumbs[currentSlide].setAttribute('aria-selected', 'false');
+        }
+
+        currentSlide = next;
+
+        slides[currentSlide].classList.add('is-active');
+        if (thumbs[currentSlide]) {
+          thumbs[currentSlide].classList.add('is-active');
+          thumbs[currentSlide].setAttribute('aria-selected', 'true');
+        }
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+          goToSlide(currentSlide - 1);
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+          goToSlide(currentSlide + 1);
+        });
+      }
+
+      thumbs.forEach(function(btn, idx) {
+        btn.addEventListener('click', function() {
+          goToSlide(idx);
+        });
+      });
+
+      gal.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          goToSlide(currentSlide - 1);
+          if (thumbs[currentSlide]) thumbs[currentSlide].focus();
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          goToSlide(currentSlide + 1);
+          if (thumbs[currentSlide]) thumbs[currentSlide].focus();
+        }
+      });
+
+      if (viewport) {
+        var x0 = null, y0 = null;
+        viewport.addEventListener('touchstart', function(e) {
+          x0 = e.touches[0].clientX;
+          y0 = e.touches[0].clientY;
+        }, { passive: true });
+
+        viewport.addEventListener('touchend', function(e) {
+          if (x0 === null) return;
+          var dx = e.changedTouches[0].clientX - x0;
+          var dy = e.changedTouches[0].clientY - y0;
+          if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+            goToSlide(currentSlide + (dx < 0 ? 1 : -1));
+          }
+          x0 = null;
+          y0 = null;
+        }, { passive: true });
+      }
+
+      // Preload neighbouring images
+      slides.forEach(function(s) {
+        var img = s.querySelector('img');
+        if (img) img.loading = 'eager';
+      });
+
+      // Synchronize with variant change
+      section._goToSlideForVariant = function(variant) {
+        if (!variant || slides.length <= 1) return;
+        var targetIndex = -1;
+        if (variant.featured_media) {
+          targetIndex = slides.findIndex(function(s) {
+            return s.getAttribute('data-media-id') == variant.featured_media.id;
+          });
+        }
+        if (targetIndex === -1 && variant.featured_image) {
+          targetIndex = slides.findIndex(function(s) {
+            var img = s.querySelector('img');
+            return img && img.src.indexOf(variant.featured_image.src.split('?')[0]) !== -1;
+          });
+        }
+        if (targetIndex !== -1) {
+          goToSlide(targetIndex);
+        }
+      };
+    }
+
     function updateDisplay() {
       if (!selectedVariant) return;
 
@@ -497,6 +680,11 @@
           atcBtn.setAttribute('disabled', 'disabled');
           atcBtn.textContent = 'Sold Out';
         }
+      }
+
+      // Switch gallery image if variant has its own image
+      if (typeof section._goToSlideForVariant === 'function') {
+        section._goToSlideForVariant(selectedVariant);
       }
     }
 
