@@ -506,7 +506,7 @@
         "sc3": {
           "type": "shop_card",
           "settings": {
-            "card_product": "books-titan-aura",
+            "card_product": "titan-aura-notebook",
             "badge": "TITAN AURA",
             "badge_alt": true,
             "emoji": "📓",
