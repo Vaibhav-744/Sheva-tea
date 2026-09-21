@@ -551,7 +551,7 @@
         "sc6": {
           "type": "shop_card",
           "settings": {
-            "card_product": "pens-titan-aura",
+            "card_product": "titan-aura-pen",
             "badge": "TITAN AURA",
             "badge_alt": true,
             "emoji": "🖊️",
