@@ -521,7 +521,7 @@
         "sc4": {
           "type": "shop_card",
           "settings": {
-            "card_product": "cards-titan-aura",
+            "card_product": "titan-aura-affirmation-cards",
             "badge": "TITAN AURA",
             "badge_alt": true,
             "emoji": "🎴",
