@@ -566,7 +566,7 @@
         "sc7": {
           "type": "shop_card",
           "settings": {
-            "card_product": "bookmarks-titan-aura",
+            "card_product": "titan-aura-bookmark",
             "badge": "TITAN AURA",
             "badge_alt": true,
             "emoji": "📑",
@@ -629,7 +629,7 @@
         "bundle_save": "Save $30.74",
         "bundle_save_fs": 12,
         "bundle_btn_label": "Claim the Bundle →",
-        "bundle_btn_link": "shopify://products/bookmarks-titan-aura",
+        "bundle_btn_link": "shopify://products/titan-aura-bookmark",
         "bundle_footnote": "🚀 Free shipping · ♻️ Eco-friendly packaging",
         "bundle_foot_fs": 12,
         "bundle_mb": 80,
