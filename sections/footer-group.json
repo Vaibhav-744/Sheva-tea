@@ -40,6 +40,7 @@
         },
         "social": {
           "type": "social_column",
+          "disabled": true,
           "settings": {
             "heading": "Follow",
             "instagram_url": "#",
