@@ -536,7 +536,7 @@
         "sc5": {
           "type": "shop_card",
           "settings": {
-            "card_product": "keychains-titan-aura",
+            "card_product": "titan-aura-keychain",
             "badge": "TITAN AURA",
             "badge_alt": true,
             "emoji": "🔑",
