@@ -336,7 +336,7 @@
         "product_list": [],
         "collection": "all",
         "default_badge": "TITAN AURA",
-        "limit": 6,
+        "limit": 10,
         "show_arrows": true,
         "show_dots": true,
         "autoplay": true,
