@@ -334,7 +334,7 @@
         "subtitle": "",
         "sub_fs": 15,
         "product_list": [],
-        "collection": "frontpage",
+        "collection": "all",
         "default_badge": "TITAN AURA",
         "limit": 6,
         "show_arrows": true,
