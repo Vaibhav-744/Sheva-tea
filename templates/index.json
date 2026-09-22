@@ -338,6 +338,7 @@
       "blocks": {
         "i1": {
           "type": "ingredient",
+          "disabled": true,
           "settings": {
             "emoji": "🌱",
             "name": "Ginseng",
