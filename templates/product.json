@@ -26,6 +26,13 @@
             "product": "{{product}}"
           }
         },
+        "accordion_PTQ6YU": {
+          "type": "accordion",
+          "settings": {
+            "title": "What’s Included",
+            "description": "{{ product.metafields.custom.what_s_included | metafield_tag }}"
+          }
+        },
         "accordion_hNhRGP": {
           "type": "accordion",
           "settings": {
@@ -64,6 +71,7 @@
       },
       "block_order": [
         "subscriptions_app_block_mtGKct",
+        "accordion_PTQ6YU",
         "accordion_hNhRGP",
         "accordion_EwGCVK",
         "accordion_QBBD8f",
