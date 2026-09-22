@@ -171,69 +171,111 @@
   ──────────────────────────────── {% endcomment %}
   {%- assign shop_cards = section.blocks | where: 'type', 'shop_card' -%}
 
+  {%- assign related_products = nil -%}
+  {%- if section.settings.product_list != blank and section.settings.product_list.count > 0 -%}
+    {%- assign related_products = section.settings.product_list -%}
+  {%- elsif section.settings.product_list != blank and section.settings.product_list.size > 0 -%}
+    {%- assign related_products = section.settings.product_list -%}
+  {%- elsif section.settings.collection != blank and section.settings.collection.products_count > 0 -%}
+    {%- assign related_products = section.settings.collection.products -%}
+  {%- endif -%}
+
+  {%- assign prod_limit = section.settings.limit | default: 10 -%}
+  {%- assign shop_card_count = 0 -%}
+
+  {%- if related_products != blank and related_products.size > 0 -%}
+    {%- assign shop_card_count = related_products.size -%}
+    {%- if shop_card_count == 0 or shop_card_count == nil -%}
+      {%- assign shop_card_count = related_products.count -%}
+    {%- endif -%}
+    {%- if shop_card_count > prod_limit -%}
+      {%- assign shop_card_count = prod_limit -%}
+    {%- endif -%}
+  {%- elsif shop_cards.size > 0 -%}
+    {%- assign shop_card_count = shop_cards.size -%}
+  {%- else -%}
+    {%- assign shop_card_count = 3 -%}
+  {%- endif -%}
+
   {%- comment %} ── Shared card snippet ── {% endcomment %}
   {%- capture shop_card_html -%}
-    {%- for block in shop_cards -%}
-      {%- assign card_prod = block.settings.card_product -%}
-      {%- assign card_price = block.settings.price -%}
-      {%- assign card_link = block.settings.product_link -%}
+    {%- if related_products != blank and related_products.size > 0 -%}
+      {%- for item in related_products limit: prod_limit -%}
+        {%- assign card_var = item.selected_or_first_available_variant | default: item.variants.first -%}
+        {%- assign card_price = item.price | default: card_var.price | money -%}
+        {%- assign card_link = item.url -%}
+        {%- assign badge_display = item.tags.first | default: section.settings.default_badge -%}
+        {%- assign category_display = item.type | default: item.collections.first.title | default: 'COLLECTION' -%}
+        {%- assign short_desc = item.metafields.custom.short_description.value | default: item.description | strip_html | truncate: 75 -%}
+        {%- assign item_img = item.featured_media | default: item.featured_image -%}
 
-      {%- if card_prod != blank and card_prod != empty -%}
-        {%- assign card_var = card_prod.selected_or_first_available_variant -%}
-        {%- if card_price == blank -%}
-          {%- assign card_price = card_var.price | money -%}
-        {%- endif -%}
-        {%- if card_link == blank -%}
-          {%- assign card_link = card_prod.url -%}
-        {%- endif -%}
-      {%- endif -%}
+        {%- assign grad_cycle = forloop.index0 | modulo: 7 -%}
+        {%- case grad_cycle -%}
+          {%- when 0 -%}{%- assign grad_class = 'sheva-tea-grad' -%}
+          {%- when 1 -%}{%- assign grad_class = 'sheva-mug-grad' -%}
+          {%- when 2 -%}{%- assign grad_class = 'sheva-book-grad' -%}
+          {%- when 3 -%}{%- assign grad_class = 'sheva-card-grad' -%}
+          {%- when 4 -%}{%- assign grad_class = 'sheva-key-grad' -%}
+          {%- when 5 -%}{%- assign grad_class = 'sheva-pen-grad' -%}
+          {%- when 6 -%}{%- assign grad_class = 'sheva-bookmark-grad' -%}
+        {%- endcase -%}
 
-      <div class="sheva-shop-card" {{ block.shopify_attributes }}>
-        {%- assign badge_display = block.settings.badge -%}
-        {%- if card_prod != blank and card_prod != empty -%}
-          {%- assign badge_display = card_prod.tags.first -%}
-        {%- endif -%}
-        {%- if badge_display != blank -%}
-          <div class="sheva-shop-badge{% if block.settings.badge_alt %} sheva-shop-badge--alt{% endif %}"
-            style="font-size: {{ section.settings.badge_fs }}px;">{{ badge_display }}</div>
-        {%- endif -%}
+        {%- assign emoji_cycle = forloop.index0 | modulo: 7 -%}
+        {%- case emoji_cycle -%}
+          {%- when 0 -%}{%- assign emoji_icon = '🍵' -%}
+          {%- when 1 -%}{%- assign emoji_icon = '☕' -%}
+          {%- when 2 -%}{%- assign emoji_icon = '📓' -%}
+          {%- when 3 -%}{%- assign emoji_icon = '🎴' -%}
+          {%- when 4 -%}{%- assign emoji_icon = '🔑' -%}
+          {%- when 5 -%}{%- assign emoji_icon = '🖊️' -%}
+          {%- when 6 -%}{%- assign emoji_icon = '📑' -%}
+        {%- endcase -%}
 
-        {%- if card_link != blank -%}
-          <a href="{{ card_link }}" class="sheva-shop-img-link">
-        {%- endif -%}
-        <div class="sheva-shop-img {{ block.settings.gradient_class }}"
-          style="height: {{ section.settings.card_img_h }}px;">
-          {%- if card_prod.featured_image != blank and block.settings.emoji == blank -%}
-            <img src="{{ card_prod.featured_image | img_url: '400x' }}" alt="{{ card_prod.title }}" class="sheva-shop-card-img" />
-          {%- else -%}
-            <span class="sheva-shop-emoji" style="font-size: {{ section.settings.card_emoji_fs }}px;">{{ block.settings.emoji }}</span>
+        {%- assign badge_alt_cycle = forloop.index | modulo: 2 -%}
+
+        <div class="sheva-shop-card">
+          {%- if badge_display != blank -%}
+            <div class="sheva-shop-badge{% if badge_alt_cycle == 0 %} sheva-shop-badge--alt{% endif %}"
+              style="font-size: {{ section.settings.badge_fs }}px;">{{ badge_display }}</div>
           {%- endif -%}
-        </div>
-        {%- if card_link != blank -%}
-          </a>
-        {%- endif -%}
 
-        <div class="sheva-shop-info">
-          {%- if block.settings.category != blank -%}
-            <span class="sheva-shop-cat" style="font-size: {{ section.settings.cat_fs }}px;">{{ block.settings.category }}</span>
+          {%- if card_link != blank -%}
+            <a href="{{ card_link }}" class="sheva-shop-img-link">
           {%- endif -%}
-          <h4 class="sheva-shop-name" style="font-size: {{ section.settings.card_name_fs }}px;">
-            {%- if card_link != blank -%}
-              <a href="{{ card_link }}" style="color: inherit; text-decoration: none;">{{ block.settings.name | default: card_prod.title }}</a>
+          <div class="sheva-shop-img {{ grad_class }}"
+            style="height: {{ section.settings.card_img_h }}px;">
+            {%- if item_img != blank -%}
+              <img src="{{ item_img | img_url: '400x' }}" alt="{{ item.title | escape }}" class="sheva-shop-card-img" />
             {%- else -%}
-              {{ block.settings.name }}
+              <span class="sheva-shop-emoji" style="font-size: {{ section.settings.card_emoji_fs }}px;">{{ emoji_icon }}</span>
             {%- endif -%}
-          </h4>
-          <p class="sheva-shop-desc" style="font-size: {{ section.settings.card_desc_fs }}px;">{{ block.settings.description }}</p>
+          </div>
+          {%- if card_link != blank -%}
+            </a>
+          {%- endif -%}
 
-          <div class="sheva-shop-foot">
-            <span class="sheva-shop-price" style="font-size: {{ section.settings.price_fs }}px;">{{ card_price }}</span>
+          <div class="sheva-shop-info">
+            {%- if category_display != blank -%}
+              <span class="sheva-shop-cat" style="font-size: {{ section.settings.cat_fs }}px;">{{ category_display }}</span>
+            {%- endif -%}
+            <h4 class="sheva-shop-name" style="font-size: {{ section.settings.card_name_fs }}px;">
+              {%- if card_link != blank -%}
+                <a href="{{ card_link }}" style="color: inherit; text-decoration: none;">{{ item.title }}</a>
+              {%- else -%}
+                {{ item.title }}
+              {%- endif -%}
+            </h4>
+            {%- if short_desc != blank -%}
+              <p class="sheva-shop-desc" style="font-size: {{ section.settings.card_desc_fs }}px;">{{ short_desc }}</p>
+            {%- endif -%}
 
-            {%- if card_prod != blank and card_prod != empty -%}
-              {%- if card_prod.available -%}
+            <div class="sheva-shop-foot">
+              <span class="sheva-shop-price" style="font-size: {{ section.settings.price_fs }}px;">{{ card_price }}</span>
+
+              {%- if item.available -%}
                 <product-form class="sheva-shop-card__form">
-                  {%- assign card_form_id = 'sheva-card-form-' | append: block.id -%}
-                  {%- form 'product', card_prod, id: card_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                  {%- assign card_form_id = 'sheva-card-form-' | append: section.id | append: '-' | append: item.id -%}
+                  {%- form 'product', item, id: card_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
                     <input type="hidden" name="id" value="{{ card_var.id }}">
                     <input type="hidden" name="quantity" value="1">
                     <button
@@ -257,20 +299,173 @@
                   SOLD OUT
                 </button>
               {%- endif -%}
-            {%- elsif card_link != blank -%}
-              <a href="{{ card_link }}" class="sheva-btn-ghost sheva-btn-ghost--sm sheva-shop-atc-btn"
-                style="font-size: {{ section.settings.card_btn_fs }}px;">ADD +</a>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+
+    {%- elsif shop_cards.size > 0 -%}
+      {%- for block in shop_cards -%}
+        {%- assign card_prod = block.settings.card_product -%}
+        {%- assign card_price = block.settings.price -%}
+        {%- assign card_link = block.settings.product_link -%}
+
+        {%- if card_prod != blank and card_prod != empty -%}
+          {%- assign card_var = card_prod.selected_or_first_available_variant -%}
+          {%- if card_price == blank -%}
+            {%- assign card_price = card_var.price | money -%}
+          {%- endif -%}
+          {%- if card_link == blank -%}
+            {%- assign card_link = card_prod.url -%}
+          {%- endif -%}
+        {%- endif -%}
+
+        <div class="sheva-shop-card" {{ block.shopify_attributes }}>
+          {%- assign badge_display = block.settings.badge -%}
+          {%- if card_prod != blank and card_prod != empty -%}
+            {%- assign badge_display = card_prod.tags.first -%}
+          {%- endif -%}
+          {%- if badge_display != blank -%}
+            <div class="sheva-shop-badge{% if block.settings.badge_alt %} sheva-shop-badge--alt{% endif %}"
+              style="font-size: {{ section.settings.badge_fs }}px;">{{ badge_display }}</div>
+          {%- endif -%}
+
+          {%- if card_link != blank -%}
+            <a href="{{ card_link }}" class="sheva-shop-img-link">
+          {%- endif -%}
+          <div class="sheva-shop-img {{ block.settings.gradient_class }}"
+            style="height: {{ section.settings.card_img_h }}px;">
+            {%- if card_prod.featured_image != blank and block.settings.emoji == blank -%}
+              <img src="{{ card_prod.featured_image | img_url: '400x' }}" alt="{{ card_prod.title }}" class="sheva-shop-card-img" />
             {%- else -%}
-              <a href="/collections/all" class="sheva-btn-ghost sheva-btn-ghost--sm sheva-shop-atc-btn"
-                style="font-size: {{ section.settings.card_btn_fs }}px;">ADD +</a>
+              <span class="sheva-shop-emoji" style="font-size: {{ section.settings.card_emoji_fs }}px;">{{ block.settings.emoji }}</span>
             {%- endif -%}
+          </div>
+          {%- if card_link != blank -%}
+            </a>
+          {%- endif -%}
+
+          <div class="sheva-shop-info">
+            {%- if block.settings.category != blank -%}
+              <span class="sheva-shop-cat" style="font-size: {{ section.settings.cat_fs }}px;">{{ block.settings.category }}</span>
+            {%- endif -%}
+            <h4 class="sheva-shop-name" style="font-size: {{ section.settings.card_name_fs }}px;">
+              {%- if card_link != blank -%}
+                <a href="{{ card_link }}" style="color: inherit; text-decoration: none;">{{ block.settings.name | default: card_prod.title }}</a>
+              {%- else -%}
+                {{ block.settings.name }}
+              {%- endif -%}
+            </h4>
+            <p class="sheva-shop-desc" style="font-size: {{ section.settings.card_desc_fs }}px;">{{ block.settings.description }}</p>
+
+            <div class="sheva-shop-foot">
+              <span class="sheva-shop-price" style="font-size: {{ section.settings.price_fs }}px;">{{ card_price }}</span>
+
+              {%- if card_prod != blank and card_prod != empty -%}
+                {%- if card_prod.available -%}
+                  <product-form class="sheva-shop-card__form">
+                    {%- assign card_form_id = 'sheva-card-form-' | append: block.id -%}
+                    {%- form 'product', card_prod, id: card_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                      <input type="hidden" name="id" value="{{ card_var.id }}">
+                      <input type="hidden" name="quantity" value="1">
+                      <button
+                        type="submit"
+                        name="add"
+                        data-btn-addToCart
+                        class="sheva-btn-ghost sheva-btn-ghost--sm sheva-shop-atc-btn"
+                        style="font-size: {{ section.settings.card_btn_fs }}px;"
+                      >
+                        ADD +
+                      </button>
+                    {%- endform -%}
+                  </product-form>
+                {%- else -%}
+                  <button
+                    type="button"
+                    class="sheva-btn-ghost sheva-btn-ghost--sm sheva-shop-atc-btn is-soldout"
+                    style="font-size: {{ section.settings.card_btn_fs }}px; pointer-events: none; opacity: 0.5;"
+                    disabled="disabled"
+                  >
+                    SOLD OUT
+                  </button>
+                {%- endif -%}
+              {%- elsif card_link != blank -%}
+                <a href="{{ card_link }}" class="sheva-btn-ghost sheva-btn-ghost--sm sheva-shop-atc-btn"
+                  style="font-size: {{ section.settings.card_btn_fs }}px;">ADD +</a>
+              {%- else -%}
+                <a href="/collections/all" class="sheva-btn-ghost sheva-btn-ghost--sm sheva-shop-atc-btn"
+                  style="font-size: {{ section.settings.card_btn_fs }}px;">ADD +</a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+
+    {%- else -%}
+      {%- comment -%} ── Fallback Demo Cards (Preview Mode / Unassigned State) ── {%- endcomment -%}
+      <div class="sheva-shop-card">
+        <div class="sheva-shop-badge" style="font-size: {{ section.settings.badge_fs }}px;">TITAN AURA</div>
+        <a href="/collections/all" class="sheva-shop-img-link">
+          <div class="sheva-shop-img sheva-mug-grad" style="height: {{ section.settings.card_img_h }}px;">
+            <span class="sheva-shop-emoji" style="font-size: {{ section.settings.card_emoji_fs }}px;">☕</span>
+          </div>
+        </a>
+        <div class="sheva-shop-info">
+          <span class="sheva-shop-cat" style="font-size: {{ section.settings.cat_fs }}px;">DRINKWARE</span>
+          <h4 class="sheva-shop-name" style="font-size: {{ section.settings.card_name_fs }}px;">
+            <a href="/collections/all" style="color: inherit; text-decoration: none;">Titan Aura Mug</a>
+          </h4>
+          <p class="sheva-shop-desc" style="font-size: {{ section.settings.card_desc_fs }}px;">11oz stoneware — every sip, a reminder to rise.</p>
+          <div class="sheva-shop-foot">
+            <span class="sheva-shop-price" style="font-size: {{ section.settings.price_fs }}px;">$15.95</span>
+            <a href="/collections/all" class="sheva-btn-ghost sheva-btn-ghost--sm sheva-shop-atc-btn" style="font-size: {{ section.settings.card_btn_fs }}px;">ADD +</a>
           </div>
         </div>
       </div>
-    {%- endfor -%}
+
+      <div class="sheva-shop-card">
+        <div class="sheva-shop-badge" style="font-size: {{ section.settings.badge_fs }}px;">TITAN AURA</div>
+        <a href="/collections/all" class="sheva-shop-img-link">
+          <div class="sheva-shop-img sheva-book-grad" style="height: {{ section.settings.card_img_h }}px;">
+            <span class="sheva-shop-emoji" style="font-size: {{ section.settings.card_emoji_fs }}px;">📓</span>
+          </div>
+        </a>
+        <div class="sheva-shop-info">
+          <span class="sheva-shop-cat" style="font-size: {{ section.settings.cat_fs }}px;">BOOKS</span>
+          <h4 class="sheva-shop-name" style="font-size: {{ section.settings.card_name_fs }}px;">
+            <a href="/collections/all" style="color: inherit; text-decoration: none;">Titan Aura Notebook</a>
+          </h4>
+          <p class="sheva-shop-desc" style="font-size: {{ section.settings.card_desc_fs }}px;">Vegan leatherette — made for cosmic downloads.</p>
+          <div class="sheva-shop-foot">
+            <span class="sheva-shop-price" style="font-size: {{ section.settings.price_fs }}px;">$18.50</span>
+            <a href="/collections/all" class="sheva-btn-ghost sheva-btn-ghost--sm sheva-shop-atc-btn" style="font-size: {{ section.settings.card_btn_fs }}px;">ADD +</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sheva-shop-card">
+        <div class="sheva-shop-badge" style="font-size: {{ section.settings.badge_fs }}px;">TITAN AURA</div>
+        <a href="/collections/all" class="sheva-shop-img-link">
+          <div class="sheva-shop-img sheva-card-grad" style="height: {{ section.settings.card_img_h }}px;">
+            <span class="sheva-shop-emoji" style="font-size: {{ section.settings.card_emoji_fs }}px;">🎴</span>
+          </div>
+        </a>
+        <div class="sheva-shop-info">
+          <span class="sheva-shop-cat" style="font-size: {{ section.settings.cat_fs }}px;">CARDS</span>
+          <h4 class="sheva-shop-name" style="font-size: {{ section.settings.card_name_fs }}px;">
+            <a href="/collections/all" style="color: inherit; text-decoration: none;">Affirmation Deck</a>
+          </h4>
+          <p class="sheva-shop-desc" style="font-size: {{ section.settings.card_desc_fs }}px;">4×4" deck — manifest one sip, one card at a time.</p>
+          <div class="sheva-shop-foot">
+            <span class="sheva-shop-price" style="font-size: {{ section.settings.price_fs }}px;">$22.00</span>
+            <a href="/collections/all" class="sheva-btn-ghost sheva-btn-ghost--sm sheva-shop-atc-btn" style="font-size: {{ section.settings.card_btn_fs }}px;">ADD +</a>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
   {%- endcapture -%}
 
-  {%- if shop_cards.size > 0 -%}
+  {%- if shop_card_count > 0 -%}
 
     {%- if layout == 'marquee' -%}
       {%- comment %} ════════════ MARQUEE ════════════ {% endcomment %}
@@ -310,34 +505,47 @@
 
 {%- if layout == 'slider' -%}
 <script>
-  $(document).ready(function () {
-    $('#sheva-shop-{{ section.id }} .sheva-shop-swiper__track').slick({
-      dots: {{ section.settings.show_dots }},
-      arrows: {{ section.settings.show_arrows }},
-      infinite: true,
-      autoplay: true,
-      autoplaySpeed: 3000,
-      speed: 300,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 1
-          }
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]
-    });
-  });
+  (function () {
+    function initShopSlider() {
+      if (typeof $ === 'undefined') return;
+      var $track = $('#sheva-shop-{{ section.id }} .sheva-shop-swiper__track');
+      if ($track.length && !$track.hasClass('slick-initialized')) {
+        $track.slick({
+          dots: {{ section.settings.show_dots }},
+          arrows: {{ section.settings.show_arrows }},
+          infinite: true,
+          autoplay: true,
+          autoplaySpeed: 3000,
+          speed: 300,
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+              }
+            }
+          ]
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initShopSlider);
+    } else {
+      initShopSlider();
+    }
+    document.addEventListener('shopify:section:load', initShopSlider);
+  })();
 </script>
 {%- endif -%}
 
@@ -471,6 +679,39 @@
       "type":"image_picker",
       "id":"product_image",
       "label":"Image"
+    },
+    {
+      "type": "header",
+      "content": "Product Selection Settings"
+    },
+    {
+      "type": "paragraph",
+      "content": "Select products or a fallback collection to automatically populate shop cards. If empty, the manual Shop Card blocks below will be used as fallback."
+    },
+    {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "Select Products (Theme Setting Fallback)"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Fallback Collection"
+    },
+    {
+      "type": "text",
+      "id": "default_badge",
+      "label": "Default Pill Badge Text",
+      "default": "TITAN AURA"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Max Products Limit",
+      "min": 3,
+      "max": 24,
+      "step": 1,
+      "default": 10
     },
     {
       "type": "header",
