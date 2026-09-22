@@ -491,6 +491,21 @@
             "product_link": ""
           }
         },
+        "shop_card_exrqky": {
+          "type": "shop_card",
+          "settings": {
+            "card_product": "teascoop",
+            "badge": "MYSTIQUE",
+            "badge_alt": false,
+            "emoji": "🫖",
+            "gradient_class": "sheva-tea-grad",
+            "category": "",
+            "name": "Tea Scoop",
+            "description": "Thermal-shock resistant glass.",
+            "price": "from $7.99",
+            "product_link": ""
+          }
+        },
         "sc2": {
           "type": "shop_card",
           "settings": {
@@ -591,6 +606,7 @@
         "bi6",
         "bi7",
         "sc1",
+        "shop_card_exrqky",
         "sc2",
         "sc3",
         "sc4",
