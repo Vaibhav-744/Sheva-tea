@@ -120,9 +120,9 @@
           </div>
 
           <div class="sheva-yml-card__body">
-            {%- if category_text != blank -%}
+            {% comment %} {%- if category_text != blank -%}
               <span class="sheva-yml-card__cat">{{ category_text }}</span>
-            {%- endif -%}
+            {%- endif -%} {% endcomment %}
 
             <h3 class="sheva-yml-card__title">
               <a href="{{ item.url }}">{{ item.title }}</a>
@@ -229,9 +229,9 @@
           </div>
 
           <div class="sheva-yml-card__body">
-            {%- if card_cat != blank -%}
+            {% comment %} {%- if card_cat != blank -%}
               <span class="sheva-yml-card__cat">{{ card_cat }}</span>
-            {%- endif -%}
+            {%- endif -%} {% endcomment %}
 
             <h3 class="sheva-yml-card__title">
               {%- if card_link != blank -%}
