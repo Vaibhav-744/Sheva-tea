@@ -355,6 +355,7 @@
         },
         "i3": {
           "type": "ingredient",
+          "disabled": true,
           "settings": {
             "emoji": "��",
             "name": "Muicle",
@@ -371,6 +372,7 @@
         },
         "i5": {
           "type": "ingredient",
+          "disabled": true,
           "settings": {
             "emoji": "💫",
             "name": "Brahmi",
