@@ -478,6 +478,7 @@
         },
         "sc1": {
           "type": "shop_card",
+          "disabled": true,
           "settings": {
             "card_product": "teapots",
             "badge": "MYSTIQUE",
@@ -493,6 +494,7 @@
         },
         "shop_card_exrqky": {
           "type": "shop_card",
+          "disabled": true,
           "settings": {
             "card_product": "teascoop",
             "badge": "MYSTIQUE",
@@ -508,6 +510,7 @@
         },
         "sc2": {
           "type": "shop_card",
+          "disabled": true,
           "settings": {
             "card_product": "drinkware-titan-aura",
             "badge": "TITAN AURA",
@@ -523,6 +526,7 @@
         },
         "sc3": {
           "type": "shop_card",
+          "disabled": true,
           "settings": {
             "card_product": "titan-aura-notebook",
             "badge": "TITAN AURA",
@@ -538,6 +542,7 @@
         },
         "sc4": {
           "type": "shop_card",
+          "disabled": true,
           "settings": {
             "card_product": "titan-aura-affirmation-cards",
             "badge": "TITAN AURA",
@@ -553,6 +558,7 @@
         },
         "sc5": {
           "type": "shop_card",
+          "disabled": true,
           "settings": {
             "card_product": "titan-aura-keychain",
             "badge": "TITAN AURA",
@@ -568,6 +574,7 @@
         },
         "sc6": {
           "type": "shop_card",
+          "disabled": true,
           "settings": {
             "card_product": "titan-aura-pen",
             "badge": "TITAN AURA",
@@ -583,6 +590,7 @@
         },
         "sc7": {
           "type": "shop_card",
+          "disabled": true,
           "settings": {
             "card_product": "titan-aura-bookmark",
             "badge": "TITAN AURA",
@@ -624,6 +632,10 @@
         "title_fs_mobile": 28,
         "sub_fs": 15,
         "product_image": "shopify://shop_images/pack.png",
+        "product_list": [],
+        "collection": "all",
+        "default_badge": "TITAN AURA",
+        "limit": 10,
         "layout_type": "slider",
         "pause_on_hover": true,
         "marquee_direction": "rtl",
