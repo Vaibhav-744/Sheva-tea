@@ -382,6 +382,7 @@
         },
         "i6": {
           "type": "ingredient",
+          "disabled": true,
           "settings": {
             "emoji": "🌴",
             "name": "Mamaki",
